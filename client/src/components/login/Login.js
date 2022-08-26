@@ -30,7 +30,7 @@ const Login = () => {
 
     const handleSubmit = async (e) => { //button press
         e.preventDefault();
-        
+
         //Axios rough work
         // try {
         //     const response = await axios.get(LOGIN_URL,{params:{ email: email, password: pwd }}); //change to whatever email and passwprd called on backend
@@ -62,40 +62,55 @@ const Login = () => {
                     {/*change to landing page URL*/}
                 </section>
             ) : (
-                <section>
-                    <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                    <h1>Sign In</h1>
-                    <form onSubmit={handleSubmit}>
-                        <BsIcons.BsFillPersonFill className='input-icon'/>
-                        <input
-                            type="email"
-                            id="email"
-                            placeholder='Email Adress'
-                            ref={userRef}
-                            autoComplete="off"
-                            onChange={(e) => setEmail(e.target.value)}
-                            value={email}
-                            required
-                        />
-                        <RiIcons.RiLockPasswordLine className='input-icon'/>
-                        <input
-                            type="password"
-                            id="password"
-                            placeholder='Password'
-                            onChange={(e) => setPwd(e.target.value)}
-                            value={pwd}
-                            required
-                        />
-                        <button>Sign In</button>
-                    </form>
-                    <p>
-                        Need an Account?<br />
+                <section className='login-box'>
+                    <div className='login-heading'>
+                        Welcome
+                    </div>
+                    <div className='login-form'>
+                        <form onSubmit={handleSubmit}>
+                            <div className='login-field'>
+                                <div className='login-icon'>
+                                    <BsIcons.BsFillPersonFill/>
+                                </div>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    placeholder='Email Adress'
+                                    ref={userRef}
+                                    autoComplete="off"
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    value={email}
+                                    required
+                                />
+                                <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+                            </div>
+                            <div className='login-field'>
+                                <div className='login-icon'>
+                                    <RiIcons.RiLockPasswordLine className='login-icon'/>
+                                </div>
+                                <input
+                                    type="password"
+                                    id="password"
+                                    placeholder='Password'
+                                    onChange={(e) => setPwd(e.target.value)}
+                                    value={pwd}
+                                    required
+                                />
+                                <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+                            </div>
+                            <div className='login-button'>
+                                <button type='login'>Sign In</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div className='login-link'>
+                        Need an Account? 
                         <span>
                             <Link to='/signup'>
-                                Signup
+                                Sign Up
                             </Link>
                         </span>
-                    </p>
+                    </div>
                 </section>
             )}
         </>
