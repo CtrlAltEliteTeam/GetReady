@@ -100,117 +100,139 @@ const Signup = () => {
                     {/* Change to landing URL */}
                 </section>
             ) : (
-                <section>
-                    {/* UserName */}
-                    <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                    <h1>Register</h1>
-                    <form onSubmit={handleSubmit}>
-                        <BsIcons.BsFillPersonFill className='input-icon'/>
-                        <input 
-                            type="text"
-                            id="username"
-                            placeholder='User Name'
-                            ref={userRef}
-                            autoComplete="off"
-                            onChange={(e) => setUser(e.target.value)}
-                            value={user}
-                            required
-                            aria-invalid={validName ? "false" : "true"}
-                            aria-describedby="uidnote"
-                            onFocus={() => setUserFocus(true)}
-                            onBlur={() => setUserFocus(false)}
-                        />
-                        <FaIcons.FaCheck className={validEmail ? "valid" : "hide"} />
-                        <FaIcons.FaTimes className={validEmail || !email ? "hide" : "invalid"} />
-                        <p id="uidnote" className={userFocus && user && !validName ? "instructions" : "offscreen"}>
-                            <FaIcons.FaInfoCircle />
-                            4 to 24 characters.<br />
-                            Must begin with a letter.<br />
-                            Letters, numbers, underscores, hyphens allowed.
-                        </p>
+                <div className='signup-box'>
+                    <section className='login-box'>
+                        <div className='login-heading'>
+                            Register
+                        </div>
+                        <div className='login-form'>
+                            <form onSubmit={handleSubmit}>
+                                {/* UserName */}
+                                <div className='signup-field'>
+                                    <div className='login-icon'>
+                                        <BsIcons.BsFillPersonFill/>
+                                    </div>
+                                    <input 
+                                        type="text"
+                                        id="username"
+                                        placeholder='User Name'
+                                        ref={userRef}
+                                        autoComplete="off"
+                                        onChange={(e) => setUser(e.target.value)}
+                                        value={user}
+                                        required
+                                        aria-invalid={validName ? "false" : "true"}
+                                        aria-describedby="uidnote"
+                                        onFocus={() => setUserFocus(true)}
+                                        onBlur={() => setUserFocus(false)}
+                                    />
+                                    <FaIcons.FaCheck className={validName ? "valid" : "hide"} />
+                                    <FaIcons.FaTimes className={validName || !user ? "hide" : "invalid"} />
+                                    <span className='signup-info'>
+                                        <FaIcons.FaInfoCircle />
+                                        4 to 24 characters.<br />
+                                        Must begin with a letter.<br />
+                                        Letters, numbers, underscores, hyphens allowed.
+                                    </span>
 
-                        {/* Email adress */}
-                        <MdIcons.MdOutlineMailOutline className='input-icon'/>
-                        <input
-                            type="email"
-                            id="email"
-                            autoComplete="off"
-                            placeholder='Email Adress'
-                            onChange={(e) => setEmail(e.target.value)}
-                            value={email}
-                            required
-                            aria-invalid={validEmail ? "false" : "true"}
-                            aria-describedby="uidnote"
-                            onFocus={() => setEmailFocus(true)}
-                            onBlur={() => setEmailFocus(false)}
-                        />
-                        <FaIcons.FaCheck className={validEmail ? "valid" : "hide"} />
-                        <FaIcons.FaTimes className={validEmail || !email ? "hide" : "invalid"} />
-                        <p id="uidnote" className={emailFocus && email && !validEmail ? "instructions" : "offscreen"}>
-                        <FaIcons.FaInfoCircle />
-                            4 to 24 characters.<br />
-                            Must begin with a letter.<br />
-                            Letters, numbers, underscores, hyphens allowed.
-                        </p>
+                                </div>
 
-                        {/* Password */}
-                        <RiIcons.RiLockPasswordLine className='input-icon'/>
-                        <input
-                            type="password"
-                            id="password"
-                            placeholder='Password'
-                            onChange={(e) => setPwd(e.target.value)}
-                            value={pwd}
-                            required
-                            aria-invalid={validPwd ? "false" : "true"}
-                            aria-describedby="pwdnote"
-                            onFocus={() => setPwdFocus(true)}
-                            onBlur={() => setPwdFocus(false)}
-                        />
-                        <FaIcons.FaCheck className={validEmail ? "valid" : "hide"} />
-                        <FaIcons.FaTimes className={validEmail || !email ? "hide" : "invalid"} />
-                        <p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
-                        <FaIcons.FaInfoCircle />
-                            8 to 24 characters.<br />
-                            Must include uppercase and lowercase letters, a number and a special character.<br />
-                            Allowed special characters: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
-                        </p>
+                                {/* Email adress */}
+                                <div className='signup-field'>
+                                    <div className='login-icon'>
+                                        <MdIcons.MdOutlineMailOutline />
+                                    </div>
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        autoComplete="off"
+                                        placeholder='Email Adress'
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        value={email}
+                                        required
+                                        aria-invalid={validEmail ? "false" : "true"}
+                                        aria-describedby="uidnote"
+                                        onFocus={() => setEmailFocus(true)}
+                                        onBlur={() => setEmailFocus(false)}
+                                    />
+                                    <FaIcons.FaCheck className={validEmail ? "valid" : "hide"} />
+                                    <FaIcons.FaTimes className={validEmail || !email ? "hide" : "invalid"} />
+                                    <span className='signup-info'>
+                                        <FaIcons.FaInfoCircle />
+                                        4 to 24 characters.<br />
+                                        Must begin with a letter.<br />
+                                        Letters, numbers, underscores, hyphens allowed.
+                                    </span>
+                                </div>
 
-                        {/* Match Password */}
-                        <RiIcons.RiLockPasswordLine className='input-icon'/>
-                        <input
-                            type="password"
-                            id="confirm_pwd"
-                            placeholder='Confirm Password'
-                            onChange={(e) => setMatchPwd(e.target.value)}
-                            value={matchPwd}
-                            required
-                            aria-invalid={validMatch ? "false" : "true"}
-                            aria-describedby="confirmnote"
-                            onFocus={() => setMatchFocus(true)}
-                            onBlur={() => setMatchFocus(false)}
-                        />
-                        <FaIcons.FaCheck className={validEmail ? "valid" : "hide"} />
-                        <FaIcons.FaTimes className={validEmail || !email ? "hide" : "invalid"} />
-                        <p id="confirmnote" className={matchFocus && !validMatch ? "instructions" : "offscreen"}>
-                        <FaIcons.FaInfoCircle />
-                            Must match the first password input field.
-                        </p>
+                                {/* Password */}
+                                <div className='signup-field'>
+                                    <div className='login-icon'>
+                                        <RiIcons.RiLockPasswordLine />
+                                    </div>
+                                    <input
+                                        type="password"
+                                        id="password"
+                                        placeholder='Password'
+                                        onChange={(e) => setPwd(e.target.value)}
+                                        value={pwd}
+                                        required
+                                        aria-invalid={validPwd ? "false" : "true"}
+                                        aria-describedby="pwdnote"
+                                        onFocus={() => setPwdFocus(true)}
+                                        onBlur={() => setPwdFocus(false)}
+                                    />
+                                    <FaIcons.FaCheck className={validPwd ? "valid" : "hide"} />
+                                    <FaIcons.FaTimes className={validPwd || !pwd ? "hide" : "invalid"} />
+                                    <span className='signup-info'>
+                                        <FaIcons.FaInfoCircle />
+                                            8 to 24 characters.<br />
+                                            Must include uppercase and lowercase letters, a number and a special character.<br />
+                                            Allowed special characters: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
+                                    </span>
+                                </div>
 
-                        {/* Button : when pressed handle event is run */}
-                        <button disabled={!validName || !validEmail || !validPwd || !validMatch ? true : false}>Sign Up</button>
-                    </form>
+                                {/* Match Password */}
+                                <div className='signup-field'>
+                                        <div className='login-icon'>
+                                            <RiIcons.RiLockPasswordLine />
+                                        </div>
+                                    <input
+                                        type="password"
+                                        id="confirm_pwd"
+                                        placeholder='Confirm Password'
+                                        onChange={(e) => setMatchPwd(e.target.value)}
+                                        value={matchPwd}
+                                        required
+                                        aria-invalid={validMatch ? "false" : "true"}
+                                        aria-describedby="confirmnote"
+                                        onFocus={() => setMatchFocus(true)}
+                                        onBlur={() => setMatchFocus(false)}
+                                    />
+                                    <FaIcons.FaCheck className={validMatch && matchPwd ? "valid" : "hide"} />
+                                    <FaIcons.FaTimes className={validMatch || !matchPwd ? "hide" : "invalid"} />
+                                    <span className='signup-info'>
+                                        <FaIcons.FaInfoCircle />
+                                        Must match the first password input field.
+                                    </span>
+                                </div>
 
-                    <p>
-                        Already registered?<br />
-                        <span>
-                            <Link to='/login'>
-                                Login
-                            </Link>
-                        </span>
-                    </p>
-
-                </section>
+                                {/* Button : when pressed handle event is run */}
+                                <div className='login-button'>
+                                    <button disabled={!validName || !validEmail || !validPwd || !validMatch ? true : false} type='login'>Sign Up</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div className='login=-link'>
+                            Already registered?<br />
+                            <span>
+                                <Link to='/login'>
+                                    Login
+                                </Link>
+                            </span>
+                        </div>
+                    </section>
+                </div>
             )}
         </>
     )
