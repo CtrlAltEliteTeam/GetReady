@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import * as BsIcons from 'react-icons/bs';
 import * as RiIcons from 'react-icons/ri';
-import { Link,Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import "./Login.css";
 
 const LOGIN_URL = '';
@@ -30,34 +30,36 @@ const Login = () => {
 
     const handleSubmit = async (e) => { //button press
         e.preventDefault();
-        try {
-            const response = await axios.get(LOGIN_URL,{params:{ email: email, password: pwd }}); //change to whatever email and passwprd called on backend
-            if(response?.data?.login === 301){
-                setErrMsg('Incorrect Username or Password');
-            }
-            else {
-                // const user_id = response?.data?.user_id;
-                // setEmail('');
-                // setPwd('');
-                // setSuccess(true);
-            }
-        } catch (err) {
-            if (!err?.response) {
-                setErrMsg('No Server Response');
-            } else if (err?.response?.data?.login === 301) { //setup error coded for failed login
-                setErrMsg('Incorrect Username or Password');
-            } else {
-                setErrMsg('Login Failed');
-            }
-            errRef.current.focus();
-        }
+        
+        //Axios rough work
+        // try {
+        //     const response = await axios.get(LOGIN_URL,{params:{ email: email, password: pwd }}); //change to whatever email and passwprd called on backend
+        //     if(response?.data?.login === 301){
+        //         setErrMsg('Incorrect Username or Password');
+        //     }
+        //     else {
+        //         const user_id = response?.data?.user_id;
+        //         setEmail('');
+        //         setPwd('');
+        //         setSuccess(true);
+        //     }
+        // } catch (err) {
+        //     if (!err?.response) {
+        //         setErrMsg('No Server Response');
+        //     } else if (err?.response?.data?.login === 301) { //setup error coded for failed login
+        //         setErrMsg('Incorrect Username or Password');
+        //     } else {
+        //         setErrMsg('Login Failed');
+        //     }
+        //     errRef.current.focus();
+        // }
     }
 
     return (
         <>
             {success ? (
                 <section>
-                    <Redirect to='/landing'/> {/*change to landing page URL*/}
+                    {/*change to landing page URL*/}
                 </section>
             ) : (
                 <section>

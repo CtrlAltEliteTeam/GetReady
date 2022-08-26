@@ -1,11 +1,12 @@
-import React, {useState, useEffect, useRef} from 'react'
-// import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link,Redirect } from 'react-router-dom';
+import React, {useState, useEffect, useRef} from 'react';
+import { Link } from 'react-router-dom';
+//import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+//import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import * as FaIcons from 'react-icons/fa'
 import * as MdIcons from 'react-icons/md';
 import * as BsIcons from 'react-icons/bs';
 import * as RiIcons from 'react-icons/ri';
-import './Signup.css';
+import './Login.css';
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -67,36 +68,36 @@ const Signup = () => {
             return;
         }
 
-        //Axios
-        try {
-            const response = await axios.get(REGISTER_URL,{params:{ username: user, email : email, pwd :pwd }});
-            if (response?.data?.username_availability === 301) {
-                setErrMsg('Username Taken');           
-            } else if (response?.data?.email_availability === 301) {
-                setErrMsg('Email Taken');
-            } else {  
-                //On sucess             
-                // setUser('');
-                // setPwd('');
-                // setEmail('');
-                // setMatchPwd('');
-                // setSuccess(true);
-            }
-        } catch (err) {
-            if (!err?.response) {
-                setErrMsg('No Server Response');
-            } else {
-                setErrMsg('Registration Failed')
-            }
-            errRef.current.focus();
-        }
+        //Axios rough work
+        // try {
+        //     const response = await axios.get(REGISTER_URL,{params:{ username: user, email : email, pwd :pwd }});
+        //     if (response?.data?.username_availability === 301) {
+        //         setErrMsg('Username Taken');           
+        //     } else if (response?.data?.email_availability === 301) {
+        //         setErrMsg('Email Taken');
+        //     } else {  
+        //         On sucess             
+        //         setUser('');
+        //         setPwd('');
+        //         setEmail('');
+        //         setMatchPwd('');
+        //         setSuccess(true);
+        //     }
+        // } catch (err) {
+        //     if (!err?.response) {
+        //         setErrMsg('No Server Response');
+        //     } else {
+        //         setErrMsg('Registration Failed')
+        //     }
+        //     errRef.current.focus();
+        // }
     }
 
     return (
         <>
             {success ? (
                 <section>
-                    <Redirect to='/landing'/> {/* Change to landing URL */}
+                    {/* Change to landing URL */}
                 </section>
             ) : (
                 <section>
@@ -119,10 +120,10 @@ const Signup = () => {
                             onFocus={() => setUserFocus(true)}
                             onBlur={() => setUserFocus(false)}
                         />
-                        <FontAwesomeIcon icon={faCheck} className={validName ? "valid" : "hide"} />
-                        <FontAwesomeIcon icon={faTimes} className={validName || !user ? "hide" : "invalid"} />
+                        <FaIcons.FaCheck className={validEmail ? "valid" : "hide"} />
+                        <FaIcons.FaTimes className={validEmail || !email ? "hide" : "invalid"} />
                         <p id="uidnote" className={userFocus && user && !validName ? "instructions" : "offscreen"}>
-                            <FontAwesomeIcon icon={faInfoCircle} />
+                            <FaIcons.FaInfoCircle />
                             4 to 24 characters.<br />
                             Must begin with a letter.<br />
                             Letters, numbers, underscores, hyphens allowed.
@@ -143,10 +144,10 @@ const Signup = () => {
                             onFocus={() => setEmailFocus(true)}
                             onBlur={() => setEmailFocus(false)}
                         />
-                        <FontAwesomeIcon icon={faCheck} className={validEmail ? "valid" : "hide"} />
-                        <FontAwesomeIcon icon={faTimes} className={validEmail || !email ? "hide" : "invalid"} />
+                        <FaIcons.FaCheck className={validEmail ? "valid" : "hide"} />
+                        <FaIcons.FaTimes className={validEmail || !email ? "hide" : "invalid"} />
                         <p id="uidnote" className={emailFocus && email && !validEmail ? "instructions" : "offscreen"}>
-                            <FontAwesomeIcon icon={faInfoCircle} />
+                        <FaIcons.FaInfoCircle />
                             4 to 24 characters.<br />
                             Must begin with a letter.<br />
                             Letters, numbers, underscores, hyphens allowed.
@@ -166,10 +167,10 @@ const Signup = () => {
                             onFocus={() => setPwdFocus(true)}
                             onBlur={() => setPwdFocus(false)}
                         />
-                        <FontAwesomeIcon icon={faCheck} className={validPwd ? "valid" : "hide"} />
-                        <FontAwesomeIcon icon={faTimes} className={validPwd || !pwd ? "hide" : "invalid"} />
+                        <FaIcons.FaCheck className={validEmail ? "valid" : "hide"} />
+                        <FaIcons.FaTimes className={validEmail || !email ? "hide" : "invalid"} />
                         <p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
-                            <FontAwesomeIcon icon={faInfoCircle} />
+                        <FaIcons.FaInfoCircle />
                             8 to 24 characters.<br />
                             Must include uppercase and lowercase letters, a number and a special character.<br />
                             Allowed special characters: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
@@ -189,10 +190,10 @@ const Signup = () => {
                             onFocus={() => setMatchFocus(true)}
                             onBlur={() => setMatchFocus(false)}
                         />
-                        <FontAwesomeIcon icon={faCheck} className={validMatch && matchPwd ? "valid" : "hide"} />
-                        <FontAwesomeIcon icon={faTimes} className={validMatch || !matchPwd ? "hide" : "invalid"} />
+                        <FaIcons.FaCheck className={validEmail ? "valid" : "hide"} />
+                        <FaIcons.FaTimes className={validEmail || !email ? "hide" : "invalid"} />
                         <p id="confirmnote" className={matchFocus && !validMatch ? "instructions" : "offscreen"}>
-                            <FontAwesomeIcon icon={faInfoCircle} />
+                        <FaIcons.FaInfoCircle />
                             Must match the first password input field.
                         </p>
 
