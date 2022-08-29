@@ -1,6 +1,6 @@
 import React from "react";
 import Login from "./Login";
-import GetReady from '../../resources/img/20220826_105837_0000.png'
+import GetReady from '../../resources/img/GetReady_text.png'
 
 const LoginPage = () => {
     return(

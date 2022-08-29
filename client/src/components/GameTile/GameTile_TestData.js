@@ -1,3 +1,4 @@
+import React from 'react';
 import Fortnite from '../../resources/img/GameTile_Test_Img/Fortnite.jpg';
 import LoL from '../../resources/img/GameTile_Test_Img/LoL.jpg'
 import CSgo from '../../resources/img/GameTile_Test_Img/CSGO.png'
