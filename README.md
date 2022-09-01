@@ -1,3 +1,3 @@
 # Get Ready
 This
-application will be created using React, PHP and MySQL.
+application will be created using React, Node.js and MySQL.
