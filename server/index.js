@@ -29,7 +29,7 @@ app.post('/api/insert',(req,res)=>{
     const username = req.body.username;
     const password = req.body.password;
     const sqlInsert = "INSERT INTO users(email,joinDate,password,username) VALUES (?,CURDATE(),?,?)";
-    db.query(sqlInsert,['test3@gmail.com',password,username],(err,result)=>{
+    db.query(sqlInsert,['test4@gmail.com',password,username],(err,result)=>{
         console.log(result)
     });
 });
