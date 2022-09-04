@@ -1,0 +1,152 @@
+body {
+    background-color: #3d3b51;
+}
+
+.signup-box{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+img {
+    border: 0;
+    opacity: 70%;
+    border-style: none;
+    float: auto;
+    height: 400px;
+    margin: 50px;
+}
+
+.login-box {
+    border-radius:25px;
+    background-color: blueviolet;
+    width: min-content;
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    padding: 40px;
+}
+
+.login-heading{
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-size: 35px;
+    padding-bottom: 10px;
+}
+
+.login-form{
+    display: flex;
+    justify-content: center;
+}
+
+.login-field{
+    background-color: white;
+    border-radius: 25px;
+    margin: 20px;
+    padding-top: 2px;
+    padding-bottom: 1px;
+    padding-left: 17px;
+    padding-right: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.login-icon {
+    opacity: 60%;
+    padding-top: 4.3px;
+}
+
+input{
+    border-style: none;
+}
+
+.login-button {
+    display: flex;
+    justify-content: center;
+    margin: 30px;
+}
+
+button[type="login"]{
+    background-color: gold;
+    border: none;
+    color: white;
+    padding: 15px 50px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 25px;
+}
+
+.login-link{
+    display: flex;
+    justify-content: center;
+}
+
+.signup-field{
+    background-color: white;
+    border-radius: 25px;
+    margin: 20px;
+    padding-top: 2px;
+    padding-bottom: 1px;
+    padding-left: 17px;
+    padding-right: 15px;
+    display: flex;
+    white-space: nowrap;
+}
+
+.signup-field .signup-info{
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    margin-left: -60px;
+}
+
+.signup-field:hover .signup-info{
+    visibility: visible;
+}
+
+.hide {
+    display: none;
+}
+
+.valid {
+    margin-top: 5px;
+    color: blueviolet;
+    margin-left: 10px;
+    margin-right: 5px;
+}
+
+.invalid {
+    margin-top: 5px;
+    color: blueviolet;
+    margin-left: 10px;
+    margin-right: 5px;
+}
+
+.signup-input{
+    width: 70%;
+    height: 100%;
+    margin: 0px;
+    margin-right: 20px;
+}
