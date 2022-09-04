@@ -1,16 +1,13 @@
+
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
-const mysql = require('mysql');
+const db = require('./config/Db');
 
 
-const db = mysql.createPool({
-    host: 'localhost',
-    user: 'james',
-    password: 'jamesthackeray',
-    database: 'crud-get-ready'
-});
+
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}));
@@ -33,6 +30,7 @@ app.post('/api/insert',(req,res)=>{
         console.log(result)
     });
 });
+
 
 app.listen(8000,()=>{
     console.log("running on port 8000");
