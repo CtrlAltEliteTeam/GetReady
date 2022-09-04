@@ -31,7 +31,7 @@ app.post('/api/insert',(req,res)=>{
     });
 });
 
-
-app.listen(process.env.PORT || PORT,()=>{    //8000
+const PORT =process.env.PORT || 8000;
+app.listen( PORT,()=>{    //8000
     console.log(`running on port ${PORT}`);
 });
