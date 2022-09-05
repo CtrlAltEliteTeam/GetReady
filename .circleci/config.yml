@@ -9,10 +9,11 @@ orbs:
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
   test: # this can be any name you choose
-#    working_directory: ~/client
+    working_directory: ~/GetReady/client
     executor: node/default # use the default executor defined within the orb
     steps:
-      - checkout     
+      - checkout:
+          path: ~/GetReady
       - run:
           name: install npm
           command: npm install             
