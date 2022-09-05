@@ -21,7 +21,7 @@ jobs:
       - run:
           name: Test app
           command: npm run test
-       - coveralls/upload   
+      - coveralls/upload   
           
 
 workflows:
