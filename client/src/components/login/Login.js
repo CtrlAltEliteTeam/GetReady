@@ -3,8 +3,9 @@ import * as BsIcons from 'react-icons/bs';
 import * as RiIcons from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import "./Login.css";
+import axios from '../../api/Axois';
 
-const LOGIN_URL = '';
+const LOGIN_URL = '/login';
 
 /* TODO :
         - create state that stores the users Username and other essential info returned byu server
@@ -19,18 +20,36 @@ const Login = () => {
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
+    const [user, setUser]=useState([]);
 
     useEffect(() => {
         userRef.current.focus();
+        console.log(JSON.stringify(user));
     }, [])
 
     useEffect(() => {
         setErrMsg('');
+        
     }, [email, pwd])
 
     const handleSubmit = async (e) => { //button press
         e.preventDefault();
 
+        try {
+            const response = await axios.get(LOGIN_URL,{params:{
+                     email:email,
+                     password:pwd
+                }});
+            setUser(response.data);
+            console.log(JSON.stringify(user));
+            // .then((response)=>{
+            //   setUserList(response.data);
+            //   console.log(userList);
+            //  });
+            
+        } catch (error) {
+            console.log(error);
+        }
         //Axios rough work
         // try {
         //     const response = await axios.get(LOGIN_URL,{params:{ email: email, password: pwd }}); //change to whatever email and passwprd called on backend

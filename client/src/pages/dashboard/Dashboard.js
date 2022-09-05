@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
-import { GameTileData } from "../../components/GameTile/GameTileData";
+import { GameTileData } from "../../components/GameTile/GameTitleData";
 import GameTile from "../../components/GameTile/GameTile";
-import { GameTile_TestData } from "../../components/GameTile/GameTile_TestData";
+import { GameTile_TestData } from "../../components/GameTile/GameTitle_TestData";
 import './Dashboard.css';
 
 const Dashboard = () => {

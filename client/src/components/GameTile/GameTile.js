@@ -1,5 +1,5 @@
 import React from "react";
-import { GameTileData } from "./GameTileData";
+import { GameTileData } from "./GameTitleData";
 import './GameTile.css';
 
 const GameTile = (props) => {

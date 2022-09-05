@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
-import { GameTileData } from "../GameTile/GameTileData";
+import { GameTileData } from "../GameTile/GameTitleData";
 import GameTile from "../GameTile/GameTile";
-import { GameTile_TestData } from "../GameTile/GameTile_TestData";
+import { GameTile_TestData } from "../GameTile/GameTitle_TestData";
 import GetReady from '../../resources/img/GetReady.png';
 import './LandingPage.css';
 
