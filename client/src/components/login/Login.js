@@ -24,7 +24,7 @@ const Login = () => {
 
     useEffect(() => {
         userRef.current.focus();
-        console.log(JSON.stringify(user));
+        //console.log(JSON.stringify(user));
     }, [])
 
     useEffect(() => {
@@ -37,19 +37,21 @@ const Login = () => {
 
         try {
             const response = await axios.get(LOGIN_URL,{params:{
-                     email:email,
-                     password:pwd
+                    email:email,
+                    password:pwd
                 }});
-            setUser(response.data);
-            console.log(JSON.stringify(user));
-            // .then((response)=>{
-            //   setUserList(response.data);
-            //   console.log(userList);
-            //  });
-            
+            if(response?.data?.login === 301){
+                setErrMsg('Incorrect Username or Password');
+            } else {
+                const user_id = response?.data?.user_id;
+                setEmail('');
+                setPwd('');
+                setSuccess(true);
+            }
         } catch (error) {
             console.log(error);
         }
+
         //Axios rough work
         // try {
         //     const response = await axios.get(LOGIN_URL,{params:{ email: email, password: pwd }}); //change to whatever email and passwprd called on backend
