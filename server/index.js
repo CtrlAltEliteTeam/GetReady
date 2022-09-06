@@ -21,23 +21,28 @@ app.get('/api/get',(req,res)=>{
     
 });
 
+<<<<<<< HEAD
 app.get('/api/login',(req,res)=>{
     console.log(req.query);
     const email = req.query.email;
     const password =req.query.password;
     
+=======
+app.get('/api/login',(req,res)=>{ //The params come through the query of the request not the body
+    const email = req.query.email;
+    const password = req.query.password;
+>>>>>>> e51f0f06072402e71c23f8751c083073252ac47d
     const sqlSelect = "SELECT * FROM users WHERE email=? AND password =?";
-    db.query(sqlSelect,[email,password],(err,result)=>{
-       console.log(result);
-       res.send(result);
+    db.query(sqlSelect,[email,password],(err,result)=>{ // add code so that the response data is just 301 if the username or password is incorrect
+        console.log(result);
+        res.send(result);
     });
-    
 });
 
 app.post('/api/insert',(req,res)=>{
-
-    const username = req.body.username;
-    const password = req.body.password;
+    const email = req.query.email;
+    const username = req.query.username;
+    const password = req.query.password;
     const sqlInsert = "INSERT INTO users(email,joinDate,password,username) VALUES (?,CURDATE(),?,?)";
     db.query(sqlInsert,['test4@gmail.com',password,username],(err,result)=>{
         console.log(result)
