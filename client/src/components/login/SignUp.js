@@ -1,7 +1,5 @@
 import React, {useState, useEffect, useRef, useContext} from 'react';
-import { Link } from 'react-router-dom';
-//import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-//import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link, useNavigate } from 'react-router-dom';
 import * as FaIcons from 'react-icons/fa'
 import * as MdIcons from 'react-icons/md';
 import * as BsIcons from 'react-icons/bs';
@@ -9,6 +7,7 @@ import * as RiIcons from 'react-icons/ri';
 import './Login.css';
 import { AuthContext } from '../../api/AuthProvider';
 import { LOGIN } from '../../api/Constants';
+import axios from '../../api/Axois';
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
