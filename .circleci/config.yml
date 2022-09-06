@@ -14,10 +14,7 @@ jobs:
           path: ~/GetReady
       - run:
           name: install npm
-          command: npm install             
-#      - run:
-#          name: install react scripts
-#          command: npm i -S react-scripts         
+          command: npm install                     
       - run:
           name: Test app
           command: npm run test -- --coverage
