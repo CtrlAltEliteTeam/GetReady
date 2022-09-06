@@ -18,7 +18,8 @@ const LOGIN_URL = '/login';
 const Login = () => {
     const userRef = useRef();
     const errRef = useRef();
-
+    
+    let navigate = useNavigate();
     const [state, dispatch] = useContext(AuthContext);
 
     const [email, setEmail] = useState('');
@@ -36,12 +37,11 @@ const Login = () => {
         setErrMsg('');
         
     }, [email, pwd])
-let navigate = useNavigate();
+
     useEffect(()=>{
         
         if(success){
-           return navigate(`/`);
-
+            return navigate(`/`);
         }
     },[success]);
 
@@ -70,28 +70,6 @@ let navigate = useNavigate();
             console.log(error);
         }
 
-        //Axios rough work
-        // try {
-        //     const response = await axios.get(LOGIN_URL,{params:{ email: email, password: pwd }}); //change to whatever email and passwprd called on backend
-        //     if(response?.data?.login === 301){
-        //         setErrMsg('Incorrect Username or Password');
-        //     }
-        //     else {
-        //         const user_id = response?.data?.user_id;
-        //         setEmail('');
-        //         setPwd('');
-        //         setSuccess(true);
-        //     }
-        // } catch (err) {
-        //     if (!err?.response) {
-        //         setErrMsg('No Server Response');
-        //     } else if (err?.response?.data?.login === 301) { //setup error coded for failed login
-        //         setErrMsg('Incorrect Username or Password');
-        //     } else {
-        //         setErrMsg('Login Failed');
-        //     }
-        //     errRef.current.focus();
-        // }
     }
 
     
@@ -108,6 +86,7 @@ let navigate = useNavigate();
                         Welcome
                     </div>
                     <div className='login-form'>
+                        <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                         <form onSubmit={handleSubmit}>
                             <div className='login-field'>
                                 <div className='login-icon'>
@@ -123,7 +102,6 @@ let navigate = useNavigate();
                                     value={email}
                                     required
                                 />
-                                <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                             </div>
                             <div className='login-field'>
                                 <div className='login-icon'>
@@ -137,7 +115,6 @@ let navigate = useNavigate();
                                     value={pwd}
                                     required
                                 />
-                                <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                             </div>
                             <div className='login-button'>
                                 <button type='login'>Sign In</button>

@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect, useRef, useContext} from 'react';
 import { Link } from 'react-router-dom';
 //import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 //import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,6 +7,8 @@ import * as MdIcons from 'react-icons/md';
 import * as BsIcons from 'react-icons/bs';
 import * as RiIcons from 'react-icons/ri';
 import './Login.css';
+import { AuthContext } from '../../api/AuthProvider';
+import { LOGIN } from '../../api/Constants';
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -16,6 +18,10 @@ const REGISTER_URL = ''; //Register URL
 const Signup = () => {
     const userRef = useRef();
     const errRef = useRef();
+
+    let navigate = useNavigate();
+
+    const [state,dispatch] = useContext(AuthContext);
 
     const [user, setUser] = useState('');
     const [validName, setValidName] = useState(false);
@@ -57,6 +63,12 @@ const Signup = () => {
         setErrMsg('');
     }, [user, pwd, matchPwd])
 
+    useEffect(()=>{        
+        if(success){
+            return navigate(`/`);
+        }
+    },[success]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         // prevents button hack
@@ -69,28 +81,32 @@ const Signup = () => {
         }
 
         //Axios rough work
-        // try {
-        //     const response = await axios.get(REGISTER_URL,{params:{ username: user, email : email, pwd :pwd }});
-        //     if (response?.data?.username_availability === 301) {
-        //         setErrMsg('Username Taken');           
-        //     } else if (response?.data?.email_availability === 301) {
-        //         setErrMsg('Email Taken');
-        //     } else {  
-        //         On sucess             
-        //         setUser('');
-        //         setPwd('');
-        //         setEmail('');
-        //         setMatchPwd('');
-        //         setSuccess(true);
-        //     }
-        // } catch (err) {
-        //     if (!err?.response) {
-        //         setErrMsg('No Server Response');
-        //     } else {
-        //         setErrMsg('Registration Failed')
-        //     }
-        //     errRef.current.focus();
-        // }
+        try {
+            const response = await axios.get(REGISTER_URL,{params:{ username: user, email : email, pwd :pwd }});
+            if (response?.data?.error === 301) {
+                setErrMsg('Username Taken');           
+            // } else if (response?.data?.email_availability === 301) {
+            //     setErrMsg('Email Taken');
+            } else {  
+                //On sucess             
+                setUser('');
+                setPwd('');
+                setEmail('');
+                setMatchPwd('');
+                dispatch({
+                    type: LOGIN,
+                    payload: response?.data?.user_id,
+                })
+                setSuccess(true);
+            }
+        } catch (err) {
+            if (!err?.response) {
+                setErrMsg('No Server Response');
+            } else {
+                setErrMsg('Registration Failed')
+            }
+            errRef.current.focus();
+        }
     }
 
     return (
@@ -106,6 +122,7 @@ const Signup = () => {
                             Register
                         </div>
                         <div className='login-form'>
+                            <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                             <form onSubmit={handleSubmit}>
                                 {/* UserName */}
                                 <div className='signup-field'>
