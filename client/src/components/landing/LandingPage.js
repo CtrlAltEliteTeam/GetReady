@@ -32,6 +32,7 @@ const LandingPage = () => {
         }
         if(!state.loggedin){
             setLoginName('Login');
+            setViewDash(false);
         }
     },[loginName]);
         
