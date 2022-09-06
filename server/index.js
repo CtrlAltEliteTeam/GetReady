@@ -43,14 +43,24 @@ app.get('/api/login',(req,res)=>{
     
 });
 
-app.post('/api/insert',(req,res)=>{
-    const email = req.query.email;
-    const username = req.query.username;
-    const password = req.query.password;
-    const sqlInsert = "INSERT INTO users(email,joinDate,password,username) VALUES (?,CURDATE(),?,?)";
-    db.query(sqlInsert,['test4@gmail.com',password,username],(err,result)=>{
-        console.log(result)
-    });
+app.post('/api/register',(req,res)=>{
+    const email = req.body.email;
+    const username = req.body.username;
+    const password = req.body.password;
+    try{
+        const sqlInsert = "INSERT INTO users(email,joinDate,password,username) VALUES (?,CURDATE(),?,?)";
+        db.query(sqlInsert,[email,password,username],(err,result)=>{
+            console.log(result?.affectedRows);
+            if(result?.affectedRows===1){
+                res.send(result);
+            }else{
+                res.send({error:301});
+            }
+        });
+    }catch(err){
+        res.send({error:301});
+    }
+    
 });
 
 const PORT =process.env.PORT || 8000;
