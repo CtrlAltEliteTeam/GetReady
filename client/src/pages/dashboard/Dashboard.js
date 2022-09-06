@@ -1,12 +1,15 @@
 import React, {useState, useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import { GameTileData } from "../../components/GameTile/GameTitleData";
 import GameTile from "../../components/GameTile/GameTile";
 import { GameTile_TestData } from "../../components/GameTile/GameTitle_TestData";
 import './Dashboard.css';
+import * as BiIcons from 'react-icons/bi';
 
 const Dashboard = () => {
 
     const [tournamentList, setTournamentList] = useState([]);
+    let navigate = useNavigate();
 
     useEffect(() => {
         //Axios function to load the data into GameTileData objects 
@@ -22,11 +25,21 @@ const Dashboard = () => {
         });
     }, [])
     
-
+    const backToLanding = () => {
+        return navigate('/');
+    }
 
     return(
         <div className="dashboard-page">
             <div className="dashboard-topbar">
+                <div onClick={backToLanding} className='dash-back-button'>
+                    <div className='dash-back-button-icon'>
+                        <BiIcons.BiArrowBack/>
+                    </div>
+                    <div>
+                        Back
+                    </div>
+                </div>
                 <div className="dashboard-heading">
                     <span>
                         Your Page
