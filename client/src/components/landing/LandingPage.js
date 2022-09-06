@@ -12,10 +12,12 @@ import { LOGOUT } from "../../api/Constants";
 
 const LandingPage = () => {
 
+    let navigate = useNavigate();
     // Array of Tounaments
     const [tournamentList, setTournamentList] = useState([]);
     const [loginName, setLoginName] = useState('Login');
     const [state,dispatch]=useContext(AuthContext);
+    const [viewDash, setViewDash] = useState(false);
 
     useEffect(() => {
         //Axios function to load the data into GameTileData objects 
@@ -24,20 +26,15 @@ const LandingPage = () => {
 
     useEffect(() => {
     console.log(state.loggedin);
-      if(state.loggedin){
-        setLoginName('Log Out');
-      }
-      if(!state.loggedin){
-        
-        setLoginName('Login');
-      }
-
-      
+        if(state.loggedin){
+            setLoginName('Log Out');
+            setViewDash(true);
+        }
+        if(!state.loggedin){
+            setLoginName('Login');
+        }
     },[loginName]);
-    
-
-    
-    
+        
 
     //Load sample data 
     useEffect(() => {
@@ -46,7 +43,7 @@ const LandingPage = () => {
             setTournamentList(tournamentList => [...tournamentList,gameTile]);
         });
     }, [])
-    let navigate = useNavigate();
+
     const loginCheck = () =>{
         if(state.loggedin){
 
@@ -61,6 +58,10 @@ const LandingPage = () => {
         }
     };
 
+    const viewDashboard = () => {
+        return navigate(`/dashboard`);
+    }
+
 
     return (
         <div className="landing-page">
@@ -70,15 +71,17 @@ const LandingPage = () => {
                     <span>
                         Tournaments
                     </span>
-                        
                 </div>
                 <div  className="landing-login-button" onClick={loginCheck}>
-                    
-                        {loginName}
-                    
+                    {loginName}
                 </div>
             </div>
             <div className="tourny-list-outer">
+                <div className="landing-button-container">
+                    <div className={viewDash ? 'view-dash-button-valid' : 'view-dash-button-invalid' } onClick={viewDashboard}>
+                        View Your Dashboard
+                    </div>
+                </div>
                 <div className="tourny-list-inner">
                     {tournamentList.map((element)=>{
                         return(
