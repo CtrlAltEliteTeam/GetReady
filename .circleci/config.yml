@@ -1,0 +1,27 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@5.0.2
+  coveralls: coveralls/coveralls@1.0.6
+
+
+jobs:
+  test:
+    working_directory: ~/GetReady/client
+    executor: node/default
+    steps:
+      - checkout:
+          path: ~/GetReady
+      - run:
+          name: install npm
+          command: npm install                     
+      - run:
+          name: Test app
+          command: npm run test -- --coverage
+      - coveralls/upload   
+          
+
+workflows:
+  basic_test:
+    jobs:
+      - test
