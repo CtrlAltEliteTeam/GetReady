@@ -1,9 +1,10 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState, useContext} from 'react';
 import * as BsIcons from 'react-icons/bs';
 import * as RiIcons from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import "./Login.css";
 import axios from '../../api/Axois';
+import { AuthContext } from '../../api/AuthProvider';
 
 const LOGIN_URL = '/login';
 
@@ -15,6 +16,8 @@ const LOGIN_URL = '/login';
 const Login = () => {
     const userRef = useRef();
     const errRef = useRef();
+
+    const [state, dispatch] = useContext(AuthContext);
 
     const [email, setEmail] = useState('');
     const [pwd, setPwd] = useState('');
@@ -46,6 +49,10 @@ const Login = () => {
                 const user_id = response?.data?.user_id;
                 setEmail('');
                 setPwd('');
+                dispatch({
+                    type: LOGIN,
+                    payload : user_id,
+                });
                 setSuccess(true);
             }
         } catch (error) {

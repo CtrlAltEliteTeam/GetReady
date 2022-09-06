@@ -32,9 +32,9 @@ app.get('/api/login',(req,res)=>{ //The params come through the query of the req
 });
 
 app.post('/api/insert',(req,res)=>{
-
-    const username = req.body.username;
-    const password = req.body.password;
+    const email = req.query.email;
+    const username = req.query.username;
+    const password = req.query.password;
     const sqlInsert = "INSERT INTO users(email,joinDate,password,username) VALUES (?,CURDATE(),?,?)";
     db.query(sqlInsert,['test4@gmail.com',password,username],(err,result)=>{
         console.log(result)
