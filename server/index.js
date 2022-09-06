@@ -22,8 +22,10 @@ app.get('/api/get',(req,res)=>{
 });
 
 app.get('/api/login',(req,res)=>{
-    const email = 'test@gmail.com';//req.body.email;
-    const password ='test' ;//req.body.password;
+    console.log(req.query);
+    const email = req.query.email;
+    const password =req.query.password;
+    
     const sqlSelect = "SELECT * FROM users WHERE email=? AND password =?";
     db.query(sqlSelect,[email,password],(err,result)=>{
        console.log(result);

@@ -36,11 +36,14 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.get(LOGIN_URL,{params:{
+            const response = await axios.get(LOGIN_URL,{ params:
+                {
                      email:email,
                      password:pwd
                 }});
-            setUser(response.data);
+            //console.log(JSON.stringify(response));
+            setUser(response?.data);
+
             console.log(JSON.stringify(user));
             // .then((response)=>{
             //   setUserList(response.data);
