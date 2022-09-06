@@ -1,4 +1,80 @@
-* {
-    font-family: 'Lato', sans-serif;
-    color: black;
+body{
+    margin: 0;
+}
+
+.landing-page{
+    margin: 0;
+    padding: 0;
+    background-image: url('../../resources/img/GetReady.png');
+    background-repeat: no-repeat;
+    background-size: 800px 800px;
+    background-position-x: center;
+    background-position-y: center;
+    background-attachment: fixed;
+}
+
+.landing-topbar{
+    display: flex;
+    justify-content: center;
+    height: 70px;
+    width: 100%;
+    background-color: blueviolet;
+    margin: 0;
+    padding: 0;
+}
+
+.landing-title{
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 50px;
+    text-align: center;
+    padding-top: 7px;
+}
+.tourny-list-outer{
+    width: 100%;
+}
+
+.tourny-list-inner{
+    justify-content: center;
+    max-width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.landing-login-button{
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 600px ;
+    position: absolute;
+    right: 20px;
+    border-radius: 25px;
+    background-color: #f9be32;
+    padding: 12px;
+    width: 70px;
+    margin-top: 14px;
+    text-align: center;
+}
+
+.view-dash-button-valid{
+    border-radius: 25px;
+    background-color: #f9be32;
+    padding: 15px;
+    width: 200px;
+    margin: 20px;
+    align-content: center;
+    text-align: center;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.view-dash-button-invalid{
+    display: none;
+}
+
+.landing-button-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }

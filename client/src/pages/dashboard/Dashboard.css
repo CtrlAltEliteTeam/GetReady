@@ -1,0 +1,60 @@
+body{
+    margin: 0;
+}
+
+.dashboard-page{
+    margin: 0;
+    padding: 0;
+    background-image: url('../../resources/img/GetReady.png');
+    background-repeat: no-repeat;
+    background-size: 800px 800px;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.dashboard-topbar{
+    height: 70px;
+    width: 100%;
+    opacity: 1;
+    background-color: blueviolet;
+    margin: 0;
+    padding: 0;
+}
+
+.user-tounaments-heading{
+
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    text-align: center;
+    padding-top: 7px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.dashboard-heading{
+
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 50px;
+    text-align: center;
+    padding-top: 7px;
+}
+
+.user-tounaments-outer{
+
+    width: 100%;
+    margin-top: 30px;
+}
+
+.user-tounaments-inner{
+    justify-content: center;
+    max-width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 25px;
+    border-color: blueviolet;
+    border-style: groove;
+}
