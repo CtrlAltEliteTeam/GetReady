@@ -22,15 +22,25 @@ app.get('/api/get',(req,res)=>{
 });
 
 app.get('/api/login',(req,res)=>{
-    console.log(req.query);
+    //console.log(req.query);
     const email = req.query.email;
     const password =req.query.password;
-    
+    try {
     const sqlSelect = "SELECT * FROM users WHERE email=? AND password =?";
     db.query(sqlSelect,[email,password],(err,result)=>{ // add code so that the response data is just 301 if the username or password is incorrect
         console.log(result);
-        res.send(result);
-    });
+        
+        if(result.length===1){
+            res.send(result);
+        }else{
+            res.send({error:301});
+        }
+    })
+    }catch (err) {
+           res.send({error:301}); 
+    }
+        
+    
 });
 
 app.post('/api/insert',(req,res)=>{

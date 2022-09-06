@@ -53,7 +53,8 @@ let navigate = useNavigate();
                     email:email,
                     password:pwd
                 }});
-            if(response?.data?.login === 301){
+                console.log(JSON.stringify(response));
+            if(response?.data?.error === 301){
                 setErrMsg('Incorrect Username or Password');
             } else {
                 const user_id = response?.data?.user_id;
