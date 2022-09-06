@@ -14,6 +14,8 @@ body{
 }
 
 .landing-topbar{
+    display: flex;
+    justify-content: center;
     height: 70px;
     width: 100%;
     background-color: blueviolet;
@@ -40,4 +42,17 @@ body{
     flex-wrap: wrap;
     margin-left: auto;
     margin-right: auto;
+}
+.landing-login-button{
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+ margin-left: 600px ;
+ position: absolute;
+ right: 20px;
+ border-radius: 25px;
+ background-color: #f9be32;
+ padding: 12px;
+ width: 70px;
+ margin-top: 14px;
+ text-align: center;
 }

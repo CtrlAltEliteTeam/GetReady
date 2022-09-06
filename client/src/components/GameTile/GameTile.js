@@ -6,7 +6,7 @@ const GameTile = (props) => {
 
     let gameTile = props.game;
 
-    console.log(props);
+    //console.log(props);
 
     //Create an onclick event that open the information obout the game catagory
 

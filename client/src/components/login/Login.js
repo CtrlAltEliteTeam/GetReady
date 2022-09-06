@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import "./Login.css";
 import axios from '../../api/Axois';
 import { AuthContext } from '../../api/AuthProvider';
+import {LOGIN} from '../../api/Constants';
+import {useNavigate} from 'react-router-dom';
 
 const LOGIN_URL = '/login';
 
@@ -34,6 +36,14 @@ const Login = () => {
         setErrMsg('');
         
     }, [email, pwd])
+let navigate = useNavigate();
+    useEffect(()=>{
+        
+        if(success){
+           return navigate(`/`);
+
+        }
+    },[success]);
 
     const handleSubmit = async (e) => { //button press
         e.preventDefault();
@@ -83,10 +93,12 @@ const Login = () => {
         // }
     }
 
+    
+
     return (
         <>
             {success ? (
-                <section>
+                <section >
                     {/*change to landing page URL*/}
                 </section>
             ) : (
