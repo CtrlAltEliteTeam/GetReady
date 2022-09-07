@@ -11,21 +11,3 @@ test('renders the landing page', () => {
   render(App);
 
 });
-
-test('renderLogin', () => {
-  render(Login);
-});
-
-test('renderLogin', () => {
-  render(Signup);
-});
-
-test('renderLogin', () => {
-  render(GameTile);
-});
-
-test('dash', () => {
-  render(Dashboard);
-});
-
-
