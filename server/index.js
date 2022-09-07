@@ -50,7 +50,7 @@ app.post('/api/register',(req,res)=>{
     try{
         const sqlInsert = "INSERT INTO users(email,joinDate,password,username) VALUES (?,CURDATE(),?,?)";
         db.query(sqlInsert,[email,password,username],(err,result)=>{
-            console.log(result?.affectedRows);
+            
             if(result?.affectedRows===1){
                 res.send(result);
             }else{
