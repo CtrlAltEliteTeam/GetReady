@@ -24,7 +24,7 @@ test('renderLogin', () => {
   render(GameTile);
 });
 
-test1('dash', () => {
+test('dash', () => {
   render(Dashboard);
 });
 
