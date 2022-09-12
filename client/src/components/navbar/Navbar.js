@@ -1,7 +1,8 @@
-import React, {useState, useContext} from "react";
-import { Link } from 'react-router-dom';
+import React, {useState, useContext, useEffect} from "react";
+import { Link, useNavigate } from 'react-router-dom';
 import { IconContext } from 'react-icons';
 import { AuthContext } from "../../api/AuthProvider";
+import { LOGOUT } from "../../api/Constants";
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai'
 import {NavbarData} from './NavbarData';
@@ -9,11 +10,38 @@ import './Navbar.css'
 
 const NavBar = () => {
 
+    const [state, dispatch] = useContext(AuthContext);
+    let navigate = useNavigate();
+
     const [menubar, setMenubar] = useState(false);
     const showMenubar = () => setMenubar(!menubar);
     const [pageHeading, setPageHeading] = useState('Tournaments');
+    const [loginName, setLoginName] = useState('Login');
 
-    const [state] = useContext(AuthContext);
+    useEffect(() => {
+        console.log(state.loggedin);
+            if(state.loggedin){
+                setLoginName('Log Out');
+            }
+            if(!state.loggedin){
+                setLoginName('Login');
+            }
+    },[loginName]);
+
+    const loginCheck = () =>{
+        if(state.loggedin){
+
+            dispatch({
+                type:LOGOUT,
+                payload: 0
+            });
+            setLoginName('Login');
+        }
+        if(!state.loggedin){
+            return navigate(`/login`);
+        }
+    };
+
 
     return (
         <>
@@ -24,6 +52,9 @@ const NavBar = () => {
                     </Link>
                     <div className="page-heading">
                         {pageHeading}
+                    </div>
+                    <div  className="landing-login-button" onClick={loginCheck}>
+                    {loginName}
                     </div>
                 </div>
                 <nav className={menubar ? 'nav-menu active' : 'nav-menu'}>

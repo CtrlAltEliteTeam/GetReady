@@ -66,12 +66,6 @@ const LandingPage = () => {
 
     return (
         <div className="landing-page">
-            {/* this title will probably end up being part of the navbar when it is done */}
-            <div className="landing-topbar">
-                <div  className="landing-login-button" onClick={loginCheck}>
-                    {loginName}
-                </div>
-            </div>
             <div className="tourny-list-outer">
                 <div className="landing-button-container">
                     <div className={viewDash ? 'view-dash-button-valid' : 'view-dash-button-invalid' } onClick={viewDashboard}>
