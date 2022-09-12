@@ -77,7 +77,7 @@ input{
 }
 
 button[type="login"]{
-    background-color: gold;
+    background-color:#f9be32;
     border: none;
     color: white;
     padding: 15px 50px;

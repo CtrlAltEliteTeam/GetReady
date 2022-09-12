@@ -15,13 +15,12 @@ function reducer(state,action){
         case LOGIN:
             return {
                 id : action.payload,
-                nav : true,
+                loggedin : true,
             }
         case LOGOUT:
             return {
                 id : action.payload,
-                nav : false,
-                chat : 0,
+                loggedin : false
             }
         default:
             throw new Error();
