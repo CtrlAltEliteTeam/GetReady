@@ -68,11 +68,6 @@ const LandingPage = () => {
         <div className="landing-page">
             {/* this title will probably end up being part of the navbar when it is done */}
             <div className="landing-topbar">
-                <div className="landing-title">
-                    <span>
-                        Tournaments
-                    </span>
-                </div>
                 <div  className="landing-login-button" onClick={loginCheck}>
                     {loginName}
                 </div>
