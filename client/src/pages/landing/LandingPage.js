@@ -1,8 +1,8 @@
 import React, {useState, useEffect, useContext} from "react";
 import { AuthContext } from "../../api/AuthProvider";
-import { GameTileData } from "../GameTile/GameTitleData";
-import GameTile from "../GameTile/GameTile";
-import { GameTile_TestData } from "../GameTile/GameTitle_TestData";
+import { GameTileData } from "../../components/GameTile/GameTitleData";
+import GameTile from "../../components/GameTile/GameTile";
+import { GameTile_TestData } from "../../components/GameTile/GameTitle_TestData";
 import GetReady from '../../resources/img/GetReady.png';
 import './LandingPage.css';
 import { Link, useNavigate } from "react-router-dom";
