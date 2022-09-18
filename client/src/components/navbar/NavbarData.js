@@ -17,7 +17,13 @@ export const NavbarData = [
         cName:'nav-text'
     },
     {
-        title:"Your Page",
+        title:"My Tounaments",
+        path:'/mypage',
+        icon:<AiIcons.AiOutlineProfile />,
+        cName:'nav-text'
+    },
+    {
+        title:"History",
         path:'/',
         icon:<AiIcons.AiOutlineProfile />,
         cName:'nav-text'

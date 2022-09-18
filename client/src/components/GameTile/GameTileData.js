@@ -7,5 +7,8 @@ export class GameTileData{
     }
 }
 
+//TODO
+//this should recive a game nor na image and alt **fix later
+
 //Can add editable stuff later
 /* this.editable = edit to make the popup menu appear as seen in the UI diagrams  */
