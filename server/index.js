@@ -6,16 +6,17 @@ const cors = require('cors');
 const app = express();
 const db = require('./config/Db');
 
-
-
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
 app.get('/api/get',(req,res)=>{
-    const sqlSelect = "SELECT * FROM users";
+    const sqlSelect = "SELECT * FROM heroku_caad988da016f21.users";
     db.query(sqlSelect,(err,result)=>{
-       // console.log(result);
+        //console.log(result);
+        if (err){ 
+            throw err;
+        }
         res.send(result);
     });
     
@@ -26,7 +27,7 @@ app.get('/api/login',(req,res)=>{
     const email = req.query.email;
     const password =req.query.password;
     try {
-    const sqlSelect = "SELECT * FROM users WHERE email=? AND password =?";
+    const sqlSelect = "SELECT * FROM  heroku_caad988da016f21.users WHERE email=? AND password =?";
     db.query(sqlSelect,[email,password],(err,result)=>{ // add code so that the response data is just 301 if the username or password is incorrect
         console.log(result);
         
@@ -48,7 +49,7 @@ app.post('/api/register',(req,res)=>{
     const username = req.body.username;
     const password = req.body.password;
     try{
-        const sqlInsert = "INSERT INTO users(email,joinDate,password,username) VALUES (?,CURDATE(),?,?)";
+        const sqlInsert = "INSERT INTO  heroku_caad988da016f21.users(email,joinDate,password,username) VALUES (?,CURDATE(),?,?)";
         db.query(sqlInsert,[email,password,username],(err,result)=>{
             console.log(result?.affectedRows);
             if(result?.affectedRows===1){
