@@ -1,6 +1,42 @@
-.create-tounament-outer{
-    position: absolute;
-    left: 10px;
-    height: 100px;
-    width: 200px;
+.create-tounament-inner{
+    display: flex;
+    margin-top: 10px;
+    border-radius: 25px;
+    border-style: groove;
+    width: fit-content;
+    padding: 10px;
+    padding-top: 15px;
+    border-color: gold;
+    width: 300px;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: darkorchid;
+}
+
+.create-form-title{
+    color:white;
+    font-size: 30px;
+    padding-bottom: 10px;
+}
+
+.create-item{
+    padding: 3px;
+    width: 100%;
+}
+
+.create-item-heading{
+    color: white;
+    padding-left: 10px;
+}
+
+.create-item-input{
+    padding: 7px;
+    border-radius: 20px;
+    background-color: white;
+}
+
+.create-item-button{
+    display: flex;
+    justify-content: center;
 }
