@@ -5,12 +5,25 @@ import Select from "react-dropdown-select";
 const CreateTournament = () => {
 
     const [tName, setTName] = useState('');
+    const [validTName, setValidTName] = useState(false);
+
     const [tGame, setTGame] = useState("");
+    const [validTGame, setValidTGame] = useState(false);
+    
     const [tsDate, setTsDate] = useState("");
+    const [validTsDate, setValidTsDate] = useState(false);
+
     const [tfDate, setTfDate] = useState("");
+    const [validTfDate, setValidTfDate] = useState(false);
+
     const [tParticipants, setTParticipants] = useState(2);
+    const [validTParticipants, setValidTParticipants] = useState(false);
+    
     const [tDesc, setTDesc] = useState("");
+    const [validTDesc, setValidTDesc] = useState(false);
+    
     const [tsTime, setTsTime] = useState("");
+    const [validTsTime, setValidTsTime] = useState(false);
 
     const options = [{id:1,name:"Counter Strike: GO"},{id:2,name:"Fortnite"}]//,"Fortnite","Halo","League of Legends","Super Smash Bros"];
 
