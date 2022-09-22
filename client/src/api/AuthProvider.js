@@ -8,7 +8,7 @@ const { Provider } = AuthContext;
 const initialState = {
     id : 0,
     loggedin : false,
-    heading : "Tournaments"
+    heading : "Get Ready"
 }
 
 function reducer(state,action){

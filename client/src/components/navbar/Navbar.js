@@ -2,7 +2,7 @@ import React, {useState, useContext, useEffect} from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { IconContext } from 'react-icons';
 import { AuthContext } from "../../api/AuthProvider";
-import { LOGOUT } from "../../api/Constants";
+import { LOGIN, LOGOUT } from "../../api/Constants";
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai'
 import {NavbarData} from './NavbarData';
@@ -15,31 +15,45 @@ const NavBar = () => {
 
     const [menubar, setMenubar] = useState(false);
     const showMenubar = () => setMenubar(!menubar);
-    const [pageHeading, setPageHeading] = useState('Tournaments');
+    const [pageHeading, setPageHeading] = useState('Get Ready');
     const [loginName, setLoginName] = useState('Login');
 
-    useEffect(() => {
-        console.log(state.loggedin);
-            if(state.loggedin){
-                setLoginName('Log Out');
-            }
-            if(!state.loggedin){
-                setLoginName('Login');
-            }
-    },[loginName]);
+    // useEffect(() => {
+    //     //console.log(state.loggedin);
+    //         if(state.loggedin){
+    //             setLoginName('Log Out');
+    //         }
+    //         else if(!state.loggedin){
+    //             setLoginName('Login');
+    //         }
+    // },[loginName]);
 
     const loginCheck = () =>{
-        if(state.loggedin){
+        // if(state.loggedin){
 
+        //     dispatch({
+        //         type:LOGOUT,
+        //         payload: 0
+        //     });
+        //     setLoginName('Login');
+        // }
+        // if(!state.loggedin){
+        //     return navigate(`/login`);
+        // }
+        if(state.loggedin){
             dispatch({
                 type:LOGOUT,
                 payload: 0
             });
             setLoginName('Login');
+        } else if (!state.loggedin) {
+            dispatch({
+                type:LOGIN,
+                payload: 1
+            });
+            setLoginName('Logout');
         }
-        if(!state.loggedin){
-            return navigate(`/login`);
-        }
+        console.log(state.id);
     };
 
 
@@ -54,7 +68,7 @@ const NavBar = () => {
                         {pageHeading}
                     </div>
                     <div  className="landing-login-button" onClick={loginCheck}>
-                    {loginName}
+                        {loginName}
                     </div>
                 </div>
                 <nav className={menubar ? 'nav-menu active' : 'nav-menu'}>
