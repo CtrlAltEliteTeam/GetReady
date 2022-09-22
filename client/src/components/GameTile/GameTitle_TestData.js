@@ -20,7 +20,7 @@ export const GameTile_TestData = [
         img: LoL,
         alt: 'League of Legends',
         content: 'GAME',
-        user: 1,
+        user: 2,
     },
     {
         id: 3,
@@ -36,7 +36,7 @@ export const GameTile_TestData = [
         img: Halo,
         alt: 'Halo',
         content: 'GAME',
-        user: 1,
+        user: 3,
     },
     {
         id: 5,

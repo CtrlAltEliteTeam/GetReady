@@ -3,6 +3,7 @@ import { GameTileData } from "./GameTileData";
 import {FiEdit} from "react-icons/fi";
 import './GameTile.css';
 import { AuthContext } from "../../api/AuthProvider";
+import  CreateTournament  from "../createTounament/CreateTournament";
 
 const GameTile = (props) => {
 
@@ -10,7 +11,8 @@ const GameTile = (props) => {
 
     const [state] = useContext(AuthContext);
     const [editPermission, setEditPermission] = useState(false);
-    const [displayContent, setDisplayContent] = useState(true)
+    const [displayContent, setDisplayContent] = useState(true);
+    const [overlay, setOverlay] = useState(false);
 
     useEffect(() => {
         //console.log(state.id + " : " + gameTile.user);
@@ -23,32 +25,47 @@ const GameTile = (props) => {
 
     const showDetails = () => {
         if (displayContent){
-            console.log("tournament");
+            setOverlay(true);
         } else {
             console.log("game");
         }
     }
 
-    const editDetails = () => {
+    const stopOverlay = () => {
+        setOverlay(false);
+    }
+
+    const editDetails = (e) => {
+        e.stopPropagation();
         console.log("edit");
     }
     
     return(
-        <div key={gameTile.count} className="tile-layout" >
-            <div className="tile-image-outer">
-                <img src={gameTile.img} alt={gameTile.alt} className='tile-image' onClick={showDetails} />
-            </div>
-            <div className="tile-info">
-                <div className="tile-name" onClick={showDetails}>
-                    <span>
-                        {gameTile.name}
-                    </span>
+        <>
+            <div className={overlay ? "tournament-overlay-active" : "tournament-overlay"}>
+                <div className="tournament-overlay-screen" onClick={stopOverlay}>
+
                 </div>
-                <div className={editPermission ? "tile-edit-button-active" : "tile-edit-button"} onClick={editDetails}>
-                    <FiEdit className="edit-button-symbol" />
+                <div className="tournament-edit-outer">
+                    <CreateTournament/>
                 </div>
             </div>
-        </div>
+            <div key={gameTile.count} className="tile-layout" >
+                <div className="tile-image-outer">
+                    <img src={gameTile.img} alt={gameTile.alt} className='tile-image' onClick={showDetails} />
+                </div>
+                <div className="tile-info">
+                    <div className="tile-name" onClick={showDetails}>
+                        <span>
+                            {gameTile.name}
+                        </span>
+                    </div>
+                    <div className={editPermission ? "tile-edit-button-active" : "tile-edit-button"} onClick={editDetails}>
+                        <FiEdit className="edit-button-symbol" />
+                    </div>
+                </div>
+            </div>
+        </>
     )
 }
 
