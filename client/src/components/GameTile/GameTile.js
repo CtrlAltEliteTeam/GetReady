@@ -11,7 +11,7 @@ const GameTile = (props) => {
 
     const [state] = useContext(AuthContext);
     const [editPermission, setEditPermission] = useState(false);
-    const [displayContent, setDisplayContent] = useState(true);
+    const [task, setTask] = useState(true);
     const [overlay, setOverlay] = useState(false);
 
     useEffect(() => {
@@ -24,38 +24,53 @@ const GameTile = (props) => {
     }, [state.id])
 
     const showDetails = () => {
-        if (displayContent){
+        if (gameTile.content == "GAME"){
             setOverlay(true);
-        } else {
-            console.log("game");
+            setTask(1);
+        }
+        if (gameTile.content == "TOURNAMENT"){
+            setOverlay(true);
+            setTask(2);
         }
     }
 
     const stopOverlay = () => {
         setOverlay(false);
+        setTask(0);
     }
 
     const editDetails = (e) => {
         e.stopPropagation();
-        console.log("edit");
-    }
-    
-    return(
-        <>
+        setOverlay(true);
+        setTask(3)
+        }
+        
+        return(
+            <>
             <div className={overlay ? "tournament-overlay-active" : "tournament-overlay"}>
-                <div className="tournament-overlay-screen" onClick={stopOverlay}>
-
-                </div>
-                <div className="tournament-edit-outer">
-                    <CreateTournament/>
-                </div>
+                <div className="tournament-overlay-screen" onClick={stopOverlay}></div>
+                    {task == 1 && (
+                        <div className="tournament-edit-outer">
+                            <CreateTournament/>
+                        </div>
+                    )}
+                    {task == 2 && (
+                        <div className="tournament-edit-outer">
+                            <CreateTournament/>
+                        </div>
+                    )}
+                    {task == 3 && (
+                        <div className="tournament-edit-outer">
+                            <CreateTournament/>
+                        </div>
+                    )}
             </div>
-            <div key={gameTile.count} className="tile-layout" >
+            <div key={gameTile.count} className="tile-layout" onClick={showDetails} >
                 <div className="tile-image-outer">
-                    <img src={gameTile.img} alt={gameTile.alt} className='tile-image' onClick={showDetails} />
+                    <img src={gameTile.img} alt={gameTile.alt} className='tile-image' />
                 </div>
                 <div className="tile-info">
-                    <div className="tile-name" onClick={showDetails}>
+                    <div className="tile-name">
                         <span>
                             {gameTile.name}
                         </span>

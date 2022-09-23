@@ -8,6 +8,7 @@ import Dashboard from '../src/pages/dashboard/Dashboard';
 import NavBar from './components/navbar/Navbar';
 import MyToumanents from '../src/pages/myTourmanents/MyTounamentsPage';
 import CreateTournament from '../src/components/createTounament/CreateTournament';
+import Tournament from './components/tournament/Tournament';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
 				<Route path='/dashboard' exact element={<Dashboard/>}/>
 				<Route path='/mypage' exact element={<MyToumanents/>}/>
 				<Route path='/create' exact element={<CreateTournament/>}/>
+				<Route path='/details' exact element={<Tournament/>}/>
 			</Routes>
 		</Router>
     </>
