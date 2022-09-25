@@ -1,6 +1,4 @@
 .tournament-details-outer{
-    position: relative;
-    top: 100px;
     padding: 30px;
     border-radius: 20px;
     border-style: ridge;
@@ -8,6 +6,7 @@
     background-color: darkorchid;
     width: 60%;
     display: flex;
+    position: relative;
 }
 
 .tournament-spacer{

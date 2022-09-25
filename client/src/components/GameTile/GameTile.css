@@ -82,3 +82,11 @@
     top: calc(100vh/2 - 250px);
     left: calc(100vw/2 - 150px);
 }
+
+.tournament-view-outer{
+    z-index: 17;
+    position: fixed;
+    /* left: 40%; */
+    top: calc(100vh/2 - 250px);
+    left: calc(100vw/2 - 30vw);
+}

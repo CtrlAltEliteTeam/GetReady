@@ -4,6 +4,7 @@ import {FiEdit} from "react-icons/fi";
 import './GameTile.css';
 import { AuthContext } from "../../api/AuthProvider";
 import  CreateTournament  from "../createTounament/CreateTournament";
+import Tournament from "../tournament/Tournament";
 
 const GameTile = (props) => {
 
@@ -50,8 +51,8 @@ const GameTile = (props) => {
             <div className={overlay ? "tournament-overlay-active" : "tournament-overlay"}>
                 <div className="tournament-overlay-screen" onClick={stopOverlay}></div>
                     {task == 1 && (
-                        <div className="tournament-edit-outer">
-                            <CreateTournament/>
+                        <div className="tournament-view-outer">
+                            <Tournament/>
                         </div>
                     )}
                     {task == 2 && (

@@ -11,7 +11,7 @@ body{
     margin-top: 80px;
     margin: 0;
     padding: 0;
-    background-image: url('../../resources/img/GetReady.png');
+    /* background-image: url('../../resources/img/GetReady.png'); */
     background-repeat: no-repeat;
     background-size: 800px 800px;
     background-position-x: center;
