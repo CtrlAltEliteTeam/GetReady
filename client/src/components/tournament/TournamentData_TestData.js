@@ -16,6 +16,7 @@ export const TournamentData_TestData = [
             eDate: "2022-12-13",
             participants: 4,
             participantsMax: 16,
+            participantsPermission: true,
         },
         game: {
             id: 5,

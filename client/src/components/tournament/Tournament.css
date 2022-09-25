@@ -7,6 +7,8 @@
     width: 60%;
     display: flex;
     position: relative;
+    /* overflow-y: scroll; */
+    overflow-x: hidden;
 }
 
 .tournament-spacer{
@@ -64,7 +66,6 @@
 
 .tournament-details-partricipants{
     color:white;
-    display: flex;
 }
 
 .tournament-details-partricipants-button{
@@ -78,8 +79,29 @@
     padding-top: 3px;
 }
 
+.tournament-details-partricipants-expand{
+    display: flex;
+}
+
+.active, .tournament-details-partricipants-expand{
+
+}
+
+
+.tournament-details-partricipants-expand-button{
+    display: flex;
+}
+
 .tournament-details-partricipants-display{
 
+}
+
+.tournament-details-partricipants-list-show{
+    display: block;
+}
+
+.tournament-details-partricipants-list{
+    display: none;
 }
 
 .tournament-details-join-button{

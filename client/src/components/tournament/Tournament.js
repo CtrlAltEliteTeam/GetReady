@@ -2,14 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { TournamentData } from './TournamentData';
 import { TournamentData_TestData } from './TournamentData_TestData';
 import { GameTileData } from '../GameTile/GameTileData';
+import * as AiIcons from 'react-icons/ai';
 import './Tournament.css';
 
 const Tournament = (params) => {
 
     const [TournamentDetails, setTournamentDetails] = useState({});
     const [GameDetails, setGameDetails] = useState('');
-    const [Participant, setParticipant] = useState([]);
+    const [Participants, setParticipants] = useState([]);
 
+    const [showParticipants, setShowParticipants] = useState(false);
 
     //Axiose to fetch tournament details 
     useEffect(() => {
@@ -25,11 +27,18 @@ const Tournament = (params) => {
         setTournamentDetails(t);
         //let tourmanent = new TournamentData(t.id,t.title,game,t.img,t.alt,t.desc,t.creator,t.sTime,t.sDate,t.eDate,t.partisipants,t.partisipantsMax);
         details.participants.participants.forEach(element => {
-            setParticipant(Participant => [...Participant,element.playerName]);
+            setParticipants(Participants => [...Participants,element.playerName]);
         });
     }, [TournamentDetails])
     
-
+    const showParticipantsEvent = (e) => {
+        if (!showParticipants){
+            setShowParticipants(true);
+        }
+        if (showParticipants) {
+            setShowParticipants(false);
+        }
+    }
     //replace join with leave if user is participating
     return (
         <div className='tournament-details-outer'>
@@ -65,16 +74,38 @@ const Tournament = (params) => {
                         End Date: {TournamentDetails.eDate}
                     </div>
                 </div>
-                <div className='tournament-details-partricipants'>
-                    <div className='tournament-details-partricipants-button'>
-                        <div>
-                            Participants
+                {TournamentDetails.participantsPermission ? (
+                    <div className='tournament-details-partricipants'>
+                        <div className='tournament-details-partricipants-expand'>
+                            <div className="tournament-details-partricipants-expand-button" onClick={showParticipantsEvent}>
+                                <div className={TournamentDetails.participantPermission ? "tournament-details-partricipants-expand-icon-visible" : "tournament-details-partricipants-expand-icon"}>
+                                    {showParticipants ? (<AiIcons.AiOutlineDown/>) : (<AiIcons.AiOutlineRight/>)}
+                                </div>
+                                Participants
+                            </div>
+                            <div className='tournament-details-partricipants-display'>
+                                {TournamentDetails.participants} / {TournamentDetails.participantsMax}
+                            </div>
                         </div>
-                    </div>
-                    <div className='tournament-details-partricipants-display'>
-                        {TournamentDetails.participants} / {TournamentDetails.participantsMax}
-                    </div>
-                </div>
+                        <div className='tournament-details-partricipants-list-container'>
+                            <div className={showParticipants ? "tournament-details-partricipants-list-show" : "tournament-details-partricipants-list"}>
+                                {Participants.map((element)=>{
+                                    return(
+                                        <div>
+                                            {element}
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        </div>
+                    </div>) : (
+                        <div className='tournament-details-partricipants'>
+                            Participants
+                            <div className='tournament-details-partricipants-display'>
+                                {TournamentDetails.participants} / {TournamentDetails.participantsMax}
+                            </div>
+                        </div>
+                    )}
                 <div className='tournament-details-bracket'>
 
                 </div>
