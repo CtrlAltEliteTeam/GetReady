@@ -23,16 +23,6 @@ app.get('/api/get',(req,res)=>{
     
 });
 
-app.get('/api/getTournaments', (req, res)=>{
-    const sqlSelect = "SELECT * FROM heroku_caad988da016f21.tournament";
-    db.query(sqlSelect, (err, result)=> {
-        if (err) {
-            throw err;
-        }
-        res.send(result);
-    });
-});
-
 app.post('/api/login',(req,res)=>{
     //console.log(req.query);
     const email = req.query.email;
@@ -73,6 +63,93 @@ app.post('/api/register',(req,res)=>{
     
 });
 
+app.post('/api/createTournament', (req, res)=>{
+    const title = req.body.title; 
+    const description = req.body.description;
+    const startDate= req.body.startDate; 
+    const endDate= req.body.endDate; 
+    const num_participants= req.body.num_participants; 
+    const user_id= req.body.creator_id; 
+    const game_id= req.body.game_id; 
+    const startTime= req.body.startTime; 
+    const viewParticipant= req.body.viewParticipant;
+    const img= req.body.img;
+    const imgName= req.body.imgName;
+    const content = req.body.content;
+    try {
+        const sqlInsert = "INSERT INTO heroku_caad988da016f21.tournament(title, description, startDate, endDate, num_participants, user_id, game_id, startTime, viewParticipant, img, imgName, content) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+        db.query(sqlInsert, [title, description, startDate, endDate, num_participants, user_id, game_id, startTime, viewParticipant, img, content], (err, result)=> {
+            if(result?.affectedRows===1){
+                res.send(result);
+            }else{
+                res.send({error:301});
+            }
+        });
+    } catch (err) {
+        res.send({error:301});
+    }
+    
+});
+
+app.get('/api/getAllTournaments', (req, res)=>{
+    const sqlSelect = "SELECT * FROM heroku_caad988da016f21.tournament";
+    db.query(sqlSelect, (err, result)=> {
+        if (err) {
+            throw err;
+        }
+        res.send(result);
+    });
+});
+
+app.get('/api/getTournamentShort', (req, res)=>{
+    const sqlSelect = "SELECT tournament_id, title, img, imgName, content, user_id, viewParticipant FROM heroku_caad988da016f21.tournament";
+    db.query(sqlSelect, (err, result)=> {
+        if (err) {
+            throw err;
+        }
+        res.send(result);
+    });
+});
+
+app.post('/api/addGame',(req,res)=>{
+    const name = req.body.name;
+    const img = req.body.img;
+    const imgName = req.body.imgName;
+    const content = "GAME";
+    try{
+        const sqlInsert = "INSERT INTO heroku_caad988da016f21.game(name, img, imgName, content) VALUES (?,?,?,?)";
+        db.query(sqlInsert,[name, img, imgName, content],(err,result)=>{
+            
+            if(result?.affectedRows===1){
+                res.send(result);
+            }else{
+                res.send({error:301});
+            }
+        });
+    }catch(err){
+        res.send({error:301});
+    }
+    
+});
+
+app.post('/api/getTournamentDetails', (req, res)=>{
+    const tournament_id = req.query.tournament_id;
+    try {
+        const sqlSelect1 = "SELECT * FROM heroku_caad988da016f21.tournament WHERE tournament_id=? ";
+        db.query(sqlSelect1,[tournament_id],(err,result)=>{
+            res.send(result.game_id);
+        });
+
+        //const game_id = result
+
+        // const sqlSelect2 = "SELECT * FROM heroku_caad988da016f21.game WHERE game_id=? ";
+        // db.query(sqlSelect2,[game_id],(err,result)=>{
+        //     res.send(result);
+        // });
+    } catch (err) {
+        res.send({error:301});
+    }
+});
 
 
 const PORT =process.env.PORT || 8000;
