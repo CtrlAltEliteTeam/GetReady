@@ -12,7 +12,7 @@ const TOURNAMENT_URL = "/get_tournament_details"
 const Tournament = (params) => {
 
     let data = params.params;
-    //console.log(JSON.stringify(data));
+    console.log(JSON.stringify(data));
 
     const [state] = useContext(AuthContext); 
 
@@ -20,9 +20,21 @@ const Tournament = (params) => {
     const [GameDetails, setGameDetails] = useState('');
     const [Participants, setParticipants] = useState([]);
 
+    const [title, setTitle] = useState(data.name);
+    const [image, setImage] = useState(data.img);
+    const [alt, setAlt] = useState(data.alt);
+    const [game, setGame] = useState(data.game);
+
     const [showParticipants, setShowParticipants] = useState(false);
 
     const [joinLeave, setJoinLeave] = useState('');
+
+    //load passed data
+    useEffect(() => {
+        
+    
+    }, []);
+    
 
     //Axiose to fetch tournament details 
     useEffect(() => {
@@ -42,6 +54,7 @@ const Tournament = (params) => {
         }
         //fetchData();
     }, [TournamentDetails])
+
 
     //load test data
     useEffect(() => {

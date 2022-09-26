@@ -10,6 +10,7 @@ const GameTile = (props) => {
 
     let gameTile = props.game;
 
+    //console.log(JSON.stringify(gameTile));
     const [state] = useContext(AuthContext);
     const [editPermission, setEditPermission] = useState(false);
     const [task, setTask] = useState(true);
@@ -27,11 +28,11 @@ const GameTile = (props) => {
     const showDetails = () => {
         if (gameTile.content == "GAME"){
             setOverlay(true);
-            setTask(1);
+            setTask(2);
         }
         if (gameTile.content == "TOURNAMENT"){
             setOverlay(true);
-            setTask(2);
+            setTask(1);
         }
     }
 

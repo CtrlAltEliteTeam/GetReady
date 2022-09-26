@@ -123,7 +123,7 @@ app.get('/api/getAllTournaments', (req, res)=>{
 
 app.get('/api/get_tournament_short', (req, res)=>{
     //const sqlSelect = "SELECT tournament_id, title, img, imgName, content, user_id, viewParticipant FROM heroku_caad988da016f21.tournament";
-    const sqlSelect = "SELECT tournament.tournament_id, tournament.title, tournament.content, game.name FROM heroku_caad988da016f21.tournament INNER JOIN game ON tournament.game_id = game.game_id";
+    const sqlSelect = "SELECT tournament.tournament_id, tournament.title, tournament.content, tournament.user_id, game.name FROM heroku_caad988da016f21.tournament INNER JOIN game ON tournament.game_id = game.game_id";
     db.query(sqlSelect, (err, result)=> {
         if (err) {
             throw err;
