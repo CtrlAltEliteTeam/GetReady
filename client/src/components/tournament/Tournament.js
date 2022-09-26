@@ -9,7 +9,9 @@ import { AuthContext } from '../../api/AuthProvider';
 
 const TOURNAMENT_URL = "/get_tournament_details";
 const PARTICIPANT_URL = "/";
-const GET_JOIN_LEAVE_URL = "/";
+const GET_JOIN_LEAVE_URL = "/is_participating";
+const JOIN_URL = "/join_tournament";
+const LEAVE_URL = "/leave_tournament";
 
 
 const Tournament = (params) => {
@@ -40,7 +42,8 @@ const Tournament = (params) => {
 
     const [showParticipants, setShowParticipants] = useState(false);
 
-    const [joinLeave, setJoinLeave] = useState('');
+    const [joinLeave, setJoinLeave] = useState(true);
+    const [joinLeaveLable, setJoinLeaveLable] = useState("Join");
     
     //Axiose to fetch tournament details 
     useEffect(() => {
@@ -86,15 +89,32 @@ const Tournament = (params) => {
                 });
                 
             } catch (error) {
-
             }
         }
         //fetchTournament();
         //fetchParticipants();
         //fetchJoinLeave();
-    }, [TournamentDetails])
+    }, [])
 
-
+    //change participants
+    useEffect(() => {
+        const fetchParticipants = async (e) => {
+            setParticipants([]);
+            try {
+                const response = await axios.post(PARTICIPANT_URL,{
+                    tournament_id : data.id,
+                });
+                var details = response?.data[0];
+                details.participants.forEach(element => {
+                    setParticipants(Participants => [...Participants,element.playerName]);
+                });
+            } catch (error) {
+                //console.log(error);
+            }
+        }
+        //fetchParticipants();
+    }, [])
+    
     //load test data
     useEffect(() => {
         let details = TournamentData_TestData[0];
@@ -104,9 +124,8 @@ const Tournament = (params) => {
         details.participants.participants.forEach(element => {
             setParticipants(Participants => [...Participants,element.playerName]);
         });
-    }, [TournamentDetails])
+    }, [])
 
-    
     const showParticipantsEvent = (e) => {
         if (!showParticipants){
             setShowParticipants(true);
@@ -116,9 +135,40 @@ const Tournament = (params) => {
         }
     }
 
-    const handleJoin = (e) => {
+    const handleJoin = async (e) => {
         //axiose for join
-
+        e.preventDefault();
+        if (joinLeave === true){
+            setJoinLeaveLable("Leave");
+            setCurrPart(currPart + 1);
+            // try {
+            //     const response = await axios.post(JOIN_URL,{
+            //         tournament_id : data.id,
+            //         user_id : state.id,
+            //     });
+            //     setJoinLeaveLable("Leave");
+            //     setParticipants([]);
+            //     setCurrPart(currPart++);
+            // } catch (error) {
+                
+            // }
+        }
+        if (joinLeave === false) {
+            setJoinLeaveLable("Join");
+            //     setParticipants([]);
+            setCurrPart(currPart - 1);
+            // try {
+            //     const response = await axios.post(LEAVE_URL,{
+            //         tournament_id : data.id,
+            //         user_id : state.id,
+            //     });
+            //     setJoinLeaveLable("Join");
+            //     setParticipants([]);
+            //     setCurrPart(currPart--);
+            // } catch (error) {
+                
+            // }
+        }
     }
     //replace join with leave if user is participating
 
@@ -192,7 +242,7 @@ const Tournament = (params) => {
 
                 </div>
                 <div className='tournament-details-join-button' onClick={handleJoin}>
-                    Join
+                    {joinLeaveLable}
                 </div>
             </div>
             <div className='tournament-spacer'/>
