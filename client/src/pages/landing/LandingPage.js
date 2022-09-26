@@ -44,7 +44,7 @@ const LandingPage = () => {
 
     //Load data of games
     useEffect(() => {
-        if ( gamesList.length == 0){
+        if ( gamesList.length === 0){
             GameTile_TestData.forEach(element => {
                 console.log(JSON.stringify(element));
                 let gameTile = new GameTileData(element.id,element.name,element.img,element.alt,count,element.content,element.user);
@@ -55,7 +55,7 @@ const LandingPage = () => {
     }, [])
 
     useEffect(() => {
-        if ( featuredList.length == 0){
+        if ( featuredList.length === 0){
             GameTile_TestData.forEach(element => {
                 let gameTile = new GameTileData(element.id,element.name,element.img,element.alt,count);
                 setFeaturedList(featuredList => [...featuredList,gameTile]);

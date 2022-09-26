@@ -67,6 +67,7 @@ const Tournament = (params) => {
 
     }
     //replace join with leave if user is participating
+
     return (
         <div className='tournament-details-outer'>
             <div className='tournament-spacer'/>
@@ -108,10 +109,10 @@ const Tournament = (params) => {
                                 <div className={TournamentDetails.participantPermission ? "tournament-details-partricipants-expand-icon-visible" : "tournament-details-partricipants-expand-icon"}>
                                     {showParticipants ? (<AiIcons.AiOutlineDown/>) : (<AiIcons.AiOutlineRight/>)}
                                 </div>
-                                Participants
+                                Participants:&nbsp; 
                             </div>
                             <div className='tournament-details-partricipants-display'>
-                                {TournamentDetails.participants} / {TournamentDetails.participantsMax}
+                            {TournamentDetails.participants} / {TournamentDetails.participantsMax}
                             </div>
                         </div>
                         <div className='tournament-details-partricipants-list-container'>
