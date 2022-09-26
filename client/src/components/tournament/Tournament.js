@@ -44,6 +44,7 @@ const Tournament = (params) => {
 
     const [showParticipants, setShowParticipants] = useState(false);
 
+    const [joinedResponse, setJoinedResponse] = useState({});
     const [joinLeave, setJoinLeave] = useState(false); //false if not joined
     const [joinLeaveLable, setJoinLeaveLable] = useState("Leave");
     
@@ -63,13 +64,23 @@ const Tournament = (params) => {
                 const response = await axios.post(GET_JOIN_LEAVE_URL,{
                     tournament_id : data.id,
                     user_id : state.id,
-                });
-                setJoinLeave(response?.data);
+                })
+                setJoinedResponse(response?.data);
             } catch (error) {
             }
         }
         fetchData();
     }, [])
+
+    useEffect(()=>{
+        setJoinLeave(joinedResponse);
+        if (joinLeave){
+            setJoinLeaveLable("Leave");
+        }
+        if (!joinLeave){
+            setJoinLeaveLable("Join");
+        }
+    }, [joinedResponse]);
 
     useEffect(()=>{
         setCreator(details[0]?.username);
@@ -111,7 +122,7 @@ const Tournament = (params) => {
     // },[]);
 
     useEffect(() => {
-        console.log("trigger");
+        console.log(joinLeave);
         if (!joinLeave){
             setJoinLeaveLable("Leave");
         }
@@ -132,7 +143,7 @@ const Tournament = (params) => {
     const handleJoin = async (e) => {
         //axiose for join
         var t = currPart;
-        if (joinLeave){
+        if (!joinLeave){
             try {
                 const response = await axios.post(JOIN_URL,{
                     tournament_id : data.id,
@@ -144,7 +155,7 @@ const Tournament = (params) => {
                 
             }
         }
-        if (!joinLeave) {
+        if (joinLeave) {
             try {
                 const response = await axios.post(LEAVE_URL,{
                     tournament_id : data.id,
@@ -192,17 +203,17 @@ const Tournament = (params) => {
                         End Date: {eDate}
                     </div>
                 </div>
-                {TournamentDetails.participantsPermission ? (
+                {partPermission ? (
                     <div className='tournament-details-partricipants'>
                         <div className='tournament-details-partricipants-expand'>
                             <div className="tournament-details-partricipants-expand-button" onClick={showParticipantsEvent}>
-                                <div className={TournamentDetails.participantPermission ? "tournament-details-partricipants-expand-icon-visible" : "tournament-details-partricipants-expand-icon"}>
+                                <div className={partPermission ? "tournament-details-partricipants-expand-icon-visible" : "tournament-details-partricipants-expand-icon"}>
                                     {showParticipants ? (<AiIcons.AiOutlineDown/>) : (<AiIcons.AiOutlineRight/>)}
                                 </div>
                                 Participants:&nbsp; 
                             </div>
                             <div className='tournament-details-partricipants-display'>
-                            {TournamentDetails.participants} / {TournamentDetails.participantsMax}
+                            {currPart} / {maxPart}
                             </div>
                         </div>
                         <div className='tournament-details-partricipants-list-container'>
@@ -220,7 +231,7 @@ const Tournament = (params) => {
                         <div className='tournament-details-partricipants'>
                             Participants
                             <div className='tournament-details-partricipants-display'>
-                                {TournamentDetails.participants} / {TournamentDetails.participantsMax}
+                                {currPart} / {maxPart}
                             </div>
                         </div>
                     )}
