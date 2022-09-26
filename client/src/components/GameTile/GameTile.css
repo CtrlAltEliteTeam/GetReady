@@ -49,3 +49,44 @@
     color:gold;
     z-index: 3;
 }
+
+.tournament-overlay{
+    display: none;
+}
+
+.tournament-overlay-active{
+    position: fixed;
+    display: block;
+    z-index: 15;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.tournament-overlay-screen{
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    cursor: pointer;
+}
+
+.tournament-edit-outer{
+    z-index: 17;
+    position: fixed;
+    /* left: 40%; */
+    top: calc(100vh/2 - 250px);
+    left: calc(100vw/2 - 150px);
+}
+
+.tournament-view-outer{
+    z-index: 17;
+    position: fixed;
+    /* left: 40%; */
+    top: calc(100vh/2 - 250px);
+    left: calc(100vw/2 - 30vw);
+}

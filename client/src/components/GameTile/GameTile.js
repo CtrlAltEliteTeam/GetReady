@@ -3,6 +3,8 @@ import { GameTileData } from "./GameTileData";
 import {FiEdit} from "react-icons/fi";
 import './GameTile.css';
 import { AuthContext } from "../../api/AuthProvider";
+import  CreateTournament  from "../createTounament/CreateTournament";
+import Tournament from "../tournament/Tournament";
 
 const GameTile = (props) => {
 
@@ -10,7 +12,8 @@ const GameTile = (props) => {
 
     const [state] = useContext(AuthContext);
     const [editPermission, setEditPermission] = useState(false);
-    const [displayContent, setDisplayContent] = useState(true)
+    const [task, setTask] = useState(true);
+    const [overlay, setOverlay] = useState(false);
 
     useEffect(() => {
         //console.log(state.id + " : " + gameTile.user);
@@ -22,33 +25,63 @@ const GameTile = (props) => {
     }, [state.id])
 
     const showDetails = () => {
-        if (displayContent){
-            console.log("tournament");
-        } else {
-            console.log("game");
+        if (gameTile.content == "GAME"){
+            setOverlay(true);
+            setTask(1);
+        }
+        if (gameTile.content == "TOURNAMENT"){
+            setOverlay(true);
+            setTask(2);
         }
     }
 
-    const editDetails = () => {
-        console.log("edit");
+    const stopOverlay = () => {
+        setOverlay(false);
+        setTask(0);
     }
-    
-    return(
-        <div key={gameTile.count} className="tile-layout" >
-            <div className="tile-image-outer">
-                <img src={gameTile.img} alt={gameTile.alt} className='tile-image' onClick={showDetails} />
+
+    const editDetails = (e) => {
+        e.stopPropagation();
+        setOverlay(true);
+        setTask(3)
+        }
+        
+        return(
+            <>
+            <div className={overlay ? "tournament-overlay-active" : "tournament-overlay"}>
+                <div className="tournament-overlay-screen" onClick={stopOverlay}></div>
+                    {task == 1 && (
+                        <div className="tournament-view-outer">
+                            <Tournament/>
+                        </div>
+                    )}
+                    {task == 2 && (
+                        <div className="tournament-edit-outer">
+                            <CreateTournament/>
+                        </div>
+                    )}
+                    {task == 3 && (
+                        <div className="tournament-edit-outer">
+                            <CreateTournament/>
+                        </div>
+                    )}
             </div>
-            <div className="tile-info">
-                <div className="tile-name" onClick={showDetails}>
-                    <span>
-                        {gameTile.name}
-                    </span>
+            <div key={gameTile.count} className="tile-layout" onClick={showDetails} >
+                <div className="tile-image-outer">
+                    <img src={gameTile.img} alt={gameTile.alt} className='tile-image' />
                 </div>
-                <div className={editPermission ? "tile-edit-button-active" : "tile-edit-button"} onClick={editDetails}>
-                    <FiEdit className="edit-button-symbol" />
+                <div className="tile-info">
+                    <div className="tile-name">
+                        <span>
+                            {gameTile.name}
+                        </span>
+                    </div>
+                    <div className={editPermission ? "tile-edit-button-active" : "tile-edit-button"} onClick={editDetails}>
+                        <FiEdit className="edit-button-symbol" />
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 
