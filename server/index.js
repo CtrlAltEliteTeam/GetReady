@@ -175,12 +175,11 @@ app.post('/api/is_participating', (req, res)=>{
     try {
         const sqlSelect = "SELECT * FROM heroku_caad988da016f21.entry WHERE tournament_id =? AND user_id =?;";
         db.query(sqlSelect,[tournament_id, user_id],(err,result)=>{
-            // if (result.length===1) {
-            //     res.send({joinLeave:true});
-            // } else{
-            //     res.send({joinLeave:false});
-            // }
-            res.send(result);
+            if (result.length=1) {
+                res.send({joinLeave:true});
+            } else{
+                res.send({joinLeave:false});
+            }
         });
     } catch (err) {
         res.send({error:301});
@@ -188,7 +187,6 @@ app.post('/api/is_participating', (req, res)=>{
 });
 
 //need to modify for adding images
-
 app.post('/api/add_game',(req,res)=>{
     const name = req.body.name;
     const img = "link";
