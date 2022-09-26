@@ -1,7 +1,10 @@
+import axios from "../../api/Axois";
 import React, {useState, useEffect, useContext} from "react";
 import "./CreateTournament.css";
 
 const TITLE_REGEX=/^[A-z][A-z0-9-_!?]{3,23}$/;
+const FETCH_GAMES_URL = "/get_games";
+const CREATE_TOURNAMENT = "/add_game";
 
 const CreateTournament = () => {
 
@@ -28,7 +31,21 @@ const CreateTournament = () => {
 
     const [tPermission, setTPermission] = useState(false);
 
+    const [gamesList, setGamesList] = useState([]);
+
     const options = [{id:1,name:"Counter Strike: GO"},{id:2,name:"Fortnite"}]//,"Fortnite","Halo","League of Legends","Super Smash Bros"];
+    useEffect(() => {
+        const fetchGames = async () => {
+            const response = await axios.post(FETCH_GAMES_URL,{});
+            return await response?.data;
+        }
+        const res = fetchGames();
+        const data = Promise.resolve(res);
+        data.then((value) => {
+            console.log(value);
+        });
+        
+    },[])
 
     useEffect(() => {
         //console.log(tGame);
