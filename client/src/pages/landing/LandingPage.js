@@ -45,13 +45,13 @@ const LandingPage = () => {
                 console.log(response?.data);
                 var data = response?.data;
                 let count = 0;
-                // if ( featuredList.length == 0){
-                //     data.forEach(element => {
-                //         let gameTile = new GameTileData(element.id,element.name,element.game,element.user,count);
-                //         setFeaturedList(featuredList => [...featuredList,gameTile]);
-                //         count++;
-                //     });
-                // }
+                if ( featuredList.length == 0){
+                    data.forEach(element => {
+                        let gameTile = new GameTileData(element.id,element.name,element.game,element.user,count);
+                        setFeaturedList(featuredList => [...featuredList,gameTile]);
+                        count++;
+                    });
+                }
             } catch (error) {
                 console.log(error);
             }
