@@ -7,52 +7,91 @@ import './Tournament.css';
 import axios from '../../api/Axois';
 import { AuthContext } from '../../api/AuthProvider';
 
-const TOURNAMENT_URL = "/get_tournament_details"
+const TOURNAMENT_URL = "/get_tournament_details";
+const PARTICIPANT_URL = "/";
+const GET_JOIN_LEAVE_URL = "/";
+
 
 const Tournament = (params) => {
 
     let data = params.params;
-    console.log(JSON.stringify(data));
+    //console.log(JSON.stringify(data));
 
     const [state] = useContext(AuthContext); 
 
     const [TournamentDetails, setTournamentDetails] = useState({});
     const [GameDetails, setGameDetails] = useState('');
-    const [Participants, setParticipants] = useState([]);
 
+    
     const [title, setTitle] = useState(data.name);
     const [image, setImage] = useState(data.img);
     const [alt, setAlt] = useState(data.alt);
+    const [creator, setCreator] = useState("");
     const [game, setGame] = useState(data.game);
+    const [sTime, setSTime] = useState("");
+    const [sDate, setSDate] = useState("");
+    const [eDate, setEDate] = useState("");
+    const [desc, setDesc] = useState("");
+    const [currPart, setCurrPart] = useState(0);
+    const [maxPart, setMaxPart] = useState(0);
+    const [Participants, setParticipants] = useState([]);
+    const [partPermission, setPartPermission] = useState(false);
+
 
     const [showParticipants, setShowParticipants] = useState(false);
 
     const [joinLeave, setJoinLeave] = useState('');
-
-    //load passed data
-    useEffect(() => {
-        
     
-    }, []);
-    
-
     //Axiose to fetch tournament details 
     useEffect(() => {
-        const fetchData = async (e) => {
+        const fetchTournament = async (e) => {
             try {
                 const response = await axios.post(TOURNAMENT_URL,{
-                    tournament_id : 21,
-                    user_id : 11
+                    tournament_id : data.id,
                 });
-
                 //console.log(response?.data[0]);
-                //var details = response?.data[0];
-                //setGameDetails(details);
+                var details = response?.data;
+                setCreator(details.user);
+                setDesc(details.details);
+                setSTime(details.startTime);
+                setSDate(details.startDate);
+                setEDate(details.endDate);
+                setCurrPart(details.numParticipants);
+                setMaxPart(details.maxParticipants);
+                setPartPermission(details.viewParticipants);
             } catch (error) {
                 //console.log(error);
             }
         }
-        //fetchData();
+        const fetchParticipants = async (e) => {
+            try {
+                const response = await axios.post(PARTICIPANT_URL,{
+                    tournament_id : data.id,
+                });
+                var details = response?.data[0];
+                if (Participants.length() != 0) {
+                    details.participants.forEach(element => {
+                        setParticipants(Participants => [...Participants,element.playerName]);
+                    });
+                }
+            } catch (error) {
+                //console.log(error);
+            }
+        }
+        const fetchJoinLeave = async (e) => {
+            try{
+                const response = await axios.post(GET_JOIN_LEAVE_URL,{
+                    tournament_id : data.id,
+                    user_id : state.id,
+                });
+                
+            } catch (error) {
+
+            }
+        }
+        //fetchTournament();
+        //fetchParticipants();
+        //fetchJoinLeave();
     }, [TournamentDetails])
 
 
@@ -89,14 +128,14 @@ const Tournament = (params) => {
             <div className='tournament-details'>
                 <div className='tournament-details-header'>
                     <div className='tournament-details-header-image-container'>
-                        <img src={TournamentDetails.img} alt={TournamentDetails.alt} className="tournament-details-header-image"/>
+                        <img src={image} alt={alt} className="tournament-details-header-image"/>
                     </div>
                     <div className='tournament-details-header-info'>
                         <div className='tournament-details-header-title'>
-                            {TournamentDetails.title}
+                            {title}
                         </div>
                         <div className='tournament-details-header-game'>
-                            {GameDetails}
+                            {game}
                         </div>
                         <div className='tournament-details-header-creator'>
                             {TournamentDetails.creator}

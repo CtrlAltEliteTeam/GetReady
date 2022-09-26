@@ -10,7 +10,7 @@ export class GameTileData{
     constructor(id, name, game, content, user, count){
         this.id = id;
         this.name = name;
-        console.log(game);
+        this.game = game;
         switch(game){
             case "Fortnite":
                 this.img = Fortnite;

@@ -51,10 +51,10 @@ export const TournamentData_TestData = [
 export const TournamentData_TestData2 = [
     //Tournament
     {
+        //Request 1:
+        //send tournament id
+        //return:
         tournament: {
-            id: 1,
-            title: 'UltimateBrawl',
-            Game: "GAME NAME",
             creator: "Percy Vere",
             desc: "The top up and coming Super Smash players",
             sTime: "14:00:00",
@@ -64,6 +64,9 @@ export const TournamentData_TestData2 = [
             participantsMax: 16,
             participantsPermission: true,
         },
+        //request 2:
+        //send tournament id 
+        //return
         participants : {
             participants:
             [
@@ -81,6 +84,9 @@ export const TournamentData_TestData2 = [
                 }
             ]
         },
+        //request 3:
+        //send tournament id & user id 
+        //return:
         user : {
             joinLeave: true,
         }
