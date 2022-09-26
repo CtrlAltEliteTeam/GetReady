@@ -7,8 +7,9 @@ import GetReady from '../../resources/img/GetReady.png';
 import './LandingPage.css';
 import { Link, useNavigate } from "react-router-dom";
 import { LOGOUT } from "../../api/Constants";
+import axios from "../../api/Axois";
 
-
+const GET_TOURMANENT_SHORT_URL = "/get_tournament_short";
 
 const LandingPage = () => {
 
@@ -22,32 +23,14 @@ const LandingPage = () => {
 
     const [gamesList, setGamesList] = useState([]);
     const [gamesListName, setGamesListName] = useState("Popular Games");
-
-    useEffect(() => {
-        //Axios function to load the data into GameTileData objects 
-
-    }, [])
-
-    // useEffect(() => {
-    // //console.log(state.loggedin);
-    //     if(state.loggedin){
-    //         setLoginName('Log Out');
-    //         //setViewDash(true);
-    //     }
-    //     if(!state.loggedin){
-    //         setLoginName('Login');
-    //         //setViewDash(false);
-    //     }
-    // },[loginName]);
         
-    let count =0;
 
     //Load data of games
     useEffect(() => {
         if ( gamesList.length === 0){
             GameTile_TestData.forEach(element => {
-                console.log(JSON.stringify(element));
-                let gameTile = new GameTileData(element.id,element.name,element.img,element.alt,count,element.content,element.user);
+                //console.log(JSON.stringify(element));
+                let gameTile = new GameTileData(element.id,element.name,element.game,element.content,element.user,count);
                 setGamesList(gamesList => [...gamesList,gameTile]);
                 count++;
             });
@@ -62,22 +45,8 @@ const LandingPage = () => {
                 count++;
             });
         }
-    }, [])
-
-    // const loginCheck = () =>{
-    //     if(state.loggedin){
-
-    //         dispatch({
-    //             type:LOGOUT,
-    //             payload: 0
-    //         });
-    //         setLoginName('Login');
-    //     }
-    //     if(!state.loggedin){
-    //         return navigate(`/login`);
-    //     }
-    // };
-
+        fetchData();
+    }, []);
 
     return (
         <>
