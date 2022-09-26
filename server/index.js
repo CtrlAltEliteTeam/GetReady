@@ -87,8 +87,28 @@ app.post('/api/createTournament', (req, res)=>{
         });
     } catch (err) {
         res.send({error:301});
-    }
-    
+    } 
+});
+
+//update tournament
+
+
+//update profile
+app.post('/api/updateProfile', (req,res)=>{
+    const user_id = req.body.user_id;
+    const email = req.body.email;
+    const username = req.body.username;
+    const password = req.body.password;
+
+    const sqlUpdate = "UPDATE heroku_caad988da016f21.user SET username =?, email=?, password=? WHERE user_id=?";
+    db.query(sqlUpdate, [username, email, password, user_id],(err, result)=> {
+        if(result?.affectedRows===1){
+            res.send(result);
+        }else{
+            res.send({error:301});
+        }
+    });
+
 });
 
 app.get('/api/getAllTournaments', (req, res)=>{
@@ -132,20 +152,48 @@ app.post('/api/addGame',(req,res)=>{
     
 });
 
+app.post('/api/joinTournament', (req,res)=>{
+    const user_id = req.body.user_id;
+    const tournament_id = req.body.tournament_id;
+    try{
+        const sqlInsert = "INSERT INTO heroku_caad988da016f21.entry(user_id, tournament_id) VALUES (?,?)";
+        db.query(sqlInsert,[user_id, tournament_id],(err,result)=>{
+            if(result?.affectedRows===1){
+                res.send(result);
+            }else{
+                res.send({error:301});
+            }
+        });
+    }catch(err){
+        res.send({error:301});
+    }
+});
+
+app.post('/api/leaveTournament', (req,res)=>{
+    const user_id = req.body.user_id;
+    const tournament_id = req.body.tournament_id;
+    try{
+        const sqlInsert = "DELETE FROM heroku_caad988da016f21.entry WHERE user_id=? AND tournament_id =?";
+        db.query(sqlInsert,[user_id, tournament_id],(err,result)=>{
+            if(result?.affectedRows===1){
+                res.send(result);
+            }else{
+                res.send({error:301});
+            }
+        });
+    }catch(err){
+        res.send({error:301});
+    }
+});
+
 app.post('/api/getTournamentDetails', (req, res)=>{
     const tournament_id = req.query.tournament_id;
     try {
-        const sqlSelect1 = "SELECT * FROM heroku_caad988da016f21.tournament WHERE tournament_id=? ";
+        const sqlSelect1 = "SELECT tournament.tournament_id, tournament.title, tournament.img, tournament.imgName, tournament.description, tournament.startTime, tournament.startDate, tournament.endDate, tournament.maxParticipants, game.game_id, game.name, game.img, game.imgName, entry.user_id, user.username FROM heroku_caad988da016f21.tournament INNER JOIN entry ON tournament.tournament_id = entry.tournament_id INNER JOIN user ON user.user_id = entry.user_id INNER JOIN game ON tournament.game_id = game.game_id WHERE tournament.tournament_id =?;";
         db.query(sqlSelect1,[tournament_id],(err,result)=>{
-            res.send(result.game_id);
+            res.send(result);
         });
 
-        //const game_id = result
-
-        // const sqlSelect2 = "SELECT * FROM heroku_caad988da016f21.game WHERE game_id=? ";
-        // db.query(sqlSelect2,[game_id],(err,result)=>{
-        //     res.send(result);
-        // });
     } catch (err) {
         res.send({error:301});
     }
