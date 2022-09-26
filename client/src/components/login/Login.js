@@ -49,10 +49,10 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.get(LOGIN_URL,{params:{
+            const response = await axios.post(LOGIN_URL,{
                     email:email,
                     password:pwd
-                }});
+                });
                 console.log(JSON.stringify(response));
             if(response?.data?.error === 301){
                 setErrMsg('Incorrect Username or Password');

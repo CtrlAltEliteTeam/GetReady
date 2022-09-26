@@ -1,6 +1,5 @@
 import React, {useState, useEffect, useContext} from "react";
 import "./CreateTournament.css";
-import Select from "react-dropdown-select";
 
 const CreateTournament = () => {
 
