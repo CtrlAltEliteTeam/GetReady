@@ -1,6 +1,8 @@
 import React, {useState, useEffect, useContext} from "react";
 import "./CreateTournament.css";
 
+const TITLE_REGEX=/^[A-z][A-z0-9-_!?]{3,23}$/;
+
 const CreateTournament = () => {
 
     const [tName, setTName] = useState('');
@@ -8,7 +10,7 @@ const CreateTournament = () => {
 
     const [tGame, setTGame] = useState("");
     const [validTGame, setValidTGame] = useState(false);
-    
+
     const [tsDate, setTsDate] = useState("");
     const [validTsDate, setValidTsDate] = useState(false);
 
@@ -17,10 +19,10 @@ const CreateTournament = () => {
 
     const [tParticipants, setTParticipants] = useState(2);
     const [validTParticipants, setValidTParticipants] = useState(false);
-    
+
     const [tDesc, setTDesc] = useState("");
     const [validTDesc, setValidTDesc] = useState(false);
-    
+
     const [tsTime, setTsTime] = useState("");
     const [validTsTime, setValidTsTime] = useState(false);
 
@@ -29,11 +31,44 @@ const CreateTournament = () => {
     const options = [{id:1,name:"Counter Strike: GO"},{id:2,name:"Fortnite"}]//,"Fortnite","Halo","League of Legends","Super Smash Bros"];
 
     useEffect(() => {
-        console.log(tGame);
+        //console.log(tGame);
     }, [tGame])
 
-    //get game data
-    
+    //validation
+    useEffect(() => {
+        setValidTName(TITLE_REGEX.test(tName));
+    }, [tName]);
+    useEffect(() => {
+        if (tDesc.length >= 300){
+            setValidTDesc(true);
+        }
+    }, [tDesc]);
+    useEffect(() => {
+        let currDate = new Date();
+        console.log(currDate.getDate());
+        console.log(tsDate);
+        if (tsDate >= currDate.getDate()){
+            setValidTsDate(true);
+        }
+    }, [tsDate]);
+    // useEffect(() => {
+    //     if (tfDate < tsDate){
+    //         setValidTfDate(true);
+    //     }
+    // }, [tfDate]);
+    // useEffect(() => {
+    //     let currDate = new Date();
+    //     if (tsDate === currDate.getDate() && tsTime < currDate.getTime()){
+    //         setValidTsTime(true);
+    //     }
+    // }, [tsTime]);
+    // useEffect(() => {
+    //     if ((tParticipants % 2) == 0 ){
+    //         setValidTParticipants(true);
+    //     } else {
+    //         setValidTParticipants(false);
+    //     }
+    // }, [tParticipants]);
 
     const handleSubmit = async (e) => {
         e.preventDeafault();
@@ -153,7 +188,7 @@ const CreateTournament = () => {
                     </div>
                     <div>
                         <input
-                            type="chechbox"
+                            type="checkbox"
                             id="tpermission"
                             value={tPermission}
                             onChange={(e) => setTPermission(e.target.value)}

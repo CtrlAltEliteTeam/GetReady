@@ -67,7 +67,6 @@ app.post('/api/register',(req,res)=>{
     }catch (err) {
             res.send({error:301}); 
     }
-    
 });
 
 app.post('/api/create_tournament', (req, res)=>{
