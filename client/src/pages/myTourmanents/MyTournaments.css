@@ -1,0 +1,6 @@
+.my-tournaments{
+    padding-top: 100px;
+    display: grid;
+    align-content: space-evenly;
+    grid-template-columns: auto auto auto;
+}

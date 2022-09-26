@@ -31,7 +31,7 @@ const MyTounaments = () => {
 
     return(
         <div>
-            <div>
+            <div className="my-tournaments">
                 {show ? <CreateTournament/> : console.log("no show")}
                 <div className="create-tounament-wrapper" onClick={createTounament}>
                     <GameTile game={createNew} />

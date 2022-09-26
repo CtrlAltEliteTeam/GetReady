@@ -2,12 +2,12 @@
     padding: 30px;
     border-radius: 20px;
     border-style: ridge;
-    border-color: gold;
+    border-color: #F9BE32;
     background-color: darkorchid;
     width: 60%;
     display: flex;
     position: relative;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
     overflow-x: hidden;
 }
 
@@ -58,6 +58,7 @@
 
 .tournament-details-body{
     color: white;
+    font-family:sans-serif;
 }
 
 .tournament-details-date{
@@ -66,13 +67,14 @@
 
 .tournament-details-partricipants{
     color:white;
+    font-family:sans-serif;
 }
 
 .tournament-details-partricipants-button{
     width: 115px;
     height: 25px;
     border-radius: 25px;
-    background-color: gold;
+    background-color: #F9BE32;
     padding: auto;
     display: flex;
     justify-content: center;
@@ -112,7 +114,7 @@
     width: 80px;
     height: 25px;
     border-radius: 25px;
-    background-color: gold;
+    background-color: #F9BE32;
     padding: auto;
     display: flex;
     justify-content: center;

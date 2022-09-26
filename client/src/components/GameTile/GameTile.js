@@ -18,19 +18,19 @@ const GameTile = (props) => {
 
     useEffect(() => {
         //console.log(state.id + " : " + gameTile.user);
-        if(state.id == gameTile.user){
+        if(state.id === gameTile.user){
             setEditPermission(true);
-        } else if (state.id != gameTile.user){
+        } else if (state.id !== gameTile.user){
             setEditPermission(false);
         }
     }, [state.id])
 
     const showDetails = () => {
-        if (gameTile.content == "GAME"){
+        if (gameTile.content === "GAME"){
             setOverlay(true);
             setTask(2);
         }
-        if (gameTile.content == "TOURNAMENT"){
+        if (gameTile.content === "TOURNAMENT"){
             setOverlay(true);
             setTask(1);
         }
@@ -51,17 +51,17 @@ const GameTile = (props) => {
             <>
             <div className={overlay ? "tournament-overlay-active" : "tournament-overlay"}>
                 <div className="tournament-overlay-screen" onClick={stopOverlay}></div>
-                    {task == 1 && (
+                    {task === 1 && (
                         <div className="tournament-view-outer">
                             <Tournament params={gameTile}/>
                         </div>
                     )}
-                    {task == 2 && (
+                    {task === 2 && (
                         <div className="tournament-edit-outer">
                             <CreateTournament/>
                         </div>
                     )}
-                    {task == 3 && (
+                    {task === 3 && (
                         <div className="tournament-edit-outer">
                             <CreateTournament/>
                         </div>
