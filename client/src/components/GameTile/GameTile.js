@@ -52,7 +52,7 @@ const GameTile = (props) => {
                 <div className="tournament-overlay-screen" onClick={stopOverlay}></div>
                     {task == 1 && (
                         <div className="tournament-view-outer">
-                            <Tournament/>
+                            <Tournament params={gameTile}/>
                         </div>
                     )}
                     {task == 2 && (

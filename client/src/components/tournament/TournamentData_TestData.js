@@ -24,7 +24,6 @@ export const TournamentData_TestData = [
             img: SSb,
             alt: 'Super Smash Bros',
             content: 'GAME',
-            user: 1,
         },
         participants : {
             participants:
@@ -42,6 +41,9 @@ export const TournamentData_TestData = [
                     playerName: "Ben Dover",
                 }
             ]
+        },
+        user : {
+            joinLeave: true,
         }
     }
 ]

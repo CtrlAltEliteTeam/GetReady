@@ -24,7 +24,7 @@ app.get('/api/get',(req,res)=>{
 });
 
 app.post('/api/login',(req,res)=>{
-    //console.log(req.query);
+    console.log(req);
     const email = req.query.email;
     const password =req.query.password;
     try {
@@ -39,7 +39,7 @@ app.post('/api/login',(req,res)=>{
         }
     })
     }catch (err) {
-        res.send({error:301}); 
+            res.send({error:301}); 
     }
 });
 
@@ -186,8 +186,8 @@ app.post('/api/leaveTournament', (req,res)=>{
     }
 });
 
-app.post('/api/getTournamentDetails', (req, res)=>{
-    const tournament_id = req.query.tournament_id;
+app.post('/api/get_tournament_details', (req, res)=>{
+    const tournament_id = req.body.tournament_id;
     try {
         const sqlSelect1 = "SELECT tournament.tournament_id, tournament.title, tournament.img, tournament.imgName, tournament.description, tournament.startTime, tournament.startDate, tournament.endDate, tournament.maxParticipants, game.game_id, game.name, game.img, game.imgName, entry.user_id, user.username FROM heroku_caad988da016f21.tournament INNER JOIN entry ON tournament.tournament_id = entry.tournament_id INNER JOIN user ON user.user_id = entry.user_id INNER JOIN game ON tournament.game_id = game.game_id WHERE tournament.tournament_id =?;";
         db.query(sqlSelect1,[tournament_id],(err,result)=>{

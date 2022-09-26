@@ -1,11 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { TournamentData } from './TournamentData';
 import { TournamentData_TestData } from './TournamentData_TestData';
 import { GameTileData } from '../GameTile/GameTileData';
 import * as AiIcons from 'react-icons/ai';
 import './Tournament.css';
+import axios from '../../api/Axois';
+import { AuthContext } from '../../api/AuthProvider';
+
+const TOURNAMENT_URL = "/get_tournament_details"
 
 const Tournament = (params) => {
+
+    let data = params.params;
+    console.log(JSON.stringify(data));
+
+    const [state] = useContext(AuthContext); 
 
     const [TournamentDetails, setTournamentDetails] = useState({});
     const [GameDetails, setGameDetails] = useState('');
@@ -17,7 +26,19 @@ const Tournament = (params) => {
 
     //Axiose to fetch tournament details 
     useEffect(() => {
-
+        const fetchData = async (e) => {
+            try {
+                const response = await axios.post(TOURNAMENT_URL,{
+                    //tournament_id : data.id,
+                    tournament_id : 21,
+                    user_id : 11
+                });
+                console.log(response?.data[0]);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchData();
     }, [TournamentDetails])
 
     //load test data
