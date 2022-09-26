@@ -13,6 +13,8 @@ const Tournament = (params) => {
 
     const [showParticipants, setShowParticipants] = useState(false);
 
+    const [joinLeave, setJoinLeave] = useState('');
+
     //Axiose to fetch tournament details 
     useEffect(() => {
 
@@ -22,14 +24,13 @@ const Tournament = (params) => {
     useEffect(() => {
         let details = TournamentData_TestData[0];
         let t = details.tournament;
-        //console.log("d: " +JSON.stringify(details));
         setGameDetails(details.game.name);
         setTournamentDetails(t);
-        //let tourmanent = new TournamentData(t.id,t.title,game,t.img,t.alt,t.desc,t.creator,t.sTime,t.sDate,t.eDate,t.partisipants,t.partisipantsMax);
         details.participants.participants.forEach(element => {
             setParticipants(Participants => [...Participants,element.playerName]);
         });
     }, [TournamentDetails])
+
     
     const showParticipantsEvent = (e) => {
         if (!showParticipants){
@@ -38,6 +39,11 @@ const Tournament = (params) => {
         if (showParticipants) {
             setShowParticipants(false);
         }
+    }
+
+    const handleJoin = (e) => {
+        //axiose for join
+
     }
     //replace join with leave if user is participating
     return (
@@ -109,7 +115,7 @@ const Tournament = (params) => {
                 <div className='tournament-details-bracket'>
 
                 </div>
-                <div className='tournament-details-join-button'>
+                <div className='tournament-details-join-button' onClick={handleJoin}>
                     Join
                 </div>
             </div>
