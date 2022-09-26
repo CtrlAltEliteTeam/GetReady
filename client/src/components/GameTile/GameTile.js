@@ -44,7 +44,7 @@ const GameTile = (props) => {
         e.stopPropagation();
         setOverlay(true);
         setTask(3)
-        }
+    }
         
         return(
             <>

@@ -12,7 +12,7 @@ const TOURNAMENT_URL = "/get_tournament_details"
 const Tournament = (params) => {
 
     let data = params.params;
-    console.log(JSON.stringify(data));
+    //console.log(JSON.stringify(data));
 
     const [state] = useContext(AuthContext); 
 
@@ -29,16 +29,18 @@ const Tournament = (params) => {
         const fetchData = async (e) => {
             try {
                 const response = await axios.post(TOURNAMENT_URL,{
-                    //tournament_id : data.id,
                     tournament_id : 21,
                     user_id : 11
                 });
-                console.log(response?.data[0]);
+
+                //console.log(response?.data[0]);
+                //var details = response?.data[0];
+                //setGameDetails(details);
             } catch (error) {
-                console.log(error);
+                //console.log(error);
             }
         }
-        fetchData();
+        //fetchData();
     }, [TournamentDetails])
 
     //load test data
