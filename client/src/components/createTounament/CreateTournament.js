@@ -25,6 +25,8 @@ const CreateTournament = () => {
     const [tsTime, setTsTime] = useState("");
     const [validTsTime, setValidTsTime] = useState(false);
 
+    const [tPermission, setTPermission] = useState(false);
+
     const options = [{id:1,name:"Counter Strike: GO"},{id:2,name:"Fortnite"}]//,"Fortnite","Halo","League of Legends","Super Smash Bros"];
 
     useEffect(() => {
@@ -143,6 +145,19 @@ const CreateTournament = () => {
                             value={tDesc}
                             onChange={(e) => setTDesc(e.target.value)}
                             required
+                        />
+                    </div>
+                </div>
+                <div className="creat-item">
+                    <div className="create-item-heading">
+                        allow people to see who is participating
+                    </div>
+                    <div>
+                        <input
+                            type="chechbox"
+                            id="tpermission"
+                            value={tPermission}
+                            onChange={(e) => setTPermission(e.target.value)}
                         />
                     </div>
                 </div>
