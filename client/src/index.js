@@ -6,9 +6,10 @@ import Provider from './api/AuthProvider';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<Provider>
-		<React.StrictMode>
+		{/* <React.StrictMode>
 			<App />
-		</React.StrictMode>
+		</React.StrictMode> */}
+		<App />
 	</Provider>
 );
 

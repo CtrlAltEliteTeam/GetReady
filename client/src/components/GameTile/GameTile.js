@@ -67,7 +67,7 @@ const GameTile = (props) => {
                         </div>
                     )}
             </div>
-            <div key={gameTile.count} className="tile-layout" onClick={showDetails} >
+            <div className="tile-layout" onClick={showDetails} >
                 <div className="tile-image-outer">
                     <img src={gameTile.img} alt={gameTile.alt} className='tile-image' />
                 </div>

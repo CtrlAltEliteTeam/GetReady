@@ -49,7 +49,7 @@ const NavBar = () => {
         } else if (!state.loggedin) {
             dispatch({
                 type:LOGIN,
-                payload: 1
+                payload: 11
             });
             setLoginName('Logout');
         }

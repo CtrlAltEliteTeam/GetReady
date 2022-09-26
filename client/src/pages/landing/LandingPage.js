@@ -26,28 +26,28 @@ const LandingPage = () => {
         
 
     //Load data of games
-    useEffect(() => {
-        let count =0;
-        if ( gamesList.length === 0){
-            GameTile_TestData.forEach(element => {
-                //console.log(JSON.stringify(element));
-                let gameTile = new GameTileData(element.id,element.name,element.game,element.content,element.user,count);
-                setGamesList(gamesList => [...gamesList,gameTile]);
-                count++;
-            });
-        }
-    }, [])
+    // useEffect(() => {
+    //     let count =0;
+    //     if ( gamesList.length === 0){
+    //         GameTile_TestData.forEach(element => {
+    //             //console.log(JSON.stringify(element));
+    //             let gameTile = new GameTileData(element.id,element.name,element.game,element.content,element.user,count);
+    //             setGamesList(gamesList => [...gamesList,gameTile]);
+    //             count++;
+    //         });
+    //     }
+    // }, [])
 
     useEffect(() => {
         const fetchData = async (e) => {
             try {
-                const response = await axios.get(GET_TOURMANENT_SHORT_URL,{params:{}});
+                const response = await axios.post(GET_TOURMANENT_SHORT_URL,{});
                 console.log(response?.data);
                 var data = response?.data;
                 let count = 0;
                 if ( featuredList.length === 0){
                     data.forEach(element => {
-                        let gameTile = new GameTileData(element.id,element.name,element.game,element.user,count);
+                        let gameTile = new GameTileData(element.tournament_id,element.title,element.name,element.content,element.user_id,count);
                         setFeaturedList(featuredList => [...featuredList,gameTile]);
                         count++;
                     });
@@ -82,7 +82,9 @@ const LandingPage = () => {
                 <div className="tourny-list-inner">
                     {featuredList.map((element)=>{
                         return(
-                            <GameTile game={element}/>
+                            <div key={element.id}>
+                                <GameTile game={element}/>
+                            </div>
                         )
                     })}
                 </div>
