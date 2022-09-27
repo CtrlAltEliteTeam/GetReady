@@ -12,8 +12,8 @@ import { AxiosError } from 'axios';
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-const FETCH_URL = '/register'; //Register URL
-const EDIT_URL ='/';
+const FETCH_URL = '/get_user_details'; //Register URL
+const EDIT_URL ='/update_profile';
 
 const UserProfile = () => {
     const userRef = useRef();
@@ -22,6 +22,8 @@ const UserProfile = () => {
     let navigate = useNavigate();
 
     const [state,dispatch] = useContext(AuthContext);
+
+    console.log(state.id);
 
     const [user, setUser] = useState('');
     const [validName, setValidName] = useState(false);
@@ -86,14 +88,15 @@ const UserProfile = () => {
                 })
                 return await response?.data;
             } catch (error) {
-
+                
             }
         }
         const response = fetchUser();
         const data = Promise.resolve(response);
         data.then((value) => {
-            setEmail(value.email);
-            setUser(value.user);
+            console.log(value);
+            setEmail(value[0].email);
+            setUser(value[0].username);
         });
     },[])
 
@@ -110,7 +113,7 @@ const UserProfile = () => {
 
         //Axios rough work
         try {
-            const response = await axios.post(EDIT_URL,{username: user, password :pwd });
+            const response = await axios.post(EDIT_URL,{user_id: state.id, username : user, email: email, password :pwd });
             console.log(JSON.stringify(response?.data));
             if (response?.data?.error === 301) {
                 //setErrMsg('Username Taken');           
@@ -215,8 +218,8 @@ const UserProfile = () => {
                                     </div>
                                     <input
                                         type="password"
-                                        id="password"
-                                        placeholder='Password'
+                                        id="oldpassword"
+                                        placeholder='Old Password'
                                         onChange={(e) => setOldPwd(e.target.value)}
                                         value={oldPwd}
                                         required
@@ -243,7 +246,7 @@ const UserProfile = () => {
                                     <input
                                         type="password"
                                         id="password"
-                                        placeholder='Password'
+                                        placeholder='New Password'
                                         onChange={(e) => setPwd(e.target.value)}
                                         value={pwd}
                                         required
