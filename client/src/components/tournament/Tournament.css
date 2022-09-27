@@ -1,0 +1,123 @@
+.tournament-details-outer{
+    padding: 30px;
+    border-radius: 20px;
+    border-style: ridge;
+    border-color: #F9BE32;
+    background-color: darkorchid;
+    width: 60%;
+    display: flex;
+    position: relative;
+    /* overflow-y: scroll; */
+    overflow-x: hidden;
+}
+
+.tournament-spacer{
+    width: 15vw;
+}
+
+.tournament-details{
+
+}
+
+.tournament-details-header{
+    display: flex;
+    justify-content: center;
+}
+
+.tournament-details-header-image-container{
+}
+
+.tournament-details-header-image{
+    background-color: transparent;
+    border-radius: 20px;
+    width: 30vw;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    float: left;
+}
+
+.tournament-details-header-info{
+    margin-right: 2vw;
+    padding-left: 20px;
+    color: white;
+}
+
+.tournament-details-header-title{
+    margin-top: 4vh;
+    font-size: 7vh;
+}
+
+.tournament-details-header-game{
+    font-size: 4vh;
+}
+
+.tournament-details-header-creator{
+    font-size: 3vh;
+}
+
+.tournament-details-body{
+    color: white;
+    font-family:sans-serif;
+}
+
+.tournament-details-date{
+
+}
+
+.tournament-details-partricipants{
+    color:white;
+    font-family:sans-serif;
+}
+
+.tournament-details-partricipants-button{
+    width: 115px;
+    height: 25px;
+    border-radius: 25px;
+    background-color: #F9BE32;
+    padding: auto;
+    display: flex;
+    justify-content: center;
+    padding-top: 3px;
+}
+
+.tournament-details-partricipants-expand{
+    display: flex;
+}
+
+.tournament-details-partricipants-list-container{
+    padding-left: 25px;
+}
+
+
+.tournament-details-partricipants-expand-button{
+    display: flex;
+}
+
+.tournament-details-partricipants-display{
+
+}
+
+.tournament-details-partricipants-list-show{
+    display: block;
+}
+
+.tournament-details-partricipants-list{
+    display: none;
+}
+
+.tournament-details-join-button{
+    right: 20px;
+    position: absolute;
+    bottom: 8px;
+    color: white;
+    width: 80px;
+    height: 25px;
+    border-radius: 25px;
+    background-color: #F9BE32;
+    padding: auto;
+    display: flex;
+    justify-content: center;
+    padding-top: 3px;
+}
+

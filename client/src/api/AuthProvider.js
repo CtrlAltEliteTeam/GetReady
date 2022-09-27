@@ -1,5 +1,5 @@
 import { createContext, useReducer } from "react";
-import { LOGIN, LOGOUT } from "./Constants"
+import { LOGIN, LOGOUT, TITLE } from "./Constants"
 
 export const AuthContext = createContext();
 
@@ -8,6 +8,7 @@ const { Provider } = AuthContext;
 const initialState = {
     id : 0,
     loggedin : false,
+    heading : "Get Ready"
 }
 
 function reducer(state,action){
@@ -21,6 +22,10 @@ function reducer(state,action){
             return {
                 id : action.payload,
                 loggedin : false
+            }
+        case TITLE:
+            return {
+                heading : action.payload
             }
         default:
             throw new Error();

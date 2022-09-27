@@ -12,7 +12,7 @@ import axios from '../../api/Axois';
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-const REGISTER_URL = ''; //Register URL
+const REGISTER_URL = '/register'; //Register URL
 
 const Signup = () => {
     const userRef = useRef();
@@ -81,7 +81,8 @@ const Signup = () => {
 
         //Axios rough work
         try {
-            const response = await axios.get(REGISTER_URL,{params:{ username: user, email : email, pwd :pwd }});
+            const response = await axios.post(REGISTER_URL,{username: user, email : email, password :pwd });
+            console.log(JSON.stringify(response?.data));
             if (response?.data?.error === 301) {
                 setErrMsg('Username Taken');           
             // } else if (response?.data?.email_availability === 301) {
@@ -150,7 +151,9 @@ const Signup = () => {
                                         Must begin with a letter.<br />
                                         Letters, numbers, underscores, hyphens allowed.
                                     </span>
+
                                 </div>
+
                                 {/* Email adress */}
                                 <div className='signup-field'>
                                     <div className='login-icon'>

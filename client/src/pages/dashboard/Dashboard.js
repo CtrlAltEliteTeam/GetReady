@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
-import { GameTileData } from "../../components/GameTile/GameTitleData";
+import { GameTileData } from "../../components/GameTile/GameTileData";
 import GameTile from "../../components/GameTile/GameTile";
 import { GameTile_TestData } from "../../components/GameTile/GameTitle_TestData";
 import './Dashboard.css';
@@ -49,7 +49,7 @@ const Dashboard = () => {
             <div className="user-tounaments-outer">
                 <div className="user-tounaments-heading">
                     <span>
-                        Your Tounaments
+                        Your Tournaments
                     </span>
                 </div>
                 <div className="user-tounaments-inner">
@@ -77,7 +77,7 @@ const Dashboard = () => {
             <div className="user-tounaments-outer">
                 <div className="user-tounaments-heading">
                     <span>
-                        Tounament History
+                        Tournaments History
                     </span>
                 </div>
                 <div className="user-tounaments-inner">
