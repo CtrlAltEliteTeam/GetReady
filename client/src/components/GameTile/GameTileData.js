@@ -5,6 +5,7 @@ import Halo from '../../resources/img/GameTile_Test_Img/Halo.jpg';
 import SSb from '../../resources/img/GameTile_Test_Img/SSB.jpg';
 import Tekken from '../../resources/img/GameTile_Test_Img/tekken-7.jpg';
 import pacMan from '../../resources/img/GameTile_Test_Img/pacMan.jpg';
+import createImg from '../../resources/img/BigPlus.jpg';
 
 export class GameTileData{
     constructor(id, name, game, content, user, count){
@@ -33,6 +34,9 @@ export class GameTileData{
             case "pacman":
                 this.img = pacMan;
                 break;
+            case "create":
+                this.img = createImg;
+                break
         }
         this.alt = "TournamentImage";
         this.content = content;
