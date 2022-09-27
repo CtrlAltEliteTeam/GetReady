@@ -46,7 +46,7 @@ const Tournament = (params) => {
 
     //const [joinedResponse, setJoinedResponse] = useState({});
     const [joinLeave, setJoinLeave] = useState(false); //false if not joined
-    const [joinLeaveLable, setJoinLeaveLable] = useState("Leave");
+    const [joinLeaveLable, setJoinLeaveLable] = useState("Join");
     
     //Axiose to fetch tournament details 
     useEffect(() => {
