@@ -150,13 +150,12 @@ app.post('/api/is_participating', (req, res)=>{
 app.post('/api/get_user_details', (req, res)=>{
     const user_id = req.body.user_id;
     try {
-        const sqlSelect = "SELECT * FROM heroku_caad988da016f21.user WHERE user_id =?;";
+        const sqlSelect = "SELECT user_id, username, password FROM heroku_caad988da016f21.user WHERE user_id =?;";
         db.query(sqlSelect,[user_id],(err,result)=>{
-            if (result.length>=1) {
-                res.send(result);
-            } else{
-                res.send({error:301});
+            if (err) {
+                throw err;
             }
+            res.send(result);
         });
     } catch (err) {
         res.send({error:301});
