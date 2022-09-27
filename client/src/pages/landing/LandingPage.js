@@ -61,7 +61,7 @@ const LandingPage = () => {
 
     return (
         <>
-        <div className="spacer"></div>
+        <div className="spacer" data-testid="landing-page"></div>
         <div className="landing-page">
             <div className="games-list-outer">
                 <div className="games-list-heading">

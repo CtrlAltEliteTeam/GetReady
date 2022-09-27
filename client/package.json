@@ -25,9 +25,12 @@
   "jest": {
     "verbose": true,
     "transform": {
-      "\\.[jt]sx?$": "babel-jest",
-      "\\.css$": "some-css-transformer"
-    }
+      "\\.[jt]sx?$": "babel-jest"
+    },
+    "moduleNameMapper": {
+      ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "identity-obj-proxy"
+    },
+    "testEnvironment":"jsdom"
   },
   "eslintConfig": {
     "extends": [
@@ -46,5 +49,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "identity-obj-proxy": "^3.0.0"
   }
 }

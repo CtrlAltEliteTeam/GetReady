@@ -1,6 +1,6 @@
 
 import React from 'react';
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import { Route, Routes} from 'react-router-dom';
 import LandingPage from '../src/pages/landing/LandingPage';
 import LoginPage from '../src/components/login/LoginPage';
 import Signup from '../src/components/login/Signup';
@@ -15,7 +15,7 @@ import UserProfile from './pages/profile/UserProfile';
 function App() {
 	return (
 	<>
-		<Router>
+		
 			<NavBar />
 			<Routes>
 				<Route path='/' exact element={<LandingPage/>}/>
@@ -28,7 +28,7 @@ function App() {
 				<Route path='/details' exact element={<Tournament/>}/>
 				<Route path='/profile' exact element={<UserProfile/>}/>
 			</Routes>
-		</Router>
+		
     </>
 	);
 }
