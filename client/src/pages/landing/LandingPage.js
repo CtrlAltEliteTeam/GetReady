@@ -12,31 +12,15 @@ import axios from "../../api/Axois";
 const GET_TOURMANENT_SHORT_URL = "/get_tournament_short";
 
 const LandingPage = () => {
-
-    let navigate = useNavigate();
     // Array of Tounaments
-    const [loginName, setLoginName] = useState('Login');
-    const [state,dispatch]=useContext(AuthContext);
+    //const [loginName, setLoginName] = useState('Login');
+    //const [state,dispatch]=useContext(AuthContext);
 
     const [featuredList, setFeaturedList] = useState([]);
     const [featuredName, setFeaturedName] = useState("Featured Tournaments");
 
     const [gamesList, setGamesList] = useState([]);
     const [gamesListName, setGamesListName] = useState("Popular Games");
-        
-
-    //Load data of games
-    // useEffect(() => {
-    //     let count =0;
-    //     if ( gamesList.length === 0){
-    //         GameTile_TestData.forEach(element => {
-    //             //console.log(JSON.stringify(element));
-    //             let gameTile = new GameTileData(element.id,element.name,element.game,element.content,element.user,count);
-    //             setGamesList(gamesList => [...gamesList,gameTile]);
-    //             count++;
-    //         });
-    //     }
-    // }, [])
 
     useEffect(() => {
         const fetchData = async (e) => {
@@ -76,7 +60,7 @@ const LandingPage = () => {
                 </div>
             </div>
             <div className="tourny-list-outer">
-                <div  className="games-list-heading">
+                <div  className="games-list-heading" data-testid='TournamentList'>
                     {featuredName}
                 </div>
                 <div className="tourny-list-inner">
