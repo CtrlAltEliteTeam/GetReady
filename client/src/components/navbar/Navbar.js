@@ -18,41 +18,41 @@ const NavBar = () => {
     const [pageHeading, setPageHeading] = useState('Get Ready');
     const [loginName, setLoginName] = useState('Login');
 
-    // useEffect(() => {
-    //     //console.log(state.loggedin);
-    //         if(state.loggedin){
-    //             setLoginName('Log Out');
-    //         }
-    //         else if(!state.loggedin){
-    //             setLoginName('Login');
-    //         }
-    // },[loginName]);
+    useEffect(() => {
+        //console.log(state.loggedin);
+            if(state.loggedin){
+                setLoginName('Log Out');
+            }
+            else if(!state.loggedin){
+                setLoginName('Login');
+            }
+    },[loginName]);
 
     const loginCheck = () =>{
-        // if(state.loggedin){
-
-        //     dispatch({
-        //         type:LOGOUT,
-        //         payload: 0
-        //     });
-        //     setLoginName('Login');
-        // }
-        // if(!state.loggedin){
-        //     return navigate(`/login`);
-        // }
         if(state.loggedin){
+
             dispatch({
                 type:LOGOUT,
                 payload: 0
             });
             setLoginName('Login');
-        } else if (!state.loggedin) {
-            dispatch({
-                type:LOGIN,
-                payload: 11
-            });
-            setLoginName('Logout');
         }
+        if(!state.loggedin){
+            return navigate(`/login`);
+        }
+        // if(state.loggedin){
+        //     dispatch({
+        //         type:LOGOUT,
+        //         payload: 0
+        //     });
+        //     setLoginName('Login');
+        // } else if (!state.loggedin) {
+        //     dispatch({
+        //         type:LOGIN,
+        //         payload: 11
+        //     });
+        //     setLoginName('Logout');
+        // }
         console.log(state.id);
     };
 
