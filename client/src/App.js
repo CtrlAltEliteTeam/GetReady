@@ -9,6 +9,7 @@ import NavBar from './components/navbar/Navbar';
 import MyToumanents from '../src/pages/myTourmanents/MyTounamentsPage';
 import CreateTournament from '../src/components/createTounament/CreateTournament';
 import Tournament from './components/tournament/Tournament';
+import Profile from '../src/pages/profile/UserProfile';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
 				<Route path='/login' exact element={<LoginPage/>}/>
 				<Route path='/signup' exact element={<Signup/>}/>
 				<Route path='/dashboard' exact element={<Dashboard/>}/>
+				<Route path='/profile' exact element={<Profile/>}/>
 				<Route path='/mypage' exact element={<MyToumanents/>}/>
 				<Route path='/create' exact element={<CreateTournament/>}/>
 				<Route path='/details' exact element={<Tournament/>}/>
