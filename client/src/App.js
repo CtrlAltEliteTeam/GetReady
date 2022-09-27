@@ -9,6 +9,7 @@ import NavBar from './components/navbar/Navbar';
 import MyToumanents from '../src/pages/myTourmanents/MyTounamentsPage';
 import CreateTournament from '../src/components/createTounament/CreateTournament';
 import Tournament from './components/tournament/Tournament';
+import UserProfile from './pages/profile/UserProfile';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
 				<Route path='/mypage' exact element={<MyToumanents/>}/>
 				<Route path='/create' exact element={<CreateTournament/>}/>
 				<Route path='/details' exact element={<Tournament/>}/>
+				<Route path='/profile' exact element={<UserProfile/>}/>
 			</Routes>
 		</Router>
     </>
