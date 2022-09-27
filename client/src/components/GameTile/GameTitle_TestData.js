@@ -1,9 +1,9 @@
 import React from 'react';
 import Fortnite from '../../resources/img/GameTile_Test_Img/Fortnite.jpg';
-import LoL from '../../resources/img/GameTile_Test_Img/LoL.jpg'
-import CSgo from '../../resources/img/GameTile_Test_Img/CSGO.png'
-import Halo from '../../resources/img/GameTile_Test_Img/Halo.jpg'
-import SSb from '../../resources/img/GameTile_Test_Img/SSB.jpg'
+import LoL from '../../resources/img/GameTile_Test_Img/LoL.jpg';
+import CSgo from '../../resources/img/GameTile_Test_Img/CSGO.png';
+import Halo from '../../resources/img/GameTile_Test_Img/Halo.jpg';
+import SSb from '../../resources/img/GameTile_Test_Img/SSB.jpg';
 
 export const GameTile_TestData = [
     {

@@ -1,12 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import ReactDOM from "react-dom/client";
-import App from '../App';
 import GameTile from '../components/GameTile/GameTile';
-import Login from '../components/login/Login';
-import Signup from '../components/login/Signup';
-import Dashboard from '../pages/dashboard/Dashboard';
 
+it("test game tile",() =>{
+	render(<GameTile/>)
 
-it("renders correctly", () => {
-  //render(<App/>);
+	//screen.debug();
 });
