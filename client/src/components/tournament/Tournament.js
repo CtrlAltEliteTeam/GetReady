@@ -11,7 +11,6 @@ const TOURNAMENT_URL = "/get_tournament_details";
 const PARTICIPANT_URL = "/get_participants";
 const GET_JOIN_LEAVE_URL = "/is_participating";
 const JOIN_URL = "/join_tournament";
-const LEAVE_URL = "/leave_tournament";
 
 
 const Tournament = (params) => {
@@ -56,46 +55,12 @@ const Tournament = (params) => {
                     tournament_id : data.id,
                 });
                 setDetails(response?.data);
-                //console.log(details);
             } catch (error) {
                 //console.log(error);
             }
-            // try{
-            //     const response = await axios.post(GET_JOIN_LEAVE_URL,{
-            //         tournament_id : data.id,
-            //         user_id : state.id,
-            //     })
-            //     setJoinedResponse(response?.data);
-            // } catch (error) {
-            // }
         }
         fetchData();
     }, [])
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const response = await axios.post(GET_JOIN_LEAVE_URL,{
-                tournament_id : data.id,
-                user_id : state.id,
-            });
-            return await response?.data;
-        }
-        const res = fetchData();
-        const temp = Promise.resolve(res);
-        temp.then((value) => {
-            setJoinLeave(value);
-        });
-    }, [])
-
-    // useEffect(()=>{
-    //     setJoinLeave(joinedResponse);
-    //     if (joinLeave){
-    //         setJoinLeaveLable("Leave");
-    //     }
-    //     if (!joinLeave){
-    //         setJoinLeaveLable("Join");
-    //     }
-    // }, [joinedResponse]);
 
     useEffect(()=>{
         setCreator(details[0]?.username);
@@ -116,23 +81,16 @@ const Tournament = (params) => {
                 const response = await axios.post(PARTICIPANT_URL,{
                     tournament_id : data.id,
                 });
-                //setParticipants(response?.data);
                 console.log(response?.data);
+                response?.data.forEach(element => {
+                    setParticipants(Participants => [...Participants,element]);
+                });
             } catch (error) {
-                //console.log(error);
+                console.log(error);
             }
         }
-        //fetchParticipants();
-    }, []);
-
-    useEffect(() => {
-        console.log(joinLeave);
-        if (!joinLeave){
-            setJoinLeaveLable("Leave");
-        } else {
-            setJoinLeaveLable("Join");
-        }
-    }, [joinLeave])
+        fetchParticipants();
+    }, [fetchParts]);
 
     const showParticipantsEvent = (e) => {
         if (!showParticipants){
@@ -143,31 +101,47 @@ const Tournament = (params) => {
         }
     }
 
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await axios.post(GET_JOIN_LEAVE_URL,{
+                tournament_id : data.id,
+                user_id : state.id,
+            });
+            return await response?.data;
+        }
+        const res = fetchData();
+        const temp = Promise.resolve(res);
+        temp.then((value) => {
+            setJoinLeave(value.joinLeave);
+            console.log(joinLeave);
+            if (value.joinLeave === false){
+                setJoinLeaveLable("Join");
+            } else {
+                setJoinLeaveLable("Leave");
+            }
+        });
+    }, [])
+
     const handleJoin = async (e) => {
         //axiose for join
         var t = currPart;
-        if (joinLeave === false){
-            try {
-                const response = await axios.post(JOIN_URL,{
-                    tournament_id : data.id,
-                    user_id : state.id,
-                });
+        try {
+            const response = await axios.post(JOIN_URL,{
+                tournament_id : data.id,
+                user_id : state.id,
+            });
+            setJoinLeave(response?.data?.result);
+            if (response?.data?.result === false){
+                setJoinLeaveLable("Join");
                 setCurrPart(t--);
-                setJoinLeave(false);
-            } catch (error) {
-                
-            }
-        } else  {
-            try {
-                const response = await axios.post(LEAVE_URL,{
-                    tournament_id : data.id,
-                    user_id : state.id,
-                });
+                setFetchParts(2);
+            } else {
+                setJoinLeaveLable("Leave");
                 setCurrPart(t++);
-                setJoinLeave(true);
-            } catch (error) {
-                
+                setFetchParts(3);
             }
+        } catch (error) {
+            console.log(error);
         }
     }
 
@@ -223,7 +197,7 @@ const Tournament = (params) => {
                                 {Participants.map((element)=>{
                                     return(
                                         <div>
-                                            {element.player}
+                                            {element.username}
                                         </div>
                                     )
                                 })}

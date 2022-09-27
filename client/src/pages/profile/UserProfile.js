@@ -1,228 +1,305 @@
-import axios from "../../api/Axois";
-import React, {useState, useEffect, useContext} from "react";
-import "./UserProfile.css";
+import React, {useState, useEffect, useRef, useContext} from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import * as FaIcons from 'react-icons/fa'
+import * as MdIcons from 'react-icons/md';
+import * as BsIcons from 'react-icons/bs';
+import * as RiIcons from 'react-icons/ri';
+import { AuthContext } from '../../api/AuthProvider';
+import { LOGIN } from '../../api/Constants';
+import axios from '../../api/Axois';
+import { AxiosError } from 'axios';
 
-const TITLE_REGEX=/^[A-z][A-z0-9-_!?]{3,23}$/;
-const FETCH_GAMES_URL = "/get_games";
-//const CREATE_TOURNAMENT = "/add_game";
+const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
+const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+const FETCH_URL = '/get_user_details'; //Register URL
+const EDIT_URL ='/update_profile';
 
 const UserProfile = () => {
-    const [tName, setTName] = useState('');
-    const [validTName, setValidTName] = useState(false);
+    const userRef = useRef();
+    const errRef = useRef();
 
-    const [tGame, setTGame] = useState("");
-    const [validTGame, setValidTGame] = useState(false);
+    let navigate = useNavigate();
 
-    const [tsDate, setTsDate] = useState("");
-    const [validTsDate, setValidTsDate] = useState(false);
+    const [state,dispatch] = useContext(AuthContext);
 
-    const [tfDate, setTfDate] = useState("");
-    const [validTfDate, setValidTfDate] = useState(false);
+    console.log(state.id);
 
-    const [tParticipants, setTParticipants] = useState(2);
-    const [validTParticipants, setValidTParticipants] = useState(false);
+    const [user, setUser] = useState('');
+    const [validName, setValidName] = useState(false);
+    const [userFocus, setUserFocus] = useState(false);
 
-    const [tDesc, setTDesc] = useState("");
-    const [validTDesc, setValidTDesc] = useState(false);
+    const [email, setEmail] = useState('');
+    const [validEmail, setVaildEmail] = useState(false);
+    const [emailFocus, setEmailFocus] = useState(false);
 
-    const [tsTime, setTsTime] = useState("");
-    const [validTsTime, setValidTsTime] = useState(false);
+    const [pwd, setPwd] = useState('');
+    const [validPwd, setValidPwd] = useState(false);
+    const [pwdFocus, setPwdFocus] = useState(false);
 
-    const [tPermission, setTPermission] = useState(false);
+    const [matchPwd, setMatchPwd] = useState('');
+    const [validMatch, setValidMatch] = useState(false);
+    const [matchFocus, setMatchFocus] = useState(false);
 
-    const [gamesList, setGamesList] = useState([]);
+    const [oldPwd, setOldPwd] = useState('');
+    const [validOldPwd, setValidOldPwd] = useState(false);
+    const [oldFocus, setOldFocus] = useState(false);
+
+    const [errMsg, setErrMsg] = useState('');
+    const [success, setSuccess] = useState(false);
 
     useEffect(() => {
-        const fetchGames = async () => {
-            const response = await axios.post(FETCH_GAMES_URL,{});
-            return await response?.data;
+        userRef.current.focus();
+    }, [])
+
+    useEffect(() => {
+        setValidName(USER_REGEX.test(user));
+    }, [user])
+
+    useEffect(() => {
+        setVaildEmail(EMAIL_REGEX.test(email));
+    }, [email])
+
+    useEffect(() => {
+        setValidPwd(PWD_REGEX.test(pwd));
+        setValidMatch(pwd === matchPwd);
+    }, [pwd, matchPwd])
+
+    useEffect(() => {
+        setErrMsg('');
+    }, [user, pwd, matchPwd])
+
+    useEffect(() => {
+        setValidOldPwd(PWD_REGEX.test(oldPwd));
+    }, [oldPwd])
+
+    useEffect(()=>{        
+        if(success){
+            return navigate(`/`);
         }
-        const res = fetchGames();
-        const data = Promise.resolve(res);
+    },[success]);
+
+    //get user details;
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const response = await axios.post(FETCH_URL,{
+                    user_id : state.id
+                })
+                return await response?.data;
+            } catch (error) {
+                
+            }
+        }
+        const response = fetchUser();
+        const data = Promise.resolve(response);
         data.then((value) => {
-            value.forEach(element => {
-                setGamesList(gamesList => [...gamesList,element]);
-            });
-        });
-        gamesList.forEach(element => {
-            console.log(element);
+            console.log(value);
+            setEmail(value[0].email);
+            setUser(value[0].username);
         });
     },[])
 
-    useEffect(() => {
-        //console.log(tGame);
-    }, [tGame])
-
-    //validation
-    useEffect(() => {
-        setValidTName(TITLE_REGEX.test(tName));
-    }, [tName]);
-    useEffect(() => {
-        if (tDesc.length >= 300){
-            setValidTDesc(true);
-        }
-    }, [tDesc]);
-    useEffect(() => {
-        let currDate = new Date();
-        console.log(currDate.getDate());
-        console.log(tsDate);
-        if (tsDate >= currDate.getDate()){
-            setValidTsDate(true);
-        }
-    }, [tsDate]);
-    // useEffect(() => {
-    //     if (tfDate < tsDate){
-    //         setValidTfDate(true);
-    //     }
-    // }, [tfDate]);
-    // useEffect(() => {
-    //     let currDate = new Date();
-    //     if (tsDate === currDate.getDate() && tsTime < currDate.getTime()){
-    //         setValidTsTime(true);
-    //     }
-    // }, [tsTime]);
-    // useEffect(() => {
-    //     if ((tParticipants % 2) == 0 ){
-    //         setValidTParticipants(true);
-    //     } else {
-    //         setValidTParticipants(false);
-    //     }
-    // }, [tParticipants]);
-
     const handleSubmit = async (e) => {
-        e.preventDeafault();
-        //send created game
+        e.preventDefault();
+        // prevents button hack
+        const v1 = USER_REGEX.test(user);
+        const v2 = PWD_REGEX.test(pwd);
+        const v3 = EMAIL_REGEX.test(email);
+        if (!v1 || !v2 || !v3) {
+            setErrMsg("Invalid Entry");
+            return;
+        }
+
+        //Axios rough work
+        try {
+            const response = await axios.post(EDIT_URL,{user_id: state.id, username : user, email: email, password :pwd });
+            console.log(JSON.stringify(response?.data));
+            if (response?.data?.error === 301) {
+                //setErrMsg('Username Taken');           
+            // } else if (response?.data?.email_availability === 301) {
+            //     setErrMsg('Email Taken');
+            } else {  
+                //On sucess             
+                setUser('');
+                setPwd('');
+                setEmail('');
+                setMatchPwd('');
+                setSuccess(true);
+            }
+        } catch (err) {
+            if (!err?.response) {
+                setErrMsg('No Server Response');
+            } else {
+                setErrMsg('Registration Failed')
+            }
+            errRef.current.focus();
+        }
     }
-    
-    return(
-        <section className="create-tounament-inner">
-            <form encType='multipart/form-data' onSubmit={handleSubmit}>
-                <div className="create-form-title">
-                    <span>
-                        User Details
-                    </span>
+
+    return (
+        <>
+            {success ? (
+                <section>
+                    {/* Change to landing URL */}
+                </section>
+            ) : (
+                <div className='signup-box'>
+                    <section className='login-box'>
+                        <div className='login-heading'>
+                            Your Profile
+                        </div>
+                        <div className='login-form'>
+                            <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+                            <form onSubmit={handleSubmit}>
+                                {/* UserName */}
+                                <div className='signup-field'>
+                                    <div className='login-icon'>
+                                        <BsIcons.BsFillPersonFill/>
+                                    </div>
+                                    <input 
+                                        type="text"
+                                        id="username"
+                                        placeholder='User Name'
+                                        ref={userRef}
+                                        autoComplete="off"
+                                        onChange={(e) => setUser(e.target.value)}
+                                        value={user}
+                                        required
+                                        aria-invalid={validName ? "false" : "true"}
+                                        aria-describedby="uidnote"
+                                        onFocus={() => setUserFocus(true)}
+                                        onBlur={() => setUserFocus(false)}
+                                    />
+                                    <FaIcons.FaCheck className={validName ? "valid" : "hide"} />
+                                    <FaIcons.FaTimes className={validName || !user ? "hide" : "invalid"} />
+                                    <span className='signup-info'>
+                                        <FaIcons.FaInfoCircle />
+                                        4 to 24 characters.<br />
+                                        Must begin with a letter.<br />
+                                        Letters, numbers, underscores, hyphens allowed.
+                                    </span>
+
+                                </div>
+
+                                {/* Email adress */}
+                                <div className='signup-field'>
+                                    <div className='login-icon'>
+                                        <MdIcons.MdOutlineMailOutline />
+                                    </div>
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        autoComplete="off"
+                                        placeholder='Email Adress'
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        value={email}
+                                        required
+                                        aria-invalid={validEmail ? "false" : "true"}
+                                        aria-describedby="uidnote"
+                                        onFocus={() => setEmailFocus(true)}
+                                        onBlur={() => setEmailFocus(false)}
+                                        disabled
+                                    />
+                                    <FaIcons.FaCheck className={validEmail ? "valid" : "hide"} />
+                                    <FaIcons.FaTimes className={validEmail || !email ? "hide" : "invalid"} />
+                                    <span className='signup-info'>
+                                        <FaIcons.FaInfoCircle />
+                                        4 to 24 characters.<br />
+                                        Must begin with a letter.<br />
+                                        Letters, numbers, underscores, hyphens allowed.
+                                    </span>
+                                </div>
+
+                                {/* Old Password */}
+                                <div className='signup-field'>
+                                    <div className='login-icon'>
+                                        <RiIcons.RiLockPasswordLine />
+                                    </div>
+                                    <input
+                                        type="password"
+                                        id="oldpassword"
+                                        placeholder='Old Password'
+                                        onChange={(e) => setOldPwd(e.target.value)}
+                                        value={oldPwd}
+                                        required
+                                        aria-invalid={validOldPwd ? "false" : "true"}
+                                        aria-describedby="pwdnote"
+                                        onFocus={() => setOldFocus(true)}
+                                        onBlur={() => setOldFocus(false)}
+                                    />
+                                    <FaIcons.FaCheck className={validOldPwd ? "valid" : "hide"} />
+                                    <FaIcons.FaTimes className={validOldPwd || !oldPwd ? "hide" : "invalid"} />
+                                    <span className='signup-info'>
+                                        <FaIcons.FaInfoCircle />
+                                            8 to 24 characters.<br />
+                                            Must include uppercase and lowercase letters, a number and a special character.<br />
+                                            Allowed special characters: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
+                                    </span>
+                                </div>
+
+                                {/* Password */}
+                                <div className='signup-field'>
+                                    <div className='login-icon'>
+                                        <RiIcons.RiLockPasswordLine />
+                                    </div>
+                                    <input
+                                        type="password"
+                                        id="password"
+                                        placeholder='New Password'
+                                        onChange={(e) => setPwd(e.target.value)}
+                                        value={pwd}
+                                        required
+                                        aria-invalid={validPwd ? "false" : "true"}
+                                        aria-describedby="pwdnote"
+                                        onFocus={() => setPwdFocus(true)}
+                                        onBlur={() => setPwdFocus(false)}
+                                    />
+                                    <FaIcons.FaCheck className={validPwd ? "valid" : "hide"} />
+                                    <FaIcons.FaTimes className={validPwd || !pwd ? "hide" : "invalid"} />
+                                    <span className='signup-info'>
+                                        <FaIcons.FaInfoCircle />
+                                            8 to 24 characters.<br />
+                                            Must include uppercase and lowercase letters, a number and a special character.<br />
+                                            Allowed special characters: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
+                                    </span>
+                                </div>
+
+                                {/* Match Password */}
+                                <div className='signup-field'>
+                                        <div className='login-icon'>
+                                            <RiIcons.RiLockPasswordLine />
+                                        </div>
+                                    <input
+                                        type="password"
+                                        id="confirm_pwd"
+                                        placeholder='Confirm Password'
+                                        onChange={(e) => setMatchPwd(e.target.value)}
+                                        value={matchPwd}
+                                        required
+                                        aria-invalid={validMatch ? "false" : "true"}
+                                        aria-describedby="confirmnote"
+                                        onFocus={() => setMatchFocus(true)}
+                                        onBlur={() => setMatchFocus(false)}
+                                    />
+                                    <FaIcons.FaCheck className={validMatch && matchPwd ? "valid" : "hide"} />
+                                    <FaIcons.FaTimes className={validMatch || !matchPwd ? "hide" : "invalid"} />
+                                    <span className='signup-info'>
+                                        <FaIcons.FaInfoCircle />
+                                        Must match the first password input field.
+                                    </span>
+                                </div>
+
+                                {/* Button : when pressed handle event is run */}
+                                <div className='login-button'>
+                                    <button disabled={!validName || !validEmail || !validPwd || !validMatch ? true : false} type='login'>Edit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
                 </div>
-                <div className="create-item">
-                    <div className="create-item-heading">
-                        User Name
-                    </div>
-                    <div className="create-item-input">
-                        <input
-                            type="name"
-                            id="tname"
-                            placeholder="Tounament Name"
-                            value={tName}
-                            onChange={(e) => setTName(e.target.value)}
-                            required
-                        />
-                    </div>
-                </div>
-                <div className="create-item">
-                    <div className="create-item-heading">
-                        Game that will be played
-                    </div>
-                    <div className="create-item-input">
-                        <select
-                            value={tGame}
-                            onChange={(e) => setTGame(e.target.value)}
-                        >
-                            {gamesList.map(({ game_id, name }, index) => <option value={game_id} >{name}</option>)}
-                        </select>
-                    </div>
-                </div>
-                <div className="create-item">
-                    <div className="create-item-heading">
-                        Start Date
-                    </div>
-                    <div className="create-item-input">
-                        <input
-                            type="date"
-                            id="tsdate"
-                            value={tsDate}
-                            onChange={(e) => setTsDate(e.target.value)}
-                            required
-                            placeholder="Tounament Name"
-                        />
-                    </div>
-                </div>
-                <div className="create-item">
-                    <div className="create-item-heading">
-                        Start Time
-                    </div>
-                    <div className="create-item-input">
-                        <input
-                            type="time"
-                            id="tstime"
-                            value={tsTime}
-                            required
-                            onChange={(e) => setTsTime(e.target.value)}
-                        />
-                    </div>
-                </div>
-                <div className="create-item">
-                    <div className="create-item-heading">
-                        End Date
-                    </div>
-                    <div className="create-item-input">
-                        <input
-                            type="date"
-                            id="tfdate"
-                            value={tfDate}
-                            required
-                            onChange={(e) => setTfDate(e.target.value)}
-                        />
-                    </div>
-                </div>
-                <div className="create-item">
-                    <div className="create-item-heading">
-                        Number of Participants
-                    </div>
-                    <div className="create-item-input">
-                        <input
-                            type="number"
-                            id="tstime"
-                            value={tParticipants}
-                            required
-                            onChange={(e) => setTParticipants(e.target.value)}
-                        />
-                    </div>
-                </div>
-                <div className="create-item">
-                    <div className="create-item-heading">
-                        Tounament Info
-                    </div>
-                    <div className="create-item-input">
-                        <textarea
-                            type="info"
-                            id="tdesc"
-                            value={tDesc}
-                            onChange={(e) => setTDesc(e.target.value)}
-                            required
-                        />
-                    </div>
-                </div>
-                <div className="creat-item">
-                    <div className="create-item-heading">
-                        allow people to see who is participating
-                    </div>
-                    <div>
-                        <input
-                            type="checkbox"
-                            id="tpermission"
-                            value={tPermission}
-                            onChange={(e) => setTPermission(e.target.value)}
-                        />
-                    </div>
-                </div>
-                <div className="create-item">
-                    <div className="create-item-button">
-                        <button>
-                            Submit
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </section>
+            )}
+        </>
     )
 }
 

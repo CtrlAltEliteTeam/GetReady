@@ -1,12 +1,16 @@
 import axios from "../../api/Axois";
 import React, {useState, useEffect, useContext} from "react";
 import "./CreateTournament.css";
+import { AuthContext } from "../../api/AuthProvider";
 
 const TITLE_REGEX=/^[A-z][A-z0-9-_!?]{3,23}$/;
 const FETCH_GAMES_URL = "/get_games";
-const CREATE_TOURNAMENT = "/add_game";
+const CREATE_TOURNAMENT_URL = "/create_tournament";
+
 
 const CreateTournament = () => {
+
+    const [state] = useContext(AuthContext);
 
     const [tName, setTName] = useState('');
     const [validTName, setValidTName] = useState(false);
@@ -51,7 +55,7 @@ const CreateTournament = () => {
     },[])
 
     useEffect(() => {
-        //console.log(tGame);
+        console.log(tGame);
     }, [tGame])
 
     //validation
@@ -91,8 +95,24 @@ const CreateTournament = () => {
     // }, [tParticipants]);
 
     const handleSubmit = async (e) => {
-        e.preventDeafault();
-        //send created game
+        e.preventDefault();
+        try {
+            const response = await axios.post(CREATE_TOURNAMENT_URL,{
+                user_id : state.id,
+                game_id : tGame,
+                title : tName,
+                description : tDesc,
+                startDate : tsDate,
+                endDate : tfDate,
+                maxParticipants : tParticipants,
+                startTime : tsTime,
+                viewParticipant : tPermission,
+                content : "TOURNAMENT",
+            });
+            console.log(response?.data);
+        } catch (error) {
+            console.log(error);
+        }
     }
     
     return(
