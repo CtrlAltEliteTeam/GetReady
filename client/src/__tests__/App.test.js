@@ -11,7 +11,7 @@ const tileData = new GameTileData(11,"Test","CSGO","TOURNAMENT",12,1);
 // 	//screen.debug();
 // });
 
-it("test navbar",() => {
+if("test navbar",() => {
 	render(<Navbar />);
 
 	screen.debug();
