@@ -22,6 +22,8 @@ app.get('/api/get',(req,res)=>{
     
 });
 
+//Login and Register_________________________________________________________________________________________________________________________________________
+
 app.post('/api/login',(req,res)=>{
     const email = req.body.email;
     const password =req.body.password;
@@ -69,48 +71,7 @@ app.post('/api/register',(req,res)=>{
     }
 });
 
-app.post('/api/create_tournament', (req, res)=>{
-    const title = req.body.title; 
-    const description = req.body.description;
-    const startDate= req.body.startDate; 
-    const endDate= req.body.endDate; 
-    const maxParticipants= req.body.maxParticipants; 
-    const user_id= req.body.user_id; 
-    const game_id= req.body.game_id; 
-    const startTime= req.body.startTime; 
-    const viewParticipant= req.body.viewParticipant;
-    const img= req.body.img;
-    const imgName= req.body.imgName;
-    const content = "TOURNAMENT";
-    try {
-        const sqlInsert = "INSERT INTO heroku_caad988da016f21.tournament(title, description, startDate, endDate, maxParticipants, user_id, game_id, startTime, viewParticipant, img, imgName, content) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-        db.query(sqlInsert, [title, description, startDate, endDate, maxParticipants, user_id, game_id, startTime, viewParticipant, img, imgName, content], (err, result)=> {
-            if(result?.affectedRows===1){
-                res.send(result);
-            }else{
-                res.send({error:301});
-            }
-        });
-    } catch (err) {
-        res.send({error:301});
-    } 
-});
-
-app.post('/api/update_profile', (req,res)=>{
-    const user_id = req.body.user_id;
-    const email = req.body.email;
-    const username = req.body.username;
-    const password = req.body.password;
-
-    const sqlUpdate = "UPDATE heroku_caad988da016f21.user SET username =?, email=?, password=? WHERE user_id=?";
-    db.query(sqlUpdate, [username, email, password, user_id],(err, result)=> {
-        if(result?.affectedRows===1){
-            res.send(result);
-        }else{
-            res.send({error:301});
-        }
-    });
-});
+//Selects____________________________________________________________________________________________________________________________________________________
 
 app.get('/api/get_all_tournaments', (req, res)=>{
     const sqlSelect = "SELECT * FROM heroku_caad988da016f21.tournament";
@@ -175,13 +136,73 @@ app.post('/api/is_participating', (req, res)=>{
     try {
         const sqlSelect = "SELECT * FROM heroku_caad988da016f21.entry WHERE tournament_id =? AND user_id =?;";
         db.query(sqlSelect,[tournament_id, user_id],(err,result)=>{
-            if (result.length=1) {
+            if (result.length>=1) {
                 res.send({joinLeave:true});
             } else{
                 res.send({joinLeave:false});
             }
         });
     } catch (err) {
+        res.send({error:301});
+    }
+});
+
+//Inserts____________________________________________________________________________________________________________________________________________________
+
+app.post('/api/create_tournament', (req, res)=>{
+    const title = req.body.title; 
+    const description = req.body.description;
+    const startDate= req.body.startDate; 
+    const endDate= req.body.endDate; 
+    const maxParticipants= req.body.maxParticipants; 
+    const user_id= req.body.user_id; 
+    const game_id= req.body.game_id; 
+    const startTime= req.body.startTime; 
+    const viewParticipant= req.body.viewParticipant;
+    const img= req.body.img;
+    const imgName= req.body.imgName;
+    const content = "TOURNAMENT";
+    try {
+        const sqlInsert = "INSERT INTO heroku_caad988da016f21.tournament(title, description, startDate, endDate, maxParticipants, user_id, game_id, startTime, viewParticipant, img, imgName, content) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+        db.query(sqlInsert, [title, description, startDate, endDate, maxParticipants, user_id, game_id, startTime, viewParticipant, img, imgName, content], (err, result)=> {
+            if(result?.affectedRows===1){
+                res.send(result);
+            }else{
+                res.send({error:301});
+            }
+        });
+    } catch (err) {
+        res.send({error:301});
+    } 
+});
+
+//still need to add check for id max participants reached - consider a trigger
+app.post('/api/join_tournament', (req,res)=>{
+    const user_id = req.body.user_id;
+    const tournament_id = req.body.tournament_id;
+    try{
+        const sqlInsert = "INSERT INTO heroku_caad988da016f21.entry(user_id, tournament_id) VALUES (?,?)";
+        db.query(sqlInsert,[user_id, tournament_id],(err,result)=>{
+            if(result?.affectedRows>=1){
+                //record successfully added to table
+                try {
+                    const sqlUpdate = "UPDATE heroku_caad988da016f21.tournament SET numParticipants = numParticipants + 1 WHERE tournament_id = ?;";
+                    db.query(sqlUpdate, [tournament_id],(err,result)=>{
+                        if (result?.affectedRows===1) {
+                            res.send(result);
+                        }else {
+                            //not updated
+                            res.send({error:301});
+                        }
+                    });
+                } catch (err) {
+                    res.send({error:301});
+                }
+            }else{
+                res.send({error:301});
+            }
+        });
+    }catch(err){
         res.send({error:301});
     }
 });
@@ -197,7 +218,7 @@ app.post('/api/add_game',(req,res)=>{
         const sqlSelect = "SELECT * FROM heroku_caad988da016f21.game WHERE name = ?;";
         db.query(sqlSelect,[name],(err,result)=>{
             if (result.length===1) {
-                res.send({error:"301 EXISTS"});
+                res.send({error:301});
             } else{
                 try{
                     const sqlInsert = "INSERT INTO heroku_caad988da016f21.game(name, img, imgName, content) VALUES (?,?,?,?)";
@@ -220,14 +241,65 @@ app.post('/api/add_game',(req,res)=>{
     }
 });
 
-app.post('/api/join_tournament', (req,res)=>{
+//Updates________________________________________________________________________________________________________________________________________________________
+
+app.post('/api/update_profile', (req,res)=>{
+    const user_id = req.body.user_id;
+    const email = req.body.email;
+    const username = req.body.username;
+    const password = req.body.password;
+
+    const sqlUpdate = "UPDATE heroku_caad988da016f21.user SET username =?, email=?, password=? WHERE user_id=?";
+    db.query(sqlUpdate, [username, email, password, user_id],(err, result)=> {
+        if(result?.affectedRows===1){
+            res.send(result);
+        }else{
+            res.send({error:301});
+        }
+    });
+});
+
+//add validation to ensure no empty fields 
+app.post('/api/update_tournament', (req,res)=>{
+    const title = req.body.title;
+    const description = req.body.description;
+    const startDate = req.body.startDate;
+    const endDate = req.body.endDate;
+    const startTime = req.body.startTime;
+    const maxParticipants = req.body.maxParticipants;
+
+    const sqlUpdate = "UPDATE heroku_caad988da016f21.tournament SET title=?, description=?, startDate=?, endDate=?, startTime=?, maxParticipants=? WHERE tournament_id=?";
+    db.query(sqlUpdate, [title, description, startDate, endDate, startTime, maxParticipants],(err, result)=> {
+        if(result?.affectedRows===1){
+            res.send(result);
+        }else{
+            res.send({error:301});
+        }
+    });
+});
+
+//Delete_____________________________________________________________________________________________________________________________________________________
+
+app.post('/api/leave_tournament', (req,res)=>{
     const user_id = req.body.user_id;
     const tournament_id = req.body.tournament_id;
     try{
-        const sqlInsert = "INSERT INTO heroku_caad988da016f21.entry(user_id, tournament_id) VALUES (?,?)";
+        const sqlInsert = "DELETE FROM heroku_caad988da016f21.entry WHERE user_id=? AND tournament_id =?";
         db.query(sqlInsert,[user_id, tournament_id],(err,result)=>{
-            if(result?.affectedRows===1){
-                res.send(result);
+            if(result?.affectedRows>=1){
+                try {
+                    const sqlUpdate = "UPDATE heroku_caad988da016f21.tournament SET numParticipants = numParticipants - 1 WHERE tournament_id = ?;";
+                    db.query(sqlUpdate, [tournament_id],(err,result)=>{
+                        if (result?.affectedRows===1) {
+                            res.send(result);
+                        }else {
+                            //not updated
+                            res.send({error:301});
+                        }
+                    });
+                } catch (err) {
+                    res.send({error:301});
+                }
             }else{
                 res.send({error:301});
             }
@@ -237,22 +309,7 @@ app.post('/api/join_tournament', (req,res)=>{
     }
 });
 
-app.post('/api/leave_tournament', (req,res)=>{
-    const user_id = req.body.user_id;
-    const tournament_id = req.body.tournament_id;
-    try{
-        const sqlInsert = "DELETE FROM heroku_caad988da016f21.entry WHERE user_id=? AND tournament_id =?";
-        db.query(sqlInsert,[user_id, tournament_id],(err,result)=>{
-            if(result?.affectedRows===1){
-                res.send(result);
-            }else{
-                res.send({error:301});
-            }
-        });
-    }catch(err){
-        res.send({error:301});
-    }
-});
+//consider adding a delete tournament option
 
 const PORT =process.env.PORT || 8000;
 app.listen( PORT,()=>{    //8000
