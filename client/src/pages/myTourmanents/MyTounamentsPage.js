@@ -32,22 +32,28 @@ const MyTounaments = () => {
     }
 
     return(
-        <div className="my-tournaments">
+        <>
             <div className={show ? "my-tournament-overlay-active" : "my-tournament-overlay"}>
                 <div className="my-tournament-overlay-screen" onClick={stopOverlay}></div>
                 <div>
-                    {show ? <CreateTournament/> : null }
+                    {show ? 
+                        <div className="create-tounament-wrapper">
+                            <CreateTournament/>
+                        </div> 
+                    : null }
                 </div>
             </div>
-            <div className="create-tounament-wrapper" onClick={createTounament}>
-                <GameTile game={createNew} />
+            <div className="my-tournaments">
+                <div onClick={createTounament}>
+                    <GameTile game={createNew}/>
+                </div>
+                    {tournamentList.map((element)=>{
+                        return(
+                            <GameTile game={element}/>
+                        )
+                    })}
             </div>
-            {tournamentList.map((element)=>{
-                return(
-                    <GameTile game={element}/>
-                )
-            })}
-        </div>
+        </>
     )
 }
 
