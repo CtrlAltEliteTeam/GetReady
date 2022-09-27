@@ -79,34 +79,34 @@ const UserProfile = () => {
         }
 
         //Axios rough work
-    //     try {
-    //         const response = await axios.post(REGISTER_URL,{username: user, email : email, password :pwd });
-    //         console.log(JSON.stringify(response?.data));
-    //         if (response?.data?.error === 301) {
-    //             setErrMsg('Username Taken');           
-    //         // } else if (response?.data?.email_availability === 301) {
-    //         //     setErrMsg('Email Taken');
-    //         } else {  
-    //             //On sucess             
-    //             setUser('');
-    //             setPwd('');
-    //             setEmail('');
-    //             setMatchPwd('');
-    //             dispatch({
-    //                 type: LOGIN,
-    //                 payload: response?.data?.user_id,
-    //             })
-    //             setSuccess(true);
-    //         }
-    //     } catch (err) {
-    //         if (!err?.response) {
-    //             setErrMsg('No Server Response');
-    //         } else {
-    //             setErrMsg('Registration Failed')
-    //         }
-    //         errRef.current.focus();
-    //     }
-    // }
+        try {
+            const response = await axios.post(REGISTER_URL,{username: user, email : email, password :pwd });
+            console.log(JSON.stringify(response?.data));
+            if (response?.data?.error === 301) {
+                setErrMsg('Username Taken');           
+            // } else if (response?.data?.email_availability === 301) {
+            //     setErrMsg('Email Taken');
+            } else {  
+                //On sucess             
+                setUser('');
+                setPwd('');
+                setEmail('');
+                setMatchPwd('');
+                dispatch({
+                    type: LOGIN,
+                    payload: response?.data?.user_id,
+                })
+                setSuccess(true);
+            }
+        } catch (err) {
+            if (!err?.response) {
+                setErrMsg('No Server Response');
+            } else {
+                setErrMsg('Registration Failed')
+            }
+            errRef.current.focus();
+        }
+    }
 
     return (
         <>
