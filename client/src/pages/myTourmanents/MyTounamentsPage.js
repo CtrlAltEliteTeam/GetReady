@@ -24,24 +24,29 @@ const MyTounaments = () => {
     let createNew = new GameTileData(0,"Create Tounament",BigPlus,'create tounament img');
 
     const createTounament = () => {
-        console.log("I have renderd");
         setShow(true);
     }
 
+    const stopOverlay = () => {
+        setShow(false);
+    }
 
     return(
-        <div>
-            <div className="my-tournaments">
-                {show ? <CreateTournament/> : console.log("no show")}
-                <div className="create-tounament-wrapper" onClick={createTounament}>
-                    <GameTile game={createNew} />
+        <div className="my-tournaments">
+            <div className={show ? "my-tournament-overlay-active" : "my-tournament-overlay"}>
+                <div className="my-tournament-overlay-screen" onClick={stopOverlay}></div>
+                <div>
+                    {show ? <CreateTournament/> : null }
                 </div>
-                {tournamentList.map((element)=>{
-                    return(
-                        <GameTile game={element}/>
-                    )
-                })}
             </div>
+            <div className="create-tounament-wrapper" onClick={createTounament}>
+                <GameTile game={createNew} />
+            </div>
+            {tournamentList.map((element)=>{
+                return(
+                    <GameTile game={element}/>
+                )
+            })}
         </div>
     )
 }

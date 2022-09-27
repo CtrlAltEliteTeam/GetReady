@@ -33,7 +33,6 @@ const CreateTournament = () => {
 
     const [gamesList, setGamesList] = useState([]);
 
-    const options = [{id:1,name:"Counter Strike: GO"},{id:2,name:"Fortnite"}]//,"Fortnite","Halo","League of Legends","Super Smash Bros"];
     useEffect(() => {
         const fetchGames = async () => {
             const response = await axios.post(FETCH_GAMES_URL,{});
@@ -42,9 +41,13 @@ const CreateTournament = () => {
         const res = fetchGames();
         const data = Promise.resolve(res);
         data.then((value) => {
-            console.log(value);
+            value.forEach(element => {
+                setGamesList(gamesList => [...gamesList,element]);
+            });
         });
-        
+        gamesList.forEach(element => {
+            console.log(element);
+        });
     },[])
 
     useEffect(() => {
@@ -124,7 +127,7 @@ const CreateTournament = () => {
                             value={tGame}
                             onChange={(e) => setTGame(e.target.value)}
                         >
-                            {options.map(({ id, name }, index) => <option value={id} >{name}</option>)}
+                            {gamesList.map(({ game_id, name }, index) => <option value={game_id} >{name}</option>)}
                         </select>
                     </div>
                 </div>
