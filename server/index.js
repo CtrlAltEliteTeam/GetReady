@@ -177,35 +177,35 @@ app.post('/api/create_tournament', (req, res)=>{
 });
 
 //still need to add check for id max participants reached - consider a trigger
-app.post('/api/join_tournament', (req,res)=>{
-    const user_id = req.body.user_id;
-    const tournament_id = req.body.tournament_id;
-    try{
-        const sqlInsert = "INSERT INTO heroku_caad988da016f21.entry(user_id, tournament_id) VALUES (?,?)";
-        db.query(sqlInsert,[user_id, tournament_id],(err,result)=>{
-            if(result?.affectedRows>=1){
-                //record successfully added to table
-                try {
-                    const sqlUpdate = "UPDATE heroku_caad988da016f21.tournament SET numParticipants = numParticipants + 1 WHERE tournament_id = ?;";
-                    db.query(sqlUpdate, [tournament_id],(err,result)=>{
-                        if (result?.affectedRows===1) {
-                            res.send(result);
-                        }else {
-                            //not updated
-                            res.send({error:301});
-                        }
-                    });
-                } catch (err) {
-                    res.send({error:301});
-                }
-            }else{
-                res.send({error:301});
-            }
-        });
-    }catch(err){
-        res.send({error:301});
-    }
-});
+// app.post('/api/join_tournament', (req,res)=>{
+//     const user_id = req.body.user_id;
+//     const tournament_id = req.body.tournament_id;
+//     try{
+//         const sqlInsert = "INSERT INTO heroku_caad988da016f21.entry(user_id, tournament_id) VALUES (?,?)";
+//         db.query(sqlInsert,[user_id, tournament_id],(err,result)=>{
+//             if(result?.affectedRows>=1){
+//                 //record successfully added to table
+//                 try {
+//                     const sqlUpdate = "UPDATE heroku_caad988da016f21.tournament SET numParticipants = numParticipants + 1 WHERE tournament_id = ?;";
+//                     db.query(sqlUpdate, [tournament_id],(err,result)=>{
+//                         if (result?.affectedRows===1) {
+//                             res.send(result);
+//                         }else {
+//                             //not updated
+//                             res.send({error:301});
+//                         }
+//                     });
+//                 } catch (err) {
+//                     res.send({error:301});
+//                 }
+//             }else{
+//                 res.send({error:301});
+//             }
+//         });
+//     }catch(err){
+//         res.send({error:301});
+//     }
+// });
 
 //need to modify for adding images
 app.post('/api/add_game',(req,res)=>{
@@ -280,28 +280,97 @@ app.post('/api/update_tournament', (req,res)=>{
 
 //Delete_____________________________________________________________________________________________________________________________________________________
 
-app.post('/api/leave_tournament', (req,res)=>{
+// app.post('/api/leave_tournament', (req,res)=>{
+//     const user_id = req.body.user_id;
+//     const tournament_id = req.body.tournament_id;
+//     try{
+//         const sqlInsert = "DELETE FROM heroku_caad988da016f21.entry WHERE user_id=? AND tournament_id =?";
+//         db.query(sqlInsert,[user_id, tournament_id],(err,result)=>{
+//             if(result?.affectedRows>=1){
+//                 try {
+//                     const sqlUpdate = "UPDATE heroku_caad988da016f21.tournament SET numParticipants = numParticipants - 1 WHERE tournament_id = ?;";
+//                     db.query(sqlUpdate, [tournament_id],(err,result)=>{
+//                         if (result?.affectedRows===1) {
+//                             res.send(result);
+//                         }else {
+//                             //not updated
+//                             res.send({error:301});
+//                         }
+//                     });
+//                 } catch (err) {
+//                     res.send({error:301});
+//                 }
+//             }else{
+//                 res.send({error:301});
+//             }
+//         });
+//     }catch(err){
+//         res.send({error:301});
+//     }
+// });
+
+//consider adding a delete tournament option
+
+app.post('/api/join_tournament', (req,res)=>{
     const user_id = req.body.user_id;
     const tournament_id = req.body.tournament_id;
     try{
-        const sqlInsert = "DELETE FROM heroku_caad988da016f21.entry WHERE user_id=? AND tournament_id =?";
-        db.query(sqlInsert,[user_id, tournament_id],(err,result)=>{
-            if(result?.affectedRows>=1){
-                try {
-                    const sqlUpdate = "UPDATE heroku_caad988da016f21.tournament SET numParticipants = numParticipants - 1 WHERE tournament_id = ?;";
-                    db.query(sqlUpdate, [tournament_id],(err,result)=>{
-                        if (result?.affectedRows===1) {
-                            res.send(result);
-                        }else {
-                            //not updated
-                            res.send({error:301});
+        //check if the person has already joined the tournament
+        const sqlSelect = "SELECT * FROM heroku_caad988da016f21.entry WHERE tournament_id =? AND user_id =?;";
+        db.query(sqlSelect,[tournament_id, user_id],(err,result)=>{
+            if (result.length>=1) {
+                //joined - there fore leave
+                try{
+                    const sqlInsert = "DELETE FROM heroku_caad988da016f21.entry WHERE user_id=? AND tournament_id =?";
+                    db.query(sqlInsert,[user_id, tournament_id],(err,result)=>{
+                        if(result?.affectedRows>=1){
+                            try {
+                                const sqlUpdate = "UPDATE heroku_caad988da016f21.tournament SET numParticipants = numParticipants - 1 WHERE tournament_id = ?;";
+                                db.query(sqlUpdate, [tournament_id],(err,result)=>{
+                                    if (result?.affectedRows===1) {
+                                        res.send({"result": false});
+                                    }else {
+                                        //not updated
+                                        res.send({error:"not updated"});
+                                    }
+                                });
+                            } catch (err) {
+                                res.send({error:"try update failed"});
+                            }
+                        }else{
+                            res.send({error:"not deleted"});
                         }
                     });
                 } catch (err) {
-                    res.send({error:301});
+                    res.send({error:"try delete failed"});
                 }
-            }else{
-                res.send({error:301});
+            } else{
+                //not joined - therefore join
+                try{
+                    const sqlInsert = "INSERT INTO heroku_caad988da016f21.entry(user_id, tournament_id) VALUES (?,?)";
+                    db.query(sqlInsert,[user_id, tournament_id],(err,result)=>{
+                        if(result?.affectedRows>=1){
+                            //record successfully added to table
+                            try {
+                                const sqlUpdate = "UPDATE heroku_caad988da016f21.tournament SET numParticipants = numParticipants + 1 WHERE tournament_id = ?;";
+                                db.query(sqlUpdate, [tournament_id],(err,result)=>{
+                                    if (result?.affectedRows===1) {
+                                        res.send({"result": true});
+                                    }else {
+                                        //not updated
+                                        res.send({error:"update failed"});
+                                    }
+                                });
+                            } catch (err) {
+                                res.send({error:"try update failed"});
+                            }
+                        }else{
+                            res.send({error:"insert failed"});
+                        }
+                    });
+                }catch(err){
+                    res.send({error:"try insert failed"});
+                }
             }
         });
     }catch(err){
@@ -309,9 +378,8 @@ app.post('/api/leave_tournament', (req,res)=>{
     }
 });
 
-//consider adding a delete tournament option
-
 const PORT =process.env.PORT || 8000;
 app.listen( PORT,()=>{    //8000
     console.log(`running on port ${PORT}`);
 });
+

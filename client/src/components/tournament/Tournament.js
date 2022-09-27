@@ -46,7 +46,7 @@ const Tournament = (params) => {
 
     const [joinedResponse, setJoinedResponse] = useState({});
     const [joinLeave, setJoinLeave] = useState(false); //false if not joined
-    const [joinLeaveLable, setJoinLeaveLable] = useState("Leave");
+    const [joinLeaveLable, setJoinLeaveLable] = useState("Join");
     
     //Axiose to fetch tournament details 
     useEffect(() => {
@@ -64,9 +64,11 @@ const Tournament = (params) => {
                 const response = await axios.post(GET_JOIN_LEAVE_URL,{
                     tournament_id : data.id,
                     user_id : state.id,
-                })
+                });
                 setJoinedResponse(response?.data);
+
             } catch (error) {
+                
             }
         }
         fetchData();
