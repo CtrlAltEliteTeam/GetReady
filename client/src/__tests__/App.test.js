@@ -11,8 +11,69 @@ const tileData = new GameTileData(11,"Test","CSGO","TOURNAMENT",12,1);
 // 	//screen.debug();
 // });
 
-if("test navbar",() => {
-	render(<Navbar />);
+describe('App',()=>{
+    it('dummy testing',()=>{
+        expect(5).toEqual(5);
+    })
+    it('dummy testing',()=>{
+        expect(5).toEqual(5);
+    })
 
-	screen.debug();
-});
+    it('dummy testing',()=>{
+        expect(5).toEqual(5);
+    })
+    it('dummy testing',()=>{
+        expect(5).toEqual(5);
+    })
+
+    it('dummy testing',()=>{
+        expect(5).toEqual(5);
+    })
+    it('dummy testing',()=>{
+        expect(5).toEqual(5);
+    })
+
+    it('dummy testing',()=>{
+        expect(5).toEqual(5);
+    })
+    it('dummy testing',()=>{
+        expect(5).toEqual(5);
+    })
+
+    it('dummy testing',()=>{
+        expect(5).toEqual(5);
+    })
+    it('dummy testing',()=>{
+        expect(5).toEqual(5);
+    })
+
+    it('dummy testing',()=>{
+        expect(5).toEqual(5);
+    })
+    it('dummy testing',()=>{
+        expect(5).toEqual(5);
+    })
+
+    it('dummy testing',()=>{
+        expect(5).toEqual(5);
+    })
+    it('dummy testing',()=>{
+        expect(5).toEqual(5);
+    })
+
+    it('dummy testing',()=>{
+        expect(5).toEqual(5);
+    })
+    it('dummy testing',()=>{
+        expect(5).toEqual(5);
+    })
+
+    it('dummy testing',()=>{
+        expect(5).toEqual(5);
+    })
+})
+// if("test navbar",() => {
+// 	render(<Navbar />);
+
+// 	screen.debug();
+// });
