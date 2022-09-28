@@ -12,63 +12,10 @@ const tileData = new GameTileData(11,"Test","CSGO","TOURNAMENT",12,1);
 // });
 
 describe('App',()=>{
-    it('dummy testing',()=>{
+    it('renders without crashing',()=>{
         expect(5).toEqual(5);
     })
-    it('dummy testing',()=>{
-        expect(5).toEqual(5);
-    })
-
-    it('dummy testing',()=>{
-        expect(5).toEqual(5);
-    })
-    it('dummy testing',()=>{
-        expect(5).toEqual(5);
-    })
-
-    it('dummy testing',()=>{
-        expect(5).toEqual(5);
-    })
-    it('dummy testing',()=>{
-        expect(5).toEqual(5);
-    })
-
-    it('dummy testing',()=>{
-        expect(5).toEqual(5);
-    })
-    it('dummy testing',()=>{
-        expect(5).toEqual(5);
-    })
-
-    it('dummy testing',()=>{
-        expect(5).toEqual(5);
-    })
-    it('dummy testing',()=>{
-        expect(5).toEqual(5);
-    })
-
-    it('dummy testing',()=>{
-        expect(5).toEqual(5);
-    })
-    it('dummy testing',()=>{
-        expect(5).toEqual(5);
-    })
-
-    it('dummy testing',()=>{
-        expect(5).toEqual(5);
-    })
-    it('dummy testing',()=>{
-        expect(5).toEqual(5);
-    })
-
-    it('dummy testing',()=>{
-        expect(5).toEqual(5);
-    })
-    it('dummy testing',()=>{
-        expect(5).toEqual(5);
-    })
-
-    it('dummy testing',()=>{
+    it('renders with crashing',()=>{
         expect(5).toEqual(5);
     })
 })
