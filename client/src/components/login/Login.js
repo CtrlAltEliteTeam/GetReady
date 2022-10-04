@@ -83,7 +83,7 @@ const Login = () => {
                 </section>
             ) : (
                 <section className='login-box'>
-                    <div className='login-heading'>
+                    <div data-testid="test" className='login-heading'>
                         Welcome
                     </div>
                     <div className='login-form'>

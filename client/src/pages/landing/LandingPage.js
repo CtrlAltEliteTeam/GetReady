@@ -13,7 +13,7 @@ const GET_TOURMANENT_SHORT_URL = "/get_tournament_short";
 
 const LandingPage = () => {
 
-    let navigate = useNavigate();
+    //let navigate = useNavigate();
     // Array of Tounaments
     const [loginName, setLoginName] = useState('Login');
     const [state,dispatch]=useContext(AuthContext);

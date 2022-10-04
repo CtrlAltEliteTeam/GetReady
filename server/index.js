@@ -56,7 +56,7 @@ app.post('/api/register',(req,res)=>{
                 db.query(sqlInsert,[username, email, password],(err,result)=>{
                     
                     if(result?.affectedRows===1){
-                        res.send(result);
+                        res.send({"user_id":result.userId});
                     }else{
                         res.send({error:301});
                     }
