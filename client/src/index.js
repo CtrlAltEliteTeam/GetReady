@@ -1,16 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import Provider from './api/AuthProvider';
+import { AuthProvider } from './api/AuthProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-	<Provider>
+	<AuthProvider>
 		{/* <React.StrictMode>
 			<App />
 		</React.StrictMode> */}
 		<App />
-	</Provider>
+	</AuthProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

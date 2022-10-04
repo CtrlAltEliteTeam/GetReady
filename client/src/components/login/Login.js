@@ -4,7 +4,7 @@ import * as RiIcons from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import "./Login.css";
 import axios from '../../api/Axois';
-import { AuthContext } from '../../api/AuthProvider';
+import AuthContext from '../../api/AuthProvider';
 import {LOGIN} from '../../api/Constants';
 import {useNavigate} from 'react-router-dom';
 
@@ -20,7 +20,8 @@ const Login = () => {
     const errRef = useRef();
     
     let navigate = useNavigate();
-    const [state, dispatch] = useContext(AuthContext);
+
+    const { setAuth } = useContext(AuthContext);
 
     const [email, setEmail] = useState('');
     const [pwd, setPwd] = useState('');
@@ -58,13 +59,11 @@ const Login = () => {
                 setErrMsg('Incorrect Username or Password');
             } else {
                 const user_id = response?.data[0]?.user_id;
+                const username = response?.data[0]?.username;
                 setEmail('');
                 setPwd('');
                 console.log("before dispatch " + response?.data[0]?.user_id);
-                dispatch({
-                    type: LOGIN,
-                    payload : user_id,
-                });
+                setAuth({ user_id, username});
                 setSuccess(true);
             }
         } catch (error) {

@@ -5,7 +5,7 @@ import { GameTileData } from '../GameTile/GameTileData';
 import * as AiIcons from 'react-icons/ai';
 import './Tournament.css';
 import axios from '../../api/Axois';
-import { AuthContext } from '../../api/AuthProvider';
+import AuthContext from '../../api/AuthProvider';
 
 const TOURNAMENT_URL = "/get_tournament_details";
 const PARTICIPANT_URL = "/get_participants";
@@ -18,7 +18,7 @@ const Tournament = (params) => {
     let data = params.params;
     //console.log(JSON.stringify(data));
 
-    const [state] = useContext(AuthContext); 
+    const { auth } = useContext(AuthContext);
 
     const [TournamentDetails, setTournamentDetails] = useState({});
     const [GameDetails, setGameDetails] = useState('');
@@ -105,7 +105,7 @@ const Tournament = (params) => {
         const fetchData = async () => {
             const response = await axios.post(GET_JOIN_LEAVE_URL,{
                 tournament_id : data.id,
-                user_id : state.id,
+                user_id : auth.user_id,
             });
             return await response?.data;
         }
@@ -128,7 +128,7 @@ const Tournament = (params) => {
         try {
             const response = await axios.post(JOIN_URL,{
                 tournament_id : data.id,
-                user_id : state.id,
+                user_id : auth.user_id,
             });
             setJoinLeave(response?.data?.result);
             if (response?.data?.result === false){
