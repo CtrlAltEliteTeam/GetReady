@@ -73,7 +73,7 @@ const GameTile = (props) => {
                 </div>
                 <div className="tile-info">
                     <div className="tile-name">
-                        <span>
+                        <span data-testid = "gameTile-1">
                             {gameTile.name}
                         </span>
                     </div>
