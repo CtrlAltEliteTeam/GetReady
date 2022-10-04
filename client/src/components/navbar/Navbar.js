@@ -20,7 +20,7 @@ const NavBar = () => {
 
     const { auth, setAuth } = useContext(AuthContext)
 
-    console.log( auth.user_id );
+    //console.log( auth.user_id );
 
     useEffect(() => {
         //console.log(state.loggedin);
@@ -35,7 +35,7 @@ const NavBar = () => {
     const loginCheck = () =>{
         if(auth.user_id != null){
             setLoginName('Login');
-            setAuth(null);
+            setAuth({});
         } else {
             setLoginName('Logout');
             return navigate(`/login`);
