@@ -26,6 +26,7 @@ function App() {
 				<Route path='/profile' exact element={<UserProfile/>}/>
 				<Route path='/create' exact element={<CreateTournament/>}/>
 				<Route path='/details' exact element={<Tournament/>}/>
+				<Route path='/profile' exact element={<UserProfile/>}/>
 			</Routes>
 		</Router>
     </>

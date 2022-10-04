@@ -57,9 +57,10 @@ const Login = () => {
             if(response?.data?.error === 301){
                 setErrMsg('Incorrect Username or Password');
             } else {
-                const user_id = response?.data?.user_id;
+                const user_id = response?.data[0]?.user_id;
                 setEmail('');
                 setPwd('');
+                console.log("before dispatch " + response?.data[0]?.user_id);
                 dispatch({
                     type: LOGIN,
                     payload : user_id,

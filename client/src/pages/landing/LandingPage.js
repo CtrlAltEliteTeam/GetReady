@@ -26,17 +26,17 @@ const LandingPage = () => {
         
 
     //Load data of games
-    // useEffect(() => {
-    //     let count =0;
-    //     if ( gamesList.length === 0){
-    //         GameTile_TestData.forEach(element => {
-    //             //console.log(JSON.stringify(element));
-    //             let gameTile = new GameTileData(element.id,element.name,element.game,element.content,element.user,count);
-    //             setGamesList(gamesList => [...gamesList,gameTile]);
-    //             count++;
-    //         });
-    //     }
-    // }, [])
+    useEffect(() => {
+        let count =0;
+        if ( gamesList.length === 0){
+            GameTile_TestData.forEach(element => {
+                //console.log(JSON.stringify(element));
+                let gameTile = new GameTileData(element.id,element.name,element.game,element.content,element.user_id,count);
+                setGamesList(gamesList => [...gamesList,gameTile]);
+                count++;
+            });
+        }
+    }, [])
 
     useEffect(() => {
         const fetchData = async (e) => {

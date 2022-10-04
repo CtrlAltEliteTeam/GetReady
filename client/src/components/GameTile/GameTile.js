@@ -27,8 +27,8 @@ const GameTile = (props) => {
 
     const showDetails = () => {
         if (gameTile.content === "GAME"){
-            setOverlay(true);
-            setTask(2);
+            //setOverlay(true);
+            //setTask(2);
         }
         if (gameTile.content === "TOURNAMENT"){
             setOverlay(true);
