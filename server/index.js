@@ -118,6 +118,21 @@ app.post('/api/get_tournament_details', (req, res)=>{
     }
 });
 
+app.post('/api/get_t_update_details', (req, res)=>{
+    const tournament_id = req.body.tournament_id;
+    try {
+        const sqlSelect = "SELECT tournament_id, title, description, startDate, endDate, maxParticipants, startTime, game_id, viewParticipant FROM heroku_caad988da016f21.tournament WHERE tournament_id = ?;";
+        db.query(sqlSelect,[tournament_id],(err,result)=>{
+            if (err) {
+                throw err;
+            }
+            res.send(result);
+        });
+    } catch (err) {
+        res.send({error:301});
+    }
+});
+
 app.post('/api/get_participants', (req, res)=>{
     const tournament_id = req.body.tournament_id;
     try {
@@ -275,6 +290,7 @@ app.post('/api/update_profile', (req,res)=>{
 });
 
 app.post('/api/update_tournament', (req,res)=>{
+    const tournament_id = req.body.tournament_id;
     const title = req.body.title;
     const description = req.body.description;
     const startDate = req.body.startDate;
@@ -284,9 +300,10 @@ app.post('/api/update_tournament', (req,res)=>{
     const viewParticipant = req.body.viewParticipant;
 
     const sqlUpdate = "UPDATE heroku_caad988da016f21.tournament SET title=?, description=?, startDate=?, endDate=?, startTime=?, maxParticipants=?, viewParticipant=? WHERE tournament_id=?";
-    db.query(sqlUpdate, [title, description, startDate, endDate, startTime, maxParticipants, viewParticipant],(err, result)=> {
+    db.query(sqlUpdate, [title, description, startDate, endDate, startTime, maxParticipants, viewParticipant, tournament_id],(err, result)=> {
         if(result?.affectedRows===1){
             res.send(result);
+            console.log("update successful");
         }else{
             res.send({error:301});
         }

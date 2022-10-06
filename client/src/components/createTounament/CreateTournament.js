@@ -127,13 +127,13 @@ const CreateTournament = () => {
                 </div>
                 <div className="create-item">
                     <div className="create-item-heading">
-                        Tounament Name
+                        Tournament Name
                     </div>
                     <div className="create-item-input">
                         <input
                             type="name"
                             id="tname"
-                            placeholder="Tounament Name"
+                            placeholder="Tournament Name"
                             value={tName}
                             onChange={(e) => setTName(e.target.value)}
                             required
@@ -164,7 +164,7 @@ const CreateTournament = () => {
                             value={tsDate}
                             onChange={(e) => setTsDate(e.target.value)}
                             required
-                            placeholder="Tounament Name"
+                            placeholder="Tournament Name"
                         />
                     </div>
                 </div>
@@ -226,7 +226,7 @@ const CreateTournament = () => {
                 </div>
                 <div className="creat-item">
                     <div className="create-item-heading">
-                        allow people to see who is participating
+                        allow people to see who is participating?
                     </div>
                     <div>
                         <input
