@@ -177,6 +177,37 @@ app.post('/api/get_user_details', (req, res)=>{
     }
 });
 
+//search and filter
+app.post('/api/search_by_title', (req, res)=>{
+    const title = req.body.tournament_title;
+    try {
+        const sqlSelect = "SELECT tournament.tournament_id, tournament.title, tournament.content, tournament.user_id, game.name FROM heroku_caad988da016f21.tournament INNER JOIN game ON tournament.game_id = game.game_id WHERE tournament.title =?;";
+        db.query(sqlSelect,[title],(err,result)=>{
+            if (err) {
+                throw err;
+            }
+            res.send(result);
+        });
+    } catch (err) {
+        res.send({error:301});
+    }
+});
+
+app.post('/api/get_my_tournaments', (req, res)=>{
+    const user_id = req.body.user_id;
+    try {
+        const sqlSelect = "SELECT tournament.tournament_id, tournament.title, tournament.content, tournament.user_id, game.name FROM heroku_caad988da016f21.tournament INNER JOIN game ON tournament.game_id = game.game_id INNER JOIN user ON tournament.user_id = user.user_id WHERE user.user_id =?;";
+        db.query(sqlSelect,[user_id],(err,result)=>{
+            if (err) {
+                throw err;
+            }
+            res.send(result);
+        });
+    } catch (err) {
+        res.send({error:301});
+    }
+});
+
 //Inserts____________________________________________________________________________________________________________________________________________________
 
 app.post('/api/create_tournament', (req, res)=>{
