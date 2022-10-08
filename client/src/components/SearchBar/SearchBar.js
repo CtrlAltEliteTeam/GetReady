@@ -12,7 +12,8 @@ function SearchBar({placeholder, data}) {
         const searchString = event.target.value;
         setBarValue(searchString);
         const newFilter = data.filter((value) => {
-            return value.game.toLowerCase().includes(searchString.toLowerCase());
+            console.log(value);
+            return value.name.toLowerCase().includes(searchString.toLowerCase());
         });
         if (searchString === ""){
             setFilteredData([]);
