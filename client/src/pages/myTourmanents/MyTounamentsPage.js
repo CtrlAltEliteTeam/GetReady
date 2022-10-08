@@ -25,6 +25,7 @@ const MyTounaments = () => {
             try {
                 const response = await axios.post(MY_TOURNAMENTS_URL,{
                     user_id : auth.user_id
+
                 });
                 console.log(response?.data);
                 var data = response?.data;
