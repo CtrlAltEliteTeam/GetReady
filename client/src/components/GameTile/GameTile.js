@@ -3,7 +3,8 @@ import { GameTileData } from "./GameTileData";
 import {FiEdit} from "react-icons/fi";
 import './GameTile.css';
 import AuthContext from "../../api/AuthProvider";
-import  CreateTournament  from "../createTounament/CreateTournament";
+import CreateTournament  from "../createTounament/CreateTournament";
+import UpdateTournament from "../updateTournament/UpdateTournament";
 import Tournament from "../tournament/Tournament";
 
 const GameTile = (props) => {
@@ -65,7 +66,7 @@ const GameTile = (props) => {
                     )}
                     {task === 3 && (
                         <div className="tournament-edit-outer">
-                            <CreateTournament/>
+                            <UpdateTournament params={gameTile}/>
                         </div>
                     )}
             </div>

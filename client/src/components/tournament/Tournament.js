@@ -66,8 +66,8 @@ const Tournament = (params) => {
         setCreator(details[0]?.username);
         setDesc(details[0]?.description);
         setSTime(details[0]?.startTime);
-        setSDate(details[0]?.startDate);
-        setEDate(details[0]?.endDate);
+        setSDate(details[0]?.startDate.substring(0, 10));
+        setEDate(details[0]?.endDate.substring(0, 10));
         setCurrPart(details[0]?.numParticipants);
         setMaxPart(details[0]?.maxParticipants);
         setPartPermission(details[0]?.viewParticipant);

@@ -1,0 +1,34 @@
+body{
+    margin: 0;
+}
+
+.spacer{
+    height: 80px;
+
+}
+
+.search-page{
+    margin-top: 80px;
+    margin: 0;
+    padding: 0;
+    /* background-image: url('../../resources/img/GetReady.png'); */
+    background-repeat: no-repeat;
+    background-size: 800px 800px;
+    background-position-x: center;
+    background-position-y: center ;
+    background-attachment: fixed;
+}
+
+.games-list-outer{
+    margin-top: 20px;
+    width: 83%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.games-list-inner{
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+
+}
