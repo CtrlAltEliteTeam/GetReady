@@ -20,8 +20,8 @@ function App() {
 			<NavBar />
 			<Routes>
 				<Route path='/' exact element={<LandingPage/>}/>
-				<Route path='/login' exact element={<LoginPage/>}/>
-				<Route path='/signup' exact element={<Signup/>}/>
+				<Route path='/login/login' exact element={<LoginPage/>}/>
+				<Route path='/login/signup' exact element={<Signup/>}/>
 				<Route path='/dashboard' exact element={<Dashboard/>}/>
 				<Route path='/mypage' exact element={<MyToumanents/>}/>
 				<Route path='/profile' exact element={<UserProfile/>}/>

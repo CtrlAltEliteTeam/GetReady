@@ -92,22 +92,7 @@ span {
     padding-top: 7px;
 }
 
-.landing-login-button{
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
-    margin-left: 600px ;
-    position: absolute;
-    right: 20px;
-    border-radius: 25px;
-    background-color: #F9BE32;
-    padding: 12px;
-    width: 70px;
-    margin-top: 14px;
-    text-align: center;
-}
-
 .landing-button-container{
-    width: 100%;
-    display: flex;
-    justify-content: center;
+    top: 20px;
+    position: relative;
 }

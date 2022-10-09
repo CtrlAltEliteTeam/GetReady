@@ -1,0 +1,45 @@
+.login-button-button-button{
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 600px ;
+    position: absolute;
+    right: 20px;
+    border-radius: 25px;
+    background-color: #F9BE32;
+    padding: 12px;
+    width: 70px;
+    margin-top: 0px;
+    text-align: center;
+    top:25px
+}
+
+.signup-button-button-button{
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 800px ;
+    position: absolute;
+    right: 120px;
+    border-radius: 25px;
+    background-color: #F9BE32;
+    padding: 12px;
+    width: 70px;
+    margin-top: 0px;
+    text-align: center;
+    top:25px
+}
+
+.login-button-button-show{
+    display: flex;
+}
+
+.login-button-button{
+    display: none;
+}
+
+.signup-button-button-show{
+    display: flex;
+}
+
+.signup-button-button{
+    display: none;
+}
