@@ -1,5 +1,4 @@
 import React, {useState, useEffect, useContext} from "react";
-import { AuthContext } from "../../api/AuthProvider";
 import { GameTileData } from "../../components/GameTile/GameTileData";
 import GameTile from "../../components/GameTile/GameTile";
 import { GameTile_TestData } from "../../components/GameTile/GameTitle_TestData";
@@ -15,8 +14,6 @@ const LandingPage = () => {
 
     let navigate = useNavigate();
     // Array of Tounaments
-    const [loginName, setLoginName] = useState('Login');
-    const [state,dispatch]=useContext(AuthContext);
 
     const [featuredList, setFeaturedList] = useState([]);
     const [featuredName, setFeaturedName] = useState("Featured Tournaments");

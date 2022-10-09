@@ -4,7 +4,7 @@ import * as FaIcons from 'react-icons/fa'
 import * as MdIcons from 'react-icons/md';
 import * as BsIcons from 'react-icons/bs';
 import * as RiIcons from 'react-icons/ri';
-import { AuthContext } from '../../api/AuthProvider';
+import AuthContext from '../../api/AuthProvider';
 import { LOGIN } from '../../api/Constants';
 import axios from '../../api/Axois';
 import { AxiosError } from 'axios';
@@ -21,9 +21,7 @@ const UserProfile = () => {
 
     let navigate = useNavigate();
 
-    const [state,dispatch] = useContext(AuthContext);
-
-    console.log(state.id);
+    const { auth } = useContext(AuthContext)
 
     const [user, setUser] = useState('');
     const [validName, setValidName] = useState(false);
@@ -84,7 +82,7 @@ const UserProfile = () => {
         const fetchUser = async () => {
             try {
                 const response = await axios.post(FETCH_URL,{
-                    user_id : state.id
+                    user_id : auth.user_id,
                 })
                 return await response?.data;
             } catch (error) {
@@ -113,7 +111,7 @@ const UserProfile = () => {
 
         //Axios rough work
         try {
-            const response = await axios.post(EDIT_URL,{user_id: state.id, username : user, email: email, password :pwd });
+            const response = await axios.post(EDIT_URL,{user_id: auth.user_id, username : user, email: email, password :pwd });
             console.log(JSON.stringify(response?.data));
             if (response?.data?.error === 301) {
                 //setErrMsg('Username Taken');           
