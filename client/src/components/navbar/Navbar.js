@@ -7,6 +7,7 @@ import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai'
 import {NavbarData} from './NavbarData';
 import './Navbar.css'
+import LoginButton from '../LoginButton/LoginButton';
 
 const NavBar = () => {
 
@@ -54,9 +55,8 @@ const NavBar = () => {
                     <div className="page-heading">
                         {pageHeading}
                     </div>
-                    <div  className="landing-login-button" onClick={loginCheck}>
-                        {loginName}
-                    </div>
+                        <LoginButton/>
+
                 </div>
                 <nav className={menubar ? 'nav-menu active' : 'nav-menu'}>
                 <ul className='nav-menu-items' onClick={showMenubar}>

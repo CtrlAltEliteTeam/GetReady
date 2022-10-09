@@ -243,7 +243,7 @@ const Signup = () => {
                         <div className='login=-link'>
                             Already registered?<br />
                             <span>
-                                <Link to='/login'>
+                                <Link to='/login/login'>
                                     Login
                                 </Link>
                             </span>

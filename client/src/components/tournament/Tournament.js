@@ -24,6 +24,8 @@ const Tournament = (params) => {
     const [GameDetails, setGameDetails] = useState('');
 
     const [details, setDetails] = useState({});
+
+    const [showJoinLeave, setShowJoinLeave] = useState(false);
     
     const [title, setTitle] = useState(data.name);
     const [image, setImage] = useState(data.img);
@@ -47,6 +49,15 @@ const Tournament = (params) => {
     const [joinLeave, setJoinLeave] = useState(false); //false if not joined
     const [joinLeaveLable, setJoinLeaveLable] = useState("Join");
     
+    //joinleaveshowButton
+    useEffect (() => {
+        if(auth.user_id != 0) {
+            setShowJoinLeave(true);
+        } else { 
+            setShowJoinLeave(false)
+        }
+    }, [auth.user_id]);
+
     //Axiose to fetch tournament details 
     useEffect(() => {
         const fetchData = async (e) => {
@@ -125,6 +136,7 @@ const Tournament = (params) => {
     const handleJoin = async (e) => {
         //axiose for join
         var t = currPart;
+        console.log("value on press: " + currPart + ", recorded value: " + t);
         try {
             const response = await axios.post(JOIN_URL,{
                 tournament_id : data.id,
@@ -133,16 +145,19 @@ const Tournament = (params) => {
             setJoinLeave(response?.data?.result);
             if (response?.data?.result === false){
                 setJoinLeaveLable("Join");
-                setCurrPart(t--);
+                t--;
+                setCurrPart(t);
                 setFetchParts(2);
             } else {
                 setJoinLeaveLable("Leave");
-                setCurrPart(t++);
+                t++;
+                setCurrPart(t);
                 setFetchParts(3);
             }
         } catch (error) {
             console.log(error);
         }
+        console.log("value after press: " + currPart + ", recorded value: " + t);
     }
 
     return (
@@ -214,7 +229,7 @@ const Tournament = (params) => {
                 <div className='tournament-details-bracket'>
 
                 </div>
-                <div className='tournament-details-join-button' onClick={handleJoin}>
+                <div className={showJoinLeave? 'tournament-details-join-button-show' : 'tournament-details-join-button'} onClick={handleJoin}>
                     {joinLeaveLable}
                 </div>
             </div>
