@@ -5,12 +5,12 @@ import { AuthProvider } from './api/AuthProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-	<AuthProvider>
-		{/* <React.StrictMode>
+	<Provider>
+		<React.StrictMode>
 			<App />
-		</React.StrictMode> */}
-		<App />
-	</AuthProvider>
+		</React.StrictMode>
+		{/* <App /> */}
+	</Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

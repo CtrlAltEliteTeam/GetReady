@@ -11,18 +11,19 @@ import axios from "../../api/Axois";
 const GET_TOURMANENT_SHORT_URL = "/get_tournament_short";
 
 const LandingPage = () => {
-
     //let navigate = useNavigate();
     // Array of Tounaments
+    //const [loginName, setLoginName] = useState('Login');
+    //const [state,dispatch]=useContext(AuthContext);
+
 
     const [featuredList, setFeaturedList] = useState([]);
     const [featuredName, setFeaturedName] = useState("Featured Tournaments");
 
     const [gamesList, setGamesList] = useState([]);
     const [gamesListName, setGamesListName] = useState("Popular Games");
-        
 
-    //Load data of games
+    //Load data of games just for show
     useEffect(() => {
         let count =0;
         if ( gamesList.length === 0){
@@ -73,7 +74,7 @@ const LandingPage = () => {
                 </div>
             </div>
             <div className="tourny-list-outer">
-                <div  className="games-list-heading">
+                <div  className="games-list-heading" data-testid='TournamentList'>
                     {featuredName}
                 </div>
                 <div className="tourny-list-inner">

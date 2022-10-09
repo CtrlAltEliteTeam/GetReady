@@ -16,34 +16,7 @@ const NavBar = () => {
 
     const [menubar, setMenubar] = useState(false);
     const showMenubar = () => setMenubar(!menubar);
-    const [pageHeading, setPageHeading] = useState('Get Ready');
-    const [loginName, setLoginName] = useState('Login');
-
-    const { auth, setAuth } = useContext(AuthContext)
-
-    //console.log( auth.user_id );
-
-    useEffect(() => {
-        //console.log(state.loggedin);
-            if(auth.user_id != null){
-                setLoginName('Log Out');
-            }
-            else {
-                setLoginName('Login');
-            }
-    },[auth.user_id]);
-
-    const loginCheck = () =>{
-        if(auth.user_id != null){
-            setLoginName('Login');
-            setAuth({});
-        } else {
-            setLoginName('Logout');
-            return navigate(`/login`);
-        }
-        //return navigate(`/login`);
-    };
-
+    const [pageHeading] = useState('Get Ready');
 
     return (
         <>

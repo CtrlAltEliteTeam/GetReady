@@ -12,6 +12,7 @@
     "react-icons": "^4.4.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "react-test-renderer": "^18.2.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -19,6 +20,17 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+  },
+  "jest": {
+    "verbose": true,
+    "testEnvironment": "jsdom",
+    "transform": {
+      "\\.[jt]sx?$": "babel-jest"
+    },
+    "moduleNameMapper": {
+      "\\.(jpg|ico|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/mocks/fileMock.js"
+    }
   },
   "eslintConfig": {
     "extends": [
@@ -42,6 +54,8 @@
     "@testing-library/jest-dom": "^5.16.5",
     "enzyme": "^3.11.0",
     "eslint-plugin-jest-dom": "^4.0.2",
-    "jest": "^27.5.1"
+    "jest": "^27.5.1",
+    "babel-jest": "^29.0.3",
+    "identity-obj-proxy": "^3.0.0"
   }
 }
