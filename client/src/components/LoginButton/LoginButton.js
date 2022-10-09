@@ -9,7 +9,7 @@ const LoginButton = (params) => {
 
     //const { auth, setAuth } = useContext(AuthContext);
     //let navigate = useNavigate();
-    const [auth,setAuth] = useState({user_id:0});
+    const [auth,setAuth] = useState(params.params);
 
     const [showLoginButton, setShowLoginButton] = useState(true);
     const [loginName, setLoginName] = useState('Log in');
@@ -29,10 +29,10 @@ const LoginButton = (params) => {
         } else {
             setShowLoginButtons(true);
         }
-    });
+    },[params]);
 
     useEffect(() => {
-        console.log(auth.user_id);
+        //console.log(auth.user_id);
             if(auth.user_id != 0){
                 setLoginName('Log Out');
                 setShowSignupButton(false);
@@ -48,7 +48,7 @@ const LoginButton = (params) => {
             setLoginName('Login');
             setAuth({ user_id : 0});
         } else {
-            //return navigate(`/login/login`);
+            return (`/login/login`);
         }
     };
 
@@ -59,8 +59,8 @@ const LoginButton = (params) => {
     return (
         <>
             <div className={showLoginButtons ? 'login-button-button-container-show' : 'login-button-button-container'}>
-                <div className={showLoginButton ? "login-button-button-show" : "login-button-button"} data-testid="LoginButton">
-                    <div  className="login-button-button-button" onClick={loginCheck}>{loginName}</div>
+                <div className={showLoginButton ? "login-button-button-show" : "login-button-button"}>
+                    <div  className="login-button-button-button" onClick={loginCheck} data-testid="LoginButton" >{loginName}</div>
                 </div>
                 <div className={showSignupButton ? "signup-button-button-show" : "signup-button-button"}>
                     <div  className="signup-button-button-button" onClick={signupClick}>Signup</div>
