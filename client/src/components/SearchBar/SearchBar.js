@@ -51,15 +51,15 @@ function SearchBar({placeholder, data}) {
                 {barValue.length == 0 ? <FcIcons.FcSearch/> : <IoIcons.IoMdCloseCircleOutline id="clearBtn" onClick={clearInput}/>}
             </div>
         </div>
-        <div className="dataResult">
-            {filteredData.map((element) => {
-                return (
-                    <div key={element.id}> 
-                        <GameTile game={element}/>
-                    </div>
-                )
-            })}
-        </div>
+            <div className="dataResult">
+                {filteredData.map((element) => {
+                    return (
+                        <div key={element.id}> 
+                            <GameTile game={element}/>
+                        </div>
+                    )
+                })}
+            </div>
         </div>
 
     );
