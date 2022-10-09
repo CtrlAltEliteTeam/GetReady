@@ -217,10 +217,14 @@ const Tournament = (params) => {
                                     )
                                 })}
                             </div>
+                            <div>
+                                <h1>hi</h1>
+                            </div>
                         </div>
+                                
                     </div>) : (
                         <div className='tournament-details-partricipants'>
-                            Participants
+                                Participants:&nbsp;
                             <div className='tournament-details-partricipants-display'>
                                 {currPart} / {maxPart}
                             </div>

@@ -60,7 +60,7 @@ const LandingPage = () => {
         <>
         <div className="spacer"></div>
         <div className="landing-page">
-            <div className="games-list-outer">
+            {/* <div className="games-list-outer">
                 <div className="games-list-heading">
                     {gamesListName}
                 </div>
@@ -71,7 +71,7 @@ const LandingPage = () => {
                         )
                     })}
                 </div>
-            </div>
+            </div> */}
             <div className="tourny-list-outer">
                 <div  className="games-list-heading">
                     {featuredName}
