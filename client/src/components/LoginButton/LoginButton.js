@@ -5,10 +5,11 @@ import './LoginButton.css';
 
 const PATH = '/login/*';
 
-const LoginButton = () => {
+const LoginButton = (params) => {
 
-    const { auth, setAuth } = useContext(AuthContext);
-    let navigate = useNavigate();
+    //const { auth, setAuth } = useContext(AuthContext);
+    //let navigate = useNavigate();
+    const [auth,setAuth] = useState({user_id:0});
 
     const [showLoginButton, setShowLoginButton] = useState(true);
     const [loginName, setLoginName] = useState('Log in');
@@ -18,10 +19,11 @@ const LoginButton = () => {
     const [showLoginButtons, setShowLoginButtons] = useState(true);
 
     //this needs its own var
-    const {pathname} = useLocation();
-    //console.log(pathname);
+    //const {pathname} = useLocation();
+    console.log(params);
     useEffect(() => {
-        const match = matchPath("/login/*",pathname);
+        //const match = matchPath("/login/*",pathname);
+        const match = params.params.path;
         if (match != null) {
             setShowLoginButtons(false);
         } else {
@@ -46,18 +48,18 @@ const LoginButton = () => {
             setLoginName('Login');
             setAuth({ user_id : 0});
         } else {
-            return navigate(`/login/login`);
+            //return navigate(`/login/login`);
         }
     };
 
     const signupClick = () => {
-        return navigate(`/login/signup`);
+        //return navigate(`/login/signup`);
     }
 
     return (
         <>
             <div className={showLoginButtons ? 'login-button-button-container-show' : 'login-button-button-container'}>
-                <div className={showLoginButton ? "login-button-button-show" : "login-button-button"}>
+                <div className={showLoginButton ? "login-button-button-show" : "login-button-button"} data-testid="LoginButton">
                     <div  className="login-button-button-button" onClick={loginCheck}>{loginName}</div>
                 </div>
                 <div className={showSignupButton ? "signup-button-button-show" : "signup-button-button"}>
