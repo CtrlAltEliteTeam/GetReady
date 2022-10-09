@@ -103,6 +103,7 @@ button[type="login"]{
     padding-right: 15px;
     display: flex;
     white-space: nowrap;
+    width: 210px;
 }
 
 .signup-field .signup-info{

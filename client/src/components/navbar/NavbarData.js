@@ -12,12 +12,12 @@ export const NavbarData = [
     },
     {
         title:"Tourmanents",
-        path:'/',
+        path:'/search',
         icon:<AiIcons.AiOutlineHome />,
         cName:'nav-text'
     },
     {
-        title:"My Tounaments",
+        title:"My Tournaments",
         path:'/mypage',
         icon:<AiIcons.AiOutlineProfile />,
         cName:'nav-text'
@@ -30,7 +30,7 @@ export const NavbarData = [
     },
     {
         title:"Profile",
-        path:'/',
+        path:'/profile',
         icon:<CgIcons.CgProfile />,
         cName:'nav-text'
     },

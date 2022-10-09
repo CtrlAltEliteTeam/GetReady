@@ -6,6 +6,10 @@ import { useNavigate } from "react-router-dom";
 import "./MyTournaments.css";
 import BigPlus from "../../resources/img/BigPlus.jpg";
 import CreateTournament from "../../components/createTounament/CreateTournament";
+import AuthContext from "../../api/AuthProvider";
+import axios from "../../api/Axois";
+
+const MY_TOURNAMENTS_URL = "/get_my_tournaments";
 
 const MyTounaments = () => {
 
@@ -14,14 +18,33 @@ const MyTounaments = () => {
 
     let navigate = useNavigate();
 
+    const { auth } = useContext(AuthContext);
+
     useEffect(() => {
-        GameTile_TestData.forEach(element => {
-            let gameTile = new GameTileData(element.id,element.name,element.img,element.alt);
-            setTournamentList(tournamentList => [...tournamentList,gameTile]);
-        });
+        const fetchData = async (e) => {
+            try {
+                const response = await axios.post(MY_TOURNAMENTS_URL,{
+                    user_id : auth.user_id
+
+                });
+                console.log(response?.data);
+                var data = response?.data;
+                let count = 0;
+                if ( tournamentList.length === 0){
+                    data.forEach(element => {
+                        let gameTile = new GameTileData(element.tournament_id,element.title,element.name,element.content,element.user_id,count);
+                        setTournamentList(tournamentList => [...tournamentList,gameTile]);
+                        count++;
+                    });
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchData();
     }, [])
 
-    let createNew = new GameTileData(0,"Create Tounament",BigPlus,'create tounament img');
+    let createNew = new GameTileData(0,"Create Tournament","create","create",'0',0);
 
     const createTounament = () => {
         setShow(true);

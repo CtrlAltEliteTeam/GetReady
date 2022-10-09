@@ -1,5 +1,4 @@
 import React, {useState, useEffect, useContext} from "react";
-import { AuthContext } from "../../api/AuthProvider";
 import { GameTileData } from "../../components/GameTile/GameTileData";
 import GameTile from "../../components/GameTile/GameTile";
 import { GameTile_TestData } from "../../components/GameTile/GameTitle_TestData";
@@ -16,11 +15,25 @@ const LandingPage = () => {
     //const [loginName, setLoginName] = useState('Login');
     //const [state,dispatch]=useContext(AuthContext);
 
+
     const [featuredList, setFeaturedList] = useState([]);
     const [featuredName, setFeaturedName] = useState("Featured Tournaments");
 
     const [gamesList, setGamesList] = useState([]);
     const [gamesListName, setGamesListName] = useState("Popular Games");
+
+    //Load data of games just for show
+    useEffect(() => {
+        let count =0;
+        if ( gamesList.length === 0){
+            GameTile_TestData.forEach(element => {
+                //console.log(JSON.stringify(element));
+                let gameTile = new GameTileData(element.id,element.name,element.game,element.content,element.user_id,count);
+                setGamesList(gamesList => [...gamesList,gameTile]);
+                count++;
+            });
+        }
+    }, [])
 
     useEffect(() => {
         const fetchData = async (e) => {

@@ -1,14 +1,18 @@
 import axios from "../../api/Axois";
 import React, {useState, useEffect, useContext} from "react";
-import "./CreateTournament.css";
+import "./UpdateTournament.css";
 import AuthContext from "../../api/AuthProvider";
 
 const TITLE_REGEX=/^[A-z][A-z0-9-_!?]{3,23}$/;
 const FETCH_GAMES_URL = "/get_games";
-const CREATE_TOURNAMENT_URL = "/create_tournament";
+const FETCH_URL = "/get_t_update_details";
+const UPDATE_TOURNAMENT_URL = "/update_tournament";
 
 
-const CreateTournament = () => {
+const UpdateTournament = (params) => {
+
+    let tournament_id = params.params.id;
+    console.log(params);
 
     //const [state] = useContext(AuthContext);
     const { auth } = useContext(AuthContext);
@@ -34,7 +38,7 @@ const CreateTournament = () => {
     const [tsTime, setTsTime] = useState("");
     const [validTsTime, setValidTsTime] = useState(false);
 
-    const [tPermission, setTPermission] = useState(false);
+    //const [tPermission, setTPermission] = useState(false);
 
     const [gamesList, setGamesList] = useState([]);
 
@@ -51,7 +55,41 @@ const CreateTournament = () => {
             });
         });
         gamesList.forEach(element => {
-            console.log(element);
+            //console.log(element);
+        });
+    },[])
+
+    //get tournament details;
+    useEffect(() => {
+        const fetchTournamentDetails = async () => {
+            try {
+                const response = await axios.post(FETCH_URL,{
+                    tournament_id : tournament_id,
+                })
+                return await response?.data;
+            } catch (error) {
+                
+            }
+        }
+        const response = fetchTournamentDetails();
+        const data = Promise.resolve(response);
+        data.then((value) => {
+            value.forEach(element => {
+                console.log(value);
+                setTName(value[0].title);
+                setTDesc(value[0].description);
+                setTGame(value[0].game_id);
+                setTParticipants(value[0].maxParticipants);
+                
+                let sdate = value[0].startDate;
+                setTsDate(sdate.substring(0, 10));
+
+                let fdate = value[0].endDate;
+                setTfDate(fdate.substring(0, 10));
+
+                setTsTime(value[0].startTime);
+                //setTPermission(value[0].viewParticipant);
+            });
         });
     },[])
 
@@ -70,12 +108,13 @@ const CreateTournament = () => {
     }, [tDesc]);
     useEffect(() => {
         let currDate = new Date();
-        console.log(currDate.getDate());
-        console.log(tsDate);
+        // console.log(currDate.getDate());
+        // console.log(tsDate);
         if (tsDate >= currDate.getDate()){
             setValidTsDate(true);
         }
     }, [tsDate]);
+
     // useEffect(() => {
     //     if (tfDate < tsDate){
     //         setValidTfDate(true);
@@ -99,8 +138,8 @@ const CreateTournament = () => {
         e.preventDefault();
         //var state = {id : 3}; //temp
         try {
-            const response = await axios.post(CREATE_TOURNAMENT_URL,{
-                user_id : auth.user_id,
+            const response = await axios.post(UPDATE_TOURNAMENT_URL,{
+                tournament_id : tournament_id,
                 game_id : tGame,
                 title : tName,
                 description : tDesc,
@@ -108,8 +147,7 @@ const CreateTournament = () => {
                 endDate : tfDate,
                 maxParticipants : tParticipants,
                 startTime : tsTime,
-                viewParticipant : tPermission,
-                content : "TOURNAMENT",
+                //viewParticipant : tPermission,
             });
             console.log(response?.data);
         } catch (error) {
@@ -122,7 +160,7 @@ const CreateTournament = () => {
             <form encType='multipart/form-data' onSubmit={handleSubmit}>
                 <div className="create-form-title">
                     <span>
-                        Tournament Details
+                        Update Tournament
                     </span>
                 </div>
                 <div className="create-item">
@@ -212,7 +250,7 @@ const CreateTournament = () => {
                 </div>
                 <div className="create-item">
                     <div className="create-item-heading">
-                        Tounament Info
+                        Tournament Info
                     </div>
                     <div className="create-item-input">
                         <textarea
@@ -224,7 +262,7 @@ const CreateTournament = () => {
                         />
                     </div>
                 </div>
-                <div className="creat-item">
+                {/* <div className="creat-item">
                     <div className="create-item-heading">
                         allow people to see who is participating?
                     </div>
@@ -236,7 +274,7 @@ const CreateTournament = () => {
                             onChange={(e) => setTPermission(e.target.value)}
                         />
                     </div>
-                </div>
+                </div> */}
                 <div className="create-item">
                     <div className="create-item-button">
                         <button>
@@ -249,4 +287,4 @@ const CreateTournament = () => {
     )
 }
 
-export default CreateTournament
+export default UpdateTournament

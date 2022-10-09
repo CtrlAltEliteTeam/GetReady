@@ -118,6 +118,21 @@ app.post('/api/get_tournament_details', (req, res)=>{
     }
 });
 
+app.post('/api/get_t_update_details', (req, res)=>{
+    const tournament_id = req.body.tournament_id;
+    try {
+        const sqlSelect = "SELECT tournament_id, title, description, startDate, endDate, maxParticipants, startTime, game_id, viewParticipant FROM heroku_caad988da016f21.tournament WHERE tournament_id = ?;";
+        db.query(sqlSelect,[tournament_id],(err,result)=>{
+            if (err) {
+                throw err;
+            }
+            res.send(result);
+        });
+    } catch (err) {
+        res.send({error:301});
+    }
+});
+
 app.post('/api/get_participants', (req, res)=>{
     const tournament_id = req.body.tournament_id;
     try {
@@ -141,6 +156,52 @@ app.post('/api/is_participating', (req, res)=>{
             } else{
                 res.send({joinLeave:false});
             }
+        });
+    } catch (err) {
+        res.send({error:301});
+    }
+});
+
+app.post('/api/get_user_details', (req, res)=>{
+    const user_id = req.body.user_id;
+    try {
+        const sqlSelect = "SELECT user_id, username, email FROM heroku_caad988da016f21.user WHERE user_id =?;";
+        db.query(sqlSelect,[user_id],(err,result)=>{
+            if (err) {
+                throw err;
+            }
+            res.send(result);
+        });
+    } catch (err) {
+        res.send({error:301});
+    }
+});
+
+//search and filter
+app.post('/api/search_by_title', (req, res)=>{
+    const title = req.body.tournament_title;
+    try {
+        const sqlSelect = "SELECT tournament.tournament_id, tournament.title, tournament.content, tournament.user_id, game.name FROM heroku_caad988da016f21.tournament INNER JOIN game ON tournament.game_id = game.game_id WHERE tournament.title =?;";
+        db.query(sqlSelect,[title],(err,result)=>{
+            if (err) {
+                throw err;
+            }
+            res.send(result);
+        });
+    } catch (err) {
+        res.send({error:301});
+    }
+});
+
+app.post('/api/get_my_tournaments', (req, res)=>{
+    const user_id = req.body.user_id;
+    try {
+        const sqlSelect = "SELECT tournament.tournament_id, tournament.title, tournament.content, tournament.user_id, game.name FROM heroku_caad988da016f21.tournament INNER JOIN game ON tournament.game_id = game.game_id INNER JOIN user ON tournament.user_id = user.user_id WHERE user.user_id =?;";
+        db.query(sqlSelect,[user_id],(err,result)=>{
+            if (err) {
+                throw err;
+            }
+            res.send(result);
         });
     } catch (err) {
         res.send({error:301});
@@ -259,19 +320,21 @@ app.post('/api/update_profile', (req,res)=>{
     });
 });
 
-//add validation to ensure no empty fields 
 app.post('/api/update_tournament', (req,res)=>{
+    const tournament_id = req.body.tournament_id;
     const title = req.body.title;
     const description = req.body.description;
     const startDate = req.body.startDate;
     const endDate = req.body.endDate;
     const startTime = req.body.startTime;
     const maxParticipants = req.body.maxParticipants;
+    const viewParticipant = req.body.viewParticipant;
 
-    const sqlUpdate = "UPDATE heroku_caad988da016f21.tournament SET title=?, description=?, startDate=?, endDate=?, startTime=?, maxParticipants=? WHERE tournament_id=?";
-    db.query(sqlUpdate, [title, description, startDate, endDate, startTime, maxParticipants],(err, result)=> {
+    const sqlUpdate = "UPDATE heroku_caad988da016f21.tournament SET title=?, description=?, startDate=?, endDate=?, startTime=?, maxParticipants=?, viewParticipant=? WHERE tournament_id=?";
+    db.query(sqlUpdate, [title, description, startDate, endDate, startTime, maxParticipants, viewParticipant, tournament_id],(err, result)=> {
         if(result?.affectedRows===1){
             res.send(result);
+            console.log("update successful");
         }else{
             res.send({error:301});
         }
@@ -319,7 +382,7 @@ app.post('/api/join_tournament', (req,res)=>{
         const sqlSelect = "SELECT * FROM heroku_caad988da016f21.entry WHERE tournament_id =? AND user_id =?;";
         db.query(sqlSelect,[tournament_id, user_id],(err,result)=>{
             if (result.length>=1) {
-                //joined - there fore leave
+                //joined - therefore leave
                 try{
                     const sqlInsert = "DELETE FROM heroku_caad988da016f21.entry WHERE user_id=? AND tournament_id =?";
                     db.query(sqlInsert,[user_id, tournament_id],(err,result)=>{

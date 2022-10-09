@@ -9,6 +9,8 @@ import NavBar from './components/navbar/Navbar';
 import MyToumanents from '../src/pages/myTourmanents/MyTounamentsPage';
 import CreateTournament from '../src/components/createTounament/CreateTournament';
 import Tournament from './components/tournament/Tournament';
+import UserProfile from './pages/profile/UserProfile';
+import Search from './pages/search/Search';
 
 
 function App() {
@@ -18,12 +20,15 @@ function App() {
 			<NavBar />
 			<Routes>
 				<Route path='/' exact element={<LandingPage/>}/>
-				<Route path='/login' exact element={<LoginPage/>}/>
-				<Route path='/signup' exact element={<Signup/>}/>
+				<Route path='/login/login' exact element={<LoginPage/>}/>
+				<Route path='/login/signup' exact element={<Signup/>}/>
 				<Route path='/dashboard' exact element={<Dashboard/>}/>
 				<Route path='/mypage' exact element={<MyToumanents/>}/>
+				<Route path='/profile' exact element={<UserProfile/>}/>
 				<Route path='/create' exact element={<CreateTournament/>}/>
 				<Route path='/details' exact element={<Tournament/>}/>
+				<Route path='/profile' exact element={<UserProfile/>}/>
+				<Route path='/search' exact element={<Search/>}/>
 			</Routes>
 		</Router>
     </>
