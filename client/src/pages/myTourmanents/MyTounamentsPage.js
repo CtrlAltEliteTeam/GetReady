@@ -21,7 +21,7 @@ const MyTounaments = () => {
         });
     }, [])
 
-    let createNew = new GameTileData(0,"Create Tounament",BigPlus,'create tounament img');
+    let createNew = new GameTileData(0,"Create Tournament","create","create",'0',0);
 
     const createTounament = () => {
         setShow(true);
@@ -47,11 +47,11 @@ const MyTounaments = () => {
                 <div onClick={createTounament}>
                     <GameTile game={createNew}/>
                 </div>
-                    {tournamentList.map((element)=>{
+                    {/* {tournamentList.map((element)=>{
                         return(
                             <GameTile game={element}/>
                         )
-                    })}
+                    })} */}
             </div>
         </>
     )

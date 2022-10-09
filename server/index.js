@@ -31,7 +31,8 @@ app.post('/api/login',(req,res)=>{
     const sqlSelect = "SELECT * FROM heroku_caad988da016f21.user WHERE email=? AND password =?";
     db.query(sqlSelect,[email,password],(err,result)=>{ // add code so that the response data is just 301 if the username or password is incorrect
         if(result.length===1){
-            res.send(result);
+            const user_id = result?.insertId;
+            res.send({user_id:user_id, username:username});
         }else{
             res.send({error:301});
         }
@@ -56,7 +57,8 @@ app.post('/api/register',(req,res)=>{
                 db.query(sqlInsert,[username, email, password],(err,result)=>{
                     
                     if(result?.affectedRows===1){
-                        res.send({"user_id":result.userId});
+                        const user_id = result?.insertId;
+                        res.send({user_id:user_id, username:username});
                     }else{
                         res.send({error:301});
                     }

@@ -2,33 +2,35 @@ import React, { useState, useContext, useEffect } from "react";
 import { GameTileData } from "./GameTileData";
 import {FiEdit} from "react-icons/fi";
 import './GameTile.css';
-import { AuthContext } from "../../api/AuthProvider";
+import AuthContext from "../../api/AuthProvider";
 import  CreateTournament  from "../createTounament/CreateTournament";
 import Tournament from "../tournament/Tournament";
 
 const GameTile = (props) => {
 
     let gameTile = props.game;
+    
+    //const [state] = useContext(AuthContext);
+    //var state = {id:3}; //temp
+    const { auth } = useContext(AuthContext);
 
-    //console.log(JSON.stringify(gameTile));
-    const [state] = useContext(AuthContext);
     const [editPermission, setEditPermission] = useState(false);
     const [task, setTask] = useState(true);
     const [overlay, setOverlay] = useState(false);
 
     useEffect(() => {
         //console.log(state.id + " : " + gameTile.user);
-        if(state.id === gameTile.user){
+        if(auth.user_id === gameTile.user){
             setEditPermission(true);
-        } else if (state.id !== gameTile.user){
+        } else if (auth.user_id !== gameTile.user){
             setEditPermission(false);
         }
-    }, [state.id])
+    }, [])
 
     const showDetails = () => {
         if (gameTile.content === "GAME"){
-            setOverlay(true);
-            setTask(2);
+            //setOverlay(true);
+            //setTask(2);
         }
         if (gameTile.content === "TOURNAMENT"){
             setOverlay(true);

@@ -1,7 +1,7 @@
 import axios from "../../api/Axois";
 import React, {useState, useEffect, useContext} from "react";
 import "./CreateTournament.css";
-import { AuthContext } from "../../api/AuthProvider";
+import AuthContext from "../../api/AuthProvider";
 
 const TITLE_REGEX=/^[A-z][A-z0-9-_!?]{3,23}$/;
 const FETCH_GAMES_URL = "/get_games";
@@ -10,7 +10,8 @@ const CREATE_TOURNAMENT_URL = "/create_tournament";
 
 const CreateTournament = () => {
 
-    const [state] = useContext(AuthContext);
+    //const [state] = useContext(AuthContext);
+    const { auth } = useContext(AuthContext);
 
     const [tName, setTName] = useState('');
     const [validTName, setValidTName] = useState(false);
@@ -96,9 +97,10 @@ const CreateTournament = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        //var state = {id : 3}; //temp
         try {
             const response = await axios.post(CREATE_TOURNAMENT_URL,{
-                user_id : state.id,
+                user_id : auth.user_id,
                 game_id : tGame,
                 title : tName,
                 description : tDesc,
