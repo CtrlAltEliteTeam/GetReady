@@ -43,3 +43,11 @@
 .signup-button-button{
     display: none;
 }
+
+.login-button-button-container{
+    display: none;
+}
+
+.login-button-button-container-show{
+    display: flex;
+}
