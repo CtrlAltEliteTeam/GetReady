@@ -40,17 +40,6 @@ const Search = () => {
             <div className="search-bar">
                 <SearchBar placeholder={"Enter tournament title..."} data={tournamentList}/>
             </div>
-            {/* <div className="tourny-list-outer">
-                <div className="tourny-list-inner">
-                    {featuredList.map((element)=>{
-                        return(
-                            <div key={element.id}>
-                                <GameTile game={element}/>
-                            </div>
-                        )
-                    })}
-                </div>
-            </div> */}
         </div>
         </>
     )
