@@ -82,7 +82,12 @@ const TournamentBracket = (props) =>{
 //In double elimination, the first element is winners bracket and second element is losers bracket.
 var tournament = [];
 //GUI representation of tournament
-var tournamentGUI = document.getElementById("tournament");
+var tournamentGUI = document.createElement("div");
+tournamentGUI.setAttribute("id","tournament");
+const title = document.createElement('h1');
+title.innerHTML="Tournament Bracket(s)";
+tournamentGUI.appendChild(title);
+//document.body.appendChild(tournamentGUI);
 
 
 //current state of match decider popup (popup is used to determine the outcome of the match that was just clicked)
@@ -134,10 +139,10 @@ function singleElim(entrants){
     const bracketGUI = document.createElement('div');
     //set html properties of gui bracket
     bracketGUI.setAttribute("id", `${BRACKET}`);
-    bracketGUI.setAttribute("class", "bracket");
+    bracketGUI.setAttribute("className", "bracket");
     const bracketHeader = document.createElement('h3');
     bracketHeader.innerText = "Bracket";
-    bracketHeader.setAttribute("class", "bracketheader");
+    bracketHeader.setAttribute("className", "bracketheader");
     bracketGUI.appendChild(bracketHeader);
 
     //initializes the GUI representations of the bracket
@@ -145,6 +150,7 @@ function singleElim(entrants){
 
     //add bracket to tournament
     tournamentGUI.appendChild(bracketGUI);
+    //document.body.appendChild(tournamentGUI);
 }
 
 function generateBracketJS(bracket, entrants, roundNumbers){//BACKEND
@@ -458,11 +464,11 @@ function updateTournamentGUI(){//FRONTEND
         <div>
             {viewBracket ? (  
             <div>
-            <div>
+            <div id="tournament-parent">
                 <div className="tournament-bracket-closeBtn" onClick={showBracket}>&times;</div>
-                <div id="tournament">
+                 <div id="tournament">
                     <h1>Tournament Bracket(s)</h1>
-                </div>
+                </div> 
                 <div className="popup">
                     <div className="popup-content">
                         <span className="closeBtn">&times;</span>
