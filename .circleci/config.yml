@@ -24,4 +24,4 @@ jobs:
 workflows:
   basic_test:
     jobs:
-      - tests
+      - test
