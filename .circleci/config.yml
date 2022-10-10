@@ -18,9 +18,7 @@ jobs:
       - run:
           name: unit tests
           command: npm run test -- --coverage
-      - coveralls/upload:   
-          parallel: true
-          flag_name: unit tests
+      - coveralls/upload   
 
 workflows:
   basic_test:
