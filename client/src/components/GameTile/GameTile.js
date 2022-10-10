@@ -15,6 +15,7 @@ const GameTile = (props) => {
 
 
     const [auth, setAuth] = useState(props.params.user_id);
+    console.log(auth);
     //const [state] = useContext(AuthContext);
     //var state = {id:3}; //temp
     //const { auth } = useContext(AuthContext);
@@ -79,12 +80,12 @@ const GameTile = (props) => {
                     <img src={gameTile.img} alt={gameTile.alt} className='tile-image' />
                 </div>
                 <div className="tile-info">
-                    <div className="tile-name">
+                    <div className="tile-name" data-testid='TitleTest'>
                         {gameTile.name}
                     </div>
-                    <div className={editPermission ? "tile-edit-button-active" : "tile-edit-button"} onClick={editDetails}>
-                        <FiEdit className="edit-button-symbol" />
-                        Edit
+                    <div className={editPermission ? "tile-edit-button-active" : "tile-edit-button"} onClick={editDetails}  data-testid="EditButton">
+                        <FiEdit className="edit-button-symbol"/>
+                        {editPermission}
                     </div>
                 </div>
             </div>
