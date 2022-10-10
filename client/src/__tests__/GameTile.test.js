@@ -10,7 +10,7 @@ describe('Game Tile tests',() => {
             render(<GameTile params={params1}/>, container);
         })
 
-        const title = contaner.que
+        //const title = contaner.que
         //expect(screen.getByText("fortnite tourny"))
     })
 })
