@@ -16,7 +16,7 @@ jobs:
           name: install npm
           command: npm install                     
       - run:
-          name: unit tests
+          name: tests
           command: npm run test -- --coverage
       - coveralls/upload:  
           verbose: true
