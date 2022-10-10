@@ -15,12 +15,18 @@ function SearchBar({placeholder, data}) {
         let newFilter = data.filter((value) => {
             return value.name.toLowerCase().includes(searchString.toLowerCase());
         });
+
         if (filter == "Game") {
                 newFilter = data.filter((value) => {
                 return value.game.toLowerCase().includes(searchString.toLowerCase());
             });
         } 
-        setFilteredData(newFilter);
+
+        if (searchString === "") {
+            setFilteredData(data);
+        } else {
+            setFilteredData(newFilter);
+        }
     };
 
     const handleFilterChange = (filter) => {
