@@ -36,10 +36,8 @@ const Login = () => {
     }, [email, pwd])
 
     useEffect(()=>{
-        
         if(success){
             //return navigate(`/`);
-
         }
     },[success]);
 
@@ -72,8 +70,8 @@ const Login = () => {
     return (
         <>
             {success ? (
-                <section >
-                    {/*change to landing page URL*/}
+                <section data-testid="ReturnSuccess">
+                    success
                 </section>
             ) : (
                 <section className='login-box'>
