@@ -15,28 +15,27 @@ const GameTile = (props) => {
 
 
     const [auth, setAuth] = useState(props.params.user_id);
-    console.log(auth);
+    
     //const [state] = useContext(AuthContext);
     //var state = {id:3}; //temp
     //const { auth } = useContext(AuthContext);
 
-    const [editPermission, setEditPermission] = useState(false);
+    const [editPermission, setEditPermission] = useState(props.params.editPermission);
     const [task, setTask] = useState(true);
     const [overlay, setOverlay] = useState(false);
 
     useEffect(() => {
-        //console.log(state.id + " : " + gameTile.user);
-        if(auth.user_id === gameTile.user){
+        if(props.params.user_id === gameTile.user){
             setEditPermission(true);
-        } else if (auth.user_id !== gameTile.user){
+        } else if (props.params.user_id !== gameTile.user){
             setEditPermission(false);
         }
     }, [])
 
     const showDetails = () => {
         if (gameTile.content === "GAME"){
-            //setOverlay(true);
-            //setTask(2);
+            setOverlay(true);
+            setTask(2);
         }
         if (gameTile.content === "TOURNAMENT"){
             setOverlay(true);
@@ -61,21 +60,21 @@ const GameTile = (props) => {
                 <div className="tournament-overlay-screen" onClick={stopOverlay}></div>
                     {task === 1 && (
                         <div className="tournament-view-outer">
-                            <Tournament params={gameTile}/>
+                            {/* <Tournament params={gameTile}/> */}
                         </div>
                     )}
                     {task === 2 && (
-                        <div className="tournament-edit-outer">
-                            <CreateTournament/>
+                        <div className="tournament-game-outer">
+
                         </div>
                     )}
                     {task === 3 && (
                         <div className="tournament-edit-outer">
-                            <UpdateTournament params={gameTile}/>
+                            {/* <UpdateTournament params={gameTile}/> */}
                         </div>
                     )}
             </div>
-            <div className="tile-layout" onClick={showDetails} >
+            <div className="tile-layout" onClick={showDetails} data-testid="ShowDetails" >
                 <div className="tile-image-outer">
                     <img src={gameTile.img} alt={gameTile.alt} className='tile-image' />
                 </div>
@@ -83,9 +82,9 @@ const GameTile = (props) => {
                     <div className="tile-name" data-testid='TitleTest'>
                         {gameTile.name}
                     </div>
+                    {console.log(editPermission)}
                     <div className={editPermission ? "tile-edit-button-active" : "tile-edit-button"} onClick={editDetails}  data-testid="EditButton">
                         <FiEdit className="edit-button-symbol"/>
-                        {editPermission}
                     </div>
                 </div>
             </div>
