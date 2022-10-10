@@ -1,33 +1,29 @@
-import React, {useEffect, useRef, useState, useContext} from 'react';
+import React, {useEffect, useRef, useState } from 'react';
 import * as BsIcons from 'react-icons/bs';
 import * as RiIcons from 'react-icons/ri';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 import "./Login.css";
 import axios from '../../api/Axois';
-import AuthContext from '../../api/AuthProvider';
-import {LOGIN} from '../../api/Constants';
-import {useNavigate} from 'react-router-dom';
+//import AuthContext from '../../api/AuthProvider';
+//import {LOGIN} from '../../api/Constants';
+//import {useNavigate} from 'react-router-dom';
 
 const LOGIN_URL = '/login';
-
-/* TODO :
-        - create state that stores the users Username and other essential info returned byu server
- */
-
 
 const Login = () => {
     const userRef = useRef();
     const errRef = useRef();
     
-    let navigate = useNavigate();
+    //let navigate = useNavigate();
 
-    const { setAuth } = useContext(AuthContext);
+    const { auth, setAuth } = useState({});
+
 
     const [email, setEmail] = useState('');
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
-    const [user, setUser]=useState([]);
+    //const [user, setUser]=useState([]);
 
     useEffect(() => {
         userRef.current.focus();
@@ -42,7 +38,8 @@ const Login = () => {
     useEffect(()=>{
         
         if(success){
-            return navigate(`/`);
+            //return navigate(`/`);
+
         }
     },[success]);
 
@@ -71,8 +68,6 @@ const Login = () => {
         }
 
     }
-
-    
 
     return (
         <>
@@ -124,9 +119,9 @@ const Login = () => {
                     <div className='login-link'>
                         Need an Account? 
                         <span>
-                            <Link to='/login/signup'>
+                            {/* <Link to='/login/signup'>
                                 Sign Up
-                            </Link>
+                            </Link> */}
                         </span>
                     </div>
                 </section>

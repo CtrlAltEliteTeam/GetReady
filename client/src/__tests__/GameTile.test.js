@@ -1,16 +1,16 @@
 import React from 'react';
-import { render, screen, act, fireEvent, waitFor } from "@testing-library/react";
+import { act } from "@testing-library/react";
 import '@testing-library/jest-dom';
 import GameTile from '../components/GameTile/GameTile';
 import { GameTileData } from '../components/GameTile/GameTileData';
 import ReactDOM from 'react-dom/client';
-import ReactTestUtils from 'react-dom/test-utils';
 
 //var ReactTestUtils = require('react-dom/test-utils'); 
 
 const params1 = {user_id: 0, game:{id : 1, name: 'fortnite tourny', game: 'Fortnite', img: "Fortnite" , alt : "TournamentImage", content : "TOURNAMENT", user: 2, count : 1 }, editPermission : false}
 const params2 = {user_id: 0, game:{id : 1, name: 'fortnite tourny', game: 'Fortnite', img: "Fortnite" , alt : "TournamentImage", content : "GAME", user: 2, count : 1 },  editPermission : false}
 const params3 = {user_id: 2, game:{id : 1, name: 'fortnite tourny', game: 'Fortnite', img: "Fortnite" , alt : "TournamentImage", content : "TOURNAMENT", user: 2, count : 1 },  editPermission : true}
+
 let container;
 
 beforeEach(() => {
