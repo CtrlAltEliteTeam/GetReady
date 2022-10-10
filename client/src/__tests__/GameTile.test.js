@@ -109,16 +109,40 @@ describe('Game Tile data tests',() => {
 
         const tile = new GameTileData(1,'fortnite tourny', 'Fortnite', "TOURNAMENT" ,2, 1);
 
-
         expect(tile.id).toEqual(1);
         expect(tile.name).toEqual('fortnite tourny');
         expect(tile.game).toEqual('Fortnite');
-        expect(tile.img).toEqual("");
         expect(tile.alt).toEqual('TournamentImage');
         expect(tile.content).toEqual('TOURNAMENT');
         expect(tile.user).toEqual(2);
         expect(tile.count).toEqual(1);
+    });
+    it('Image Correct',() => {
 
+        const tile1 = new GameTileData(1,'fortnite tourny', 'Fortnite', "TOURNAMENT" ,2, 1);
+        expect(tile1.img).toEqual('');
+
+        const tile2 = new GameTileData(1,'fortnite tourny', 'League of Legends', "TOURNAMENT" ,2, 1);
+        expect(tile2.img).toEqual('');
+
+        const tile3 = new GameTileData(1,'fortnite tourny', 'CSGO', "TOURNAMENT" ,2, 1);
+        expect(tile3.img).toEqual('');
+
+        const tile4 = new GameTileData(1,'fortnite tourny', 'Halo', "TOURNAMENT" ,2, 1);
+        expect(tile4.img).toEqual('');
+
+        const tile5 = new GameTileData(1,'fortnite tourny', 'Super Smash bros', "TOURNAMENT" ,2, 1);
+        expect(tile5.img).toEqual('');
+
+        const tile6 = new GameTileData(1,'fortnite tourny', 'Tekken 7', "TOURNAMENT" ,2, 1);
+        expect(tile6.img).toEqual('');
+
+        const tile7 = new GameTileData(1,'fortnite tourny', 'pacman', "TOURNAMENT" ,2, 1);
+        expect(tile7.img).toEqual('');
+
+        const tile8 = new GameTileData(1,'fortnite tourny', 'create', "TOURNAMENT" ,2, 1);
+        expect(tile8.img).toEqual('');
 
     });
+
 });
