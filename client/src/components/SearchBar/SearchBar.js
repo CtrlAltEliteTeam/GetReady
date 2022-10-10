@@ -20,7 +20,11 @@ function SearchBar({placeholder, data}) {
                 return value.game.toLowerCase().includes(searchString.toLowerCase());
             });
         } 
-        setFilteredData(newFilter);
+        if (searchString === "") {
+            setFilteredData(data);
+        } else {
+            setFilteredData(newFilter);
+        }
     };
 
     const handleFilterChange = (filter) => {
@@ -31,7 +35,7 @@ function SearchBar({placeholder, data}) {
 
     const clearInput = () => {
         setBarValue("");
-        setFilteredData([]);
+        setFilteredData(data);
     }
 
     return (
