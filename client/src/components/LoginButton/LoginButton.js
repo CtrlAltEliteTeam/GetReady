@@ -20,7 +20,6 @@ const LoginButton = (params) => {
 
     //this needs its own var
     //const {pathname} = useLocation();
-    console.log(params);
     useEffect(() => {
         //const match = matchPath("/login/*",pathname);
         const match = params.params.path;

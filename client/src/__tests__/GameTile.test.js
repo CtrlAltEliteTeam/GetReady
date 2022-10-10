@@ -107,7 +107,18 @@ describe('Game Tile tests',() => {
 describe('Game Tile data tests',() => {
     it('Object Correct',() => {
 
-        const tile = new GameTileData(1,'fortnite tourny', 'Fortnite', "TOURNAMENT" ,1)
+        const tile = new GameTileData(1,'fortnite tourny', 'Fortnite', "TOURNAMENT" ,2, 1);
+
+
+        expect(tile.id).toEqual(1);
+        expect(tile.name).toEqual('fortnite tourny');
+        expect(tile.game).toEqual('Fortnite');
+        expect(tile.img).toEqual("");
+        expect(tile.alt).toEqual('TournamentImage');
+        expect(tile.content).toEqual('TOURNAMENT');
+        expect(tile.user).toEqual(2);
+        expect(tile.count).toEqual(1);
+
 
     });
 });

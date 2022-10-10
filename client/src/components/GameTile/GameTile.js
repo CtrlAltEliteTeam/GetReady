@@ -8,14 +8,12 @@ import UpdateTournament from "../updateTournament/UpdateTournament";
 import Tournament from "../tournament/Tournament";
 
 const GameTile = (props) => {
-    
-    console.log(props);
 
     let gameTile = props.params.game;
 
 
     const [auth, setAuth] = useState(props.params.user_id);
-    
+
     //const [state] = useContext(AuthContext);
     //var state = {id:3}; //temp
     //const { auth } = useContext(AuthContext);
@@ -82,7 +80,6 @@ const GameTile = (props) => {
                     <div className="tile-name" data-testid='TitleTest'>
                         {gameTile.name}
                     </div>
-                    {console.log(editPermission)}
                     <div className={editPermission ? "tile-edit-button-active" : "tile-edit-button"} onClick={editDetails}  data-testid="EditButton">
                         <FiEdit className="edit-button-symbol"/>
                     </div>
