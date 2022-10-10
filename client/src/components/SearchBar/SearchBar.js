@@ -8,6 +8,7 @@ function SearchBar({placeholder, data}) {
     const [filteredData, setFilteredData] = useState([]);
     const [barValue, setBarValue] = useState("");
     const [filter, setFilter] = useState("");
+    const [isFiltered, setIsFiltered] = useState(false);
 
     const handleFilter = (event) => {
         const searchString = event.target.value;
@@ -25,6 +26,7 @@ function SearchBar({placeholder, data}) {
         } else {
             setFilteredData(newFilter);
         }
+        setIsFiltered(true);
     };
 
     const handleFilterChange = (filter) => {
@@ -55,7 +57,8 @@ function SearchBar({placeholder, data}) {
                 {barValue.length == 0 ? <FcIcons.FcSearch/> : <IoIcons.IoMdCloseCircleOutline id="clearBtn" onClick={clearInput}/>}
             </div>
         </div>
-            <div className="dataResult">
+            {isFiltered ? (
+                <div className="dataResult">
                 {filteredData.map((element) => {
                     return (
                         <div key={element.id}> 
@@ -64,6 +67,29 @@ function SearchBar({placeholder, data}) {
                     )
                 })}
             </div>
+            ) : (
+                <div className="dataResult">
+                {data.map((element) => {
+                    return (
+                        <div key={element.id}> 
+                            <GameTile game={element}/>
+                        </div>
+                    )
+                })}
+            </div>
+            )}
+
+
+
+            {/* <div className="dataResult">
+                {filteredData.map((element) => {
+                    return (
+                        <div key={element.id}> 
+                            <GameTile game={element}/>
+                        </div>
+                    )
+                })}
+            </div> */}
         </div>
 
     );
