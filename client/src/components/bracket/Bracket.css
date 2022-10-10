@@ -1,42 +1,12 @@
-#entrantsInput {
-    background: rgb(255, 81, 0);
-    margin-bottom: 10px;
-    border: solid red 5px;
+
+header {
+    color: black;
+    border: black;
+    background: #5e5e5e;
 }
 
-#entrantsInputHeader {
-    /*just for show*/
-    display: block;
-}
-
-#entrantsInputList {
-    padding-bottom: 10px;
-}
-
-.entrantInput {
-    display: block;
-    margin: auto;
-    text-align: center;
-}
-
-.tournament-bracket-btn{   
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
-    position: relative;
-    border-radius: 25px;
-    background-color: #F9BE32;
-    padding: 12px;
-    width: fit-content;
-    margin-top: 0px;
-    text-align: center;
-}
-
-
-
-.tournament-bracket-title{
+#tournament{
     /* background-color: #ccc; */
-   /* justify-content: left; */
-
 }
 
 .bracket{
@@ -98,6 +68,30 @@
 }
 
 .closeBtn:hover, .closeBtn:focus{
+    color: #000;
+    text-decoration: none;
+    cursor:pointer;
+}
+
+.tournament-bracket-btn{   
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    position: relative;
+    border-radius: 25px;
+    background-color: #F9BE32;
+    padding: 12px;
+    width: fit-content;
+    margin-top: 0px;
+    text-align: center;
+}
+
+.tournament-bracket-closeBtn{
+    color: #ccc;
+    float: right;
+    font-size:2rem;
+}
+
+.tournament-bracket-closeBtn:hover, .closeBtn:focus{
     color: #000;
     text-decoration: none;
     cursor:pointer;

@@ -129,7 +129,7 @@
     border-style: ridge;
     border-color: #F9BE32;
     background-color:#3D3B52;
-    width:fit-content;
+    width:100%;
     display: flex;
     position: relative;
     /* overflow-y: scroll; */
