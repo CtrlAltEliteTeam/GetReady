@@ -123,4 +123,15 @@
 .tournament-details-join-button{
     display: none;
 }
-
+.tournament-bracket-box{
+    padding: 30px;
+    border-radius: 20px;
+    border-style: ridge;
+    border-color: #F9BE32;
+    background-color:#3D3B52;
+    width:fit-content;
+    display: flex;
+    position: relative;
+    /* overflow-y: scroll; */
+    overflow-x: hidden;
+}
