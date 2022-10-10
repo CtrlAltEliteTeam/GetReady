@@ -8,12 +8,16 @@ import UpdateTournament from "../updateTournament/UpdateTournament";
 import Tournament from "../tournament/Tournament";
 
 const GameTile = (props) => {
-
-    let gameTile = props.game;
     
+    console.log(props);
+
+    let gameTile = props.params.game;
+
+
+    const [auth, setAuth] = useState(props.params.user_id);
     //const [state] = useContext(AuthContext);
     //var state = {id:3}; //temp
-    const { auth } = useContext(AuthContext);
+    //const { auth } = useContext(AuthContext);
 
     const [editPermission, setEditPermission] = useState(false);
     const [task, setTask] = useState(true);
@@ -76,12 +80,11 @@ const GameTile = (props) => {
                 </div>
                 <div className="tile-info">
                     <div className="tile-name">
-                        <span>
-                            {gameTile.name}
-                        </span>
+                        {gameTile.name}
                     </div>
                     <div className={editPermission ? "tile-edit-button-active" : "tile-edit-button"} onClick={editDetails}>
                         <FiEdit className="edit-button-symbol" />
+                        Edit
                     </div>
                 </div>
             </div>
