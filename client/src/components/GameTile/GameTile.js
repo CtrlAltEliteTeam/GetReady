@@ -1,11 +1,8 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { GameTileData } from "./GameTileData";
 import {FiEdit} from "react-icons/fi";
 import './GameTile.css';
-import AuthContext from "../../api/AuthProvider";
-import CreateTournament  from "../createTounament/CreateTournament";
-import UpdateTournament from "../updateTournament/UpdateTournament";
-import Tournament from "../tournament/Tournament";
+
 
 const GameTile = (props) => {
 

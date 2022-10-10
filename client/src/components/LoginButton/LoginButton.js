@@ -1,6 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react'
-import { matchPath, useNavigate, useLocation } from 'react-router-dom'
-import AuthContext from '../../api/AuthProvider';
+import React, {useState, useEffect} from 'react'
 import './LoginButton.css';
 
 const PATH = '/login/*';

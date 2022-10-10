@@ -1,7 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { TournamentData } from './TournamentData';
-import { TournamentData_TestData } from './TournamentData_TestData';
-import { GameTileData } from '../GameTile/GameTileData';
 import * as AiIcons from 'react-icons/ai';
 import './Tournament.css';
 import axios from '../../api/Axois';
@@ -15,10 +12,11 @@ const JOIN_URL = "/join_tournament";
 
 const Tournament = (params) => {
 
-    let data = params.params;
+    let data = params.params.game;
     //console.log(JSON.stringify(data));
 
-    const { auth } = useContext(AuthContext);
+    //const { auth } = useContext(AuthContext);
+    const [auth, setAuth] = useState(params.params.user_id);
 
     const [TournamentDetails, setTournamentDetails] = useState({});
     const [GameDetails, setGameDetails] = useState('');
@@ -27,11 +25,11 @@ const Tournament = (params) => {
 
     const [showJoinLeave, setShowJoinLeave] = useState(false);
     
-    const [title, setTitle] = useState(data.name);
-    const [image, setImage] = useState(data.img);
-    const [alt, setAlt] = useState(data.alt);
+    const [title] = useState(data.name);
+    const [image] = useState(data.img);
+    const [alt] = useState(data.alt);
     const [creator, setCreator] = useState("");
-    const [game, setGame] = useState(data.game);
+    const [game] = useState(data.game);
     const [sTime, setSTime] = useState("");
     const [sDate, setSDate] = useState("");
     const [eDate, setEDate] = useState("");
