@@ -1,12 +1,21 @@
 import React from 'react';
-import { act, fireEvent, waitFor } from "@testing-library/react";
+import { act, fireEvent, waitFor, cleanup } from "@testing-library/react";
 import '@testing-library/jest-dom';
 import Login from '../components/login/Login';
 import ReactDOM from 'react-dom/client';
-import * as axios from 'axios';
+
+import axios from '../api/Axois';
+import MockAdapter from 'axios-mock-adapter';
+
+var mock = new MockAdapter(axios);
+
+beforeAll(() => {
+    mock.reset();
+});
+
+afterEach(cleanup);
 
 let container;
-axios.post = jest.fn();
 
 beforeEach(() => {
     container = document.createElement('div');
@@ -18,8 +27,38 @@ afterEach(() => {
     container = null;
 });
 
-describe('Game Tile tests',() => {
+const fakeLogin = {
+    email: "bob@test.com",
+    password: "12345"
+}
+
+const fakeLoginReturn = {
+    user_id : 2, 
+    username: 'bob',
+}
+
+const fakeLoginBadReturn = {
+    error : 301
+}
+
+
+
+describe('Login tests',() => {
+    it('test success axios',()=>{
+        mock.onPost("/login", fakeLogin).reply(200,fakeLoginReturn);
+        axios.post("/login", fakeLogin).then(function (response) {
+            expect(response.data).toEqual(fakeLoginReturn);
+        });
+    });
+    it('test fail axios',()=>{
+        mock.onPost("/login", fakeLogin).reply(200,fakeLoginBadReturn);
+        axios.post("/login", fakeLogin).then(function (response) {
+            expect(response.data).toEqual(fakeLoginBadReturn);
+        });
+    });
     it('test login',async () => {
+        mock.onPost("/login", {email: 'test@gmail.com', password: 'pass123'}).reply(200,[fakeLoginReturn]);
+
         act(() => {
             ReactDOM.createRoot(container).render(< Login />);
         });
@@ -27,37 +66,36 @@ describe('Game Tile tests',() => {
         const password = container.querySelector('#password');
         const button = container.querySelector('button');
 
-        //console.log(password.value);
-        //console.log(button);
+        fireEvent.change(email, {target: { value : 'test@gmail.com'}});
+        fireEvent.change(password, {target: { value : 'pass123'}});
+
+        await act(() => {
+            button.dispatchEvent(new MouseEvent('click', {bubbles: true}));
+        });
+
+        const success = container.querySelector('div.return-success');
+
+        expect(success.textContent).toEqual('2');
+    });
+    it('test login',async () => {
+        mock.onPost("/login", {email: 'test@gmail.com', password: 'pass123'}).reply(200,fakeLoginBadReturn);
+
+        act(() => {
+            ReactDOM.createRoot(container).render(< Login />);
+        });
+        const email = container.querySelector('#email');
+        const password = container.querySelector('#password');
+        const button = container.querySelector('button');
 
         fireEvent.change(email, {target: { value : 'test@gmail.com'}});
         fireEvent.change(password, {target: { value : 'pass123'}});
 
-        jest.mock("axios");
-
-        axios.post.mockResolvedValue({ data: {user_id : 2, username: 'bob'} });
-
-        act(() => {
+        await act(() => {
             button.dispatchEvent(new MouseEvent('click', {bubbles: true}));
         });
 
-        // await expect(axios.post).toHaveBeenCalledWith(
-        //     "http://localhost:8000/api/login", 
-        //     expect.objectContaining({
-        //         email : email.value,
-        //         password :password.value
-        //     })
-        // );
+        const success = container.querySelector('p.errmsg');
 
-        // await waitFor(() => {
-        //     const success = container.querySelector('div.return-success');
-        //     expect(success.textContent).toEqual("success");
-        // });
-
-        //axios.post.mockImplementation(() => Promise.reject({  }));
-        //const success = container.querySelector('div.return-success');
-        //console.log(success);
-
-        //expect(success.textContent).toEqual("success");
+        expect(success.textContent).toEqual('Incorrect Username or Password');
     });
 });

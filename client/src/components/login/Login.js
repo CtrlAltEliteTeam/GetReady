@@ -16,8 +16,8 @@ const Login = () => {
     
     //let navigate = useNavigate();
 
-    const { auth, setAuth } = useState({});
-
+    const [ auth, setAuth ] = useState({user_id:0});
+    
 
     const [email, setEmail] = useState('');
     const [pwd, setPwd] = useState('');
@@ -57,7 +57,7 @@ const Login = () => {
             setEmail('');
             setPwd('');
             console.log("before dispatch " + response?.data[0]?.user_id);
-            setAuth({ user_id, username});
+            setAuth({ user_id : user_id, username: username});
             setSuccess(true);
         }
 
@@ -67,7 +67,7 @@ const Login = () => {
         <>
             {success ? (
                 <div className="return-success">
-                    success
+                    {auth.user_id}
                 </div>
             ) : (
                 <section className='login-box'>

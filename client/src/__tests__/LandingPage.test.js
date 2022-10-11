@@ -13,7 +13,7 @@ var mock = new MockAdapter(axios);
 beforeAll(() => {
     mock.reset();
 });
-  
+
 afterEach(cleanup);
 
 beforeEach(() => {
