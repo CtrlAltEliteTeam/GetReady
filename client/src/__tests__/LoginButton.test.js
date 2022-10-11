@@ -1,33 +1,70 @@
 import React from 'react';
-import { render, screen } from "@testing-library/react";
+import { act } from "@testing-library/react";
+import '@testing-library/jest-dom';
+import ReactDOM from 'react-dom/client';
 import LoginButton from "../components/LoginButton/LoginButton";
-
-const mockedUsedNavigate = jest.fn();
 
 const params1 = {path :'/login/', user_id:0}
 const params2 = {path : null, user_id:0}
 const params3 = {path : null, user_id:1}
 
+let container;
+
+beforeEach(() => {
+    container = document.createElement('div');
+    document.body.appendChild(container);
+});
+
+afterEach(() => {
+    document.body.removeChild(container);
+    container = null;
+});
+
 
 describe('login button', () => {
     it('show login buttons', () => { 
-        render(<LoginButton params={params1}/>);
-        
-        expect(screen.getByText("Login"))
-        expect(screen.getByText("Signup"))
+        act(() => {
+            ReactDOM.createRoot(container).render(<LoginButton params={params1}/>);
+        });
+        console.log(container.innerHTML);
+        const Login = container.querySelector("div.login-button-button-button");
+        const Signup = container.querySelector("div.signup-button-button-button");
 
-    }),
-    it('still show login buttons',() => {
-        render(<LoginButton params={params2}/>);
+        expect(Login).toBeVisible();
+        expect(Signup.textContent).toBe("Signup");
+
+    });
+    it('hide buttons', () => { 
+        act(() => {
+            ReactDOM.createRoot(container).render(<LoginButton params={params2}/>);
+        });
+        const Login = container.querySelector("div.login-button-button-button");
+        const Signup = container.querySelector("div.signup-button-button-button");
+
+        expect(Login.textContent).toBe("Login");
+        expect(Signup.textContent).toBe("Signup");
+
+    });
+    it('show logout button', () => { 
+        act(() => {
+            ReactDOM.createRoot(container).render(<LoginButton params={params3}/>);
+        });
+        const Login = container.querySelector("div.login-button-button-button");
+
+        expect(Login.textContent).toBe("Log Out");
+
+    });
+    // it('still show login buttons',() => {
+    //     render(<LoginButton params={params2}/>);
         
-        expect(screen.getByText("Login"))
-        expect(screen.getByText("Signup"))
-    })
-    it('show log out button',() => {
-        render(<LoginButton params={params3}/>);
+    //     expect(screen.getByText("Login"))
+    //     expect(screen.getByText("Signup"))
+    // })
+    // it('show log out button',() => {
+    //     render(<LoginButton params={params3}/>);
         
-        expect(screen.getByText("Log Out"))
-    })
+    //     expect(screen.getByText("Log Out"))
+    // })
 })
 
 

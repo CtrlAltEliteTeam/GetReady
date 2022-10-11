@@ -21,7 +21,7 @@ const LoginButton = (params) => {
     useEffect(() => {
         //const match = matchPath("/login/*",pathname);
         const match = params.params.path;
-        if (match != null) {
+        if (match === '/login/') {
             setShowLoginButtons(false);
         } else {
             setShowLoginButtons(true);
