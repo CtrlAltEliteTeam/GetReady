@@ -124,14 +124,13 @@
     display: none;
 }
 .tournament-bracket-box{
-    padding: 30px;
-    border-radius: 20px;
-    border-style: ridge;
-    border-color: #F9BE32;
-    background-color:#3D3B52;
-    width:100%;
-    display: flex;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
     position: relative;
-    /* overflow-y: scroll; */
-    overflow-x: hidden;
+    border-radius: 25px;
+    background-color: #F9BE32;
+    padding: 12px;
+    width: fit-content;
+    margin-top: 0px;
+    text-align: center;
 }

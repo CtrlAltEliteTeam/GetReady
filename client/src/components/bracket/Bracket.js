@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useContext, useRef} from 'react';
+import React, { useState, useEffect, useContext} from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import axios from '../../api/Axois';
 import './Bracket.css';
@@ -87,7 +88,7 @@ tournamentGUI.setAttribute("id","tournament");
 const title = document.createElement('h1');
 title.innerHTML="Tournament Bracket(s)";
 tournamentGUI.appendChild(title);
-//document.body.appendChild(tournamentGUI);
+document.body.appendChild(tournamentGUI);
 
 
 //current state of match decider popup (popup is used to determine the outcome of the match that was just clicked)
@@ -150,7 +151,7 @@ function singleElim(entrants){
 
     //add bracket to tournament
     tournamentGUI.appendChild(bracketGUI);
-    //document.body.appendChild(tournamentGUI);
+    document.body.appendChild(tournamentGUI);
 }
 
 function generateBracketJS(bracket, entrants, roundNumbers){//BACKEND
@@ -251,6 +252,7 @@ function generateBracketGUI(bracket, bracketGUI){//FRONTEND
 
                 eGUI.setAttribute("value", entrants[k].getName());
                 matchGUI.appendChild(eGUI);
+               // document.body.appendChild(matchGUI);
             }
 
 
@@ -286,16 +288,19 @@ function generateBracketGUI(bracket, bracketGUI){//FRONTEND
 
             //add match to round
             roundGUI.appendChild(matchGUI);
+            //document.body.appendChild(roundGUI);
         }
 
         //add round to bracket
         bracketGUI.appendChild(roundGUI);
+
     }
 
     //undo float
     const clr = document.createElement('div');
     clr.setAttribute("className", "clear");
     bracketGUI.appendChild(clr);
+    document.body.appendChild(bracketGUI);
 }
 
 
