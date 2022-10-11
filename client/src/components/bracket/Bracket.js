@@ -11,12 +11,9 @@ function TournamentBracket(props){
 
     useEffect(() => { 
         setEntrants([]);
-        for(var i=0;i<50;i++){
-            setEntrants(entrants => [...entrants,i]);
-        }
-        // props.Participants.forEach(element => {
-        //     setEntrants(entrants => [...entrants,element.username]);
-        // });
+        props.Participants.forEach(element => {
+            setEntrants(entrants => [...entrants,element.username]);
+        });
     },[props])
 
     
