@@ -5,7 +5,8 @@ import { GameTileData } from '../GameTile/GameTileData';
 import * as AiIcons from 'react-icons/ai';
 import './Tournament.css';
 import axios from '../../api/Axois';
-import { AuthContext } from '../../api/AuthProvider';
+import AuthContext from '../../api/AuthProvider';
+import TournamentBracket from '../bracket/Bracket';
 
 const TOURNAMENT_URL = "/get_tournament_details";
 const PARTICIPANT_URL = "/get_participants";
@@ -18,12 +19,14 @@ const Tournament = (params) => {
     let data = params.params;
     //console.log(JSON.stringify(data));
 
-    const [state] = useContext(AuthContext); 
+    const { auth } = useContext(AuthContext);
 
     const [TournamentDetails, setTournamentDetails] = useState({});
     const [GameDetails, setGameDetails] = useState('');
 
     const [details, setDetails] = useState({});
+
+    const [showJoinLeave, setShowJoinLeave] = useState(false);
     
     const [title, setTitle] = useState(data.name);
     const [image, setImage] = useState(data.img);
@@ -47,6 +50,15 @@ const Tournament = (params) => {
     const [joinLeave, setJoinLeave] = useState(false); //false if not joined
     const [joinLeaveLable, setJoinLeaveLable] = useState("Join");
     
+    //joinleaveshowButton
+    useEffect (() => {
+        if(auth.user_id != 0) {
+            setShowJoinLeave(true);
+        } else { 
+            setShowJoinLeave(false)
+        }
+    }, [auth.user_id]);
+
     //Axiose to fetch tournament details 
     useEffect(() => {
         const fetchData = async (e) => {
@@ -66,8 +78,8 @@ const Tournament = (params) => {
         setCreator(details[0]?.username);
         setDesc(details[0]?.description);
         setSTime(details[0]?.startTime);
-        setSDate(details[0]?.startDate);
-        setEDate(details[0]?.endDate);
+        setSDate(details[0]?.startDate.substring(0, 10));
+        setEDate(details[0]?.endDate.substring(0, 10));
         setCurrPart(details[0]?.numParticipants);
         setMaxPart(details[0]?.maxParticipants);
         setPartPermission(details[0]?.viewParticipant);
@@ -105,7 +117,7 @@ const Tournament = (params) => {
         const fetchData = async () => {
             const response = await axios.post(GET_JOIN_LEAVE_URL,{
                 tournament_id : data.id,
-                user_id : state.id,
+                user_id : auth.user_id,
             });
             return await response?.data;
         }
@@ -125,24 +137,28 @@ const Tournament = (params) => {
     const handleJoin = async (e) => {
         //axiose for join
         var t = currPart;
+        console.log("value on press: " + currPart + ", recorded value: " + t);
         try {
             const response = await axios.post(JOIN_URL,{
                 tournament_id : data.id,
-                user_id : state.id,
+                user_id : auth.user_id,
             });
             setJoinLeave(response?.data?.result);
             if (response?.data?.result === false){
                 setJoinLeaveLable("Join");
-                setCurrPart(t--);
+                t--;
+                setCurrPart(t);
                 setFetchParts(2);
             } else {
                 setJoinLeaveLable("Leave");
-                setCurrPart(t++);
+                t++;
+                setCurrPart(t);
                 setFetchParts(3);
             }
         } catch (error) {
             console.log(error);
         }
+        console.log("value after press: " + currPart + ", recorded value: " + t);
     }
 
     return (
@@ -202,10 +218,14 @@ const Tournament = (params) => {
                                     )
                                 })}
                             </div>
+                            <div className='tournament-bracket-box'>
+                                <TournamentBracket maxPart={maxPart} Participants={Participants}/>
+                            </div>
                         </div>
+                                
                     </div>) : (
                         <div className='tournament-details-partricipants'>
-                            Participants
+                                Participants:&nbsp;
                             <div className='tournament-details-partricipants-display'>
                                 {currPart} / {maxPart}
                             </div>
@@ -214,7 +234,7 @@ const Tournament = (params) => {
                 <div className='tournament-details-bracket'>
 
                 </div>
-                <div className='tournament-details-join-button' onClick={handleJoin}>
+                <div className={showJoinLeave? 'tournament-details-join-button-show' : 'tournament-details-join-button'} onClick={handleJoin}>
                     {joinLeaveLable}
                 </div>
             </div>

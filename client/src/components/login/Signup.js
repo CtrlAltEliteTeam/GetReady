@@ -5,7 +5,7 @@ import * as MdIcons from 'react-icons/md';
 import * as BsIcons from 'react-icons/bs';
 import * as RiIcons from 'react-icons/ri';
 import './Login.css';
-import { AuthContext } from '../../api/AuthProvider';
+import AuthContext from '../../api/AuthProvider';
 import { LOGIN } from '../../api/Constants';
 import axios from '../../api/Axois';
 
@@ -20,7 +20,8 @@ const Signup = () => {
 
     let navigate = useNavigate();
 
-    const [state,dispatch] = useContext(AuthContext);
+    //const [state,dispatch] = useContext(AuthContext);
+    const { setAuth } = useContext(AuthContext);
 
     const [user, setUser] = useState('');
     const [validName, setValidName] = useState(false);
@@ -88,15 +89,14 @@ const Signup = () => {
             // } else if (response?.data?.email_availability === 301) {
             //     setErrMsg('Email Taken');
             } else {  
-                //On sucess             
+                //On sucess 
+                const user_id = response?.data?.user_id;
+                const username = response?.data?.username;
+                setAuth({ user_id, username});
                 setUser('');
                 setPwd('');
                 setEmail('');
                 setMatchPwd('');
-                dispatch({
-                    type: LOGIN,
-                    payload: response?.data?.user_id,
-                })
                 setSuccess(true);
             }
         } catch (err) {
@@ -243,7 +243,7 @@ const Signup = () => {
                         <div className='login=-link'>
                             Already registered?<br />
                             <span>
-                                <Link to='/login'>
+                                <Link to='/login/login'>
                                     Login
                                 </Link>
                             </span>

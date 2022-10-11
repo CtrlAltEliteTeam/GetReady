@@ -1,16 +1,17 @@
 import React, {useState, useContext, useEffect} from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { IconContext } from 'react-icons';
-import { AuthContext } from "../../api/AuthProvider";
+import  AuthContext from "../../api/AuthProvider";
 import { LOGIN, LOGOUT } from "../../api/Constants";
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai'
 import {NavbarData} from './NavbarData';
 import './Navbar.css'
+import LoginButton from '../LoginButton/LoginButton';
 
 const NavBar = () => {
 
-    const [state, dispatch] = useContext(AuthContext);
+    //const [state, dispatch] = useContext(AuthContext);
     let navigate = useNavigate();
 
     const [menubar, setMenubar] = useState(false);
@@ -18,42 +19,29 @@ const NavBar = () => {
     const [pageHeading, setPageHeading] = useState('Get Ready');
     const [loginName, setLoginName] = useState('Login');
 
+    const { auth, setAuth } = useContext(AuthContext)
+
+    //console.log( auth.user_id );
+
     useEffect(() => {
         //console.log(state.loggedin);
-            if(state.loggedin){
+            if(auth.user_id != null){
                 setLoginName('Log Out');
             }
-            else if(!state.loggedin){
+            else {
                 setLoginName('Login');
             }
-    },[loginName]);
+    },[auth.user_id]);
 
     const loginCheck = () =>{
-        if(state.loggedin){
-
-            dispatch({
-                type:LOGOUT,
-                payload: 0
-            });
+        if(auth.user_id != null){
             setLoginName('Login');
-        }
-        if(!state.loggedin){
+            setAuth({});
+        } else {
+            setLoginName('Logout');
             return navigate(`/login`);
         }
-        // if(state.loggedin){
-        //     dispatch({
-        //         type:LOGOUT,
-        //         payload: 0
-        //     });
-        //     setLoginName('Login');
-        // } else if (!state.loggedin) {
-        //     dispatch({
-        //         type:LOGIN,
-        //         payload: 11
-        //     });
-        //     setLoginName('Logout');
-        // }
-        console.log(state.id);
+        //return navigate(`/login`);
     };
 
 
@@ -67,9 +55,8 @@ const NavBar = () => {
                     <div className="page-heading">
                         {pageHeading}
                     </div>
-                    <div  className="landing-login-button" onClick={loginCheck}>
-                        {loginName}
-                    </div>
+                        <LoginButton/>
+
                 </div>
                 <nav className={menubar ? 'nav-menu active' : 'nav-menu'}>
                 <ul className='nav-menu-items' onClick={showMenubar}>

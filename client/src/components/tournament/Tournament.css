@@ -4,15 +4,16 @@
     border-style: ridge;
     border-color: #F9BE32;
     background-color: darkorchid;
-    width: 60%;
+    width: 100%;
     display: flex;
     position: relative;
-    /* overflow-y: scroll; */
-    overflow-x: hidden;
+    /* overflow: scroll; */
+    /* overflow-y: scroll;
+    overflow-x: hidden; */
 }
 
 .tournament-spacer{
-    width: 15vw;
+    width: 2vw;
 }
 
 .tournament-details{
@@ -106,7 +107,7 @@
     display: none;
 }
 
-.tournament-details-join-button{
+.tournament-details-join-button-show{
     right: 20px;
     position: absolute;
     bottom: 8px;
@@ -120,4 +121,18 @@
     justify-content: center;
     padding-top: 3px;
 }
-
+.tournament-details-join-button{
+    display: none;
+}
+.tournament-bracket-box{
+    padding: 30px;
+    border-radius: 25px;
+    border-style: ridge;
+    border-color: #F9BE32;
+    background-color:#3D3B52;
+    width:fit-content;
+    height: fit-content;
+    display: flex;
+    /* position: relative; */
+    overflow-y: auto;
+}
