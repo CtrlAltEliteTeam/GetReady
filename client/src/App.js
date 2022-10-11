@@ -11,7 +11,7 @@ import CreateTournament from '../src/components/createTounament/CreateTournament
 import Tournament from './components/tournament/Tournament';
 import UserProfile from './pages/profile/UserProfile';
 import Search from './pages/search/Search';
-import TournamentBracket from './components/bracket/Bracket'
+
 
 
 function App() {
@@ -30,7 +30,6 @@ function App() {
 				<Route path='/details' exact element={<Tournament/>}/>
 				<Route path='/profile' exact element={<UserProfile/>}/>
 				<Route path='/search' exact element={<Search/>}/>
-				<Route path='/bracket' exact element={<TournamentBracket />}/>
 			</Routes>
 		</Router>
     </>

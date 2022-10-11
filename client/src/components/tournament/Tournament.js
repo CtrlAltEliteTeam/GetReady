@@ -7,7 +7,6 @@ import './Tournament.css';
 import axios from '../../api/Axois';
 import AuthContext from '../../api/AuthProvider';
 import TournamentBracket from '../bracket/Bracket';
-import { Link, useNavigate } from 'react-router-dom';
 
 const TOURNAMENT_URL = "/get_tournament_details";
 const PARTICIPANT_URL = "/get_participants";
@@ -135,13 +134,6 @@ const Tournament = (params) => {
         });
     }, [])
 
-    let navigate = useNavigate();
-
-    const handleViewBracket = () =>{
-        return navigate(`/bracket`);
-    }
-
-
     const handleJoin = async (e) => {
         //axiose for join
         var t = currPart;
@@ -226,8 +218,8 @@ const Tournament = (params) => {
                                     )
                                 })}
                             </div>
-                            <div className='tournament-bracket-box' onClick={handleViewBracket}>
-                                View TournamentBracket
+                            <div className='tournament-bracket-box'>
+                                <TournamentBracket Participants={maxPart}/>
                             </div>
                         </div>
                                 
