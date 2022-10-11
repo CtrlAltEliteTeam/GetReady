@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as AiIcons from 'react-icons/ai';
 import './Tournament.css';
 import axios from '../../api/Axois';
@@ -12,10 +12,10 @@ const JOIN_URL = "/join_tournament";
 const Tournament = (params) => {
 
     let data = params.params.game;
-    console.log(JSON.stringify(data));
+    //console.log(JSON.stringify(data));
 
     //const { auth } = useContext(AuthContext);
-    const [auth, setAuth] = useState(params.params.user_id);
+    const [auth, setAuth] = useState({user_id : params.params.user_id});
 
     const [TournamentDetails, setTournamentDetails] = useState({});
     const [GameDetails, setGameDetails] = useState('');
@@ -24,11 +24,11 @@ const Tournament = (params) => {
 
     const [showJoinLeave, setShowJoinLeave] = useState(false);
     
-    const [title] = useState(data.name);
-    const [image] = useState(data.img);
-    const [alt] = useState(data.alt);
+    const [title, setTitle] = useState(data.name);
+    const [image, setImage] = useState(data.img);
+    const [alt, setAlt] = useState(data.alt);
     const [creator, setCreator] = useState("");
-    const [game] = useState(data.game);
+    const [game, setGame] = useState(data.game);
     const [sTime, setSTime] = useState("");
     const [sDate, setSDate] = useState("");
     const [eDate, setEDate] = useState("");
@@ -62,24 +62,22 @@ const Tournament = (params) => {
                 const response = await axios.post(TOURNAMENT_URL,{
                     tournament_id : data.id,
                 });
-                setDetails(response?.data);
+                const details = response?.data;
+                console.log(details[0]);
+                setCreator(details[0]?.username);
+                setDesc(details[0]?.description);
+                setSTime(details[0]?.startTime);
+                setSDate(details[0]?.startDate.substring(0, 10));
+                setEDate(details[0]?.endDate.substring(0, 10));
+                setCurrPart(details[0]?.numParticipants);
+                setMaxPart(details[0]?.maxParticipants);
+                setPartPermission(details[0]?.viewParticipant);
             } catch (error) {
                 //console.log(error);
             }
         }
         fetchData();
     }, [])
-
-    useEffect(()=>{
-        setCreator(details[0]?.username);
-        setDesc(details[0]?.description);
-        setSTime(details[0]?.startTime);
-        setSDate(details[0]?.startDate.substring(0, 10));
-        setEDate(details[0]?.endDate.substring(0, 10));
-        setCurrPart(details[0]?.numParticipants);
-        setMaxPart(details[0]?.maxParticipants);
-        setPartPermission(details[0]?.viewParticipant);
-    },[details])
 
     //change participants
     useEffect(() => {
@@ -111,23 +109,27 @@ const Tournament = (params) => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await axios.post(GET_JOIN_LEAVE_URL,{
-                tournament_id : data.id,
-                user_id : auth.user_id,
-            });
-            return await response?.data;
-        }
-        const res = fetchData();
-        const temp = Promise.resolve(res);
-        temp.then((value) => {
-            setJoinLeave(value.joinLeave);
-            console.log(joinLeave);
-            if (value.joinLeave === false){
-                setJoinLeaveLable("Join");
-            } else {
-                setJoinLeaveLable("Leave");
+            try {
+                const response = await axios.post(GET_JOIN_LEAVE_URL,{
+                    tournament_id : data.id,
+                    user_id : auth.user_id,
+                });
+                const joinSet = response?.data
+                console.log(joinSet.joinLeave);
+                if (joinSet.joinLeave === false){
+                    setJoinLeaveLable("Join");
+                } else {
+                    setJoinLeaveLable("Leave");
+                }
+            } catch (error) {
+                console.log(error);
             }
-        });
+        }
+        fetchData();
+        // const temp = Promise.resolve(res);
+        // temp.then((value) => {
+        //     setJoinLeave(value.joinLeave);
+        // });
     }, [])
 
     const handleJoin = async (e) => {
@@ -181,13 +183,13 @@ const Tournament = (params) => {
                     <div className='tournament-details-description'>
                         {desc}
                     </div>
-                    <div className='tournament-details-date'>
+                    <div className='tournament-details-date-time'>
                         Start Time: {sTime}
                     </div>
-                    <div className='tournament-details-date'>
+                    <div className='tournament-details-date-start'>
                         Start Date: {sDate}
                     </div>
-                    <div className='tournament-details-date'>
+                    <div className='tournament-details-date-end'>
                         End Date: {eDate}
                     </div>
                 </div>
@@ -208,7 +210,7 @@ const Tournament = (params) => {
                             <div className={showParticipants ? "tournament-details-partricipants-list-show" : "tournament-details-partricipants-list"}>
                                 {Participants.map((element)=>{
                                     return(
-                                        <div key={element.id}>
+                                        <div>
                                             {element.username}
                                         </div>
                                     )

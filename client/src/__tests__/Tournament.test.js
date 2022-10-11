@@ -38,7 +38,7 @@ const game = {
     count : 1 
 }
 
-const fakeTournament = {
+const fakeTournament = [{
     username : "bob",
     description : 'sample',
     startTime : "10:00 am",
@@ -47,7 +47,7 @@ const fakeTournament = {
     numParticipants: 12,
     maxParticipants: 25,
     viewParticipant: false
-}
+}]
 
 const fakeJoinLeaveInitial = {
     joinLeave : false
@@ -113,23 +113,36 @@ describe('Tournament Axios',() => {
     });
 });
 
-// describe('Tournament Tests',() => {
-//     it('display initial data correctly',async () => {
-//         mock.onPost("/get_tournament_details", {tournament_id : 1}).reply(200,fakeTournament);
-//         mock.onPost("/get_participants", {tournament_id : 1}).reply(200,fakeParticipants);
-//         mock.onPost("/is_participating", {tournament_id : 1, user_id : 2}).reply(200,fakeJoinLeaveInitial);
-//         mock.onPost("/join_tournament", {tournament_id : 1, user_id : 2}).reply(200,fakeJoin);
+describe('Tournament Tests',() => {
+    it('display initial data correctly',async () => {
+        mock.onPost("/get_tournament_details", {tournament_id : 1}).reply(200,fakeTournament);
+        mock.onPost("/get_participants", {tournament_id : 1}).reply(200,fakeParticipants);
+        mock.onPost("/is_participating", {tournament_id : 1, user_id : 2}).reply(200,fakeJoinLeaveInitial);
+        mock.onPost("/join_tournament", {tournament_id : 1, user_id : 2}).reply(200,fakeJoin);
 
-//         await act(() => {
-//             ReactDOM.createRoot(container).render(<Tournament params={params} />);
-//         });
-//         const label = container.querySelector('div.tournament-details-header-title');
-//         const pic = container.querySelector('img.tournament-details-header-image');
-//         const gameTitle = container.querySelector('div.tournament-details-header-game');
+        await act(() => {
+            ReactDOM.createRoot(container).render(<Tournament params={params} />);
+        });
+        const label = container.querySelector('div.tournament-details-header-title');
+        const pic = container.querySelector('img.tournament-details-header-image');
+        const gameTitle = container.querySelector('div.tournament-details-header-game');
+        const creator = container.querySelector('div.tournament-details-header-creator');
+        const desc = container.querySelector('div.tournament-details-description');
+        const time = container.querySelector('div.tournament-details-date-time');
+        const start = container.querySelector('div.tournament-details-date-start');
+        const end = container.querySelector('div.tournament-details-date-end');
+        const parts = container.querySelector('div.tournament-details-partricipants-display');
 
-//         expect(label.textContent).toBe('fortnite tourny');
-//         expect(pic.src).toBe(`http://localhost/Fortnite`);
-//         expect(pic.alt).toBe("TournamentImage");
-//         expect(gameTitle.textContent).toBe("Fortnite");
-//     });
-// });
+        console.log(time.textContent);
+        expect(label.textContent).toBe('fortnite tourny');
+        expect(pic.src).toBe(`http://localhost/Fortnite`);
+        expect(pic.alt).toBe("TournamentImage");
+        expect(gameTitle.textContent).toBe("Fortnite");
+        expect(creator.textContent).toBe("bob");
+        expect(desc.textContent).toBe("sample");
+        expect(time.textContent).toBe("Start Time: 10:00 am");
+        expect(start.textContent).toBe("Start Date: 08/12/2022");
+        expect(end.textContent).toBe("End Date: 10/12/2022");
+        expect(parts.textContent).toBe("12 / 25");
+    });
+});
