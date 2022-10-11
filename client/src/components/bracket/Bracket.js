@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {Bracket, Round, Match, Entrant, BRACKET, WINNERS_BRACKET, LOSERS_BRACKET} from './Classes_Constants';
 import TournamentGUI from './bracketComponents/TournamentGUI';
 import axios from '../../api/Axois';
@@ -6,7 +6,17 @@ import './Bracket.css';
 
 
 function TournamentBracket(props){
-    const entrants = ['1', '2', '3', '4', '5','6','7','8'];
+
+    const [entrants,setEntrants]=useState([])
+
+    useEffect(() => { 
+        setEntrants([]);
+        props.Participants.forEach(element => {
+            setEntrants(entrants => [...entrants,element.username]);
+        });
+    },[props])
+
+    
     const tournament = [];
     generateTournament(tournament, entrants);
 
@@ -41,6 +51,7 @@ function TournamentBracket(props){
 export default TournamentBracket
 
 function generateTournament(tournament, entrants){
+    console.log(entrants);
     singleElim(tournament, entrants);   
   }
   

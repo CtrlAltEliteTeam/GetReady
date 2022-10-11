@@ -219,7 +219,7 @@ const Tournament = (params) => {
                                 })}
                             </div>
                             <div className='tournament-bracket-box'>
-                                <TournamentBracket Participants={maxPart}/>
+                                <TournamentBracket maxPart={maxPart} Participants={Participants}/>
                             </div>
                         </div>
                                 
