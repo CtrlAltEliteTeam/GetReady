@@ -43,26 +43,22 @@ const Login = () => {
 
     const handleSubmit = async (e) => { //button press
         e.preventDefault();
-
-        try {
-            const response = await axios.post(LOGIN_URL,{
-                    email:email,
-                    password:pwd
-                });
-                console.log(JSON.stringify(response));
-            if(response?.data?.error === 301){
-                setErrMsg('Incorrect Username or Password');
-            } else {
-                const user_id = response?.data[0]?.user_id;
-                const username = response?.data[0]?.username;
-                setEmail('');
-                setPwd('');
-                console.log("before dispatch " + response?.data[0]?.user_id);
-                setAuth({ user_id, username});
-                setSuccess(true);
-            }
-        } catch (error) {
-            console.log(error);
+        console.log('plz');
+        const response = await axios.post(LOGIN_URL,{
+                email:email,
+                password:pwd
+            });
+            console.log(JSON.stringify(response));
+        if(response?.data?.error === 301){
+            setErrMsg('Incorrect Username or Password');
+        } else {
+            const user_id = response?.data[0]?.user_id;
+            const username = response?.data[0]?.username;
+            setEmail('');
+            setPwd('');
+            console.log("before dispatch " + response?.data[0]?.user_id);
+            setAuth({ user_id, username});
+            setSuccess(true);
         }
 
     }
@@ -70,9 +66,9 @@ const Login = () => {
     return (
         <>
             {success ? (
-                <section data-testid="ReturnSuccess">
+                <div className="return-success">
                     success
-                </section>
+                </div>
             ) : (
                 <section className='login-box'>
                     <div className='login-heading'>

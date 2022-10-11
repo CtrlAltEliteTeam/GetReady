@@ -1,18 +1,14 @@
-import React, {useState, useEffect, useContext} from "react";
+import React, { useState, useEffect } from "react";
 import { GameTileData } from "../../components/GameTile/GameTileData";
 import GameTile from "../../components/GameTile/GameTile";
 import { GameTile_TestData } from "../../components/GameTile/GameTitle_TestData";
-import GetReady from '../../resources/img/GetReady.png';
 import './LandingPage.css';
-import { Link, useNavigate } from "react-router-dom";
-import { LOGOUT } from "../../api/Constants";
 import axios from "../../api/Axois";
 
 const GET_TOURMANENT_SHORT_URL = "/get_tournament_short";
 
 const LandingPage = () => {
 
-    let navigate = useNavigate();
     // Array of Tounaments
 
     const [featuredList, setFeaturedList] = useState([]);
@@ -44,8 +40,10 @@ const LandingPage = () => {
                 let count = 0;
                 if ( featuredList.length === 0){
                     data.forEach(element => {
-                        let gameTile = new GameTileData(element.tournament_id,element.title,element.name,element.content,element.user_id,count);
-                        setFeaturedList(featuredList => [...featuredList,gameTile]);
+                        //removed for stubbing object tested seperatly
+                        //let gameTile = new GameTileData(element.tournament_id,element.title,element.name,element.content,element.user_id,count);
+                        //console.log(gameTile.id);
+                        setFeaturedList(featuredList => [...featuredList,element]);
                         count++;
                     });
                 }
@@ -66,21 +64,23 @@ const LandingPage = () => {
                 </div>
                 <div className="games-list-inner">
                     {gamesList.map((element)=>{
-                        return(
-                            <GameTile game={element}/>
+                        return( //changed for testing
+                            <div key={element.id}>
+                                {element.name}
+                            </div>
                         )
                     })}
                 </div>
             </div>
             <div className="tourny-list-outer">
-                <div  className="games-list-heading">
+                <div  className="tournament-list-heading">
                     {featuredName}
                 </div>
                 <div className="tourny-list-inner">
                     {featuredList.map((element)=>{
-                        return(
+                        return( //hanged for testing
                             <div key={element.id}>
-                                <GameTile game={element}/>
+                                {element.name}
                             </div>
                         )
                     })}

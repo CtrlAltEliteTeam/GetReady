@@ -25,7 +25,6 @@ afterEach(() => {
 
 describe('Game Tile tests',() => {
     it('display data correctly',() => {
-        // Test first render and componentDidMount
         act(() => {
             ReactDOM.createRoot(container).render(<GameTile params={params1} />);
         });
