@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import * as AiIcons from 'react-icons/ai';
 import './Tournament.css';
 import axios from '../../api/Axois';
-import AuthContext from '../../api/AuthProvider';
 
 const TOURNAMENT_URL = "/get_tournament_details";
 const PARTICIPANT_URL = "/get_participants";
@@ -13,7 +12,7 @@ const JOIN_URL = "/join_tournament";
 const Tournament = (params) => {
 
     let data = params.params.game;
-    //console.log(JSON.stringify(data));
+    console.log(JSON.stringify(data));
 
     //const { auth } = useContext(AuthContext);
     const [auth, setAuth] = useState(params.params.user_id);
@@ -209,7 +208,7 @@ const Tournament = (params) => {
                             <div className={showParticipants ? "tournament-details-partricipants-list-show" : "tournament-details-partricipants-list"}>
                                 {Participants.map((element)=>{
                                     return(
-                                        <div>
+                                        <div key={element.id}>
                                             {element.username}
                                         </div>
                                     )

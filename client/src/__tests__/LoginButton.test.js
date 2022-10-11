@@ -54,17 +54,6 @@ describe('login button', () => {
         expect(Login.textContent).toBe("Log Out");
 
     });
-    // it('still show login buttons',() => {
-    //     render(<LoginButton params={params2}/>);
-        
-    //     expect(screen.getByText("Login"))
-    //     expect(screen.getByText("Signup"))
-    // })
-    // it('show log out button',() => {
-    //     render(<LoginButton params={params3}/>);
-        
-    //     expect(screen.getByText("Log Out"))
-    // })
 })
 
 
