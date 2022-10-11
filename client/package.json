@@ -20,14 +20,14 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "eject": "react-scripts eject"
   },
   "jest": {
     "verbose": true,
     "transform": {
-      "\\.[jt]sx?$": "babel-jest"
-      
+      "\\.[jt]sx?$": "babel-jest",
+      ".+\\.(css|styl|less|sass|scss)$": "jest-css-modules-transform"
     }
   },
   "eslintConfig": {
