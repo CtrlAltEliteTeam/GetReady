@@ -46,7 +46,7 @@ const fakeTournament = [{
     endDate : "10/12/2022",
     numParticipants: 12,
     maxParticipants: 25,
-    viewParticipant: false
+    viewParticipant: true
 }]
 
 const fakeJoinLeaveInitial = {
@@ -133,7 +133,7 @@ describe('Tournament Tests',() => {
         const end = container.querySelector('div.tournament-details-date-end');
         const parts = container.querySelector('div.tournament-details-partricipants-display');
 
-        console.log(time.textContent);
+
         expect(label.textContent).toBe('fortnite tourny');
         expect(pic.src).toBe(`http://localhost/Fortnite`);
         expect(pic.alt).toBe("TournamentImage");
@@ -144,5 +144,40 @@ describe('Tournament Tests',() => {
         expect(start.textContent).toBe("Start Date: 08/12/2022");
         expect(end.textContent).toBe("End Date: 10/12/2022");
         expect(parts.textContent).toBe("12 / 25");
+    });
+    it('display participants',async () => {
+        mock.onPost("/get_tournament_details", {tournament_id : 1}).reply(200,fakeTournament);
+        mock.onPost("/get_participants", {tournament_id : 1}).reply(200,fakeParticipants);
+        mock.onPost("/is_participating", {tournament_id : 1, user_id : 2}).reply(200,fakeJoinLeaveInitial);
+        mock.onPost("/join_tournament", {tournament_id : 1, user_id : 2}).reply(200,fakeJoin);
+
+        await act(() => {
+            ReactDOM.createRoot(container).render(<Tournament params={params} />);
+        });
+
+        const parts = container.querySelector('div.tournament-details-partricipants-list');
+        expect(parts.textContent).toBe("johnroymay");
+
+    });
+    it('join',async () => {
+        mock.onPost("/get_tournament_details", {tournament_id : 1}).reply(200,fakeTournament);
+        mock.onPost("/get_participants", {tournament_id : 1}).reply(200,fakeParticipants);
+        mock.onPost("/is_participating", {tournament_id : 1, user_id : 2}).reply(200,fakeJoinLeaveInitial);
+        mock.onPost("/join_tournament", {tournament_id : 1, user_id : 2}).reply(200,fakeJoin);
+
+        await act(() => {
+            ReactDOM.createRoot(container).render(<Tournament params={params} />);
+        });
+
+        const button = container.querySelector("div.tournament-details-join-button-show");
+
+        expect(button.textContent).toBe("Join");
+
+        await act(() => {
+            button.dispatchEvent(new MouseEvent('click', {bubbles: true}));
+        });
+
+        expect(button.textContent).toBe("Leave");
+
     });
 });

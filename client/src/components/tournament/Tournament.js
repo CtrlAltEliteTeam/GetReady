@@ -210,7 +210,7 @@ const Tournament = (params) => {
                             <div className={showParticipants ? "tournament-details-partricipants-list-show" : "tournament-details-partricipants-list"}>
                                 {Participants.map((element)=>{
                                     return(
-                                        <div>
+                                        <div key={element.id}>
                                             {element.username}
                                         </div>
                                     )
