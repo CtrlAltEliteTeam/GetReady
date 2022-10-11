@@ -118,19 +118,19 @@ const Tournament = (params) => {
                 tournament_id : data.id,
                 user_id : auth.user_id,
             });
-            return await response?.data;
-        }
-        const res = fetchData();
-        const temp = Promise.resolve(res);
-        temp.then((value) => {
-            setJoinLeave(value.joinLeave);
-            console.log(joinLeave);
-            if (value.joinLeave === false){
+            const joinSet = response?.data
+            console.log(joinSet.joinLeave);
+            if (joinSet.joinLeave === false){
                 setJoinLeaveLable("Join");
             } else {
                 setJoinLeaveLable("Leave");
             }
-        });
+        }
+        fetchData();
+        // const temp = Promise.resolve(res);
+        // temp.then((value) => {
+        //     setJoinLeave(value.joinLeave);
+        // });
     }, [])
 
     const handleJoin = async (e) => {
