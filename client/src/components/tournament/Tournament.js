@@ -6,6 +6,7 @@ import * as AiIcons from 'react-icons/ai';
 import './Tournament.css';
 import axios from '../../api/Axois';
 import AuthContext from '../../api/AuthProvider';
+import TournamentBracket from '../bracket/Bracket';
 
 const TOURNAMENT_URL = "/get_tournament_details";
 const PARTICIPANT_URL = "/get_participants";
@@ -217,10 +218,14 @@ const Tournament = (params) => {
                                     )
                                 })}
                             </div>
+                            <div className='tournament-bracket-box'>
+                                <TournamentBracket maxPart={maxPart} Participants={Participants}/>
+                            </div>
                         </div>
+                                
                     </div>) : (
                         <div className='tournament-details-partricipants'>
-                            Participants
+                                Participants:&nbsp;
                             <div className='tournament-details-partricipants-display'>
                                 {currPart} / {maxPart}
                             </div>

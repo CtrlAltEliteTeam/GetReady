@@ -13,6 +13,7 @@ import UserProfile from './pages/profile/UserProfile';
 import Search from './pages/search/Search';
 
 
+
 function App() {
 	return (
 	<>
