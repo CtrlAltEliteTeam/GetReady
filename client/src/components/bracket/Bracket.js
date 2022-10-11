@@ -51,7 +51,6 @@ function TournamentBracket(props){
 export default TournamentBracket
 
 function generateTournament(tournament, entrants){
-    console.log(entrants);
     singleElim(tournament, entrants);   
   }
   

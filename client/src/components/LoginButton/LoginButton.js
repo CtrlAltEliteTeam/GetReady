@@ -30,15 +30,14 @@ const LoginButton = () => {
     });
 
     useEffect(() => {
-        console.log(auth.user_id);
-            if(auth.user_id != 0){
-                setLoginName('Log Out');
-                setShowSignupButton(false);
-            }
-            else {
-                setLoginName('Login');
-                setShowSignupButton(true);
-            }
+        if(auth.user_id != 0){
+            setLoginName('Log Out');
+            setShowSignupButton(false);
+        }
+        else {
+            setLoginName('Login');
+            setShowSignupButton(true);
+        }
     },[auth.user_id]);
 
     const loginCheck = () => {
