@@ -19,6 +19,7 @@ const MyTounaments = () => {
     let navigate = useNavigate();
 
     const { auth } = useContext(AuthContext);
+    console.log(auth.user_id);
 
     useEffect(() => {
         const fetchData = async (e) => {
