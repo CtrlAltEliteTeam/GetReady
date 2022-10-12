@@ -5,14 +5,9 @@
     margin-bottom: 40px;
 }
 
-.search input {
-    justify-content: center;
+.input {
     background-color: white;
-    border: 0;
-    border-radius: 2px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-    font-size: 18px;
+    font-size: 24px;
     padding: 15px;
     height: 30px;
     width: 300px;
@@ -28,17 +23,18 @@
 }
 
 .searchIcon {
-height: 60px;
-width: 50px;
-background-color: white;
-display: grid;
-place-items: center;
+    height: 60px;
+    width: 50px;
+    background-color: white;
+    display: grid;
+    place-items: center;
+    font-size: 35px;
 }
 
 .filter {
     background-color: #FFA900;
     height: 60px;
-    font-size: 18px;
+    font-size: 16px;
     text-align: center;
     border: 0;
     border-radius: 2px;
@@ -48,9 +44,6 @@ place-items: center;
 
 input:focus {
 outline: none;
-}
-.searchIcon svg {
-font-size: 35px;
 }
 
 #clearBtn {
