@@ -39,7 +39,6 @@ const LandingPage = () => {
         const fetchData = async (e) => {
             try {
                 const response = await axios.post(GET_TOURMANENT_SHORT_URL,{});
-                console.log(response?.data);
                 var data = response?.data;
                 let count = 0;
                 if ( featuredList.length === 0){

@@ -11,6 +11,10 @@
     position: relative;
 }
 
+.tile-layout :hover{
+    opacity: 80%;
+}
+
 .tile-image-outer{
     border-radius: inherit;
 }
@@ -86,7 +90,8 @@
 .tournament-view-outer{
     z-index: 17;
     position: fixed;
-    /* left: 40%; */
-    top: calc(100vh/2 - 250px);
-    left: calc(100vw/2 - 30vw);
+    width: 85vw;
+    top: 50%;
+    left: 50%;
+    transform: translate(-52%, -50%);
 }

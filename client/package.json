@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
     "jest": "^27.5.1",
+    "jest-css-modules-transform": "^4.4.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-dropdown-select": "^4.9.0",
@@ -26,7 +27,7 @@
     "verbose": true,
     "transform": {
       "\\.[jt]sx?$": "babel-jest",
-      "\\.css$": "some-css-transformer"
+      ".+\\.(css|styl|less|sass|scss)$": "jest-css-modules-transform"
     }
   },
   "eslintConfig": {

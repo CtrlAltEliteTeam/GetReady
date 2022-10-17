@@ -12,6 +12,7 @@ const CreateTournament = () => {
 
     //const [state] = useContext(AuthContext);
     const { auth } = useContext(AuthContext);
+    console.log(auth.user_id);
 
     const [tName, setTName] = useState('');
     const [validTName, setValidTName] = useState(false);
