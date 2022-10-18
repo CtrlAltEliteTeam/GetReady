@@ -1,11 +1,12 @@
 import React from 'react';
-import { act, fireEvent, cleanup } from "@testing-library/react";
+import { act, fireEvent, cleanup, renderHook } from "@testing-library/react";
 import '@testing-library/jest-dom';
 import Tournament from '../components/tournament/Tournament';
 import ReactDOM from 'react-dom/client';
 
 import axios from '../api/Axois';
 import MockAdapter from 'axios-mock-adapter';
+//import { AuthProvider } from '../api/AuthProvider';
 
 var mock = new MockAdapter(axios);
 
@@ -80,6 +81,29 @@ const fakeLeave = {
 
 const params = {user_id : 2 , game : game}
 
+// const {auth} = {user_id: 2, username : 'bob'};
+
+// const AuthContextProvider = ({ children }) => (
+//     <AuthProvider.Provider>{children}</AuthProvider.Provider>
+// );
+
+// const wrapper = ({ children }) => (
+//     <AuthContextProvider>{children}</AuthContextProvider>
+// );
+
+// let resultExpense = [];
+
+// const mockSetAuth = jest.fn().mockImplementation(auth => {
+//     resultAuth = {};
+//     return resultAuth;
+// });
+
+// const mockUseContext = jest.fn().mockImplementation(() => ({
+//     auth: {},
+//     setAuth: mockSetAuth,
+// }));
+
+React.useContext = mockUseContext;
 
 describe('Tournament Axios',() => {
     it('fetch Tournament',() => {
@@ -154,9 +178,7 @@ describe('Tournament Tests',() => {
         mock.onPost("/is_participating", {tournament_id : 1, user_id : 2}).reply(200,fakeJoinInitial);
         mock.onPost("/join_tournament", {tournament_id : 1, user_id : 2}).reply(200,fakeJoin);
 
-        await act(() => {
-            ReactDOM.createRoot(container).render(<Tournament params={params} />);
-        });
+        await act(() => {ReactDOM.createRoot(container).render(<Tournament params={params} />)});
 
         const parts = container.querySelector('div.tournament-details-partricipants-list');
         expect(parts.textContent).toBe("johnroymay");
