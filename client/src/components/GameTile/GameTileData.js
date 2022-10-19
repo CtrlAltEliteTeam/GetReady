@@ -6,6 +6,20 @@ import SSb from '../../resources/img/GameTile_Test_Img/SSB.jpg';
 import Tekken from '../../resources/img/GameTile_Test_Img/tekken-7.jpg';
 import pacMan from '../../resources/img/GameTile_Test_Img/pacMan.jpg';
 import createImg from '../../resources/img/BigPlus.jpg';
+import Apex from '../../resources/img/GameTile_Test_Img/Apex_legends.jpg';
+import COD from '../../resources/img/GameTile_Test_Img/COD.jpg'
+import Dota from '../../resources/img/GameTile_Test_Img/dota2.jpg'
+import Dbz from '../../resources/img/GameTile_Test_Img/dragon_ballZ.jpg'
+import Fifa22 from '../../resources/img/GameTile_Test_Img/fifa22.jpg'
+import Fifa23 from '../../resources/img/GameTile_Test_Img/fifa23.jpg'
+import MC11 from '../../resources/img/GameTile_Test_Img/header.jpg'
+import Kart from '../../resources/img/GameTile_Test_Img/mario-kart-8-deluxe.jpg'
+import Strikers from '../../resources/img/GameTile_Test_Img/Mario_strikers_battle_league.jpeg'
+import Overwatch from '../../resources/img/GameTile_Test_Img/overwatch.jpg'
+import Unite from '../../resources/img/GameTile_Test_Img/pokemon_unite.jpg'
+import Rocket from '../../resources/img/GameTile_Test_Img/rocket_league.jpg'
+import Splatoon from '../../resources/img/GameTile_Test_Img/Splatoon.3.jpg'
+import Street from '../../resources/img/GameTile_Test_Img/street_fighter.jpg'
 
 export class GameTileData{
     constructor(id, name, game, content, user, count){
@@ -31,8 +45,50 @@ export class GameTileData{
             case "Tekken 7":
                 this.img = Tekken;
                 break;
-            case "pacman":
+            case "Pacman":
                 this.img = pacMan;
+                break;
+            case "Apex":
+                this.img = Apex;
+                break;
+            case "COD":
+                this.img = COD;
+                break;
+            case "Dota":
+                this.img = Dota;
+                break;
+            case "Dbz":
+                this.img = Dbz;
+                break;
+            case "Fifa22":
+                this.img = Fifa22;
+                break;
+            case "Fifa23":
+                this.img = Fifa23;
+                break;
+            case "MC11":
+                this.img = MC11;
+                break;
+            case "Kart":
+                this.img = Kart;
+                break;
+            case "Strickers":
+                this.img = Strikers;
+                break;
+            case "Overwatch":
+                this.img = Overwatch;
+                break;
+            case "Unite":
+                this.img = Unite;
+                break;
+            case "Rocket":
+                this.img = Rocket;
+                break;
+            case "Splatoon":
+                this.img = Splatoon;
+                break;
+            case "Street":
+                this.img = Street;
                 break;
             case "create":
                 this.img = createImg;
