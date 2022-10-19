@@ -8,30 +8,34 @@ export const NavbarData = [
         title:"Featured",
         path:'/',
         icon:<BiIcons.BiTrendingUp />,
-        cName:'nav-text'
+        cName:'nav-text',
+        show: true
     },
     {
         title:"Tourmanents",
         path:'/search',
         icon:<AiIcons.AiOutlineHome />,
-        cName:'nav-text'
+        cName:'nav-text',
+        show: true
     },
     {
         title:"My Tournaments",
         path:'/mypage',
         icon:<AiIcons.AiOutlineProfile />,
-        cName:'nav-text'
+        cName:'nav-text',
+        show : false
     },
-    {
-        title:"History",
-        path:'/',
-        icon:<AiIcons.AiOutlineProfile />,
-        cName:'nav-text'
-    },
+    // {
+    //     title:"History",
+    //     path:'/',
+    //     icon:<AiIcons.AiOutlineProfile />,
+    //     cName:'nav-text'
+    // },
     {
         title:"Profile",
         path:'/profile',
         icon:<CgIcons.CgProfile />,
-        cName:'nav-text'
+        cName:'nav-text',
+        show : false
     },
 ];

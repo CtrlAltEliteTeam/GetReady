@@ -19,30 +19,30 @@ const NavBar = () => {
     const [pageHeading, setPageHeading] = useState('Get Ready');
     const [loginName, setLoginName] = useState('Login');
 
-    const { auth, setAuth } = useContext(AuthContext)
+    const { auth } = useContext(AuthContext)
 
     //console.log( auth.user_id );
 
-    useEffect(() => {
-        //console.log(state.loggedin);
-            if(auth.user_id != null){
-                setLoginName('Log Out');
-            }
-            else {
-                setLoginName('Login');
-            }
-    },[auth.user_id]);
+    // useEffect(() => {
+    //     console.log(state.loggedin);
+    //         if(auth.user_id != null){
+    //             setLoginName('Log Out');
+    //         }
+    //         else {
+    //             setLoginName('Login');
+    //         }
+    // },[auth.user_id]);
 
-    const loginCheck = () =>{
-        if(auth.user_id != null){
-            setLoginName('Login');
-            setAuth({});
-        } else {
-            setLoginName('Logout');
-            return navigate(`/login`);
-        }
-        //return navigate(`/login`);
-    };
+    // const loginCheck = () =>{
+    //     if(auth.user_id != null){
+    //         setLoginName('Login');
+    //         setAuth({});
+    //     } else {
+    //         setLoginName('Logout');
+    //         return navigate(`/login`);
+    //     }
+    //     return navigate(`/login`);
+    // };
 
 
     return (
@@ -56,7 +56,6 @@ const NavBar = () => {
                         {pageHeading}
                     </div>
                         <LoginButton/>
-
                 </div>
                 <nav className={menubar ? 'nav-menu active' : 'nav-menu'}>
                 <ul className='nav-menu-items' onClick={showMenubar}>
@@ -65,15 +64,25 @@ const NavBar = () => {
                             <AiIcons.AiOutlineClose />
                         </Link>
                     </li>
-                    {NavbarData.map((item, index) => {
-                    return (
-                        <li key={index} className={item.cName}>
-                        <Link to={item.path}>
-                            {item.icon}
-                            <span>{item.title}</span>
-                        </Link>
-                        </li>
-                    );
+                    {NavbarData.map((item, index) => { 
+                        if (item.show == true)
+                            return (
+                                <li key={index} className={item.cName}>
+                                <Link to={item.path}>
+                                    {item.icon}
+                                    <span>{item.title}</span>
+                                </Link>
+                                </li>
+                            );
+                        else if (item.show == false && auth.user_id != 0)
+                            return (
+                                <li key={index} className={item.cName}>
+                                <Link to={item.path}>
+                                    {item.icon}
+                                    <span>{item.title}</span>
+                                </Link>
+                                </li>
+                            );
                     })}
                 </ul>
                 </nav>
