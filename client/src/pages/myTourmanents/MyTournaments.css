@@ -1,9 +1,5 @@
-.my-tournaments{
-    padding-top: 100px;
-    display: grid;
-    align-content: space-evenly;
-    grid-template-columns: auto auto auto;
-    position: relative;
+body{
+    margin: 0;
 }
 
 .my-tournament-overlay{
@@ -31,10 +27,35 @@
     cursor: pointer;
 }
 
+.my-tournaments-page{
+    position: relative;
+    
+}
+
 .create-tounament-wrapper{
     z-index: 17;
     position: fixed;
     /* left: 40%; */
     top: calc(100vh/2 - 250px);
     left: calc(100vw/2 - 150px);
+}
+
+.games-list-outer{
+    margin-top: 20px;
+    width: 83%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.games-list-inner{
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+.my-tourny-list-inner{
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    display: flex;
 }
