@@ -5,6 +5,13 @@ import * as AiIcons from 'react-icons/ai';
 
 export const NavbarData = [
     {
+        title:"Home",
+        path:'/dashboard',
+        icon:<AiIcons.AiOutlineHome />,
+        cName:'nav-text',
+        show: true
+    },
+    {
         title:"Featured",
         path:'/',
         icon:<BiIcons.BiTrendingUp />,
@@ -12,7 +19,7 @@ export const NavbarData = [
         show: true
     },
     {
-        title:"Tourmanents",
+        title:"Tournaments",
         path:'/search',
         icon:<AiIcons.AiOutlineHome />,
         cName:'nav-text',
@@ -25,12 +32,7 @@ export const NavbarData = [
         cName:'nav-text',
         show : false
     },
-    // {
-    //     title:"History",
-    //     path:'/',
-    //     icon:<AiIcons.AiOutlineProfile />,
-    //     cName:'nav-text'
-    // },
+    
     {
         title:"Profile",
         path:'/profile',
@@ -38,4 +40,17 @@ export const NavbarData = [
         cName:'nav-text',
         show : false
     },
+    {
+        title:"FAQs",
+        path:'/faqs',
+        icon:<AiIcons.AiOutlineExclamationCircle />,
+        cName:'nav-text',
+        show : true
+    },
+    // {
+    //     title:"History",
+    //     path:'/',
+    //     icon:<AiIcons.AiOutlineProfile />,
+    //     cName:'nav-text'
+    // },
 ];
