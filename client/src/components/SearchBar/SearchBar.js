@@ -16,6 +16,7 @@ function SearchBar({placeholder, data}) {
         let newFilter = data.filter((value) => {
             return value.name.toLowerCase().includes(searchString.toLowerCase());
         });
+
         if (filter == "Game") {
                 newFilter = data.filter((value) => {
                 return value.game.toLowerCase().includes(searchString.toLowerCase());
@@ -43,55 +44,44 @@ function SearchBar({placeholder, data}) {
     return (
         <div className="search">
             <div className="searchInput"> 
-            <div className="dropdown">
-                <select className="filter" value={filter} onChange={event => handleFilterChange(event.target.value)}>
-                    <option id="0" >Tournament Title</option>
-                    <option id="1" >Game</option>
-                </select>
+                <div className="dropdown">
+                    <select className="filter" value={filter} onChange={event => handleFilterChange(event.target.value)}>
+                        <option id="0" >Tournament Title</option>
+                        <option id="1" >Game</option>
+                    </select>
+                </div>
+                <div className="input">
+                    <input 
+                        type="text" 
+                        placeholder={placeholder} value={barValue} onChange={handleFilter}
+                    /> 
+                </div>
+                <div className="searchIcon">
+                    {barValue.length == 0 ? <FcIcons.FcSearch/> : <IoIcons.IoMdCloseCircleOutline id="clearBtn" onClick={clearInput}/>}
+                </div>
             </div>
-            <input 
-                type="text" 
-                placeholder={placeholder} value={barValue} onChange={handleFilter}
-            /> 
-            <div className="searchIcon">
-                {barValue.length == 0 ? <FcIcons.FcSearch/> : <IoIcons.IoMdCloseCircleOutline id="clearBtn" onClick={clearInput}/>}
-            </div>
-        </div>
             {isFiltered ? (
                 <div className="dataResult">
-                {filteredData.map((element) => {
-                    return (
-                        <div key={element.id}> 
-                            <GameTile game={element}/>
-                        </div>
-                    )
-                })}
-            </div>
+                    {filteredData.map((element) => {
+                        return (
+                            <div key={element.id}> 
+                                <GameTile game={element}/>
+                            </div>
+                        )
+                    })}
+                </div>
             ) : (
                 <div className="dataResult">
-                {data.map((element) => {
-                    return (
-                        <div key={element.id}> 
-                            <GameTile game={element}/>
-                        </div>
-                    )
-                })}
-            </div>
+                    {data.map((element) => {
+                        return (
+                            <div key={element.id}> 
+                                <GameTile game={element}/>
+                            </div>
+                        )
+                    })}
+                </div>
             )}
-
-
-
-            {/* <div className="dataResult">
-                {filteredData.map((element) => {
-                    return (
-                        <div key={element.id}> 
-                            <GameTile game={element}/>
-                        </div>
-                    )
-                })}
-            </div> */}
         </div>
-
     );
 }
 

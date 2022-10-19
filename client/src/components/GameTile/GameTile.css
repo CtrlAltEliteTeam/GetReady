@@ -11,6 +11,10 @@
     position: relative;
 }
 
+.tile-layout :hover{
+    opacity: 80%;
+}
+
 .tile-image-outer{
     border-radius: inherit;
 }

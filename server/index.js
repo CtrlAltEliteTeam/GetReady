@@ -10,6 +10,31 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
+//get status function
+function getStatus(result) {
+    var count = Object.keys(result).length;
+    for (var i = 0; i < count; i++) {
+        var data = result[i];
+        const date = new Date();
+        const startDate =data.startDate;
+        const endDate = data.endDate;
+        const startTime = data.startTime;
+        var tournamentStatus;
+
+        if (date < startDate ) {
+            tournamentStatus = "Upcoming";
+        } else if (date > startDate  && date < endDate) {
+            tournamentStatus = "Ongoing";
+        } else if (date > endDate) {
+            tournamentStatus = "Past";
+        }
+    
+        data.status = tournamentStatus;
+    }
+    
+    return data; 
+}
+
 //get all users
 app.get('/api/get',(req,res)=>{
     const sqlSelect = "SELECT * FROM heroku_caad988da016f21.user";
@@ -83,13 +108,17 @@ app.get('/api/get_all_tournaments', (req, res)=>{
     });
 });
 
+//info for game tile
 app.post('/api/get_tournament_short', (req, res)=>{
-    const sqlSelect = "SELECT tournament.tournament_id, tournament.title, tournament.content, tournament.user_id, game.name FROM heroku_caad988da016f21.tournament INNER JOIN game ON tournament.game_id = game.game_id";
+    const sqlSelect = "SELECT tournament.tournament_id, tournament.title, tournament.content, tournament.user_id, game.name, tournament.startTime, tournament.startDate, tournament.endDate FROM heroku_caad988da016f21.tournament INNER JOIN game ON tournament.game_id = game.game_id";
     db.query(sqlSelect, (err, result)=> {
         if (err) {
             throw err;
         }
+        getStatus(result);
         res.send(result);
+        console.log(result);
+        //console.log(parsed);
     });
 });
 
@@ -111,7 +140,10 @@ app.post('/api/get_tournament_details', (req, res)=>{
             if (err) {
                 throw err;
             }
+            getStatus(result);
             res.send(result);
+            console.log(result);
+            //console.log(parsed);
         });
     } catch (err) {
         res.send({error:301});
@@ -181,7 +213,7 @@ app.post('/api/get_user_details', (req, res)=>{
 app.post('/api/search_by_title', (req, res)=>{
     const title = req.body.tournament_title;
     try {
-        const sqlSelect = "SELECT tournament.tournament_id, tournament.title, tournament.content, tournament.user_id, game.name FROM heroku_caad988da016f21.tournament INNER JOIN game ON tournament.game_id = game.game_id WHERE tournament.title =?;";
+        const sqlSelect = "SELECT tournament.tournament_id, tournament.title, tournament.content, tournament.user_id, game.name, tournament.startTime, tournament.startDate, tournament.endDate FROM heroku_caad988da016f21.tournament INNER JOIN game ON tournament.game_id = game.game_id WHERE tournament.title =?;";
         db.query(sqlSelect,[title],(err,result)=>{
             if (err) {
                 throw err;
@@ -193,15 +225,36 @@ app.post('/api/search_by_title', (req, res)=>{
     }
 });
 
+//gets all tournaments created by specific user
 app.post('/api/get_my_tournaments', (req, res)=>{
     const user_id = req.body.user_id;
     try {
-        const sqlSelect = "SELECT tournament.tournament_id, tournament.title, tournament.content, tournament.user_id, game.name FROM heroku_caad988da016f21.tournament INNER JOIN game ON tournament.game_id = game.game_id INNER JOIN user ON tournament.user_id = user.user_id WHERE user.user_id =?;";
+        const sqlSelect = "SELECT tournament.tournament_id, tournament.title, tournament.content, tournament.user_id, game.name, tournament.startTime, tournament.startDate, tournament.endDate FROM heroku_caad988da016f21.tournament INNER JOIN game ON tournament.game_id = game.game_id INNER JOIN user ON tournament.user_id = user.user_id WHERE user.user_id =?;";
         db.query(sqlSelect,[user_id],(err,result)=>{
             if (err) {
                 throw err;
             }
+            getStatus(result);
             res.send(result);
+            //console.log(result);
+        });
+    } catch (err) {
+        res.send({error:301});
+    }
+});
+
+//gets all tournaments that involve a specific user - whether they create it or participate in it
+app.post('/api/get_joined_tournaments', (req, res)=>{
+    const user_id = req.body.user_id;
+    try {
+        const sqlSelect = "SELECT tournament.tournament_id, tournament.title, tournament.content, tournament.user_id, game.name, tournament.startTime, tournament.startDate, tournament.endDate FROM heroku_caad988da016f21.entry INNER JOIN tournament ON entry.tournament_id = tournament.tournament_id INNER JOIN game ON tournament.game_id = game.game_id WHERE entry.user_id = ?;";
+        db.query(sqlSelect,[user_id],(err,result)=>{
+            if (err) {
+                throw err;
+            }
+            getStatus(result);
+            res.send(result);
+            console.log(result);
         });
     } catch (err) {
         res.send({error:301});
@@ -267,6 +320,7 @@ app.post('/api/create_tournament', (req, res)=>{
 //         res.send({error:301});
 //     }
 // });
+
 
 //need to modify for adding images
 app.post('/api/add_game',(req,res)=>{
@@ -414,7 +468,7 @@ app.post('/api/join_tournament', (req,res)=>{
                     db.query(sqlInsert,[user_id, tournament_id],(err,result)=>{
                         if(result?.affectedRows>=1){
                             //record successfully added to table
-                            try {
+                            try {         
                                 const sqlUpdate = "UPDATE heroku_caad988da016f21.tournament SET numParticipants = numParticipants + 1 WHERE tournament_id = ?;";
                                 db.query(sqlUpdate, [tournament_id],(err,result)=>{
                                     if (result?.affectedRows===1) {

@@ -21,7 +21,8 @@ const UserProfile = () => {
 
     let navigate = useNavigate();
 
-    const { auth } = useContext(AuthContext)
+    const { auth } = useContext(AuthContext);
+    console.log(auth.user_id);
 
     const [user, setUser] = useState('');
     const [validName, setValidName] = useState(false);

@@ -90,7 +90,7 @@ const Signup = () => {
             //     setErrMsg('Email Taken');
             } else {  
                 //On sucess 
-                const user_id = response?.data?.user_id;
+                const user_id = response?.data?.insertId;
                 const username = response?.data?.username;
                 setAuth({ user_id, username});
                 setUser('');

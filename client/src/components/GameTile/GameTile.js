@@ -29,7 +29,7 @@ const GameTile = (props) => {
         } else if (auth.user_id !== gameTile.user){
             setEditPermission(false);
         }
-    }, [])
+    }, [auth.user_id])
 
     const showDetails = () => {
         if (gameTile.content === "GAME"){
