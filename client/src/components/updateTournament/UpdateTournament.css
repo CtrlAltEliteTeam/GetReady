@@ -1,4 +1,4 @@
-.create-tounament-inner{
+/* .create-tounament-inner{
     display: flex;
     margin-top: 10px;
     border-radius: 25px;
@@ -39,4 +39,276 @@
 .create-item-button{
     display: flex;
     justify-content: center;
+} */
+
+.tournament-create-outer{
+    top: 80px;
+    padding: 30px;
+    position: relative;
+}
+
+.tournament-create-body{
+    margin-top: 20px;
+    border-style: groove;
+    border-radius: 25px;
+    border-color: gold;
+    border-width: 2px;
+    padding: 20px;
+    color: white;
+    font-family:sans-serif;
+    font-size: 17px;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+.tournament-create-header{
+    display: flex;
+}
+
+.tournament-create-date{
+    margin: 7px;
+    margin-left: 20px;
+}
+
+.tournament-create-header-image{
+    background-color: transparent;
+    border-radius: 20px;
+    width: 30vw;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    float: left;
+}
+
+.tournament-create-header-info{
+    margin-right: 2vw;
+    padding-left: 20px;
+    color: white;
+}
+
+.tournament-create-header-title{
+    margin-top: 4vh;
+    font-size: 7vh;
+}
+
+.tournament-create-header-game{
+    font-size: 4vh;
+}
+
+.tournament-create-header-creator{
+    font-size: 3vh;
+}
+
+
+.tournament-create-partricipants{
+    color:white;
+    font-family:sans-serif;
+}
+
+.tournament-create-partricipants-button{
+    width: 115px;
+    height: 25px;
+    border-radius: 25px;
+    background-color: #F9BE32;
+    padding: auto;
+    display: flex;
+    justify-content: center;
+    padding-top: 3px;
+}
+
+.tournament-create-partricipants-expand{
+    display: flex;
+}
+
+.tournament-create-partricipants-list-container{
+    padding-left: 25px;
+}
+
+
+.tournament-create-partricipants-expand-button{
+    display: flex;
+}
+
+.tournament-create-partricipants-list-show{
+    display: block;
+}
+
+.tournament-create-partricipants-list{
+    display: none;
+}
+
+.tournament-create-join-button-show{
+    right: 20px;
+    position: absolute;
+    bottom: 8px;
+    color: white;
+    width: 80px;
+    height: 25px;
+    border-radius: 25px;
+    background-color: #F9BE32;
+    padding: auto;
+    display: flex;
+    justify-content: center;
+    padding-top: 3px;
+}
+.tournament-create-join-button{
+    display: none;
+}
+.tournament-bracket-box{
+    padding: 30px;
+    border-radius: 25px;
+    border-style: ridge;
+    border-color: #F9BE32;
+    background-color:#3D3B52;
+    width:fit-content;
+    height: fit-content;
+    display: flex;
+    /* position: relative; */
+    overflow-y: auto;
+}
+.tournament-create-header-image{
+    width: 380px;
+    height: 234px;
+}
+
+input[type=name] {
+    border-style: none;
+    background-color: inherit;
+    font-size: inherit;
+    color: inherit;
+}
+
+select[id=game]{
+    padding: 7px;
+    border-radius: 20px;
+    margin-top: 17px;
+    background-color: inherit;
+    color: inherit;
+    font-size: 17px;
+    border-color: #F9BE32;
+}
+
+select[id=game] > option {
+    background-color: rebeccapurple;
+    border-color: #F9BE32;
+}
+
+.tournament-create-description{
+    border: white;
+    background-color: inherit;
+    padding: 7px;
+    border-style: solid;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    overflow: visible;
+    height: 60px;
+    border-width: 2px;
+}
+
+textarea[id=tdesc] {
+    width: 97%;
+    border-style: none;
+    overflow: auto;
+    color: white;
+    background-color: inherit;
+}
+
+input[id=tdate] {
+    margin-left: 5px;
+    border-radius: 20px;
+    padding: 3px;
+    border: white;
+    background-color: inherit;
+    border-style: solid;
+    color: inherit;
+    border-width: 2px;
+}
+
+input[id=ttime] {
+    margin-left: 5px;
+    border-radius: 20px;
+    padding: 3px;
+    border: white;
+    background-color: inherit;
+    border-style: solid;
+    color: inherit;
+    border-width: 2px;
+}
+
+.create-tournament-item{
+    margin-left: 5px;
+    border-radius: 20px;
+    padding: 3px;
+    border: white;
+    background-color: inherit;
+    border-style: solid;
+    color: inherit;
+    border-width: 2px;
+    width: 50px;
+}
+
+.create-tournament-item-outer{
+    display: flex;
+}
+
+.create-tournament-item-text{
+    padding-top: 3px;
+}
+
+input[id=tpart] {
+    margin-left: 5px;
+    border-radius: 20px;
+    padding: 3px;
+    border: white;
+    background-color: inherit;
+    border-style: none;
+    color: inherit;
+    border-width: 2px;
+    width: 35px;
+}
+
+.tournament-create-header-creator{
+    margin-top: 20px;
+    color: inherit;
+    margin-left: 12px;
+    font-size: 26px;
+}
+
+.create-item-button{
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    position: absolute;
+    right: 20px;
+    border-radius: 25px;
+    background-color: #F9BE32;
+    padding: 12px;
+    width: 70px;
+    margin-top: 0px;
+    text-align: center;
+    top:70px
+}
+
+.tournament-create-back{
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    position: absolute;
+    right: 20px;
+    border-radius: 25px;
+    background-color: #F9BE32;
+    padding: 12px;
+    width: 70px;
+    margin-top: 0px;
+    text-align: center;
+    top:20px
+}
+
+button[id=create] {
+    border-style: none;
+    background-color: inherit;
+    color: inherit;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
 }

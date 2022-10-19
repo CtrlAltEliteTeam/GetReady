@@ -51,43 +51,43 @@ export class GameTileData{
             case "Apex Legends":
                 this.img = Apex;
                 break;
-            case "COD":
+            case "Call of Duty Blck Ops":
                 this.img = COD;
                 break;
-            case "Dota":
+            case "Dota 2":
                 this.img = Dota;
                 break;
-            case "Dbz":
+            case "Dragon Ball FighterZ":
                 this.img = Dbz;
                 break;
-            case "Fifa22":
+            case "Fifa 22":
                 this.img = Fifa22;
                 break;
-            case "Fifa23":
+            case "Fifa 23":
                 this.img = Fifa23;
                 break;
-            case "MC11":
+            case "Mortal Kombat 11":
                 this.img = MC11;
                 break;
-            case "Kart":
+            case "Mario Kart 8":
                 this.img = Kart;
                 break;
-            case "Strickers":
+            case "Mario Strickers Battle League":
                 this.img = Strikers;
                 break;
             case "Overwatch":
                 this.img = Overwatch;
                 break;
-            case "Unite":
+            case "Pokemon Unite":
                 this.img = Unite;
                 break;
-            case "Rocket":
+            case "Rocket League":
                 this.img = Rocket;
                 break;
-            case "Splatoon":
+            case "Splatoon 3":
                 this.img = Splatoon;
                 break;
-            case "Street":
+            case "Street Fighter":
                 this.img = Street;
                 break;
             case "create":
