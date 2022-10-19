@@ -11,6 +11,7 @@ import CreateTournament from '../src/components/createTounament/CreateTournament
 import Tournament from './components/tournament/Tournament';
 import UserProfile from './pages/profile/UserProfile';
 import Search from './pages/search/Search';
+import UpdateTournament from './components/updateTournament/UpdateTournament';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
 				<Route path='/dashboard' exact element={<Dashboard/>}/>
 				<Route path='/mypage' exact element={<MyToumanents/>}/>
 				<Route path='/create' exact element={<CreateTournament/>}/>
+				<Route path='/update' exact element={<UpdateTournament/>}/>
 				<Route path='/details' exact element={<Tournament/>}/>
 				<Route path='/search' exact element={<Search/>}/>
 			</Routes>

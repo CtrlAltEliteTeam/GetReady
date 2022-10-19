@@ -9,6 +9,7 @@ import AuthContext from '../../api/AuthProvider';
 import TournamentBracket from '../bracket/Bracket';
 import TournamentState from '../../api/TournamentState';
 import {useNavigate} from 'react-router-dom';
+import {FiEdit} from "react-icons/fi";
 
 const TOURNAMENT_URL = "/get_tournament_details";
 const PARTICIPANT_URL = "/get_participants";
@@ -170,11 +171,22 @@ const Tournament = (params) => {
         return navigate(-1);
     }
 
+    const updateClick = () => {
+        return navigate("/update");
+    }
+
     return (
         <div className='tournament-details-outer'>
             <div className='tournament-details-back' onClick={goBack}>
                 <AiIcons.AiOutlineClose />
             </div>
+            { (auth.user_id === data.user) ? (
+                <div onClick={updateClick} className="t-edit-button-active">
+                    <FiEdit className="edit-button-symbol" />
+                </div>
+            ) : (
+                null
+            )}
             <div className='tournament-details'>
                 <div className='tournament-details-header'>
                     <div className='tournament-details-header-image-container'>

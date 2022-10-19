@@ -44,6 +44,7 @@ const LoginButton = () => {
         if(auth.user_id != 0){
             setLoginName('Login');
             setAuth({ user_id : 0});
+            navigate("/");
         } else {
             return navigate(`/login/login`);
         }
