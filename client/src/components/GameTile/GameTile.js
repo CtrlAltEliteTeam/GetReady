@@ -1,19 +1,22 @@
 import React, { useState, useContext, useEffect } from "react";
-import { GameTileData } from "./GameTileData";
 import {FiEdit} from "react-icons/fi";
 import './GameTile.css';
 import AuthContext from "../../api/AuthProvider";
 import CreateTournament  from "../createTounament/CreateTournament";
 import UpdateTournament from "../updateTournament/UpdateTournament";
 import Tournament from "../tournament/Tournament";
+import TournamentContext from "../../api/TournamentState";
+import {useNavigate} from 'react-router-dom';
 
 const GameTile = (props) => {
 
     let gameTile = props.game;
     
+    let navigate = useNavigate();
     //const [state] = useContext(AuthContext);
     //var state = {id:3}; //temp
     const { auth } = useContext(AuthContext);
+    const { setData } = useContext(TournamentContext);
 
     const [editPermission, setEditPermission] = useState(false);
     const [task, setTask] = useState(true);
@@ -34,8 +37,10 @@ const GameTile = (props) => {
             //setTask(2);
         }
         if (gameTile.content === "TOURNAMENT"){
-            setOverlay(true);
-            setTask(1);
+            //setOverlay(true);
+            //setTask(1);
+            setData(gameTile);
+            return navigate("/details");
         }
     }
 

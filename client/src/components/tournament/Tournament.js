@@ -7,6 +7,8 @@ import './Tournament.css';
 import axios from '../../api/Axois';
 import AuthContext from '../../api/AuthProvider';
 import TournamentBracket from '../bracket/Bracket';
+import TournamentState from '../../api/TournamentState';
+import {useNavigate} from 'react-router-dom';
 
 const TOURNAMENT_URL = "/get_tournament_details";
 const PARTICIPANT_URL = "/get_participants";
@@ -16,10 +18,13 @@ const JOIN_URL = "/join_tournament";
 
 const Tournament = (params) => {
 
-    let data = params.params;
+    //let data = params.params;
     //console.log(JSON.stringify(data));
 
     const { auth } = useContext(AuthContext);
+    const { data } = useContext(TournamentState);
+
+    let navigate = useNavigate();
 
     const [TournamentDetails, setTournamentDetails] = useState({});
     const [GameDetails, setGameDetails] = useState('');
@@ -161,9 +166,15 @@ const Tournament = (params) => {
         console.log("value after press: " + currPart + ", recorded value: " + t);
     }
 
+    const goBack = () => {
+        return navigate(-1);
+    }
+
     return (
         <div className='tournament-details-outer'>
-            <div className='tournament-spacer'/>
+            <div className='tournament-details-back' onClick={goBack}>
+                <AiIcons.AiOutlineClose />
+            </div>
             <div className='tournament-details'>
                 <div className='tournament-details-header'>
                     <div className='tournament-details-header-image-container'>
@@ -194,51 +205,47 @@ const Tournament = (params) => {
                     <div className='tournament-details-date'>
                         End Date: {eDate}
                     </div>
-                </div>
-                {partPermission ? (
-                    <div className='tournament-details-partricipants'>
-                        <div className='tournament-details-partricipants-expand'>
-                            <div className="tournament-details-partricipants-expand-button" onClick={showParticipantsEvent}>
-                                <div className={partPermission ? "tournament-details-partricipants-expand-icon-visible" : "tournament-details-partricipants-expand-icon"}>
-                                    {showParticipants ? (<AiIcons.AiOutlineDown/>) : (<AiIcons.AiOutlineRight/>)}
-                                </div>
-                                Participants:&nbsp; 
-                            </div>
-                            <div className='tournament-details-partricipants-display'>
-                            {currPart} / {maxPart}
-                            </div>
-                        </div>
-                        <div className='tournament-details-partricipants-list-container'>
-                            <div className={showParticipants ? "tournament-details-partricipants-list-show" : "tournament-details-partricipants-list"}>
-                                {Participants.map((element)=>{
-                                    return(
-                                        <div>
-                                            {element.username}
-                                        </div>
-                                    )
-                                })}
-                            </div>
-                            <div className='tournament-bracket-box'>
-                                <TournamentBracket maxPart={maxPart} Participants={Participants}/>
-                            </div>
-                        </div>
-                                
-                    </div>) : (
+                    {partPermission ? (
                         <div className='tournament-details-partricipants'>
-                                Participants:&nbsp;
-                            <div className='tournament-details-partricipants-display'>
-                                {currPart} / {maxPart}
+                            <div className='tournament-details-partricipants-expand'>
+                                <div className="tournament-details-partricipants-expand-button" onClick={showParticipantsEvent}>
+                                    <div className={partPermission ? "tournament-details-partricipants-expand-icon-visible" : "tournament-details-partricipants-expand-icon"}>
+                                        {showParticipants ? (<AiIcons.AiOutlineDown/>) : (<AiIcons.AiOutlineRight/>)}
+                                    </div>
+                                    Participants:&nbsp; 
+                                </div>
+                                <div className='tournament-details-partricipants-display'>
+                                    {currPart} / {maxPart}
+                                </div>
                             </div>
-                        </div>
-                    )}
-                <div className='tournament-details-bracket'>
-
+                            <div className='tournament-details-partricipants-list-container'>
+                                <div className={showParticipants ? "tournament-details-partricipants-list-show" : "tournament-details-partricipants-list"}>
+                                    {Participants.map((element)=>{
+                                        return(
+                                            <div>
+                                                {element.username}
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            </div>
+                        </div>) : (
+                            <div className='tournament-details-partricipants'>
+                                <div className='tournament-details-partricipants-display'>
+                                    Participants:&nbsp; 
+                                    {currPart} / {maxPart}
+                                </div>
+                            </div>
+                        )}
+                    <div className={showJoinLeave? 'tournament-details-join-button-show' : 'tournament-details-join-button'} onClick={handleJoin}>
+                        {joinLeaveLable}
+                    </div>
                 </div>
-                <div className={showJoinLeave? 'tournament-details-join-button-show' : 'tournament-details-join-button'} onClick={handleJoin}>
-                    {joinLeaveLable}
+                <p/>
+                <div className='tournament-details-bracket'>
+                    <TournamentBracket maxPart={maxPart} Participants={Participants}/>
                 </div>
             </div>
-            <div className='tournament-spacer'/>
         </div>
     )
 }

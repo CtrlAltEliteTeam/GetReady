@@ -13,7 +13,6 @@ import UserProfile from './pages/profile/UserProfile';
 import Search from './pages/search/Search';
 
 
-
 function App() {
 	return (
 	<>
@@ -23,12 +22,12 @@ function App() {
 				<Route path='/' exact element={<LandingPage/>}/>
 				<Route path='/login/login' exact element={<LoginPage/>}/>
 				<Route path='/login/signup' exact element={<Signup/>}/>
+				<Route path='/profile' exact element={<UserProfile/>}/>
+				<Route path='/profile' exact element={<UserProfile/>}/>
 				<Route path='/dashboard' exact element={<Dashboard/>}/>
 				<Route path='/mypage' exact element={<MyToumanents/>}/>
-				<Route path='/profile' exact element={<UserProfile/>}/>
 				<Route path='/create' exact element={<CreateTournament/>}/>
 				<Route path='/details' exact element={<Tournament/>}/>
-				<Route path='/profile' exact element={<UserProfile/>}/>
 				<Route path='/search' exact element={<Search/>}/>
 			</Routes>
 		</Router>
