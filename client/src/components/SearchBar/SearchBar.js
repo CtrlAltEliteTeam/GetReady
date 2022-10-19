@@ -1,10 +1,14 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import "./SearchBar.css";
 import * as FcIcons from 'react-icons/fc';
 import * as IoIcons from 'react-icons/io';
 import GameTile from "../../components/GameTile/GameTile";
+import SearchContext from '../../api/SearchState';
 
 function SearchBar({placeholder, data}) {
+
+    const {search, setSearch} = useContext(SearchContext);
+
     const [filteredData, setFilteredData] = useState([]);
     const [barValue, setBarValue] = useState("");
     const [filter, setFilter] = useState("");
@@ -40,6 +44,13 @@ function SearchBar({placeholder, data}) {
         setBarValue("");
         setFilteredData(data);
     }
+
+    useEffect(() => {
+        if(search != 0 ){
+            setBarValue(search);
+            setSearch(0);
+        }
+    }, [])
 
     return (
         <div className="search">

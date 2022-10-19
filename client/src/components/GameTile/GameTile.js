@@ -7,6 +7,7 @@ import UpdateTournament from "../updateTournament/UpdateTournament";
 import Tournament from "../tournament/Tournament";
 import TournamentContext from "../../api/TournamentState";
 import {useNavigate} from 'react-router-dom';
+import SearchContext from "../../api/SearchState";
 
 const GameTile = (props) => {
 
@@ -17,6 +18,7 @@ const GameTile = (props) => {
     //var state = {id:3}; //temp
     const { auth } = useContext(AuthContext);
     const { setData } = useContext(TournamentContext);
+    const {setSearch} = useContext(SearchContext);
 
     const [editPermission, setEditPermission] = useState(false);
     const [task, setTask] = useState(true);
@@ -33,8 +35,8 @@ const GameTile = (props) => {
 
     const showDetails = () => {
         if (gameTile.content === "GAME"){
-            //setOverlay(true);
-            //setTask(2);
+            setSearch(gameTile.game);
+            return navigate("/search");
         }
         if (gameTile.content === "TOURNAMENT"){
             //setOverlay(true);

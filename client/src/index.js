@@ -3,13 +3,16 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import { AuthProvider } from './api/AuthProvider';
 import { TournamentState } from './api/TournamentState';
+import { SearchState } from './api/SearchState';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<AuthProvider>
 		<TournamentState>
-			<App />
+			<SearchState>
+				<App />
+			</SearchState>
 		</TournamentState>
 	</AuthProvider>
 );
