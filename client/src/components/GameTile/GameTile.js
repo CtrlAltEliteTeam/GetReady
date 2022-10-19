@@ -85,9 +85,9 @@ const GameTile = (props) => {
                             {gameTile.name}
                         </span>
                     </div>
-                    <div className={editPermission ? "tile-edit-button-active" : "tile-edit-button"} onClick={editDetails}>
+                    {/* <div className={editPermission ? "tile-edit-button-active" : "tile-edit-button"} onClick={editDetails}>
                         <FiEdit className="edit-button-symbol" />
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </>
