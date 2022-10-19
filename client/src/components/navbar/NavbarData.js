@@ -24,7 +24,7 @@ export const NavbarData = [
     },
     {
         title:"History",
-        path:'/',
+        path:'/dashboard',
         icon:<AiIcons.AiOutlineProfile />,
         cName:'nav-text'
     },
