@@ -48,7 +48,7 @@ export class GameTileData{
             case "Pacman":
                 this.img = pacMan;
                 break;
-            case "Apex":
+            case "Apex Legends":
                 this.img = Apex;
                 break;
             case "COD":

@@ -84,7 +84,7 @@ const MyTounaments = () => {
     let createNew = new GameTileData(0,"Create Tournament","create","create",'0',0);
 
     const createTounament = () => {
-        setShow(true);
+        return navigate('/create');
     }
 
     const stopOverlay = () => {
