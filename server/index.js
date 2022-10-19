@@ -383,9 +383,10 @@ app.post('/api/update_tournament', (req,res)=>{
     const startTime = req.body.startTime;
     const maxParticipants = req.body.maxParticipants;
     const viewParticipant = req.body.viewParticipant;
+    const game_id = req.body.game_id;
 
-    const sqlUpdate = "UPDATE heroku_caad988da016f21.tournament SET title=?, description=?, startDate=?, endDate=?, startTime=?, maxParticipants=?, viewParticipant=? WHERE tournament_id=?";
-    db.query(sqlUpdate, [title, description, startDate, endDate, startTime, maxParticipants, viewParticipant, tournament_id],(err, result)=> {
+    const sqlUpdate = "UPDATE heroku_caad988da016f21.tournament SET title=?, description=?, game_id=?, startDate=?, endDate=?, startTime=?, maxParticipants=?, viewParticipant=? WHERE tournament_id=?";
+    db.query(sqlUpdate, [title, description, game_id, startDate, endDate, startTime, maxParticipants, viewParticipant, tournament_id],(err, result)=> {
         if(result?.affectedRows===1){
             res.send(result);
             console.log("update successful");
