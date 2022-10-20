@@ -99,7 +99,7 @@ const Tournament = (params) => {
                 const response = await axios.post(PARTICIPANT_URL,{
                     tournament_id : data.id,
                 });
-                console.log(response?.data);
+                //console.log(response?.data);
                 response?.data.forEach(element => {
                     setParticipants(Participants => [...Participants,element]);
                 });
@@ -126,7 +126,7 @@ const Tournament = (params) => {
                 user_id : auth.user_id,
             });
             const joinSet = response?.data
-            console.log(joinSet.joinLeave);
+            //console.log(joinSet.joinLeave);
             if (joinSet.joinLeave === false){
                 setJoinLeaveLable("Join");
             } else {

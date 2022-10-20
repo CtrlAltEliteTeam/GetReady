@@ -1,21 +1,28 @@
-import React, {useContext, useState, useEffect} from "react";
-import "./FAQs.css"
-import SearchBar from "../../components/SearchBar/SearchBar";
-import { GameTileData } from "../../components/GameTile/GameTileData";
-import GameTile from "../../components/GameTile/GameTile";
-import AuthContext from "../../api/AuthProvider";
-import axios from "../../api/Axois";
+import React, {useState,useEffect} from 'react';
 
-const Search = () => {
+const FAQs = () => {
 
-    return(
-        <>
-        <div className="spacer"></div>
-        <div className="faqs-page">
-            
+    const [contact, setContact] = useState(false);
+
+    const clickContact = () => {
+        setContact(!contact);
+    }
+    return (
+        <div className='info-wrapper'>
+            <div className='info-container'>
+                <div className='info' onClick={clickContact}>
+                    heading
+                </div>
+                { (contact) ? (
+                    <div>
+                        show
+                    </div>
+                ) : (
+                    null
+                )}
+            </div>
         </div>
-        </>
     )
 }
 
-export default Search
+export default FAQs

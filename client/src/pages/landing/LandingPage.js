@@ -41,7 +41,7 @@ const LandingPage = () => {
                 const response = await axios.post(GET_TOURMANENT_SHORT_URL,{});
                 var data = response?.data;
                 let count = 0;
-                console.log(response.data);
+                //console.log(response.data);
                 if ( featuredList.length === 0){
                     data.forEach(element => {
                         let gameTile = new GameTileData(element.tournament_id,element.title,element.name,element.content,element.user_id,count);

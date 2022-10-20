@@ -50,8 +50,8 @@ export const GameTile_TestData = [
     },
     {
         id: 8,
-        name: "Call of Duty Blck Ops",
-        game: "Call of Duty Blck Ops",
+        name: "Call of Duty Black Ops",
+        game: "Call of Duty Black Ops",
         content: "GAME",
         user: 1,
     },
