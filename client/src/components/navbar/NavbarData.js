@@ -16,7 +16,7 @@ export const NavbarData = [
         path:'/',
         icon:<BiIcons.BiTrendingUp />,
         cName:'nav-text',
-        show: true
+        show: true //if true shows when no user is signed in if false onlt shows when a user is logged in
     },
     {
         title:"Tournaments",
