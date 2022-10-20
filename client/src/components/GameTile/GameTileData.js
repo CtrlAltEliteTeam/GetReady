@@ -51,7 +51,7 @@ export class GameTileData{
             case "Apex Legends":
                 this.img = Apex;
                 break;
-            case "Call of Duty Blck Ops":
+            case "Call of Duty Black Ops":
                 this.img = COD;
                 break;
             case "Dota 2":

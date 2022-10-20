@@ -122,16 +122,6 @@ app.post('/api/get_tournament_short', (req, res)=>{
     });
 });
 
-app.post('/api/get_games', (req, res)=>{
-    const sqlSelect = "SELECT game_id, name FROM heroku_caad988da016f21.game";
-    db.query(sqlSelect, (err, result)=> {
-        if (err) {
-            throw err;
-        }
-        res.send(result);
-    });
-});
-
 app.post('/api/get_tournament_details', (req, res)=>{
     const tournament_id = req.body.tournament_id;
     try {
@@ -148,6 +138,16 @@ app.post('/api/get_tournament_details', (req, res)=>{
     } catch (err) {
         res.send({error:301});
     }
+});
+
+app.post('/api/get_games', (req, res)=>{
+    const sqlSelect = "SELECT game_id, name FROM heroku_caad988da016f21.game";
+    db.query(sqlSelect, (err, result)=> {
+        if (err) {
+            throw err;
+        }
+        res.send(result);
+    });
 });
 
 app.post('/api/get_t_update_details', (req, res)=>{
