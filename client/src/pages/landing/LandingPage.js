@@ -7,6 +7,7 @@ import './LandingPage.css';
 import { Link, useNavigate } from "react-router-dom";
 import { LOGOUT } from "../../api/Constants";
 import axios from "../../api/Axois";
+import { ContactUs } from "../../components/ContactUs/ContactUs";
 
 const GET_TOURMANENT_SHORT_URL = "/get_tournament_short";
 
@@ -85,6 +86,9 @@ const LandingPage = () => {
                         )
                     })}
                 </div>
+            </div>
+            <div className="Contact-us">
+                <ContactUs />
             </div>
         </div>
         </>
