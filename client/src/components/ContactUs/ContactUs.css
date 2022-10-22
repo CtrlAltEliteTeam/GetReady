@@ -1,5 +1,9 @@
 .Contact-us-block{
-    padding: 30px;
+    /* position:absolute;
+    bottom: 0px; */
+    margin-top:4%;
+    padding-top: 30px;
+    padding-bottom: 30px;
     background-color:blueviolet;
     width:100%;
     height: fit-content;
@@ -7,7 +11,8 @@
     grid-template-rows: auto auto;
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
-
+    overflow-x: hidden;
+    overflow: hidden;
 }
 .grid-container {
     display: grid;
@@ -41,5 +46,5 @@ text-align: center;
     margin-right: auto;
     color: white;
     justify-content: center;
-    padding-left: 20px;
+    /* padding-left: 10px; */
 }

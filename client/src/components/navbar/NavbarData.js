@@ -19,6 +19,13 @@ export const NavbarData = [
         show: true
     },
     {
+        title:"FAQ",
+        path:'/faq',
+        icon:<AiIcons.AiOutlineQuestionCircle />,
+        cName:'nav-text',
+        show: true
+    },
+    {
         title:"My Tournaments",
         path:'/mypage',
         icon:<AiIcons.AiOutlineProfile />,

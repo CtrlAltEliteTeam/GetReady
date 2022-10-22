@@ -89,7 +89,7 @@ const Dashboard = () => {
                     })}
                 </div>
             </div>
-            <div className="Contact-us">
+            <div className="contact-us">
                 <ContactUs />
             </div>
         </div>
