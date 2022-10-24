@@ -12,6 +12,7 @@ import Tournament from './components/tournament/Tournament';
 import UserProfile from './pages/profile/UserProfile';
 import Search from './pages/search/Search';
 import UpdateTournament from './components/updateTournament/UpdateTournament';
+import TournamentBracket from './components/bracket/Bracket';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
 				<Route path='/update' exact element={<UpdateTournament/>}/>
 				<Route path='/details' exact element={<Tournament/>}/>
 				<Route path='/search' exact element={<Search/>}/>
+				<Route path='/bracket' exact element={<TournamentBracket/>}/>
 			</Routes>
 		</Router>
     </>

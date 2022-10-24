@@ -255,7 +255,7 @@ const Tournament = (params) => {
                 </div>
                 <p/>
                 <div className='tournament-details-bracket'>
-                    <TournamentBracket maxPart={maxPart} Participants={Participants}/>
+                    <TournamentBracket props={data.tournament_id}/>
                 </div>
             </div>
         </div>
