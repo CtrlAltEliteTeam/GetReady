@@ -16,7 +16,7 @@ const Search = () => {
         const fetchData = async (e) => {
             try {
                 const response = await axios.post(TOURNAMENT_SEARCH ,{});
-                console.log(response?.data);
+                //console.log(response?.data);
                 var data = response?.data;
                 let count = 0;
                 if ( tournamentList.length === 0){

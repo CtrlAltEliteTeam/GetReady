@@ -15,7 +15,14 @@ function SearchBar({placeholder, data}) {
     const [isFiltered, setIsFiltered] = useState(false);
 
     const handleFilter = (event) => {
-        const searchString = event.target.value;
+        let searchString;
+        if(search != 0 ){
+            searchString = search;
+            setFilter("Game");
+            setSearch(0);
+        } else {
+            searchString = event.target.value;
+        }
         setBarValue(searchString);
         let newFilter = data.filter((value) => {
             return value.name.toLowerCase().includes(searchString.toLowerCase());
@@ -46,11 +53,32 @@ function SearchBar({placeholder, data}) {
     }
 
     useEffect(() => {
+        console.log(data);
+        let searchString = "";
         if(search != 0 ){
+            searchString = search;
             setBarValue(search);
+            setFilter("Game");
             setSearch(0);
+        } else {
+            searchString = barValue;
         }
-    }, [])
+        let newFilter = data.filter((value) => {
+            return value.name.toLowerCase().includes(searchString.toLowerCase());
+        });
+
+        if (filter == "Game") {
+                newFilter = data.filter((value) => {
+                return value.game.toLowerCase().includes(searchString.toLowerCase());
+            });
+        } 
+        if (searchString === "") {
+            setFilteredData(data);
+        } else {
+            setFilteredData(newFilter);
+        }
+        setIsFiltered(true);
+    }, [barValue,data])
 
     return (
         <div className="search">
@@ -64,7 +92,8 @@ function SearchBar({placeholder, data}) {
                 <div className="input">
                     <input 
                         type="text" 
-                        placeholder={placeholder} value={barValue} onChange={handleFilter}
+                        placeholder={placeholder} value={barValue} 
+                        onChange={(e) => setBarValue(e.target.value)}
                     /> 
                 </div>
                 <div className="searchIcon">
