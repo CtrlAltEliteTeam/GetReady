@@ -468,6 +468,8 @@ const UpdateTournament = (params) => {
     }
 
     return (
+        <div>
+        <div className="banner-updatetournament">UPDATE TOURNAMENT</div>
         <div className='tournament-create-outer'>
             <div className='tournament-create-back' onClick={goBack}>
                 Cancel
@@ -581,6 +583,7 @@ const UpdateTournament = (params) => {
                     </div>
                 </div>
             </form>
+        </div>
         </div>
     )
 }
