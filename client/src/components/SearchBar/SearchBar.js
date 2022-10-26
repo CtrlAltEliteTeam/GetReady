@@ -19,6 +19,7 @@ function SearchBar({placeholder, data}) {
         setBarValue(searchString);
         let newFilter = data.filter((value) => {
             return value.name.toLowerCase().includes(searchString.toLowerCase());
+            
         });
 
         if (filter == "Game") {
@@ -26,6 +27,7 @@ function SearchBar({placeholder, data}) {
                 return value.game.toLowerCase().includes(searchString.toLowerCase());
             });
         } 
+
         if (searchString === "") {
             setFilteredData(data);
         } else {
