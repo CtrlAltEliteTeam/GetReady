@@ -1,27 +1,77 @@
 import React, { useEffect, useState } from 'react';
-import {Bracket, Round, Match, Entrant, BRACKET, WINNERS_BRACKET, LOSERS_BRACKET} from './Classes_Constants';
 import TournamentGUI from './bracketComponents/TournamentGUI';
 import axios from '../../api/Axois';
 import './Bracket.css';
+import {Bracket, Round, Match, Entrant, BRACKET, WINNERS_BRACKET, LOSERS_BRACKET} from '../bracket/Classes_Constants';
 
+const GET_BRACKETJSON_URL = "/get_bracketJSON";
+const SEND_JSON_URL = "/send_bracketJSON";
+const END_TOURNAMENT_URL = "/end_tournament";
+const SET_WINNER_URL = "/set_winner";
 
-function TournamentBracket(props){
+function TournamentBracket({tournament_id, isCreator, setState}){
+    const [tournament, setTournament] = useState([]);
 
-    const [entrants,setEntrants]=useState([])
+    useEffect(() => {
+        const fetchData = async (e) => {
+            try {
+                const response = await axios.post(GET_BRACKETJSON_URL,{
+                    tournament_id : tournament_id,
+                });
 
-    useEffect(() => { 
-        setEntrants([]);
-        props.Participants.forEach(element => {
-            setEntrants(entrants => [...entrants,element.username]);
-        });
-    },[props])
+                var serial = response?.data[0].bracketJSON;
+                var deserializedTournament = deserializeTournament(JSON.parse(serial));
+                setTournament((deserializedTournament.map(item=>{
+                    return {...item};
+                })));
+            } catch (error) {
+                //console.log(error);
+            }
+        }
+        fetchData();
+    }, [])
 
-    
-    const tournament = [];
-    generateTournament(tournament, entrants);
+    useEffect(() => {
+        const sendData = async (e) => {
+            if(tournament.length>0){
+                try {
+                    const response = await axios.post(SEND_JSON_URL,{
+                        tournament_json: JSON.stringify(tournament),
+                        tournament_id : tournament_id,
+                    });
+                } catch (error) {
+                    console.log(error);
+                }
+
+                if(tournament[0].winner!=null){
+                    setState(3);
+
+                    //update state change state to 3
+                    try {
+                        const response = await axios.post(END_TOURNAMENT_URL,{
+                            tournament_id : tournament_id,
+                        });
+                    } catch (error) {
+                        console.log(error);
+                    }
+
+                    //set winner
+                    try {
+                        const response = await axios.post(SET_WINNER_URL,{
+                            tournament_winner: tournament[0].winner.getName(),
+                            tournament_id : tournament_id,
+                        });
+                    } catch (error) {
+                        console.log(error);
+                    }
+                }
+            }
+        }
+        sendData();
+
+    }, [tournament])
 
     const [viewBracket, setViewBracket] = useState(false);
-
     const showBracket = (e)=>{
         if(viewBracket){
             setViewBracket(false);
@@ -31,12 +81,13 @@ function TournamentBracket(props){
         }
     }
 
+
     return(
         <div>
             {viewBracket ? (  
                 <div>
                     <div className='tournament-bracket-closeBtn' onClick={showBracket}>&times;</div>
-                    <TournamentGUI tournament={tournament}/>
+                    <TournamentGUI tournament={tournament} setTournament={setTournament} isCreator={isCreator}/>
                 </div>
                 ):( 
                 <div>
@@ -50,109 +101,33 @@ function TournamentBracket(props){
 }
 export default TournamentBracket
 
-function generateTournament(tournament, entrants){
-    singleElim(tournament, entrants);   
-  }
-  
-function singleElim(tournament, entrants){
-var bracket = new Bracket(BRACKET);
-const roundNumbers = getRoundRumbers(entrants.length);
-generateBracketJS(bracket, entrants, roundNumbers);
-tournament.push(bracket);
-}
-  
-function getRoundRumbers(entrantsCount) {
-const roundNumbers = [];
-
-var nextPowOf2 = 1;
-while(nextPowOf2<entrantsCount){
-    nextPowOf2=nextPowOf2*2;
-}
 
 
-var a;
-if(nextPowOf2===entrantsCount){
-    a = entrantsCount;
-}
-else {
-    var byes = nextPowOf2 - entrantsCount;
-    a = entrantsCount-byes;
-    roundNumbers.push(a);
-    a = a/2 + byes;
-}
+function deserializeTournament(serializedTournament) {//BACKEND, used after JSON fetched from database
+    var tournament = [];
 
+    for(let i = 0; i < serializedTournament.length; i++){
+        var bracket = new Bracket('');
+        Object.assign(bracket, serializedTournament[i]);
 
-while (a>=1) {
-    roundNumbers.push(a);
-    a = a/2;
-}
-return roundNumbers;
-}
-  
-function generateBracketJS(bracket, entrants, roundNumbers){//BACKEND
-var nextPlayer = -1;
+        for(let j = 0; j < serializedTournament[i].rounds.length; j++){
+            var round = new Round(-1);
+            Object.assign(round, serializedTournament[i].rounds[j]);
+            bracket.rounds[j] = round;
 
-//generate rounds
-for(let i = 0; i < roundNumbers.length; i++) {
-    var round = new Round(i);
+            for (let k = 0; k < serializedTournament[i].rounds[j].matches.length; k++){
+                var match = new Match(-1);
+                Object.assign(match, serializedTournament[i].rounds[j].matches[k])
+                bracket.rounds[j].matches[k] = match;
 
-    //generate matches
-    for(let j = 0; j < roundNumbers[i]; j+=2) {
-        var match = new Match(j/2);
-        var e1 = new Entrant();
-        var e2 = new Entrant();
-
-        //put entrants into their initial matches, remaining matches stay with the empty entrants 'new Entrant()'
-        if(bracket.type!=LOSERS_BRACKET){
-            if(i==0) {//first round
-                const p1Name = entrants[j];
-                const p2Name = entrants[j+1];
-                nextPlayer = j + 2;
-
-                e1.setName(p1Name);
-                e2.setName(p2Name);
-            }
-
-            if(i==1){//second round (necessary if there are byes involved)
-                //start adding entrants from where takenspots end
-                var takenSpots = roundNumbers[0]/2;
-                var a = takenSpots/2;
-                var jIndex = Math.floor(takenSpots/2);
-
-                if(j/2>=jIndex & nextPlayer<entrants.length){
-                    if(!Number.isInteger(a)&j/2==jIndex){
-                        //if one of the spots is reserved for an entrant from round 1, add one bye entrant
-                        const p2Name = entrants[nextPlayer];
-                        nextPlayer++;
-
-                        e2.setName(p2Name);
-                    }
-
-                    else{
-                        //if none of the spots are reserved for entrants from round 1, add both bye entrants
-                        const p1Name = entrants[nextPlayer];
-                        nextPlayer++;
-                        const p2Name = entrants[nextPlayer];
-                        nextPlayer++;
-
-                        e1.setName(p1Name);
-                        e2.setName(p2Name);
-                    }
+                for (let l = 0; l < serializedTournament[i].rounds[j].matches[k].entrants.length; l++){
+                    var entrant = new Entrant();
+                    Object.assign(entrant, serializedTournament[i].rounds[j].matches[k].entrants[l]);
+                    bracket.rounds[j].matches[k].entrants[l] = entrant;
                 }
             }
         }
-        
-        match.appendEntrant(e1);
-        //if not last round
-        if(i!=roundNumbers.length-1){
-            match.appendEntrant(e2);
-        }
-
-        //add match to round
-        round.appendMatch(match);
+        tournament.push(bracket);
     }
-
-    //add round to bracket
-    bracket.appendRound(round);
-}
+    return tournament;
 }
