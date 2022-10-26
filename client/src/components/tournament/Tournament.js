@@ -6,6 +6,7 @@ import * as AiIcons from 'react-icons/ai';
 import './Tournament.css';
 import axios from '../../api/Axois';
 import AuthContext from '../../api/AuthProvider';
+import SeedView from '../seeding/SeedView';
 import TournamentBracket from '../bracket/Bracket';
 
 const TOURNAMENT_URL = "/get_tournament_details";
@@ -13,6 +14,7 @@ const PARTICIPANT_URL = "/get_participants";
 const GET_JOIN_LEAVE_URL = "/is_participating";
 const JOIN_URL = "/join_tournament";
 
+const END_REGISTRATION_URL = "/end_registration";
 
 const Tournament = (params) => {
 
@@ -31,7 +33,8 @@ const Tournament = (params) => {
     const [title, setTitle] = useState(data.name);
     const [image, setImage] = useState(data.img);
     const [alt, setAlt] = useState(data.alt);
-    const [creator, setCreator] = useState("");
+    const [creatorID, setCreatorID] = useState(0);
+    const [creatorName, setCreatorName] = useState("");
     const [game, setGame] = useState(data.game);
     const [sTime, setSTime] = useState("");
     const [sDate, setSDate] = useState("");
@@ -39,6 +42,8 @@ const Tournament = (params) => {
     const [desc, setDesc] = useState("");
     const [currPart, setCurrPart] = useState(0);
     const [maxPart, setMaxPart] = useState(0);
+    const [winner_username, setWinnerUsername] = useState("");
+    const [state, setState] = useState(0);
 
     const [fetchParts, setFetchParts] = useState(0);
     const [Participants, setParticipants] = useState([]);
@@ -49,6 +54,11 @@ const Tournament = (params) => {
     //const [joinedResponse, setJoinedResponse] = useState({});
     const [joinLeave, setJoinLeave] = useState(false); //false if not joined
     const [joinLeaveLable, setJoinLeaveLable] = useState("Join");
+
+    var isCreator = false;
+    if(creatorID==auth.user_id){
+        isCreator = true;
+    }
     
     //joinleaveshowButton
     useEffect (() => {
@@ -75,7 +85,8 @@ const Tournament = (params) => {
     }, [])
 
     useEffect(()=>{
-        setCreator(details[0]?.username);
+        setCreatorID(details[0]?.user_id);
+        setCreatorName(details[0]?.username);
         setDesc(details[0]?.description);
         setSTime(details[0]?.startTime);
         setSDate(details[0]?.startDate.substring(0, 10));
@@ -83,6 +94,8 @@ const Tournament = (params) => {
         setCurrPart(details[0]?.numParticipants);
         setMaxPart(details[0]?.maxParticipants);
         setPartPermission(details[0]?.viewParticipant);
+        setWinnerUsername(details[0]?.winner_username);
+        setState(details[0]?.state);
     },[details])
 
     //change participants
@@ -161,6 +174,17 @@ const Tournament = (params) => {
         console.log("value after press: " + currPart + ", recorded value: " + t);
     }
 
+    const handleEndRegistration = async(e) => {
+        setState(1);
+        try {
+            const response = await axios.post(END_REGISTRATION_URL,{
+                tournament_id : data.id,
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <div className='tournament-details-outer'>
             <div className='tournament-spacer'/>
@@ -177,7 +201,7 @@ const Tournament = (params) => {
                             {game}
                         </div>
                         <div className='tournament-details-header-creator'>
-                            {creator}
+                            {creatorName}
                         </div>
                     </div>
                 </div>
@@ -193,6 +217,9 @@ const Tournament = (params) => {
                     </div>
                     <div className='tournament-details-date'>
                         End Date: {eDate}
+                    </div>
+                    <div className='tournament-details-date'>
+                        Winner: {winner_username}
                     </div>
                 </div>
                 {partPermission ? (
@@ -218,9 +245,6 @@ const Tournament = (params) => {
                                     )
                                 })}
                             </div>
-                            <div className='tournament-bracket-box'>
-                                <TournamentBracket maxPart={maxPart} Participants={Participants}/>
-                            </div>
                         </div>
                                 
                     </div>) : (
@@ -231,12 +255,33 @@ const Tournament = (params) => {
                             </div>
                         </div>
                     )}
-                <div className='tournament-details-bracket'>
-
-                </div>
-                <div className={showJoinLeave? 'tournament-details-join-button-show' : 'tournament-details-join-button'} onClick={handleJoin}>
-                    {joinLeaveLable}
-                </div>
+                {state == 0 ||(state!=1 & state!=2 & state!=3) ? 
+                    (   
+                        <div>
+                            {isCreator ? (<h1 onClick={handleEndRegistration}>End registration</h1>) : (<></>)}
+                            <div className={showJoinLeave? 'tournament-details-join-button-show' : 'tournament-details-join-button'} onClick={handleJoin}>
+                                    {joinLeaveLable}
+                            </div>   
+                        </div>
+                    ) 
+                    :(<></>)
+                }
+                {state == 1 && isCreator? 
+                    (
+                        <div>
+                            <SeedView tournament_id={data.id} setState={setState}/>
+                        </div>
+                    ) 
+                    :(<></>)
+                }
+                {state == 2 || state == 3 ? 
+                    (
+                        <div className='tournament-bracket-box'>
+                            <TournamentBracket tournament_id={data.id} isCreator={isCreator} setState={setState}/>
+                        </div>
+                    ) 
+                    :(<></>)
+                }
             </div>
             <div className='tournament-spacer'/>
         </div>
