@@ -5,8 +5,10 @@ import { FAQ_Data } from './faq_data'
 
 export const Faq = () => {
   return (
-    <div>
-    <div className='faq-content'>
+    <>
+    <div className="spacer"></div>
+    <div className="banner-mytournament">FAQs</div>
+    <div className='faq-content'> 
         {FAQ_Data.map((element)=>{
             return(
                 <div key={element.id} className='faq-qna-body'>
@@ -16,7 +18,9 @@ export const Faq = () => {
             );
         })}
     </div>
+    <div className="contact-us-faq">
     <ContactUs/>
     </div>
+    </>
   )
 }

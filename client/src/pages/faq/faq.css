@@ -1,5 +1,5 @@
 .faq-content{
-    padding-top: 100px;
+    padding-top: 10%;
     padding-left: 5%;
     padding-right: 5%;
 }
@@ -19,4 +19,23 @@ font-weight: bold;
 }
 .faq-answer{
 font-size: medium;
+}
+.contact-us-faq{
+    bottom: 0;
+}
+.banner-faq{
+    margin-top: 0;
+    z-index: 2;
+    position: sticky;
+    top: -1px;
+    height: 80px;
+    width:100%;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 50px;
+    text-align: center;
+    padding-top: 20px;
+    background: -webkit-linear-gradient(-60deg, #8a2be2 50%, #6f1abd 50%);
+    background: linear-gradient(-60deg, #8a2be2 50%, #6f1abd 50%);
 }

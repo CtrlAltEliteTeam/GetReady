@@ -8,6 +8,7 @@ import BigPlus from "../../resources/img/BigPlus.jpg";
 import CreateTournament from "../../components/createTounament/CreateTournament";
 import AuthContext from "../../api/AuthProvider";
 import axios from "../../api/Axois";
+import { ContactUs } from "../../components/ContactUs/ContactUs";
 
 const MY_TOURNAMENTS_URL = "/get_my_tournaments";
 const MY_JOINED_URL = "/get_joined_tournaments";
@@ -92,8 +93,10 @@ const MyTounaments = () => {
     }
 
     return(
-        <>
+        <div>
+            
             <div className="spacer"></div>
+            <div className="banner-mytournament">MY TOURNAMENTS</div> 
             <div className="my-tournaments-page">
                 <div className={show ? "my-tournament-overlay-active" : "my-tournament-overlay"}>
                     <div className="my-tournament-overlay-screen" onClick={stopOverlay}></div>
@@ -169,8 +172,12 @@ const MyTounaments = () => {
                 ) : (
                     null
                 )}
+                
             </div>
-        </>
+            <div className="contact-us-mytournament">
+            <ContactUs />
+            </div>
+        </div>
     )
 }
 

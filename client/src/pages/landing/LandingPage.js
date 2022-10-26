@@ -59,7 +59,14 @@ const LandingPage = () => {
 
     return (
         <>
+        <div className="banner">
+                <div className="words-title">GET READY</div>
+                <div className="words-slogan">TO RUMBLE</div>
+                <div className="words-task">YOUR FAVOURITE TOURNAMENT MANAGEMENT SITE</div>
+        </div>
+        <div className="behind-landing">GET READY</div> 
         <div className="spacer"></div>
+        <div className="info">Click a game to view tournaments that are playing that game OR go through our featured tournaments to view top tournaments playing right now!</div>
         <div className="landing-page">
             <div className="games-list-outer">
                 <div className="games-list-heading">

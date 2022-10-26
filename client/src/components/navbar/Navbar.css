@@ -1,6 +1,6 @@
 
 .navbar {
-    background-color: blueviolet;
+    /* background-color: blueviolet; */
     height: 80px;
     display: flex;
     justify-content: start;
@@ -12,15 +12,22 @@
 }
 
 .menu-bars {
+    margin-top: 1.3rem;
     margin-left: 2rem;
     font-size: 2rem;
     background: none;
     position: absolute;
-    left:10px
+    left:10px;
 }
 
 .nav-menu {
-    background-color: blueviolet;
+    /* background: -webkit-linear-gradient(right, #5c2391, #311847);
+    background: linear-gradient(to left, #5c2391, #311847); */
+    /* background-color: blueviolet; */
+    /* background: -webkit-linear-gradient(-60deg, #8a2be2 50%, #6f1abd 50%);
+    background: linear-gradient(-60deg, #8a2be2 50%, #6f1abd 50%); */
+    background-image: linear-gradient(to top, #b878ed 0%, #6f1abd 100%);
+    background-image: linear-gradient(to top, #b878ed 0%, #6f1abd 100%);
     width: 250px;
     height: 100vh;
     display: flex;
@@ -72,7 +79,7 @@
 }
 
 .navbar-toggle {
-    background-color: blueviolet;
+    /* background-color: #6f1abd; */
     width: 100%;
     height: 80px;
     display: flex;

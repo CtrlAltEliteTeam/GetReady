@@ -52,9 +52,9 @@ const NavBar = () => {
                     <Link to='#' className='menu-bars'>
                         <FaIcons.FaBars onClick={showMenubar} />
                     </Link>
-                    <div className="page-heading">
+                    {/* <div className="page-heading">
                         {pageHeading}
-                    </div>
+                    </div> */}
                         <LoginButton/>
                 </div>
                 <nav className={menubar ? 'nav-menu active' : 'nav-menu'}>
