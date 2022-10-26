@@ -5,13 +5,6 @@ import * as AiIcons from 'react-icons/ai';
 
 export const NavbarData = [
     {
-        title:"Home",
-        path:'/dashboard',
-        icon:<AiIcons.AiOutlineHome />,
-        cName:'nav-text',
-        show: true
-    },
-    {
         title:"Featured",
         path:'/',
         icon:<BiIcons.BiTrendingUp />,
