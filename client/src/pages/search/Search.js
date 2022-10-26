@@ -5,6 +5,7 @@ import { GameTileData } from "../../components/GameTile/GameTileData";
 import GameTile from "../../components/GameTile/GameTile";
 import AuthContext from "../../api/AuthProvider";
 import axios from "../../api/Axois";
+import { ContactUs } from "../../components/ContactUs/ContactUs";
 
 const TOURNAMENT_SEARCH = "/get_tournament_short";
 
@@ -36,11 +37,16 @@ const Search = () => {
     return(
         <>
         <div className="spacer"></div>
+        <div className="banner-tournament">TOURNAMENTS</div> 
+        
         <div className="search-page">
             <div className="search-bar">
                 <SearchBar placeholder={"Enter tournament title..."} data={tournamentList}/>
             </div>
         </div>
+        {/* <div className="contact-us-search">
+            <ContactUs/>
+        </div> */}
         </>
     )
 }

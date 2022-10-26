@@ -155,6 +155,8 @@ const CreateTournament = (params) => {
 
 
     return (
+        <div>
+        <div className="banner-createtournament">CREATE TOURNAMENT</div>
         <div className='tournament-create-outer'>
             <div className='tournament-create-back' onClick={goBack}>
                 Cancel
@@ -268,6 +270,7 @@ const CreateTournament = (params) => {
                     </div>
                 </div>
             </form>
+        </div>
         </div>
     )
 }

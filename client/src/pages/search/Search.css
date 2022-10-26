@@ -1,5 +1,6 @@
 body{
     margin: 0;
+    min-height: 100vh;
 }
 
 .spacer{
@@ -8,9 +9,10 @@ body{
 }
 
 .search-page{
-    margin-top: 80px;
+    /* margin-top: 80px; */
+    padding-top: 2%;
     margin: 0;
-    padding: 0;
+    /* padding: 0; */
     /* background-image: url('../../resources/img/GetReady.png'); */
     background-repeat: no-repeat;
     background-size: 800px 800px;
@@ -31,4 +33,27 @@ body{
     overflow-x: scroll;
     overflow-y: hidden;
 
+}
+.banner-tournament{
+    justify-content: start;
+    margin-top: -10%;
+    z-index: 2;
+    position: sticky;
+    top: -1px;
+    height: 80px;
+    width:100%;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 50px;
+    text-align: center;
+    padding-top: 20px;
+    background: -webkit-linear-gradient(-60deg, #8a2be2 50%, #6f1abd 50%);
+    background: linear-gradient(-60deg, #8a2be2 50%, #6f1abd 50%);
+}
+.contact-us-search{
+    margin-top:auto; 
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }

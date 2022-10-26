@@ -1,5 +1,4 @@
 .tournament-details-outer{
-    top: 80px;
     padding: 30px;
     position: relative;
 }
@@ -153,4 +152,20 @@
 
 .t-edit-button-active :hover {
 
+}
+.banner-tournament{
+    margin-top: 0;
+    z-index: 2;
+    position: sticky;
+    top: -1px;
+    height: 80px;
+    width:100%;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 50px;
+    text-align: center;
+    padding-top: 20px;
+    background: -webkit-linear-gradient(-60deg, #8a2be2 50%, #6f1abd 50%);
+    background: linear-gradient(-60deg, #8a2be2 50%, #6f1abd 50%);
 }

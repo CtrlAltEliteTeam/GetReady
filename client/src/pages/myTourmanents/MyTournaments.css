@@ -59,3 +59,23 @@ body{
     overflow-y: hidden;
     display: flex;
 }
+.contact-us-mytournament{
+    bottom: 0;
+}
+
+.banner-mytournament{
+    margin-top: -10%;
+    z-index: 3;
+    position: sticky;
+    top: -1px;
+    height: 80px;
+    width:100%;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 50px;
+    text-align: center;
+    padding-top: 20px;
+    background: -webkit-linear-gradient(-60deg, #8a2be2 50%, #6f1abd 50%);
+    background: linear-gradient(-60deg, #8a2be2 50%, #6f1abd 50%);
+}

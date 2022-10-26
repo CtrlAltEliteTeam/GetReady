@@ -8,6 +8,8 @@ import AuthContext from '../../api/AuthProvider';
 import { LOGIN } from '../../api/Constants';
 import axios from '../../api/Axois';
 import { AxiosError } from 'axios';
+import { ContactUs } from '../../components/ContactUs/ContactUs';
+import "./UserProfile.css";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -138,12 +140,15 @@ const UserProfile = () => {
 
     return (
         <>
+        <div className="spacer"></div>
+        <div className="banner-profile">PROFILE</div> 
             {success ? (
                 <section>
                     {/* Change to landing URL */}
                 </section>
             ) : (
-                <div className='signup-box'>
+                
+                <div className='profile-box'>
                     <section className='login-box'>
                         <div className='login-heading'>
                             Your Profile
@@ -298,6 +303,9 @@ const UserProfile = () => {
                     </section>
                 </div>
             )}
+            <div className="contact-us-myprofile">
+            <ContactUs />
+            </div>
         </>
     )
 }

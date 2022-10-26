@@ -5,6 +5,7 @@ export const LOSERS_BRACKET = 'bracketL';
 export class Bracket{
     constructor(type) {
         this.type=type;
+        this.winner=null;
         this.rounds = [];
     }
 

@@ -1,0 +1,48 @@
+.seed{
+    padding-bottom: 10px;
+    font-size: 25px;
+    border-style: solid;
+}
+  
+.seedID{
+    float: left;
+    margin-right: 10px;
+    color: white;
+}
+
+.seedArrows{
+    float: left;
+    margin-right: 5px;
+}
+
+.seedArrow{
+    height: 12px;
+}
+.seedArrow:hover, .seedArrow:focus{
+    color:red;
+    cursor:pointer;
+}
+
+.seedName{
+    float: left;
+    color: white;
+}
+
+
+.tournament-bracket-btn{   
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    position: relative;
+    border-radius: 25px;
+    background-color: #F9BE32;
+    padding: 12px;
+    width: fit-content;
+    margin-top: 0px;
+    text-align: center;
+}
+
+.tournament-bracket-closeBtn{
+    color: #ccc;
+    float: right;
+    font-size:2rem;
+}

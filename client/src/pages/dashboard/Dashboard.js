@@ -5,6 +5,7 @@ import GameTile from "../../components/GameTile/GameTile";
 import { GameTile_TestData } from "../../components/GameTile/GameTitle_TestData";
 import './Dashboard.css';
 import * as BiIcons from 'react-icons/bi';
+import { ContactUs } from "../../components/ContactUs/ContactUs";
 
 const Dashboard = () => {
 
@@ -87,6 +88,9 @@ const Dashboard = () => {
                         )
                     })}
                 </div>
+            </div>
+            <div className="contact-us">
+                <ContactUs />
             </div>
         </div>
     )
