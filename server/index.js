@@ -106,7 +106,7 @@ app.post('/api/get_games', (req, res)=>{
 app.post('/api/get_tournament_details', (req, res)=>{
     const tournament_id = req.body.tournament_id;
     try {
-        const sqlSelect = "SELECT user.username, tournament.description, tournament.startTime, tournament.startDate, tournament.endDate, tournament.numParticipants, tournament.maxParticipants, tournament.viewParticipant FROM heroku_caad988da016f21.tournament INNER JOIN user ON tournament.user_id = user.user_id WHERE tournament.tournament_id = ?;";
+        const sqlSelect = "SELECT user.user_id, user.username, tournament.description, tournament.startTime, tournament.startDate, tournament.endDate, tournament.numParticipants, tournament.maxParticipants, tournament.viewParticipant, tournament.state, tournament.winner_username FROM heroku_caad988da016f21.tournament INNER JOIN user ON tournament.user_id = user.user_id WHERE tournament.tournament_id = ?;";
         db.query(sqlSelect,[tournament_id],(err,result)=>{
             if (err) {
                 throw err;
@@ -440,6 +440,147 @@ app.post('/api/join_tournament', (req,res)=>{
         res.send({error:301});
     }
 });
+
+
+
+
+//Gabriel
+//Tournament state transitions
+app.post('/api/end_registration', (req,res)=>{
+    const tournament_id = req.body.tournament_id;
+    try{
+        const sqlUpdate = "UPDATE heroku_caad988da016f21.tournament SET state = 1 WHERE tournament_id = ?;";
+        db.query(sqlUpdate,[tournament_id],(err,result)=>{
+            if(result?.affectedRows===1){
+                res.send(result);
+            }else{
+                res.send({error:301});
+            }
+        });
+    }catch(err){
+        res.send({error:301});
+    }
+});
+
+app.post('/api/end_seeding', (req,res)=>{
+    const tournament_id = req.body.tournament_id;
+    try{
+        const sqlUpdate = "UPDATE heroku_caad988da016f21.tournament SET state = 2 WHERE tournament_id = ?;";
+        db.query(sqlUpdate,[tournament_id],(err,result)=>{
+            if(result?.affectedRows===1){
+                res.send(result);
+            }else{
+                res.send({error:301});
+            }
+        });
+    }catch(err){
+        res.send({error:301});
+    }
+});
+
+app.post('/api/end_tournament', (req,res)=>{
+    const tournament_id = req.body.tournament_id;
+    try{
+        const sqlUpdate = "UPDATE heroku_caad988da016f21.tournament SET state = 3 WHERE tournament_id = ?;";
+        db.query(sqlUpdate,[tournament_id],(err,result)=>{
+            if(result?.affectedRows===1){
+                res.send(result);
+            }else{
+                res.send({error:301});
+            }
+        });
+    }catch(err){
+        res.send({error:301});
+    }
+});
+
+
+//Seeding
+//get seeds
+app.post('/api/get_entrants', (req,res)=>{
+    const tournament_id = req.body.tournament_id;
+    try{
+        const sqlSelect = "SELECT entry.entry_id, entry.user_id, user.username, entry.seed FROM heroku_caad988da016f21.entry INNER JOIN heroku_caad988da016f21.user ON entry.user_id = user.user_id WHERE entry.tournament_id = ? ORDER BY entry_id;";
+        db.query(sqlSelect,[tournament_id],(err,result)=>{
+            res.send(result);
+        });
+    }catch(err){
+        res.send({error:301});
+    }
+});
+
+//update seeds
+app.post('/api/set_seed', (req,res)=>{
+    const seed = req.body.seed;
+    const tournament_id = req.body.tournament_id;
+    const username = req.body.username;
+    try{
+        const sqlUpdate = "UPDATE heroku_caad988da016f21.entry SET seed = ? WHERE tournament_id = ? AND user_id = (SELECT user_id FROM heroku_caad988da016f21.user WHERE username = ?);";
+        db.query(sqlUpdate,[seed, tournament_id, username],(err,result)=>{
+            if(result?.affectedRows===1){
+                res.send(result);
+            }else{
+                res.send({error:301});
+            }
+        });
+    }catch(err){
+        res.send({error:301});
+    }
+});
+
+
+//Brackets
+//fetch bracket(s)
+app.post('/api/get_bracketJSON', (req,res)=>{
+    const tournament_id = req.body.tournament_id;
+    try{
+        const sqlSelect = "SELECT bracketJSON FROM heroku_caad988da016f21.tournament WHERE tournament_id = ?;";
+        db.query(sqlSelect,[tournament_id],(err,result)=>{
+            res.send(result);
+        });
+    }catch(err){
+        res.send({error:301});
+    }
+});
+
+//send bracket(s)
+app.post('/api/send_bracketJSON', (req,res)=>{
+    const tournament_json = req.body.tournament_json;
+    const tournament_id = req.body.tournament_id;
+    try{
+        const sqlUpdate = "UPDATE heroku_caad988da016f21.tournament SET bracketJSON = ? WHERE tournament_id = ?;";
+        db.query(sqlUpdate,[tournament_json, tournament_id],(err,result)=>{
+            if(result?.affectedRows===1){
+                res.send(result);
+            }else{
+                res.send({error:301});
+            }
+        });
+    }catch(err){
+        res.send({error:301});
+    }
+});
+
+//set winner
+app.post('/api/set_winner', (req,res)=>{
+    const tournament_winner = req.body.tournament_winner;
+    const tournament_id = req.body.tournament_id;
+    try{
+        const sqlUpdate = "UPDATE heroku_caad988da016f21.tournament SET winner_username = ? WHERE tournament_id = ?;";
+        db.query(sqlUpdate,[tournament_winner, tournament_id],(err,result)=>{
+            if(result?.affectedRows===1){
+                res.send(result);
+            }else{
+                res.send({error:301});
+            }
+        });
+    }catch(err){
+        res.send({error:301});
+    }
+});
+
+
+
 
 const PORT =process.env.PORT || 8000;
 app.listen( PORT,()=>{    //8000
