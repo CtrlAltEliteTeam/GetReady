@@ -103,7 +103,7 @@ const params = {user_id : 2 , game : game}
 //     setAuth: mockSetAuth,
 // }));
 
-React.useContext = mockUseContext;
+//React.useContext = mockUseContext;
 
 describe('Tournament Axios',() => {
     it('fetch Tournament',() => {
