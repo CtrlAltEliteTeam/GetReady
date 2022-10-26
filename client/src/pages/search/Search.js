@@ -36,8 +36,9 @@ const Search = () => {
 
     return(
         <>
+        <div className="spacer"></div>
         <div className="banner-tournament">TOURNAMENTS</div> 
-        {/* <div className="spacer"></div> */}
+        
         <div className="search-page">
             <div className="search-bar">
                 <SearchBar placeholder={"Enter tournament title..."} data={tournamentList}/>
