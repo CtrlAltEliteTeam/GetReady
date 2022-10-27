@@ -59,12 +59,14 @@ const Seeds = ({seeds, setSeeds, setViewSeeds, tournament_id, setState}) => {
 
 
   return (
-    <div>
+    <div >
         {[...seeds].map((entrant, i) =>
           <Seed key={i} seeds={seeds} setSeeds={setSeeds} seed={i} entrant={seeds.get(i).toString()}/>
         )}
-        <button id="updateSeeding" onClick={handleUpdateSeeding}>Update Seeds</button>
-        <button id="endSeeding" onClick={handleEndSeeding}>End Seeding</button>
+        <div className='seeding-btns'>
+            <div className='updateSeeding' id="updateSeeding" onClick={handleUpdateSeeding}>Update Seeds</div>
+            <div className='endSeeding' id="endSeeding" onClick={handleEndSeeding}>End Seeding</div>
+        </div>
     </div>
   )
 }

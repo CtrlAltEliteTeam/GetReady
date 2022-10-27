@@ -7,12 +7,13 @@
 
 .bracket{
   border:grey solid 5px;
+  border-radius: 25px;
   background-color: rgb(57, 51, 51);
   margin-top: 20px;
   padding: 10px;
 }
 
-#bracketheader {
+.bracketheader {
   color: grey;
 }
 

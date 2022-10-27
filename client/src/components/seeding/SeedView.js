@@ -61,7 +61,7 @@ function TournamentBracket({tournament_id, setState}){
     return(
         <div>
             {viewSeeds ? (  
-                <div>
+                <div className='seed-outter'>
                     <div className='tournament-bracket-closeBtn' onClick={showSeeds}>&times;</div>
                     <Seeds seeds={seeds} setSeeds={setSeeds} viewSeeds={viewSeeds} setViewSeeds={setViewSeeds} tournament_id={tournament_id} setState={setState}/>
                 </div>

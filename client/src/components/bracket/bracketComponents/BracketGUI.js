@@ -1,5 +1,6 @@
 import React from 'react'
 import RoundGUI from './RoundGUI'
+import "../Bracket.css"
 
 const BracketGUI = ({bracket, tournament, setTournament, isCreator}) => {
   return (

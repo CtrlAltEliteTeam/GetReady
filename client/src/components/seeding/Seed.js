@@ -35,10 +35,10 @@ const Seed = ({seeds, setSeeds, seed, entrant}) => {
             <div className="seedID">{seed}</div>
             <div className='seedArrows'>
                 <div className='seedArrow' onClick={handleUp}>
-                    <UpArrow size={15}/>
+                    <UpArrow size={25}/>
                 </div>
                 <div className='seedArrow' onClick={handleDown}>
-                    <DownArrow size={15}/>
+                    <DownArrow size={25}/>
                 </div>
             </div>
             <div className="seedName">{entrant}</div>   

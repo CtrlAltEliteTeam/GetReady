@@ -289,7 +289,7 @@ const Tournament = (params) => {
                     {state == 0 ||(state!=1 & state!=2 & state!=3) ? 
                         (   
                             <div>
-                                {isCreator ? (<h1 onClick={handleEndRegistration}>End registration</h1>) : (<></>)}
+                                {isCreator ? (<div className="end-registration" onClick={handleEndRegistration}>End registration</div>) : (<></>)}
                                 <div className={showJoinLeave? 'tournament-details-join-button-show' : 'tournament-details-join-button'} onClick={handleJoin}>
                                         {joinLeaveLable}
                                 </div>   
