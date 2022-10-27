@@ -125,6 +125,7 @@ const Tournament = (params) => {
 
     const showParticipantsEvent = (e) => {
         if (!showParticipants){
+            console.log(Participants);
             setShowParticipants(true);
         }
         if (showParticipants) {
@@ -245,7 +246,6 @@ const Tournament = (params) => {
                         <div className='tournament-details-date'>
                             Winner: {winner_username}
                         </div>
-                    </div>
                     {partPermission ? (
                         <div className='tournament-details-partricipants'>
                             <div className='tournament-details-partricipants-expand'>
@@ -263,7 +263,7 @@ const Tournament = (params) => {
                                 <div className={showParticipants ? "tournament-details-partricipants-list-show" : "tournament-details-partricipants-list"}>
                                     {Participants.map((element)=>{
                                         return(
-                                            <div>
+                                            <div key={element.username}>
                                                 {element.username}
                                             </div>
                                         )
@@ -275,9 +275,9 @@ const Tournament = (params) => {
                             <div className='tournament-details-partricipants'>
                                 <div className='tournament-details-partricipants-expand'>
                                     <div className="tournament-details-partricipants-expand-button" onClick={showParticipantsEvent}>
-                                        <div className={partPermission ? "tournament-details-partricipants-expand-icon-visible" : "tournament-details-partricipants-expand-icon"}>
+                                        {/* <div className={partPermission ? "tournament-details-partricipants-expand-icon-visible" : "tournament-details-partricipants-expand-icon"}>
                                             {showParticipants ? (<AiIcons.AiOutlineDown/>) : (<AiIcons.AiOutlineRight/>)}
-                                        </div>
+                                        </div> */}
                                         Participants:&nbsp; 
                                     </div>
                                     <div className='tournament-details-partricipants-display'>
@@ -286,6 +286,7 @@ const Tournament = (params) => {
                                 </div>
                             </div>
                         )}
+                    </div>
                     {state == 0 ||(state!=1 & state!=2 & state!=3) ? 
                         (   
                             <div>
