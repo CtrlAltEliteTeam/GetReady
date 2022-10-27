@@ -1,0 +1,98 @@
+#tournament{
+    padding:10px;
+    text-align: center;  
+  
+    /* background-color: #ccc; */
+}
+
+.bracket{
+  border:grey solid 5px;
+  background-color: rgb(57, 51, 51);
+  margin-top: 20px;
+  padding: 10px;
+}
+
+#bracketheader {
+  color: grey;
+}
+
+.clear {
+  clear:both;
+}
+
+.round {
+  float: left;
+  box-sizing: border-box;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.match {
+  display: block;
+  margin: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.entrant {
+  display: block;
+  margin: auto;
+}
+
+
+.popup {
+  display: none;
+  position: fixed;
+  z-index:1;
+  left:0;
+  top:0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popup-content{
+  background-color: #f4f4f4;
+  margin: 25% auto;
+  padding: 10px;
+  width: 70%;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
+}
+
+.closeBtn{
+  color: #ccc;
+  float: right;
+  font-size:20px;
+}
+
+.closeBtn:hover, .closeBtn:focus{
+  color: #000;
+  text-decoration: none;
+  cursor:pointer;
+}
+
+  
+.tournament-bracket-btn{   
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    position: relative;
+    border-radius: 25px;
+    background-color: #F9BE32;
+    padding: 12px;
+    width: fit-content;
+    margin-top: 0px;
+    text-align: center;
+}
+
+.tournament-bracket-closeBtn{
+    color: #ccc;
+    float: right;
+    font-size:2rem;
+}
+
+.tournament-bracket-closeBtn:hover, .closeBtn:focus{
+    color: #000;
+    text-decoration: none;
+    cursor:pointer;
+}
