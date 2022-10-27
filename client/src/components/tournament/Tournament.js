@@ -199,9 +199,9 @@ const Tournament = (params) => {
     }
 
     return (
-        <div>
+        <div><div className="spacer"></div>
         <div className="banner-tournament">TOURNAMENT</div>
-            <div className="spacer"></div>
+            
             <div className='tournament-details-outer'>
                 <div className='tournament-details-back' onClick={goBack}>
                     <AiIcons.AiOutlineClose />
