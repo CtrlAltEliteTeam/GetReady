@@ -17,6 +17,7 @@ function SearchBar({placeholder, data}) {
     const handleFilter = (event) => {
         const searchString = event.target.value;
         setBarValue(searchString);
+        //default filter to tournament name
         let newFilter = data.filter((value) => {
             return value.name.toLowerCase().includes(searchString.toLowerCase());
             
@@ -28,6 +29,7 @@ function SearchBar({placeholder, data}) {
             });
         } 
 
+        //if search string is empty show all tournaments
         if (searchString === "") {
             setFilteredData(data);
         } else {
@@ -62,6 +64,7 @@ function SearchBar({placeholder, data}) {
             return value.name.toLowerCase().includes(searchString.toLowerCase());
         });
 
+        //filter all tournaments by game searched
         if (filter == "Game") {
                 newFilter = data.filter((value) => {
                 return value.game.toLowerCase().includes(searchString.toLowerCase());
