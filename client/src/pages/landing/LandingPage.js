@@ -66,7 +66,7 @@ const LandingPage = () => {
         </div>
         <div className="behind-landing">GET READY</div> 
         <div className="spacer"></div>
-        <div className="info">Click a game to view tournaments that are playing that game OR go through our featured tournaments to view top tournaments playing right now!</div>
+        <div className="info">Select a tournament to view more information or login and join the fun!</div>
         <div className="landing-page">
             <div className="games-list-outer">
                 <div className="games-list-heading">

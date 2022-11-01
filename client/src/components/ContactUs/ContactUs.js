@@ -8,7 +8,7 @@ export const ContactUs = () => {
             <div className="Contact-us-title">Contact Us:</div>
             <div className='grid-container'>
                 <div className="Contact-us-email">Email: admin@getready.com</div>
-                <div className="Contact-us-phone">Tel: +27 71 855 9547</div>
+                <div className="Contact-us-phone">Tel: +27 71 845 9847</div>
                 <div className="Contact-us-address">
                         <div>Address:</div> 
                         <div>1 Jan Smuts Avenue,</div> 
