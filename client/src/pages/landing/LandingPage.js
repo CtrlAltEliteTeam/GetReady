@@ -72,12 +72,14 @@ const LandingPage = () => {
                 <div className="games-list-heading">
                     {gamesListName}
                 </div>
+                <div className="games-container">
                 <div className="games-list-inner">
                     {gamesList.map((element)=>{
                         return(
                             <GameTile game={element} key={element.id}/>
                         )
                     })}
+                </div>
                 </div>
             </div>
             <div className="tourny-list-outer">

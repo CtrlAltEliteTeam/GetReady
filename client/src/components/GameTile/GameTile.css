@@ -1,3 +1,16 @@
+.tile{
+    transition:.5s;
+    display: flex;
+    position: relative;
+    width: fit-content;
+    margin: 0px;
+    float:left;
+    flex-wrap: nowrap;
+}
+.tile:hover{ 
+transform:scale(1.05);
+}
+
 .tile-layout{
     width: 380px;
     height: 234px;
@@ -9,6 +22,7 @@
     flex-direction: column;
     margin: 15px;
     position: relative;
+    
 }
 
 .tile-layout :hover{
@@ -27,6 +41,10 @@
     padding: 0;
     opacity: 100%;
 }
+.tile-image:hover{
+    background-color: #F9BE32;
+}
+
 
 .tile-info{
     display: flex;
