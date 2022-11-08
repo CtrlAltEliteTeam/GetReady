@@ -6,6 +6,7 @@ body{
     display: none;
 }
 .my-tournaments-games-list-heading{
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
     color: white;
     text-align: center;
     font-size: 60px;
@@ -41,6 +42,7 @@ body{
 }
 
 .my-tournaments-page{
+    margin-top: 15vh;
     padding-top: 40px;
     position: relative;
     
@@ -72,6 +74,7 @@ body{
     flex: 0 0 auto;
 }
 
+
 .my-tourny-list-inner{
     overflow-x: hidden;
     overflow-y: hidden;
@@ -96,4 +99,5 @@ body{
     padding-top: 20px;
     background: -webkit-linear-gradient(-60deg, #8a2be2 50%, #6f1abd 50%);
     background: linear-gradient(-60deg, #8a2be2 50%, #6f1abd 50%);
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
