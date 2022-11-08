@@ -4,13 +4,13 @@ body{
 }
 
 .spacer{
-    height: 80px;
+    height: 10px;
 
 }
 
 .search-page{
-    /* margin-top: 80px; */
-    padding-top: 120px;
+    margin-top: 1vh;
+    padding-top: 17vh;
     margin: 0;
     /* padding: 0; */
     /* background-image: url('../../resources/img/GetReady.png'); */
@@ -21,23 +21,11 @@ body{
     background-attachment: fixed;
 }
 
-.games-list-outer{
-    margin-top: 20px;
-    width: 83%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.games-list-inner{
-    white-space: nowrap;
-    overflow-x: scroll;
-    overflow-y: hidden;
-
-}
 .banner-tournament{
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
     justify-content: start;
     margin-top: -10%;
-    z-index: 2;
+    z-index: 1;
     position: sticky;
     top: -1px;
     height: 80px;
@@ -51,9 +39,12 @@ body{
     background: -webkit-linear-gradient(-60deg, #8a2be2 50%, #6f1abd 50%);
     background: linear-gradient(-60deg, #8a2be2 50%, #6f1abd 50%);
 }
+
 .contact-us-search{
     margin-top:auto; 
-    position: fixed;
-    bottom: 0;
+    position: absolute;
+    right: 0;
+    bottom: inherit;
+    left: 0;
     width: 100%;
 }

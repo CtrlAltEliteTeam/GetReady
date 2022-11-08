@@ -13,6 +13,7 @@ import UserProfile from './pages/profile/UserProfile';
 import Search from './pages/search/Search';
 import UpdateTournament from './components/updateTournament/UpdateTournament';
 import { Faq } from './pages/faq/faq';
+import SignupPage from './components/login/SignupPage';
 
 function App() {
 	return (
@@ -22,7 +23,7 @@ function App() {
 			<Routes>
 				<Route path='/' exact element={<LandingPage/>}/>
 				<Route path='/login/login' exact element={<LoginPage/>}/>
-				<Route path='/login/signup' exact element={<Signup/>}/>
+				<Route path='/login/signup' exact element={<SignupPage/>}/>
 				<Route path='/profile' exact element={<UserProfile/>}/>
 				<Route path='/profile' exact element={<UserProfile/>}/>
 				<Route path='/dashboard' exact element={<Dashboard/>}/>

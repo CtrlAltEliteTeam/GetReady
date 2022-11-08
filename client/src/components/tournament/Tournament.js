@@ -200,7 +200,8 @@ const Tournament = (params) => {
     }
 
     return (
-        <div><div className="spacer"></div>
+        <div>
+        <div className="spacer"></div>
         <div className="banner-tournament">TOURNAMENT</div>
             <div className='tournament-details-outer'>
                 <div className='tournament-details-back' onClick={goBack}>
@@ -300,7 +301,7 @@ const Tournament = (params) => {
                     }
                     {state == 1 && isCreator? 
                         (
-                            <div>
+                            <div div className='tournament-bracket-box'>
                                 <SeedView tournament_id={data.id} setState={setState}/>
                             </div>
                         ) 
@@ -308,6 +309,7 @@ const Tournament = (params) => {
                     }
                     {state == 2 || state == 3 ? 
                         (
+                            
                             <div className='tournament-bracket-box'>
                                 <TournamentBracket tournament_id={data.id} isCreator={isCreator} setState={setState}/>
                             </div>

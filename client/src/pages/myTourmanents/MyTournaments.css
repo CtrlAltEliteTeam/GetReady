@@ -5,7 +5,20 @@ body{
 .my-tournament-overlay{
     display: none;
 }
-
+.my-tournaments-games-list-heading{
+    color: white;
+    text-align: center;
+    font-size: 60px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-top: 30px;
+}
+.my-tournaments-create-container{
+    display: flex;
+    flex-wrap: nowrap;
+    margin: 20px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
 .my-tournament-overlay-active{
     position: fixed;
     display: block;
@@ -41,24 +54,28 @@ body{
     left: calc(100vw/2 - 150px);
 }
 
-.games-list-outer{
+.my-tournaments-games-list-outer{
     margin-top: 20px;
     width: 83%;
     margin-left: auto;
     margin-right: auto;
 }
 
-.games-list-inner{
-    white-space: nowrap;
-    overflow-x: scroll;
+.my-tournaments-games-list-inner{
+    display: flex;
+    flex-wrap: nowrap;
+    /* margin: 20px; */
+    overflow-x: auto;
     overflow-y: hidden;
+    /* overflow-x: hidden; */
+    overflow-y: hidden;
+    flex: 0 0 auto;
 }
 
 .my-tourny-list-inner{
-    white-space: nowrap;
-    overflow-x: scroll;
+    overflow-x: hidden;
     overflow-y: hidden;
-    display: flex;
+    flex: 0 0 auto;
 }
 .contact-us-mytournament{
     bottom: 0;

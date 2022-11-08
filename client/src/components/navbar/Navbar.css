@@ -38,14 +38,18 @@
     transition: 850ms;
     margin-left: 0px;
     z-index: 6;
+
 }
+
 
 .nav-menu.active {
     left: 0;
     transition: 350ms;
     margin-left: 0px;
 }
-
+.nav-close:hover{
+    filter: invert(48%) sepia(79%) saturate(2476%)  brightness(158%) contrast(119%);
+}
 .nav-text {
     display: flex;
     justify-content: start;
@@ -58,8 +62,10 @@
 
 .nav-text a {
     text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
     color: #f5f5f5;
-    font-size: 18px;
+    font-size: 20px;
     width: 95%;
     height: 100%;
     display: flex;
@@ -86,6 +92,7 @@
     justify-content: start;
     align-items: center;
 }
+
 
 span {
     margin-left: 16px;

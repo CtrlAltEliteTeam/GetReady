@@ -6,15 +6,19 @@
 }
 
 .bracket{
-  border:grey solid 5px;
-  border-radius: 25px;
+  border:blueviolet solid 5px;
+  border-radius: 15px;
   background-color: rgb(57, 51, 51);
   margin-top: 20px;
   padding: 10px;
+  overflow: auto;
 }
 
-.bracketheader {
-  color: grey;
+.bracketHeader {
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
 }
 
 .clear {
@@ -24,20 +28,55 @@
 .round {
   float: left;
   box-sizing: border-box;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: groove;
+  border-right-color: blueviolet;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+}
+.roundnumber{
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  font-size: 20px;
 }
 
-.match {
+.match { 
+  border-style: ridge;
+  
+  border-right-color: transparent;
+  border-top-color:  #F9BE32;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
   display: block;
   margin: auto;
   padding-top: 10px;
   padding-bottom: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.matchnumber{
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  font-size: 15px;
 }
 
 .entrant {
+  border-radius: 10px;
+  border-color: blueviolet;
+  border-style: groove;
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
   display: block;
   margin: auto;
+  font-family: Arial, Helvetica, sans-serif;
+  cursor: pointer;
 }
 
 
@@ -49,16 +88,24 @@
   top:0;
   height: 100%;
   width: 100%;
-  overflow: auto;
+  overflow: hidden;
   background-color: rgba(0, 0, 0, 0.5);
 }
 
 .popup-content{
-  background-color: #f4f4f4;
+  background-color: #3D3B52;
+  border-color: #ccc ;
+  border-radius: 10px;
   margin: 25% auto;
   padding: 10px;
   width: 70%;
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  font-size: 30px;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+ 
+  
 }
 
 .closeBtn{
@@ -75,6 +122,7 @@
 
   
 .tournament-bracket-btn{   
+   text-shadow: -1px -1px 0 rgb(70, 70, 70), 1px -1px 0 rgb(70, 70, 70), -1px 1px 0 rgb(70, 70, 70), 1px 1px 0 rgb(70, 70, 70);
     color: white;
     font-family: Arial, Helvetica, sans-serif;
     position: relative;
@@ -96,4 +144,20 @@
     color: #000;
     text-decoration: none;
     cursor:pointer;
+}
+.eButtons{
+display: inline-flex;
+
+}
+.eButton{
+  background-color: #F9BE32;
+  text-shadow: -1px -1px 0 rgb(70, 70, 70), 1px -1px 0 rgb(70, 70, 70), -1px 1px 0 rgb(70, 70, 70), 1px 1px 0 rgb(70, 70, 70);
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 10px;
+  font-size: 20px;
+  padding: 5px;
+  margin-left: 5vw;
+  margin-right: 5vw;
+  width: 15vw;
+  cursor: pointer;
 }

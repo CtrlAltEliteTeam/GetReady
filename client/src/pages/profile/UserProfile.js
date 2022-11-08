@@ -148,9 +148,9 @@ const UserProfile = () => {
                 </section>
             ) : (
                 
-                <div className='profile-box'>
-                    <section className='login-box'>
-                        <div className='login-heading'>
+                <div className='profile-box-outter'>
+                    <section className='profile-box-inner'>
+                        <div className='profile-heading'>
                             Your Profile
                         </div>
                         <div className='login-form'>

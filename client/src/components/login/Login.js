@@ -124,7 +124,7 @@ const Login = () => {
                     <div className='login-link'>
                         Need an Account? 
                         <span>
-                            <Link to='/login/signup'>
+                            <Link className="sign-up-link" to='/login/signup'>
                                 Sign Up
                             </Link>
                         </span>
