@@ -26,6 +26,7 @@ const MatchGUI = ({brackettype, r, match, tournament, setTournament, isCreator})
   return (
     <div>
       <div className='match' brackettype={brackettype} roundnum={r} matchnum={match.matchNum} onClick={handleMatch}>
+        <div className='matchnumber'>Match Number:{match.matchNum}</div>
         {match.entrants.map((entrant, i) =>
           <EntrantGUI key={i} entrant={entrant}/>
         )}

@@ -15,9 +15,20 @@
 }
 
 .create-form-title{
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
     color:white;
     font-size: 30px;
     padding-bottom: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.profile-heading{
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-size: 35px;
+    padding-bottom: 10px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .create-item{
@@ -37,19 +48,35 @@
 }
 
 .create-item-button{
+    text-shadow: -1px -1px 0 rgb(70, 70, 70), 1px -1px 0 rgb(70, 70, 70), -1px 1px 0 rgb(70, 70, 70), 1px 1px 0 rgb(70, 70, 70);
     display: flex;
     justify-content: center;
 }
 .contact-us-myprofile{
     bottom: 0;
 }
-.profile-box{
+.profile-box-outter{
+    padding-top: 10vh;
     height: 83vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+.profile-box-inner{
+    border-radius:25px;
+    background-color: blueviolet;
+    width: min-content;
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    padding: 30px;
+    margin-left: auto;
+    margin-top: 100px;
+    margin-right: auto;
+}
 .banner-profile{
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
     margin-top: -10%;
     z-index: 2;
     position: sticky;

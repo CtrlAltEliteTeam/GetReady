@@ -6,8 +6,8 @@ import { FAQ_Data } from './faq_data'
 export const Faq = () => {
   return (
     <>
-    <div className="spacer"></div>
-    <div className="banner-mytournament">FAQs</div>
+    <div className="banner-faq">FAQs</div>
+    {/* <div className="spacer"></div> */}
     <div className='faq-content'> 
         {FAQ_Data.map((element)=>{
             return(

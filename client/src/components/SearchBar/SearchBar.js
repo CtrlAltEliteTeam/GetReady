@@ -83,8 +83,8 @@ function SearchBar({placeholder, data}) {
             <div className="searchInput"> 
                 <div className="dropdown">
                     <select className="filter" value={filter} onChange={event => handleFilterChange(event.target.value)}>
-                        <option id="0" >Tournament Title</option>
-                        <option id="1" >Game</option>
+                        <option id="0" className="option">Tournament Title</option>
+                        <option id="1" className="option">Game</option>
                     </select>
                 </div>
                 <div className="input">

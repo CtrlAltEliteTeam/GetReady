@@ -116,7 +116,7 @@ const Signup = () => {
                     {/* Change to landing URL */}
                 </section>
             ) : (
-                <div className='signup-box'>
+                <div>
                     <section className='login-box'>
                         <div className='login-heading'>
                             Register
@@ -240,16 +240,17 @@ const Signup = () => {
                                 </div>
                             </form>
                         </div>
-                        <div className='login=-link'>
-                            Already registered?<br />
+                        <div className='login-link'>
+                            Already registered?
                             <span>
-                                <Link to='/login/login'>
+                                <Link className="sign-up-link" to='/login/login'>
                                     Login
                                 </Link>
                             </span>
                         </div>
                     </section>
                 </div>
+                
             )}
         </>
     )

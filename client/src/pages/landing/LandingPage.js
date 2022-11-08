@@ -65,7 +65,7 @@ const LandingPage = () => {
                 <div className="words-task">YOUR FAVOURITE TOURNAMENT MANAGEMENT SITE</div>
         </div>
         <div className="behind-landing">GET READY</div> 
-        <div className="spacer"></div>
+        <div className="spacer-landing"></div>
         <div className="info">Click a game to view tournaments that are playing that game OR go through our featured tournaments to view top tournaments playing right now!</div>
         <div className="landing-page">
             <div className="games-list-outer">
