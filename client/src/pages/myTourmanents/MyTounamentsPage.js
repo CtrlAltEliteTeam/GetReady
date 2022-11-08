@@ -131,7 +131,7 @@ const MyTounaments = () => {
                 { !(pastTournamentList.length === 0) ? (
                     <div className="my-tournaments-games-list-outer">
                         <div className="my-tournaments-games-list-heading">
-                            Finished Tounaments
+                            Finished Tournaments
                         </div>
                         <div className="my-tournaments-games-list-inner">
                             {pastTournamentList.map((element)=>{
