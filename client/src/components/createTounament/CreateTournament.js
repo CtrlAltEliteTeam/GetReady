@@ -70,6 +70,7 @@ const CreateTournament = (params) => {
     const [image, setImage] = useState(data.img);
     const [alt, setAlt] = useState(data.alt);
     
+    //fetch the list of games from the server
     useEffect(() => {
         let n = gamesList.find(o => o.game_id === parseInt(tGame));
         console.log(n);
@@ -89,11 +90,11 @@ const CreateTournament = (params) => {
         return navigate(-1);
     }
 
-    useEffect(() => {
-        console.log(tGame);
-    }, [tGame])
+    // useEffect(() => {
+    //     console.log(tGame);
+    // }, [tGame])
 
-    //validation
+    //validation use effects
     useEffect(() => {
         setValidTName(TITLE_REGEX.test(tName));
     }, [tName]);
@@ -129,6 +130,8 @@ const CreateTournament = (params) => {
     //     }
     // }, [tParticipants]);
         
+
+    //when the submit button is pressed the data is sent to the server to create a new tournament
     const handleSubmit = async (e) => {
         e.preventDefault();
         //var state = {id : 3}; //temp

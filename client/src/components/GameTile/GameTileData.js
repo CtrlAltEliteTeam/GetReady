@@ -21,6 +21,7 @@ import Rocket from '../../resources/img/GameTile_Test_Img/rocket_league.jpg'
 import Splatoon from '../../resources/img/GameTile_Test_Img/Splatoon.3.jpg'
 import Street from '../../resources/img/GameTile_Test_Img/street_fighter.jpg'
 
+//class component to represent data in a game/tournament tile
 export class GameTileData{
     constructor(id, name, game, content, user, count){
         this.id = id;

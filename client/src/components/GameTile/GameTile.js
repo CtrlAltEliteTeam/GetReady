@@ -24,6 +24,7 @@ const GameTile = (props) => {
     const [task, setTask] = useState(true);
     const [overlay, setOverlay] = useState(false);
 
+    //checks whether a user has the permission so edit a tournament 
     useEffect(() => {
         //console.log(state.id + " : " + gameTile.user);
         if(auth.user_id === gameTile.user){
@@ -33,6 +34,7 @@ const GameTile = (props) => {
         }
     }, [auth.user_id])
 
+    //on click event to redirect the page the tournament descriptor
     const showDetails = () => {
         if (gameTile.content === "GAME"){
             setSearch(gameTile.game);
@@ -46,16 +48,17 @@ const GameTile = (props) => {
         }
     }
 
+
     const stopOverlay = () => {
         setOverlay(false);
         setTask(0);
     }
 
-    const editDetails = (e) => {
-        e.stopPropagation();
-        setOverlay(true);
-        setTask(3)
-    }
+    // const editDetails = (e) => {
+    //     e.stopPropagation();
+    //     setOverlay(true);
+    //     setTask(3)
+    // }
         
         return(
             <>
