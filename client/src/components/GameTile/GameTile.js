@@ -61,7 +61,7 @@ const GameTile = (props) => {
     // }
         
         return(
-            <>
+            <div className="tile">
             <div className={overlay ? "tournament-overlay-active" : "tournament-overlay"}>
                 <div className="tournament-overlay-screen" onClick={stopOverlay}></div>
                     {task === 1 && (
@@ -95,7 +95,7 @@ const GameTile = (props) => {
                     </div> */}
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

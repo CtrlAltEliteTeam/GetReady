@@ -1,14 +1,30 @@
+.tile{
+    transition:.5s;
+    display: flex;
+    position: relative;
+    width: fit-content;
+    margin: 0px;
+    float:left;
+    flex-wrap: nowrap;
+}
+.tile:hover{ 
+transform:scale(1.05);
+opacity: 80%;
+}
+
 .tile-layout{
     width: 380px;
     height: 234px;
     display: flex;
     border-radius: 15px;
-    border-style: groove;
+    border-style: hidden;
     border-color: blueviolet;
+    background-color: blueviolet;
     white-space: nowrap;
     flex-direction: column;
     margin: 15px;
     position: relative;
+    
 }
 
 .tile-layout :hover{
@@ -22,11 +38,16 @@
 .tile-image{
     height: 200px;
     width: 100%;
-    border-radius: inherit;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
     margin: 0;
     padding: 0;
     opacity: 100%;
 }
+/* .tile-image:hover{
+    background-color: #F9BE32;
+} */
+
 
 .tile-info{
     display: flex;
@@ -39,6 +60,7 @@
     color: white;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 23px;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 .tile-edit-button{

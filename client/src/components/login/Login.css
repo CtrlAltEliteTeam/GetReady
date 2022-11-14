@@ -2,17 +2,33 @@ body {
     background-color: #3d3b51;
 }
 
+
 .signup-box{
-    height: 100vh;
+    /* border-color: #000; */
+    border-radius:25px;
+    background-color: blueviolet;
+    width: min-content;
     display: flex;
     justify-content: center;
-    align-items: center;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    padding: 40px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .login-page{
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+.sign-up-page{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
     height: 100vh;
 }
 
@@ -26,6 +42,8 @@ img {
 }
 
 .login-box {
+    /* border-style: ridge; */
+    /* border-color: #000; */
     border-radius:25px;
     background-color: blueviolet;
     width: min-content;
@@ -34,14 +52,17 @@ img {
     flex-wrap: nowrap;
     flex-direction: column;
     padding: 40px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .login-heading{
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
     display: flex;
     justify-content: center;
     color: white;
     font-size: 35px;
     padding-bottom: 10px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .login-form{
@@ -77,8 +98,10 @@ input{
 }
 
 button[type="login"]{
+    text-shadow: -1px -1px 0 rgb(70, 70, 70), 1px -1px 0 rgb(70, 70, 70), -1px 1px 0 rgb(70, 70, 70), 1px 1px 0 rgb(70, 70, 70);
     background-color:#f9be32;
-    border: none;
+    border-style:none ;
+    /* border-color: #000; */
     color: white;
     padding: 15px 50px;
     text-align: center;
@@ -86,11 +109,20 @@ button[type="login"]{
     display: inline-block;
     font-size: 16px;
     border-radius: 25px;
+    cursor: pointer
 }
 
 .login-link{
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
     display: flex;
     justify-content: center;
+    color: #fff;
+}
+.sign-up-link{
+    color: aquamarine;
+}
+.sign-up-link:hover{
+    color: #F9BE32;
 }
 
 .signup-field{

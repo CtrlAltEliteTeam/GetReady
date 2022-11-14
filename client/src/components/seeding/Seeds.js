@@ -10,7 +10,10 @@ const SEND_JSON_URL = "/send_bracketJSON";
 
 const Seeds = ({seeds, setSeeds, setViewSeeds, tournament_id, setState}) => {
 
+    const [updated, setUpdated] = useState(0);
+
   const handleUpdateSeeding = async(e) => {
+    setUpdated(1);
     for(let i = 0; i < seeds.size; i++){
         try {
             const response = await axios.post(SET_SEED_URL,{
@@ -64,7 +67,7 @@ const Seeds = ({seeds, setSeeds, setViewSeeds, tournament_id, setState}) => {
           <Seed key={i} seeds={seeds} setSeeds={setSeeds} seed={i} entrant={seeds.get(i).toString()}/>
         )}
         <div className='seeding-btns'>
-            <div className='updateSeeding' id="updateSeeding" onClick={handleUpdateSeeding}>Update Seeds</div>
+            <div className='updateSeeding' id="updateSeeding" onClick={handleUpdateSeeding}>{updated?"Updated!":"Update Seeds"}</div>
             <div className='endSeeding' id="endSeeding" onClick={handleEndSeeding}>End Seeding</div>
         </div>
     </div>

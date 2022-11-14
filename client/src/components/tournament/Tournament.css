@@ -1,10 +1,11 @@
 .tournament-details-outer{
-    margin-top: 120px;
+    margin-top: 20vh;
     padding: 30px;
     position: relative;
 }
 
 .tournament-details-body{
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
     margin-top: 20px;
     border-style: groove;
     border-radius: 25px;
@@ -12,12 +13,14 @@
     border-width: 2px;
     padding: 20px;
     color: white;
-    font-family:sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 17px;
     width: 95%;
     margin-left: auto;
     margin-right: auto;
     position: relative;
+    /* background: rgb(81,1,184);
+    background: linear-gradient(90deg, rgba(81,1,184,1) 0%, rgba(75,9,121,1) 100%); */
 }
 
 .tournament-details-header{
@@ -43,6 +46,8 @@
     margin-right: 2vw;
     padding-left: 20px;
     color: white;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .tournament-details-header-title{
@@ -61,7 +66,8 @@
 
 .tournament-details-partricipants{
     color:white;
-    font-family:sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 .tournament-details-partricipants-button{
@@ -98,9 +104,10 @@
 }
 
 .tournament-details-join-button-show{
+    font-family: Arial, Helvetica, sans-serif;
     right: 20px;
     position: absolute;
-    bottom: 8px;
+    bottom: -4px;
     color: white;
     width: 80px;
     height: 25px;
@@ -110,18 +117,20 @@
     display: flex;
     justify-content: center;
     padding-top: 3px;
+    text-shadow: -1px -1px 0 rgb(70, 70, 70), 1px -1px 0 rgb(70, 70, 70), -1px 1px 0 rgb(70, 70, 70), 1px 1px 0 rgb(70, 70, 70);
+    cursor: pointer;
 }
 .tournament-details-join-button{
     display: none;
 }
 .tournament-bracket-box{
     padding: 30px;
-    border-radius: 25px;
+    /* border-radius: 25px;
     border-style: ridge;
     border-color: #F9BE32;
-    background-color:#3D3B52;
-    width:fit-content;
-    height: fit-content;
+    background-color:#3D3B52; */
+   /* width:95%;
+    height: fit-content; */
     display: flex;
     /* position: relative; */
     overflow-y: auto;
@@ -135,6 +144,8 @@
     top: 20px;
     right: 0px;
     font-size: 32px;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .t-edit-button-active{
@@ -156,6 +167,7 @@
 
 }
 .banner-tournament{
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
     margin-top: 0;
     z-index: 2;
     position: sticky;
@@ -173,11 +185,12 @@
 }
 
 .end-registration{
+    text-shadow: -1px -1px 0 rgb(70, 70, 70), 1px -1px 0 rgb(70, 70, 70), -1px 1px 0 rgb(70, 70, 70), 1px 1px 0 rgb(70, 70, 70);
     position: absolute;
     text-align: center;
     /* padding-top: 3px; */
     /* top: auto; */
-    /* bottom: -5; */
+    bottom: -10px;
     color: white;
     width: 125px;
     height: 25px;
@@ -186,4 +199,6 @@
     padding: 5px;
     display: flex;
     justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
 }

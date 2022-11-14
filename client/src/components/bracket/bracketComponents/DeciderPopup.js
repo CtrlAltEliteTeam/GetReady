@@ -20,8 +20,8 @@ const DeciderPopup = ({tournament, setTournament, b, r, m, e1name, e2name, visib
                         <span className="closeBtn" onClick={close}>&times;</span>
                         <h3 className="matchWinner">Select The Winner</h3>
                         <div className="eButtons">
-                            <button className="eButton" onClick={handleE1}>{e1name}</button>
-                            <button className="eButton" onClick={handleE2}>{e2name}</button>
+                            <div className="eButton" onClick={handleE1}>{e1name}</div>
+                            <div className="eButton" onClick={handleE2}>{e2name}</div>
                         </div>
                 </div>
         </div>

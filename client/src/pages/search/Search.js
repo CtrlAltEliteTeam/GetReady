@@ -44,9 +44,12 @@ const Search = () => {
                 <SearchBar placeholder={"Enter tournament title..."} data={tournamentList}/>
             </div>
         </div>
-        {/* <div className="contact-us-search">
-            <ContactUs/>
+        {/* <div className="footer">
+            <div className="contact-us-search">
+                <ContactUs/>
+            </div>
         </div> */}
+        
         </>
     )
 }

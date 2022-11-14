@@ -61,7 +61,7 @@ const NavBar = () => {
                 <ul className='nav-menu-items' onClick={showMenubar}>
                     <li className='navbar-toggle'>
                         <Link to='#' className='menu-bars'>
-                            <AiIcons.AiOutlineClose />
+                            <AiIcons.AiOutlineClose className="nav-close"/>
                         </Link>
                     </li>
                     {NavbarData.map((item, index) => { 

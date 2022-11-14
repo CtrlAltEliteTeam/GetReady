@@ -108,14 +108,16 @@ const MyTounaments = () => {
                         : null }
                     </div>
                 </div>
-                <div className="games-list-outer">
-                    <div className="games-list-heading">
+                <div className="my-tournaments-games-list-outer">
+                    <div className="my-tournaments-games-list-heading">
                         Current Tournaments
                     </div>
-                    <div className="my-tourny-list-inner">
+                    
+                    <div className="my-tournaments-create-container">
                         <div onClick={createTounament} className="create-button">
                             <GameTile game={createNew}/>
                         </div>
+                        <div className="my-tourny-list-inner">
                         <div>
                             {tournamentList.map((element)=>{
                                 return(
@@ -124,13 +126,14 @@ const MyTounaments = () => {
                             })}
                         </div>
                     </div>
+                    </div>
                 </div>
                 { !(pastTournamentList.length === 0) ? (
-                    <div className="games-list-outer">
-                        <div className="games-list-heading">
-                            Finished Tounaments
+                    <div className="my-tournaments-games-list-outer">
+                        <div className="my-tournaments-games-list-heading">
+                            Finished Tournaments
                         </div>
-                        <div className="games-list-inner">
+                        <div className="my-tournaments-games-list-inner">
                             {pastTournamentList.map((element)=>{
                                 return(
                                     <GameTile game={element} key={element.id}/>
@@ -141,11 +144,11 @@ const MyTounaments = () => {
                         null)
                 }
                 { !(joinTournamentList.length === 0) ? (
-                    <div className="games-list-outer">
-                        <div className="games-list-heading">
+                    <div className="my-tournaments-games-list-outer">
+                        <div className="my-tournaments-games-list-heading">
                             Currently Participating
                         </div>
-                        <div className="games-list-inner">
+                        <div className="my-tournaments-games-list-inner">
                             {joinTournamentList.map((element)=>{
                                 return(
                                     <GameTile game={element} key={element.id}/>
@@ -157,11 +160,11 @@ const MyTounaments = () => {
                     null
                 )}
                 { !(pastJoinTournamentList.length === 0) ? (
-                    <div className="games-list-outer">
+                    <div className="my-tournaments-games-list-outer">
                         <div className="games-list-heading">
                             Past Participation
                         </div>
-                        <div className="games-list-inner">
+                        <div className="my-tournaments-games-list-inner">
                             {pastJoinTournamentList.map((element)=>{
                                 return(
                                     <GameTile game={element} key={element.id}/>
