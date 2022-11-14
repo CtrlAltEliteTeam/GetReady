@@ -7,6 +7,8 @@ const PATH = '/login/*';
 
 const LoginButton = () => {
 
+    // this is just a comonent that controls the current state of the login buttons depending on the users current page and their loging state
+
     const { auth, setAuth } = useContext(AuthContext);
     let navigate = useNavigate();
 

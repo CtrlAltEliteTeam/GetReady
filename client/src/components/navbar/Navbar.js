@@ -11,6 +11,8 @@ import LoginButton from '../LoginButton/LoginButton';
 
 const NavBar = () => {
 
+    //displays the navbars and page headings
+
     //const [state, dispatch] = useContext(AuthContext);
     let navigate = useNavigate();
 

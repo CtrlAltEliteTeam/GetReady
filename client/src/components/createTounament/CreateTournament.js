@@ -90,10 +90,6 @@ const CreateTournament = (params) => {
         return navigate(-1);
     }
 
-    // useEffect(() => {
-    //     console.log(tGame);
-    // }, [tGame])
-
     //validation use effects
     useEffect(() => {
         setValidTName(TITLE_REGEX.test(tName));
@@ -134,7 +130,6 @@ const CreateTournament = (params) => {
     //when the submit button is pressed the data is sent to the server to create a new tournament
     const handleSubmit = async (e) => {
         e.preventDefault();
-        //var state = {id : 3}; //temp
         try {
             const response = await axios.post(CREATE_TOURNAMENT_URL,{
                 user_id : auth.user_id,

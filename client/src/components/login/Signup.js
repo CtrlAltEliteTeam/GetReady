@@ -46,6 +46,8 @@ const Signup = () => {
         userRef.current.focus();
     }, [])
 
+
+    //validation for new user
     useEffect(() => {
         setValidName(USER_REGEX.test(user));
     }, [user])
@@ -69,6 +71,8 @@ const Signup = () => {
         }
     },[success]);
 
+
+    //checks if a user already exsists and if not creates a user if one does exsist error messages are displayed
     const handleSubmit = async (e) => {
         e.preventDefault();
         // prevents button hack
@@ -80,7 +84,6 @@ const Signup = () => {
             return;
         }
 
-        //Axios rough work
         try {
             const response = await axios.post(REGISTER_URL,{username: user, email : email, password :pwd });
             console.log(JSON.stringify(response?.data));

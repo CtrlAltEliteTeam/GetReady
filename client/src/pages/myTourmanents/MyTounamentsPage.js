@@ -26,6 +26,7 @@ const MyTounaments = () => {
     const { auth } = useContext(AuthContext);
     console.log(auth.user_id);
 
+    //fetches all the tournaments the user has created past and present then splits them into 2 lists depenting on the status on the tournament 
     useEffect(() => {
         const fetchData = async (e) => {
             try {
@@ -54,6 +55,7 @@ const MyTounaments = () => {
         fetchData();
     }, [])
 
+    //fetches all the tournaments the user has partisipated in past and present then splits them into 2 lists depenting on the status on the tournament 
     useEffect(() => {
         const fetchData = async (e) => {
             try {

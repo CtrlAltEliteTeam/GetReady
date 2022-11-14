@@ -90,6 +90,7 @@ const Tournament = (params) => {
         fetchData();
     }, [])
 
+    //updates the tournament details if any changes happen
     useEffect(()=>{
         setCreatorID(details[0]?.user_id);
         setCreatorName(details[0]?.username);
@@ -104,7 +105,7 @@ const Tournament = (params) => {
         setState(details[0]?.state);
     },[details])
 
-    //change participants
+    //change participants if user joins or leaves
     useEffect(() => {
         setParticipants([]);
         const fetchParticipants = async (e) => {
@@ -123,6 +124,7 @@ const Tournament = (params) => {
         fetchParticipants();
     }, [fetchParts]);
 
+    //updates the page to show if tournaments are currently meant to be shown or hidden
     const showParticipantsEvent = (e) => {
         if (!showParticipants){
             console.log(Participants);
@@ -140,6 +142,7 @@ const Tournament = (params) => {
         return navigate("/update");
     }
 
+    //checks with the server to see if the current user that is logged in is participating in this tournament or not
     useEffect(() => {
         const fetchData = async () => {
             const response = await axios.post(GET_JOIN_LEAVE_URL,{
@@ -161,6 +164,7 @@ const Tournament = (params) => {
         // });
     }, [])
 
+    //handels a user joining or leaving a tournamet based on its current state and updates the button to reflect the server response
     const handleJoin = async (e) => {
         //axiose for join
         var t = currPart;

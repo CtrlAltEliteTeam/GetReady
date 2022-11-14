@@ -10,10 +10,6 @@ import {useNavigate} from 'react-router-dom';
 
 const LOGIN_URL = '/login';
 
-/* TODO :
-        - create state that stores the users Username and other essential info returned byu server
- */
-
 
 const Login = () => {
     const userRef = useRef();
@@ -29,6 +25,7 @@ const Login = () => {
     const [success, setSuccess] = useState(false);
     const [user, setUser]=useState([]);
 
+    //focuses the users current field to the first field with an incorrect value
     useEffect(() => {
         userRef.current.focus();
         //console.log(JSON.stringify(user));
@@ -46,6 +43,7 @@ const Login = () => {
         }
     },[success]);
 
+    //chechs if the login credentials are corrent with the ones on the server and logs the user in if they are
     const handleSubmit = async (e) => { //button press
         e.preventDefault();
 
