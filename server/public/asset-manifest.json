@@ -1,0 +1,37 @@
+{
+  "files": {
+    "main.css": "/static/css/main.8343ed7b.css",
+    "main.js": "/static/js/main.73d15ac4.js",
+    "static/media/SSB.jpg": "/static/media/SSB.bb01b3004542ac4afbdd.jpg",
+    "static/media/CSGO.png": "/static/media/CSGO.e832c278da9b237b679f.png",
+    "static/media/dragon_ballZ.jpg": "/static/media/dragon_ballZ.2da7853790c9f0ab1a96.jpg",
+    "static/media/mario-kart-8-deluxe.jpg": "/static/media/mario-kart-8-deluxe.e8279951e0f50995893b.jpg",
+    "static/media/rocket_league.jpg": "/static/media/rocket_league.dcb654d62e0e813d5cba.jpg",
+    "static/media/street_fighter.jpg": "/static/media/street_fighter.d2b9211dbda5dd9f0c52.jpg",
+    "static/media/Fortnite.jpg": "/static/media/Fortnite.fc6a99d48c092b6941c2.jpg",
+    "static/media/LoL.jpg": "/static/media/LoL.35311aa9c44e692f438b.jpg",
+    "static/media/tekken-7.jpg": "/static/media/tekken-7.a6bea98f64afb795fc7f.jpg",
+    "static/media/fifa22.jpg": "/static/media/fifa22.9402d3ccc846dee9c70b.jpg",
+    "static/media/pokemon_unite.jpg": "/static/media/pokemon_unite.596703a769e91d0fabbc.jpg",
+    "static/media/Mario_strikers_battle_league.jpeg": "/static/media/Mario_strikers_battle_league.1d007e2023ebb2bd5856.jpeg",
+    "static/media/SStest.jpg": "/static/media/SStest.fe6413a4c8f1b4e07e7a.jpg",
+    "static/media/Apex_legends.jpg": "/static/media/Apex_legends.2b9f97110454c682dfed.jpg",
+    "static/media/Splatoon.3.jpg": "/static/media/Splatoon.3.bbd2612f1bd4169dbc05.jpg",
+    "static/media/dota2.jpg": "/static/media/dota2.3f86da6fc3a55edcb73c.jpg",
+    "static/media/fifa23.jpg": "/static/media/fifa23.052b77e74a566da39339.jpg",
+    "static/media/COD.jpg": "/static/media/COD.7433a6043c8bbb63303f.jpg",
+    "static/media/overwatch.jpg": "/static/media/overwatch.f73597e742fc2e9058ca.jpg",
+    "static/media/Halo.jpg": "/static/media/Halo.049cc40742b322cac858.jpg",
+    "static/media/GetReady_text.png": "/static/media/GetReady_text.67baca798078727b001c.png",
+    "static/media/header.jpg": "/static/media/header.262c0bdb1139512a1d5e.jpg",
+    "static/media/pacMan.jpg": "/static/media/pacMan.589d88f6de8936e7af7e.jpg",
+    "static/media/BigPlus.jpg": "/static/media/BigPlus.19da398d7c4262831449.jpg",
+    "index.html": "/index.html",
+    "main.8343ed7b.css.map": "/static/css/main.8343ed7b.css.map",
+    "main.73d15ac4.js.map": "/static/js/main.73d15ac4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8343ed7b.css",
+    "static/js/main.73d15ac4.js"
+  ]
+}
