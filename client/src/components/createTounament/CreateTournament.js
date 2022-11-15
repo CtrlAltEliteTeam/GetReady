@@ -129,6 +129,7 @@ const CreateTournament = (params) => {
 
     //when the submit button is pressed the data is sent to the server to create a new tournament
     const handleSubmit = async (e) => {
+        console.log(tPermission);
         e.preventDefault();
         try {
             const response = await axios.post(CREATE_TOURNAMENT_URL,{
@@ -253,8 +254,8 @@ const CreateTournament = (params) => {
                             <input
                                 type="checkbox"
                                 id="tpermission"
-                                value={tPermission}
-                                onChange={(e) => setTPermission(e.target.value)}
+                                checked={tPermission}
+                                onChange={(e) => setTPermission(e.target.checked)}
                             />
                         </div>
                     </div>

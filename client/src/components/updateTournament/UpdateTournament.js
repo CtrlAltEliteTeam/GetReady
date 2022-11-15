@@ -346,7 +346,7 @@ const UpdateTournament = (params) => {
     const [tParticipants, setTParticipants] = useState(2);
     const [validTParticipants, setValidTParticipants] = useState(false);
 
-    const [tPermission, setTPermission] = useState(false);
+    const [tPermission, setTPermission] = useState(0);
 
     const [gamesList, setGamesList] = useState([]);
 
@@ -440,7 +440,8 @@ const UpdateTournament = (params) => {
                 setTfDate(fdate.substring(0, 10));
 
                 setTsTime(value[0].startTime);
-                //setTPermission(value[0].viewParticipant);
+                setTPermission(value[0].viewParticipant);
+                console.log(value[0].viewParticipant);
             });
         });
     },[])
@@ -458,7 +459,7 @@ const UpdateTournament = (params) => {
                 endDate : tfDate,
                 maxParticipants : tParticipants,
                 startTime : tsTime,
-                //viewParticipant : tPermission,
+                viewParticipant : tPermission,
             });
             console.log(response?.data);
             return navigate(-1);
@@ -568,8 +569,8 @@ const UpdateTournament = (params) => {
                             <input
                                 type="checkbox"
                                 id="tpermission"
-                                value={tPermission}
-                                onChange={(e) => setTPermission(e.target.value)}
+                                checked={tPermission}
+                                onChange={(e) => setTPermission(e.target.checked)}
                             />
                         </div>
                     </div>
