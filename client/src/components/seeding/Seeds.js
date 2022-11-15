@@ -8,10 +8,14 @@ const SET_SEED_URL = "/set_seed";
 const END_SEEDING_URL = "/end_seeding";
 const SEND_JSON_URL = "/send_bracketJSON";
 
+
+//Component for displaying the seeding of the tournament
 const Seeds = ({seeds, setSeeds, setViewSeeds, tournament_id, setState}) => {
 
-    const [updated, setUpdated] = useState(0);
+//stateful variable to store whether seeds have been updated
+const [updated, setUpdated] = useState(0);
 
+  //function that will update seeds in database whenever user has confirmed changes
   const handleUpdateSeeding = async(e) => {
     setUpdated(1);
     for(let i = 0; i < seeds.size; i++){
@@ -28,7 +32,9 @@ const Seeds = ({seeds, setSeeds, setViewSeeds, tournament_id, setState}) => {
   };
 
 
+  //function that sends new seeds to database and ends the seeding
   const handleEndSeeding = async(e) => {
+    //make Javascript Object version of tournament
     var tournament = [];
     var entrants = [];
     for(let i = 0; i < seeds.size; i++){
@@ -36,9 +42,12 @@ const Seeds = ({seeds, setSeeds, setViewSeeds, tournament_id, setState}) => {
     }
     generateTournament(tournament, entrants);
 
-    
+
+    //update state to 2 (tournament in-progress)
+    //update in client    
     setState(2);
-    //change state to 2
+    
+    //update in database
     try {
         const response = await axios.post(END_SEEDING_URL,{
             tournament_id : tournament_id,
@@ -47,7 +56,8 @@ const Seeds = ({seeds, setSeeds, setViewSeeds, tournament_id, setState}) => {
         console.log(error);
     }
 
-    //upload tournament json
+
+    //upload tournament json to database
     try {
         const response = await axios.post(SEND_JSON_URL,{
             tournament_json: JSON.stringify(tournament),
@@ -79,17 +89,20 @@ export default Seeds
 
 
 
+//generate initial tournament list with players in starting position according to their seeds
 function generateTournament(tournament, entrants){
     singleElim(tournament, entrants);   
 }
-  
+
+//generate single elimination tournament
 function singleElim(tournament, entrants){
     var bracket = new Bracket(BRACKET);
     const roundNumbers = getRoundRumbers(entrants.length);
     generateBracketJS(bracket, entrants, roundNumbers);
     tournament.push(bracket);
 }
-  
+ 
+//get number of players in each round. e.g. in an 8 entrant tournament, function returns [8, 4, 2, 1].
 function getRoundRumbers(entrantsCount) {
     const roundNumbers = [];
 
@@ -117,8 +130,9 @@ function getRoundRumbers(entrantsCount) {
     }
     return roundNumbers;
 }
-    
-function generateBracketJS(bracket, entrants, roundNumbers){//BACKEND
+
+//generate initial bracket information. For matches with either no entrants or one entrant, missing entrants are set to the empty entrant.
+function generateBracketJS(bracket, entrants, roundNumbers){
     var nextPlayer = -1;
 
     //generate rounds

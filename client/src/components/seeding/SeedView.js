@@ -5,9 +5,13 @@ import './Seeding.css';
 
 const GET_ENTRANTS_URL = "/get_entrants";
 
-function TournamentBracket({tournament_id, setState}){
+
+//Component for displaying seed information of the tournament
+function SeedView({tournament_id, setState}){
+    //stateful variable to hold the seeds. Consists of playername and seed pairs
     const [seeds, setSeeds] = useState(new Map());
     
+    //axios call to fetch tournament entrants from the database
     useEffect(() => {
         const fetchData = async (e) => {
             try {
@@ -16,6 +20,7 @@ function TournamentBracket({tournament_id, setState}){
                 });
 
 
+                //make new seeds map containing seed information from database
                 var newSeeds = new Map();
                 var flag = false;
                 for(let i = 0; i < response?.data.length; i++){
@@ -28,6 +33,7 @@ function TournamentBracket({tournament_id, setState}){
                     newSeeds.set(parseInt(row.seed), row.username);
                 }
 
+                //if at least one of the seeds are invalid, set each player's seed according to the order they have been fetched from the database.
                 if(flag){
                     //manually make seeds
                     newSeeds.clear();
@@ -46,6 +52,7 @@ function TournamentBracket({tournament_id, setState}){
     }, [])
 
 
+    //stateful variable to store whether or not the seeds are visible
     const [viewSeeds, setViewSeeds] = useState(false);
     const showSeeds = (e)=>{
         if(viewSeeds){
@@ -73,4 +80,4 @@ function TournamentBracket({tournament_id, setState}){
         </div>
     )
 }
-export default TournamentBracket
+export default SeedView

@@ -1,7 +1,10 @@
 import React from 'react'
 import { BsFillCaretUpFill as UpArrow, BsFillCaretDownFill as DownArrow} from "react-icons/bs"
 
+//Component for showing the seed information of a particular entrant
 const Seed = ({seeds, setSeeds, seed, entrant}) => {
+
+    //function for giving entrant the above seed 
     const handleUp = event => {
         if(seed!=0){
             //swap with entry above
@@ -15,6 +18,7 @@ const Seed = ({seeds, setSeeds, seed, entrant}) => {
         }
     };
 
+    //function for giving entrant the below seed 
     const handleDown = event => {
         if(seed!=seeds.size-1){
             //swap with entry below
