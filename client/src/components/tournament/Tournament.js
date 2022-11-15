@@ -292,7 +292,8 @@ const Tournament = (params) => {
                             </div>
                         )}
                     </div>
-                    {state == 0 ||(state!=1 & state!=2 & state!=3) ? 
+                    {state == 0 ||(state!=1 & state!=2 & state!=3) ?
+                        //displays appropriate components for state 0 (registration phase) 
                         (   
                             <div>
                                 {isCreator ? (<div className="end-registration" onClick={handleEndRegistration}>End registration</div>) : (<></>)}
@@ -303,7 +304,8 @@ const Tournament = (params) => {
                         ) 
                         :(<></>)
                     }
-                    {state == 1 && isCreator? 
+                    {state == 1 && isCreator?
+                        //displays appropriate components for state 1 (seeding phase) 
                         (
                             <div div className='tournament-bracket-box'>
                                 <SeedView tournament_id={data.id} setState={setState}/>
@@ -311,7 +313,8 @@ const Tournament = (params) => {
                         ) 
                         :(<></>)
                     }
-                    {state == 2 || state == 3 ? 
+                    {state == 2 || state == 3 ?
+                        //displays appropriate components for states 2 and 3 (in-progress and complete phases)  
                         (
                             
                             <div className='tournament-bracket-box'>
