@@ -1,6 +1,7 @@
 import React from 'react'
 import MatchGUI from './MatchGUI'
 
+//Component for round information. Main purpose is to hold all the matches in the round.
 const RoundGUI = ({brackettype, round, width, tournament, setTournament, isCreator}) => {
   return (
     <div className='round' brackettype={brackettype} roundnum={round.roundNum} style={{width: width}}>

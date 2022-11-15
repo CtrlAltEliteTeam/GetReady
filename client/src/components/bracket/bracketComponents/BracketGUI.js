@@ -2,6 +2,7 @@ import React from 'react'
 import RoundGUI from './RoundGUI'
 import "../Bracket.css"
 
+//Component for bracket information. Main purpose is to hold all the rounds in the bracket.
 const BracketGUI = ({bracket, tournament, setTournament, isCreator}) => {
   return (
     <div id={bracket.type} className='bracket'>
