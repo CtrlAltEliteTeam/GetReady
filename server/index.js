@@ -5,10 +5,12 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 const db = require('./config/Db');
+const path = require('path');
 
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(express.static(path.join(__dirname + "/public")))
 
 //get status function
 function getStatus(result) {
