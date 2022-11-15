@@ -9,9 +9,13 @@ const SEND_JSON_URL = "/send_bracketJSON";
 const END_TOURNAMENT_URL = "/end_tournament";
 const SET_WINNER_URL = "/set_winner";
 
+
+//Component for displaying bracket(s) information of the tournament
 function TournamentBracket({tournament_id, isCreator, setState}){
+    //stateful variable to store tournament list. The list is a collection of brackets
     const [tournament, setTournament] = useState([]);
 
+    //Axios call to fetch the JSON form of the tournament from the database, convert it to the appropriate format and set the tournament list to that.
     useEffect(() => {
         const fetchData = async (e) => {
             try {
@@ -31,9 +35,12 @@ function TournamentBracket({tournament_id, isCreator, setState}){
         fetchData();
     }, [])
 
+
+    //axios call to send the updated version of the tournament to the database, called whenever matches are decided
     useEffect(() => {
         const sendData = async (e) => {
             if(tournament.length>0){
+                //send tournament JSON
                 try {
                     const response = await axios.post(SEND_JSON_URL,{
                         tournament_json: JSON.stringify(tournament),
@@ -43,10 +50,14 @@ function TournamentBracket({tournament_id, isCreator, setState}){
                     console.log(error);
                 }
 
+                
+                //if tournament is done
                 if(tournament[0].winner!=null){
+                    //update state to 3 (tournament complete)
+                    //update in client
                     setState(3);
 
-                    //update state change state to 3
+                    //update in database
                     try {
                         const response = await axios.post(END_TOURNAMENT_URL,{
                             tournament_id : tournament_id,
@@ -55,7 +66,9 @@ function TournamentBracket({tournament_id, isCreator, setState}){
                         console.log(error);
                     }
 
-                    //set winner
+
+
+                    //set winner of tournament in database
                     try {
                         const response = await axios.post(SET_WINNER_URL,{
                             tournament_winner: tournament[0].winner.getName(),
@@ -71,6 +84,7 @@ function TournamentBracket({tournament_id, isCreator, setState}){
 
     }, [tournament])
 
+    //stateful variable to store whether or not the bracket(s) are visible
     const [viewBracket, setViewBracket] = useState(false);
     const showBracket = (e)=>{
         if(viewBracket){
@@ -80,6 +94,7 @@ function TournamentBracket({tournament_id, isCreator, setState}){
             setViewBracket(true);
         }
     }
+
 
 
     return(
@@ -102,8 +117,8 @@ function TournamentBracket({tournament_id, isCreator, setState}){
 export default TournamentBracket
 
 
-
-function deserializeTournament(serializedTournament) {//BACKEND, used after JSON fetched from database
+//Turns JSON version of tournament fetched from server into Javascript ES6 Classes
+function deserializeTournament(serializedTournament) {
     var tournament = [];
 
     for(let i = 0; i < serializedTournament.length; i++){
