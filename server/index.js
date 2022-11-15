@@ -5,12 +5,10 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 const db = require('./config/Db');
-const path = require('path');
 
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}));
-app.use(express.static(path.join(__dirname + "/public")))
 
 //get status function
 function getStatus(result) {
@@ -509,7 +507,7 @@ app.post('/api/join_tournament', (req,res)=>{
 
 
 
-//Gabriel
+//TOURNAMENT STATE TRANSITIONS, SEEDING AND BRACKETS
 //Tournament state transitions
 app.post('/api/end_registration', (req,res)=>{
     const tournament_id = req.body.tournament_id;
@@ -595,7 +593,7 @@ app.post('/api/set_seed', (req,res)=>{
 
 
 //Brackets
-//fetch bracket(s)
+//fetch bracket(s) from database
 app.post('/api/get_bracketJSON', (req,res)=>{
     const tournament_id = req.body.tournament_id;
     try{
@@ -608,7 +606,7 @@ app.post('/api/get_bracketJSON', (req,res)=>{
     }
 });
 
-//send bracket(s)
+//send bracket(s) to database
 app.post('/api/send_bracketJSON', (req,res)=>{
     const tournament_json = req.body.tournament_json;
     const tournament_id = req.body.tournament_id;
@@ -626,7 +624,7 @@ app.post('/api/send_bracketJSON', (req,res)=>{
     }
 });
 
-//set winner
+//set winner of tournament
 app.post('/api/set_winner', (req,res)=>{
     const tournament_winner = req.body.tournament_winner;
     const tournament_id = req.body.tournament_id;
@@ -643,6 +641,9 @@ app.post('/api/set_winner', (req,res)=>{
         res.send({error:301});
     }
 });
+
+
+
 
 const PORT =process.env.PORT || 8000;
 app.listen( PORT,()=>{    //8000
