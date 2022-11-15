@@ -49,13 +49,13 @@ export const GameTile_TestData = [
         content: "GAME",
         user: 1,
     },
-    {
-        id: 8,
-        name: "Call of Duty Black Ops",
-        game: "Call of Duty Black Ops",
-        content: "GAME",
-        user: 1,
-    },
+    // {
+    //     id: 8,
+    //     name: "Call of Duty Black Ops",
+    //     game: "Call of Duty Black Ops",
+    //     content: "GAME",
+    //     user: 1,
+    // },
     {
         id: 9,
         name: "Dragon Ball FighterZ",
@@ -91,13 +91,13 @@ export const GameTile_TestData = [
         content: "GAME",
         user: 1,
     },
-    {
-        id: 14,
-        name: "Mario Strickers",
-        game: "Mario Strickers Battle League",
-        content: "GAME",
-        user: 1,
-    },
+    // {
+    //     id: 14,
+    //     name: "Mario Strickers",
+    //     game: "Mario Strickers Battle League",
+    //     content: "GAME",
+    //     user: 1,
+    // },
     {
         id: 15,
         name: "Overwatch",

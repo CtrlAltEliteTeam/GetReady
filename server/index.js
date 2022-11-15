@@ -254,7 +254,7 @@ app.post('/api/get_joined_tournaments', (req, res)=>{
             }
             getStatus(result);
             res.send(result);
-            console.log(result);
+            //console.log(result);
         });
     } catch (err) {
         res.send({error:301});
@@ -389,7 +389,7 @@ app.post('/api/update_tournament', (req,res)=>{
     db.query(sqlUpdate, [title, description, game_id, startDate, endDate, startTime, maxParticipants, viewParticipant, tournament_id],(err, result)=> {
         if(result?.affectedRows===1){
             res.send(result);
-            console.log("update successful");
+            //console.log("update successful");
         }else{
             res.send({error:301});
         }
@@ -494,7 +494,7 @@ app.post('/api/join_tournament', (req,res)=>{
                             }
                         });
                     }catch(err){
-                        console.log({error:301});
+                        //console.log({error:301});
                         res.send({error:301});
                     }
                 }
@@ -641,9 +641,6 @@ app.post('/api/set_winner', (req,res)=>{
         res.send({error:301});
     }
 });
-
-
-
 
 const PORT =process.env.PORT || 8000;
 app.listen( PORT,()=>{    //8000

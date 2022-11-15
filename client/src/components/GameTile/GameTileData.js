@@ -52,9 +52,9 @@ export class GameTileData{
             case "Apex Legends":
                 this.img = Apex;
                 break;
-            case "Call of Duty Black Ops":
-                this.img = COD;
-                break;
+            // case "Call of Duty Black Ops":
+            //     this.img = COD;
+            //     break;
             case "Dota 2":
                 this.img = Dota;
                 break;
@@ -73,9 +73,9 @@ export class GameTileData{
             case "Mario Kart 8":
                 this.img = Kart;
                 break;
-            case "Mario Strickers Battle League":
-                this.img = Strikers;
-                break;
+            // case "Mario Strickers Battle League":
+            //     this.img = Strikers;
+            //     break;
             case "Overwatch":
                 this.img = Overwatch;
                 break;

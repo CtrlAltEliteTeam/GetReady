@@ -93,7 +93,7 @@ const Login = () => {
                                 <input
                                     type="email"
                                     id="email"
-                                    placeholder='Email Adress'
+                                    placeholder='Email Address'
                                     ref={userRef}
                                     autoComplete="off"
                                     onChange={(e) => setEmail(e.target.value)}
